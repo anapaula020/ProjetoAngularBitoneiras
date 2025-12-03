@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+  <button matIconButton (click)="clickMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>SGA - Sistema de Gerenciamento de Atletas</span>
+  <span class="spacer"></span>
+
+    <button mat-icon-button (click)="deslogar()">
+        <mat-icon>exit_to_app</mat-icon>
+    </button>
+    <span>{{usuarioLogado?.username}}</span>
+</mat-toolbar>

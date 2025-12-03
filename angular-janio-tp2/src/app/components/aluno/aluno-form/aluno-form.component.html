@@ -1,0 +1,120 @@
+<mat-toolbar class="toolbar-title">
+    Controle de Alunos
+</mat-toolbar>
+
+<mat-card class="card">
+    <mat-card-content>
+        <form class="form" [formGroup]="form">
+            <div class="grid">
+                <!-- Nome -->
+                <mat-form-field appearance="outline">
+                    <mat-label>Nome</mat-label>
+                    <input matInput formControlName="nome" placeholder="Ex.: João" />
+                    <mat-icon matSuffix>person</mat-icon>
+
+                    @if (form.controls.nome.touched && form.controls.nome.hasError('required')) {
+                    <mat-error>O nome é obrigatório.</mat-error>
+                    }
+                    @if (form.controls.nome.touched && form.controls.nome.hasError('minlength')) {
+                    <mat-error>Digite pelo menos 3 caracteres.</mat-error>
+                    }
+                </mat-form-field>
+
+                <!-- Sobrenome -->
+                <mat-form-field appearance="outline">
+                    <mat-label>Sobrenome</mat-label>
+                    <input matInput formControlName="sobrenome" placeholder="Ex.: Silva" />
+                    <mat-icon matSuffix>badge</mat-icon>
+
+                    @if (form.controls.sobrenome.touched && form.controls.sobrenome.hasError('required')) {
+                    <mat-error>O sobrenome é obrigatório.</mat-error>
+                    }
+                </mat-form-field>
+
+                <!-- Data de Nascimento -->
+                <mat-form-field appearance="outline">
+                    <mat-label>Data de Nascimento</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dataNascimento" />
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+
+                    @if (form.controls.dataNascimento.touched && form.controls.dataNascimento.hasError('required')) {
+                    <mat-error>A data de nascimento é obrigatória.</mat-error>
+                    }
+                </mat-form-field>
+
+                <!-- CPF -->
+                <mat-form-field appearance="outline">
+                    <mat-label>CPF</mat-label>
+                    <input matInput formControlName="cpf" maxlength="14" placeholder="Ex.: 123.456.789-00" />
+                    <mat-icon matSuffix>credit_card</mat-icon>
+
+                    @if (form.controls.cpf.touched && form.controls.cpf.hasError('required')) {
+                    <mat-error>O CPF é obrigatório.</mat-error>
+                    }
+                    @if (form.controls.cpf.touched && form.controls.cpf.hasError('pattern')) {
+                    <mat-error>CPF inválido. Use o formato 000.000.000-00</mat-error>
+                    }
+                </mat-form-field>
+
+                <!-- E-mail -->
+                <mat-form-field appearance="outline">
+                    <mat-label>E-mail</mat-label>
+                    <input matInput type="email" formControlName="email" placeholder="Ex.: joao@email.com" />
+                    <mat-icon matSuffix>email</mat-icon>
+
+                    @if (form.controls.email.touched && form.controls.email.hasError('required')) {
+                    <mat-error>O e-mail é obrigatório.</mat-error>
+                    }
+                    @if (form.controls.email.touched && form.controls.email.hasError('email')) {
+                    <mat-error>E-mail inválido.</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+
+             <!-- Telefone -->
+
+            <div class="telefones-section">
+                <div class="telefones-header">
+                    <h3>Telefones</h3>
+                    <button mat-icon-button color="primary" (click)="adicionarTelefone()"
+                        aria-label="Adicionar telefone">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+
+                <div formArrayName="telefones">
+                    @for (tel of telefones.controls; let i = $index; track tel) {
+                    <div [formGroupName]="i" class="telefone-item">
+                        <mat-form-field appearance="outline">
+                            <mat-label>DDD</mat-label>
+                            <input matInput maxlength="2" formControlName="codigoArea" placeholder="63" />
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Número</mat-label>
+                            <input matInput maxlength="9" formControlName="numero" placeholder="999999999" />
+                        </mat-form-field>
+
+                        <button mat-icon-button color="warn" (click)="removerTelefone(i)" aria-label="Remover telefone">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <div class="actions">
+                <button mat-raised-button routerLink="/alunos">Cancelar</button>
+
+                <button mat-raised-button color="warn" (click)="excluir()" [disabled]="!form.value.id">
+                    Excluir
+                </button>
+
+                <button mat-raised-button color="primary" (click)="salvar()" [disabled]="form.invalid">
+                    Salvar
+                </button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
