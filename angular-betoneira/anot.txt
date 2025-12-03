@@ -1,0 +1,21 @@
+finalizados na loja
+número
+data
+situação
+valor
+
+não demonstrar qual foi o método de pagamento, ocultar totalmetne o backend do frontend
+listar último pedido feito
+pesquisar pelo número de pedidos
+lista de desejos
+minha conta
+alterar senha
+código de rastreamento
+listagem de itens comprados
+quantidade
+subtotal
+frete
+valor total
+parcelamento
+total parcelado
+----

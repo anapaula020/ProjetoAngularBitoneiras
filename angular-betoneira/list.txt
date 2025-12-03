@@ -1,0 +1,21 @@
+[x] Todos CRUDS (?)
+[x] Telas Principais (regras de negócio do sistema)
+[x] Validações dos campos
+[x] Perfil do usuário (Troca de senha, alterar dados, deslogar)
+[x] Imagens em produtos (upload e download)
+[x] Segurança (Autenticação e Autorização)
+[x] Cadastro de Usuario (pelo usuario)
+[x] Conclusão da compra (com pagamento)
+[x] Visualização das compras por usuário (geralmente no perfil)
+[x] Interface (que nao seja de backend)
+[x] Carrinho de compras
+[x] Salvar pedido
+[x] Página de erros (403 e 404)
+[x] Ao deletar algo do admin, pedir confirmação
+[?] Ao alterar o jwt_token, o sistema front ainda permanece funcionando
+[?] Conteúdo extra não implementado em sala de aula
+[?] https://material.angular.io/components/sidenav/overview
+[?] https://material.angular.io/components/stepper/overview
+
+---- Não conseguiram ser resolvidos
+botões dos formulários de administração bugados ???

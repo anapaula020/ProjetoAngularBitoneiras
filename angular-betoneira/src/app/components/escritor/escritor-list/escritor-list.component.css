@@ -1,0 +1,40 @@
+.escritor-novel-list-container {
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.escritor-novel-list-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.escritor-novel-list-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.escritor-novel-list-container th,
+.escritor-novel-list-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.escritor-novel-list-container th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.escritor-novel-list-container tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.escritor-novel-list-container tr:hover {
+    background-color: #f1f1f1;
+}

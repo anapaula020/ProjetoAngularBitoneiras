@@ -1,0 +1,22 @@
+<header>
+    <a href=""><img src="logo.png" alt="Logo"></a>
+    <button (click)="navigateTo('')">Página inicial</button>
+    <button *ngIf="userRole === 'admin'" (click)="navigateTo('admin')">Administração</button>
+    <button *ngIf="userRole === 'user'" (click)="navigateTo('perfil')">Perfil</button>
+    <button *ngIf="!userRole" (click)="navigateTo('login')">Login</button>
+    <mat-toolbar color="primary" class="search">
+        <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="search-form">
+            <mat-form-field appearance="outline" class="search-field">
+                <mat-label>Pesquisar Mangás</mat-label>
+                <input matInput formControlName="query" placeholder="Nome do mangá">
+            </mat-form-field>
+            <button mat-raised-button color="accent" type="submit">Pesquisar</button>
+        </form>
+    </mat-toolbar>
+    <div>
+        <span>{{usuarioLogado?.username}}</span>
+        <button mat-icon-button (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+        </button>
+    </div>
+</header>

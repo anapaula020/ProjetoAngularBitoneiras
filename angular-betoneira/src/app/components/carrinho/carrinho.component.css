@@ -1,0 +1,111 @@
+/* Container principal */
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Coluna esquerda (mangás) */
+.left-column {
+    flex: 2;
+    margin-right: 20px;
+}
+
+/* Coluna direita (detalhes do pedido) */
+.right-column {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Título total */
+.total {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+/* Botões principais */
+button {
+    margin: 10px 5px;
+}
+
+/* Estilo do card do mangá */
+.manga-card {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.manga-card-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.manga-image {
+    width: 180px;
+    height: auto;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.manga-details {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.centered-text {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.centro {
+    text-align: center;
+    margin: 5px 0;
+}
+
+.action {
+    margin: 5px;
+}
+
+/* Estilo para o carrinho vazio */
+.vazio {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.vazio .mensagem {
+    font-size: 18px;
+    color: #666;
+}
+
+.vazio .back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.vazio .back-button:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,40 @@
+.usuario-list-container {
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.usuario-list-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.usuario-list-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.usuario-list-container th,
+.usuario-list-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.usuario-list-container th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.usuario-list-container tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.usuario-list-container tr:hover {
+    background-color: #f1f1f1;
+}
