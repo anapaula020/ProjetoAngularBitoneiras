@@ -1,6 +1,6 @@
 import { Sexo } from "./sexo.model";
 
-export class AutorManga {
+export class AutorBetoneira {
     id!: number;
     nome!: string;
     anoNascimento!: number;

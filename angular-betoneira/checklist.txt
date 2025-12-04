@@ -1,0 +1,17 @@
+[ ] Todos CRUDS 
+[ ] Telas Principais (regras de negócio do sistema)
+[ ] Validações dos campos
+[ ] Perfil do usuário (Troca de senha, alterar dados, deslogar)
+[ ] Imagens em produtos (upload e download)
+[ ] Segurança (Autenticação e Autorização)
+[ ] Cadastro de Usuario (pelo usuario)
+[ ] Carrinho de Compras
+[ ] Conclusão da compra (com pagamento)
+[ ] Visualização das compras por usuário (geralmente no perfil)
+[ ] Interface (que nao seja de backend)
+
+Opcional:
+Conteúdo extra não implementado em sala de aula (0,5 - min.io e keycloak)
+
+https://www.min.io/
+https://www.keycloak.org/

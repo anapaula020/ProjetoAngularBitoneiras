@@ -2,18 +2,17 @@ import { Routes } from '@angular/router';
 import { AdministradorFormComponent } from './components/administrador/administrador-form/administrador-form.component';
 import { AdministradorListComponent } from './components/administrador/administrador-list/administrador-list.component';
 import { AutorFormComponent } from './components/autor/autor-form/autor-form.component';
-import { AutorMangaListComponent } from './components/autor/autor-list/autor-list.component';
+import { AutorListComponent } from './components/autor/autor-list/autor-list.component';
 import { CadastroComponent } from './components/cadastro/cadastro.component';
-import { CarrinhoComponent } from './components/carrinho/carrinho.component';
 import { CompraFinalizadaComponent } from './components/compra-finalizada/compra-finalizada.component';
 import { ConfirmarCompraComponent } from './components/compra/compra.component';
 import { EscritorFormComponent } from './components/escritor/escritor-form/escritor-form.component';
 import { EscritorNovelListComponent } from './components/escritor/escritor-list/escritor-list.component';
 import { LoginComponent } from './components/login/login.component';
-import { MangaCardListComponent } from './components/manga/manga-card-list/manga-card-list.component';
-import { MangaFormComponent } from './components/manga/manga-form/manga-form.component';
-import { MangaInfoComponent } from './components/manga/manga-info/manga-info.component';
-import { MangaListComponent } from './components/manga/manga-list/manga-list.component';
+import { BetoneiraCardListComponent } from './components/betoneira/betoneira-card-list/betoneira-card-list.component';
+import { BetoneiraFormComponent } from './components/betoneira/betoneira-form/betoneira-form.component';
+import { BetoneiraInfoComponent } from './components/betoneira/betoneira-info/betoneira-info.component';
+import { BetoneiraListComponent } from './components/betoneira/betoneira-list/betoneira-list.component';
 import { NovelFormComponent } from './components/novel/novel-form/novel-form.component';
 import { NovelInfoComponent } from './components/novel/novel-info/novel-info.component';
 import { NovelListComponent } from './components/novel/novel-list/novel-list.component';
@@ -38,9 +37,9 @@ export const routes: Routes = [
         component: UserTemplateComponent,
         children: [
             { path: '',pathMatch: 'full',redirectTo: 'loja' },
-            { path: 'loja',component: MangaCardListComponent,title: 'Listagem de produtos' },
+            { path: 'loja',component: BetoneiraCardListComponent,title: 'Listagem de produtos' },
             { path: 'login',component: LoginComponent,title: 'Login' },
-            { path: 'loja/manga/:id',component: MangaInfoComponent,title: 'Mangá' },
+            { path: 'loja/betoneira/:id',component: BetoneiraInfoComponent,title: 'Mangá' },
             { path: 'loja/novel/:id',component: NovelInfoComponent,title: 'Novel' },
             { path: 'cadastro',component: CadastroComponent,title: 'Cadastro' },
             { path: 'perfil',component: PerfilComponent,title: 'Perfil',canActivate: [authGuard] },
@@ -63,7 +62,7 @@ export const routes: Routes = [
         canActivate: [authGuard],data: { role: "user" },
     },
     {
-        path: 'search/manga',
+        path: 'search/betoneira',
         title: 'Barra de pesquisa de mangás',
         component: UserTemplateComponent,
     },
@@ -73,7 +72,7 @@ export const routes: Routes = [
         component: NovelCardListComponent,
     },
     {
-        path: 'search/manga/:term',
+        path: 'search/betoneira/:term',
         title: 'Barra de pesquisa de mangás',
         component: UserTemplateComponent,
     },
@@ -99,20 +98,20 @@ export const routes: Routes = [
         canActivate: [authGuard],data: { role: "admin" },
         children: [
             { path: '',pathMatch: 'full',redirectTo: 'administrador' },
-            { path: 'admin/loja',component: MangaCardListComponent,title: 'Listagem' },
+            { path: 'admin/loja',component: BetoneiraCardListComponent,title: 'Listagem' },
             { path: 'pedido', component: PedidoListComponent, title: 'Listagem de Pedidos'},
             { path: 'administrador',component: AdministradorListComponent,data: { title: "AdministradorListComponent" } },
             { path: 'administrador/new',component: AdministradorFormComponent,data: { title: "AdministradorFormComponent" } },
             { path: 'administrador/edit/:id',component: AdministradorFormComponent,data: { title: "AdministradorFormComponent" } },
-            { path: 'autor',component: AutorMangaListComponent,data: { title: "AutorListComponent" } },
+            { path: 'autor',component: AutorListComponent,data: { title: "AutorListComponent" } },
             { path: 'autor/new',component: AutorFormComponent,data: { title: "AutorFormComponent" } },
             { path: 'autor/edit/:id',component: AutorFormComponent,data: { title: "AutorFormComponent" } },
             { path: 'escritor',component: EscritorNovelListComponent,data: { title: "EscritorListComponent" } },
             { path: 'escritor/new',component: EscritorFormComponent,data: { title: "EscritorFormComponent" } },
             { path: 'escritor/edit/:id',component: EscritorFormComponent,data: { title: "EscritorFormComponent" } },
-            { path: 'manga',component: MangaListComponent,data: { title: "MangaListComponent" } },
-            { path: 'manga/new',component: MangaFormComponent,data: { title: "MangaFormComponent" } },
-            { path: 'manga/edit/:id',component: MangaFormComponent,data: { title: "MangaFormComponent" } },
+            { path: 'betoneira',component: BetoneiraListComponent,data: { title: "BetoneiraListComponent" } },
+            { path: 'betoneira/new',component: BetoneiraFormComponent,data: { title: "BetoneiraFormComponent" } },
+            { path: 'betoneira/edit/:id',component: BetoneiraFormComponent,data: { title: "BetoneiraFormComponent" } },
             { path: 'novel',component: NovelListComponent,data: { title: "NovelListComponent" } },
             { path: 'novel/new',component: NovelFormComponent,data: { title: "NovelFormComponent" } },
             { path: 'novel/edit/:id',component: NovelFormComponent,data: { title: "NovelFormComponent" } },
