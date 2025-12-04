@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Positive;
 public class BetoneiraDTO {
 
     @NotBlank(message = "O nome não pode ser nulo ou vazio.")
-    private String nome;
+   private String nome;
 
     private String descricao;
 

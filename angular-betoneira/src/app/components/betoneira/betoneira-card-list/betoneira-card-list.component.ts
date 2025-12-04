@@ -10,7 +10,6 @@ import { FormBuilder,FormGroup,FormsModule,NgModel,ReactiveFormsModule } from '@
 import { ActivatedRoute,Router } from '@angular/router';
 import { CarrinhoService } from '../../../services/carrinho.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { GeneroBetoneira } from '../../../models/generoBetoneira.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { AutorBetoneira } from '../../../models/autorBetoneira.model';
@@ -23,7 +22,6 @@ type Card = {
     lancamento: number;
     preco: number;
     imageUrl: string;
-    genero: GeneroBetoneira;
 }
 
 @Component({
@@ -36,8 +34,6 @@ export class BetoneiraCardListComponent implements OnInit {
     betoneiras: Betoneira[] = [];
     cards = signal<Card[]>([]);
     searchForm: FormGroup;
-    selectedGenero: number | null = null;
-    generos: GeneroBetoneira[] = [];
     precos: any[] = [];
     autores: AutorBetoneira[] = [];
     selectedAutor: number | null = null;
@@ -64,9 +60,6 @@ export class BetoneiraCardListComponent implements OnInit {
     ngOnInit(): void {
         this.autorService.findAll().subscribe((data) => {
             this.autores = data;
-        });
-        this.betoneiraService.findGeneros().subscribe((data) => {
-            this.generos = data;
         });
         this.betoneiraService.count().subscribe(total => {
             this.totalBetoneiras = total;
@@ -112,13 +105,6 @@ export class BetoneiraCardListComponent implements OnInit {
         });
     }
 
-    filtrarGenero(id: number) {
-        this.betoneiraService.findByGenre(id).subscribe(data => {
-            this.betoneiras = data;
-            this.carregarCards();
-        });
-    }
-
     loadBetoneiras(page: number = 0) {
         this.betoneiraService.findAll(page,this.pageSize).subscribe(data => {
             this.betoneiras = data;
@@ -136,10 +122,8 @@ export class BetoneiraCardListComponent implements OnInit {
             cards.push({
                 id: betoneira.id,
                 nome: betoneira.nome,
-                sinopse: betoneira.sinopse,
-                lancamento: betoneira.lancamento,
+                description: betoneira.description,
                 preco: betoneira.preco,
-                genero: betoneira.genero,
                 imageUrl: this.betoneiraService.toImageUrl(betoneira.imageUrl)
             });
         });

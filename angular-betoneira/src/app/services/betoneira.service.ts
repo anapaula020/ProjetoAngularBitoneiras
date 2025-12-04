@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Betoneira } from '../models/betoneira.model';
-import { GeneroBetoneira } from '../models/generoBetoneira.model';
 
 @Injectable({ providedIn: 'root' })
 export class BetoneiraService {
@@ -16,9 +15,6 @@ export class BetoneiraService {
 
     findByPrice(price: number,price2: number): Observable<Betoneira[]> {
         return this.httpClient.get<Betoneira[]>(`${this.baseUrl}/price/${price}/${price2}`);
-    }
-    findGeneros(): Observable<GeneroBetoneira[]> {
-        return this.httpClient.get<GeneroBetoneira[]>(`${this.baseUrl}/generos`);
     }
 
     uploadImage(id: number,imageUrl: string,imagem: File): Observable<any> {
@@ -60,7 +56,6 @@ export class BetoneiraService {
         const data = {
             nome: Betoneira.nome,
             idAutor: Betoneira.idAutor,
-            genero: Betoneira.genero.id,
             sinopse: Betoneira.sinopse,
             lancamento: Betoneira.lancamento,
             estoque: Betoneira.estoque,

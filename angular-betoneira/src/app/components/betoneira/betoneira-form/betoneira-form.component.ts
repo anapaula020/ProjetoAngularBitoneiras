@@ -16,7 +16,6 @@ import { FooterAdminComponent } from "../../template/footer-admin/footer-admin.c
 import { AutorBetoneira } from '../../../models/autorBetoneira.model';
 import { Betoneira } from '../../../models/betoneira.model';
 import { MatIcon } from '@angular/material/icon';
-import { GeneroBetoneira } from '../../../models/generoBetoneira.model';
 import { ExclusaoComponent } from '../../confirmacao/exclusao/exclusao.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -30,7 +29,6 @@ import { MatDialog } from '@angular/material/dialog';
 export class BetoneiraFormComponent implements OnInit {
     formGroup: FormGroup;
     autores: AutorBetoneira[] = [];
-    generos: GeneroBetoneira[] = [];
     betoneiraId: number | null = null;
     dialog = inject(MatDialog);
 
@@ -58,9 +56,6 @@ export class BetoneiraFormComponent implements OnInit {
         const betoneira: Betoneira = this.activatedRoute.snapshot.data['betoneira'];
         this.autorService.findAll().subscribe((data) => {
             this.autores = data;
-        });
-        this.betoneiraService.findGeneros().subscribe((data) => {
-            this.generos = data;
         });
         this.activatedRoute.params.subscribe(params => {
             this.betoneiraId = params['id'] ? +params['id'] : null;
