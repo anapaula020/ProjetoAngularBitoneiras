@@ -32,7 +32,7 @@ export class PedidoService {
 
     insert(itens: ItemCarrinho[], endereco: Endereco): Observable<Pedido> {
         const data = {
-            itens: itens.map(e => Object.assign({idManga: e.id, desconto: 0}, e)), endereco
+            itens: itens.map(e => Object.assign({idBetoneira: e.id, desconto: 0}, e)), endereco
         };
     console.log(data);
 

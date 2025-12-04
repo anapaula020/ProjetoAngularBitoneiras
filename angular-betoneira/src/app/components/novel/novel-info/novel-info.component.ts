@@ -13,7 +13,6 @@ import { NovelService } from '../../../services/novel.service';
 import { getGeneroNovelById } from '../../../models/generoNovel.model';
 import { CarrinhoService } from '../../../services/carrinho.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Manga } from '../../../models/manga.model';
 
 @Component({
     selector: 'app-novel-info',

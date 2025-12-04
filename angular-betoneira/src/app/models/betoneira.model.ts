@@ -1,7 +1,7 @@
-import { GeneroManga } from "./generoManga.model";
-import { AutorManga } from "./autorManga.model";
+import { GeneroBetoneira } from "./generoBetoneira.model";
+import { AutorBetoneira } from "./autorBetoneira.model";
 
-export class Manga {
+export class Betoneira {
     id!: number;
     nome!: string;
     imageUrl!: string;
@@ -11,10 +11,10 @@ export class Manga {
     lancamento!: number;
     estoque!: number;
     color!: string;
-    idAutor!: AutorManga;
-    genero!: GeneroManga;
+    idAutor!: AutorBetoneira;
+    genero!: GeneroBetoneira;
 
-    constructor(id: number,nome: string,imageUrl: string,paginas: number,preco: number,sinopse: string,lancamento: number,estoque: number,color: string,idAutor: AutorManga,genero: GeneroManga) {
+    constructor(id: number,nome: string,imageUrl: string,paginas: number,preco: number,sinopse: string,lancamento: number,estoque: number,color: string,idAutor: AutorBetoneira,genero: GeneroBetoneira) {
         this.id = id;
         this.nome = nome;
         this.imageUrl = imageUrl;

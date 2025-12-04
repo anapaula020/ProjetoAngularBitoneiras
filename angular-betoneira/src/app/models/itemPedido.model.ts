@@ -1,15 +1,15 @@
-import { Manga } from "./manga.model"
+import { Betoneira } from "./betoneira.model"
 
 export  class ItemPedido{
-    idManga!: number;
-    manga!: Manga;
+    idBetoneira!: number;
+    betoneira!: Betoneira;
     preco!: number;
     desconto!: number;
     quantidade!: number
 
-    constructor(idManga: number, manga: Manga, preco: number, desconto: number, quantidade: number){
-        this.idManga = idManga;
-        this.manga = manga;
+    constructor(idBetoneira: number, betoneira: Betoneira, preco: number, desconto: number, quantidade: number){
+        this.idBetoneira = idBetoneira;
+        this.betoneira = betoneira;
         this.preco = preco;
         this.desconto = desconto;
         this.quantidade = quantidade;

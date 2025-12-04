@@ -18,8 +18,8 @@ import { Pedido } from '../../models/pedido.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Endereco } from '../../models/endereco.model';
 import { ItemPedido } from '../../models/itemPedido.model';
-import { MangaService } from '../../services/manga.service';
-import { Manga } from '../../models/manga.model';
+import { BetoneiraService } from '../../services/betoneira.service';
+import { Betoneira } from '../../models/betoneira.model';
 
 @Component({
     selector: 'app-compra',
@@ -34,7 +34,7 @@ export class ConfirmarCompraComponent implements OnInit,OnDestroy {
     userRole: string | null = null;
     usuarioLogado: Usuario | null = null;
     enderecoForm: FormGroup;
-    mangas: Manga[] = [];
+    betoneiras: Betoneira[] = [];
 
     constructor(
         private router: Router,
@@ -43,7 +43,7 @@ export class ConfirmarCompraComponent implements OnInit,OnDestroy {
         private authService: AuthService,
         private carrinhoService: CarrinhoService,
         private pedidoService: PedidoService,
-        private mangaService: MangaService,
+        private betoneiraService: BetoneiraService,
         private localStorageService: LocalStorageService
     ) {
         this.enderecoForm = this.formBuilder.group({
@@ -74,11 +74,11 @@ export class ConfirmarCompraComponent implements OnInit,OnDestroy {
                 });
             }
         }));
-        this.subscription.add(this.mangaService.findAll().subscribe(mangas => {
-            this.mangas = mangas;
+        this.subscription.add(this.betoneiraService.findAll().subscribe(betoneiras => {
+            this.betoneiras = betoneiras;
         }));
-        this.mangaService.findAll().subscribe((data: Manga[]) => {
-            this.mangas = data;
+        this.betoneiraService.findAll().subscribe((data: Betoneira[]) => {
+            this.betoneiras = data;
         });
     }
 

@@ -16,7 +16,7 @@ body {
     width: 30%;
 }
 
-.manga-card {
+.betoneira-card {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -28,13 +28,13 @@ body {
     max-height: 300px; /* Limitação de altura */
     overflow: hidden; /* Esconder conteúdo que ultrapassa o tamanho */
 }
-.manga-card-content {
+.betoneira-card-content {
     display: flex;
     flex-direction: row;
     width: 100%;
 }
 
-.manga-image {
+.betoneira-image {
     width: 180px;
     height: auto;
     object-fit: cover;
@@ -42,7 +42,7 @@ body {
     border-radius: 10px;
 }
 
-.manga-details {
+.betoneira-details {
     flex: 1;
 }
 

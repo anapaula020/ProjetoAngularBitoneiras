@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
     <div class="toolbar-title">Registro de Mangá</div>
 </mat-toolbar>
-<div class="manga-form-container">
+<div class="betoneira-form-container">
     <mat-card>
         <mat-card-content>
             <form [formGroup]="formGroup" (ngSubmit)="salvar()">
@@ -95,7 +95,7 @@
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="full-width-input">
-                        <mat-label>Imagem do Manga</mat-label>
+                        <mat-label>Imagem da betoneira</mat-label>
                         <input type="file" (change)="carregarImagemSelecionada($event)" hidden #fileInput>
                         <input matInput [value]="fileName" readonly>
                         <button mat-icon-button matSuffix type="button" (click)="fileInput.click()">
@@ -103,9 +103,9 @@
                         </button>
                     </mat-form-field>
                 </div>
-                <div *ngIf="imagePreview" class="manga-card">
-                    <img class="manga-image" [src]="imagePreview" alt="Preview Image">
-                    <div class="manga-details">
+                <div *ngIf="imagePreview" class="betoneira-card">
+                    <img class="betoneira-image" [src]="imagePreview" alt="Preview Image">
+                    <div class="betoneira-details">
                         <mat-card-title class="centered-text">{{formGroup.get('nome')?.value}}</mat-card-title>
                         <mat-card-content class="centered-text">
                             <h5>{{formGroup.get('sinopse')?.value}}</h5>
@@ -121,7 +121,7 @@
                 </div>
                 <div class="container"> 
                     <mat-card-actions>
-                        <button mat-raised-button routerLink="/admin/manga">Cancelar</button>
+                        <button mat-raised-button routerLink="/admin/betoneira">Cancelar</button>
                         <button mat-raised-button *ngIf="formGroup?.get('id')?.value" color="warn" (click)="excluir()" [disabled]="formGroup.invalid">
                             Excluir
                         </button>

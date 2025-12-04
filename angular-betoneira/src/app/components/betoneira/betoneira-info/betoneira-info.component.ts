@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component,OnInit,signal } from '@angular/core';
 import { ActivatedRoute,Router,RouterModule } from '@angular/router';
-import { Manga } from '../../../models/manga.model';
-import { MangaService } from '../../../services/manga.service';
+import { Betoneira } from '../../../models/betoneira.model';
+import { BetoneiraService } from '../../../services/betoneira.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -12,7 +12,7 @@ import { FooterComponent } from "../../template/footer/footer.component";
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CarrinhoService } from '../../../services/carrinho.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MangaCardListComponent } from "../manga-card-list/manga-card-list.component";
+import { BetoneiraCardListComponent } from "../betoneira-card-list/betoneira-card-list.component";
 
 type Card = {
     id: number;
@@ -22,10 +22,10 @@ type Card = {
 }
 
 @Component({
-    selector: 'app-manga-info',
+    selector: 'app-betoneira-info',
     standalone: true,
-    templateUrl: './manga-info.component.html',
-    styleUrls: ['./manga-info.component.css'],
+    templateUrl: './betoneira-info.component.html',
+    styleUrls: ['./betoneira-info.component.css'],
     imports: [
         CommonModule,
         RouterModule,
@@ -36,16 +36,16 @@ type Card = {
         MatPaginatorModule,
         HeaderComponent,
         FooterComponent,
-        MangaCardListComponent
+        BetoneiraCardListComponent
     ]
 })
-export class MangaInfoComponent implements OnInit {
-    manga!: Manga;
-    otherMangas: Manga[] = [];
+export class BetoneiraInfoComponent implements OnInit {
+    betoneira!: Betoneira;
+    otherBetoneiras: Betoneira[] = [];
     cards = signal<Card[]>([]);
 
     constructor(
-        private mangaService: MangaService,
+        private betoneiraService: BetoneiraService,
         private router: Router,
         private carrinhoService: CarrinhoService,
         private snackBar: MatSnackBar,
@@ -54,23 +54,23 @@ export class MangaInfoComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.paramMap.subscribe(params => {
-            const mangaId = parseInt(params.get('id') ?? '-1',10);
-            if(mangaId !== -1) {
-                this.mangaService.findById(mangaId).subscribe((data: Manga) => {
-                    this.manga = data;
-                    this.manga.imageUrl = this.mangaService.toImageUrl(this.manga.imageUrl);
-                    this.loadOtherMangas();
+            const betoneiraId = parseInt(params.get('id') ?? '-1',10);
+            if(betoneiraId !== -1) {
+                this.betoneiraService.findById(betoneiraId).subscribe((data: Betoneira) => {
+                    this.betoneira = data;
+                    this.betoneira.imageUrl = this.betoneiraService.toImageUrl(this.betoneira.imageUrl);
+                    this.loadOtherBetoneiras();
                 });
             }
         });
     }
 
-    loadOtherMangas(): void {
-        this.mangaService.findByGenre(this.manga.genero.id).subscribe(data => {
-            this.otherMangas = data.filter(m => m.id !== this.manga.id);
-            this.otherMangas.forEach(manga => {
-                if(!manga.imageUrl.startsWith('http')) {
-                    manga.imageUrl = 'http://localhost:8000/manga/image/download/' + manga.imageUrl;
+    loadOtherBetoneiras(): void {
+        this.betoneiraService.findByGenre(this.betoneira.genero.id).subscribe(data => {
+            this.otherBetoneiras = data.filter(m => m.id !== this.betoneira.id);
+            this.otherBetoneiras.forEach(betoneira => {
+                if(!betoneira.imageUrl.startsWith('http')) {
+                    betoneira.imageUrl = 'http://localhost:8000/betoneira/image/download/' + betoneira.imageUrl;
                 }
             });
             this.carregarCards();
@@ -81,31 +81,31 @@ export class MangaInfoComponent implements OnInit {
 
     carregarCards() {
         const cards: Card[] = [];
-        this.otherMangas.forEach(otherManga => {
-            if(otherManga.id === this.manga.id) return;
+        this.otherBetoneiras.forEach(otherBetoneira => {
+            if(otherBetoneira.id === this.betoneira.id) return;
             cards.push({
-                id: otherManga.id,
-                nome: otherManga.nome,
-                preco: otherManga.preco,
-                imageUrl: this.mangaService.toImageUrl(otherManga.imageUrl)
+                id: otherBetoneira.id,
+                nome: otherBetoneira.nome,
+                preco: otherBetoneira.preco,
+                imageUrl: this.betoneiraService.toImageUrl(otherBetoneira.imageUrl)
             });
         });
         this.cards.set(cards);
 
     }
 
-    verManga(id: number): void {
-        this.router.navigateByUrl('loja/manga/' + id);
+    verBetoneira(id: number): void {
+        this.router.navigateByUrl('loja/betoneira/' + id);
     }
 
-    adicionarAoCarrinho(manga: Manga): void {
+    adicionarAoCarrinho(betoneira: Betoneira): void {
         this.showSnackbarTopPosition('Produto adicionado no carrinho.');
         this.carrinhoService.adicionar({
             type: 1,
-            id: manga.id,
-            nome: manga.nome,
-            imageUrl: manga.imageUrl ?? "livro.jpg", 
-            preco: manga.preco,
+            id: betoneira.id,
+            nome: betoneira.nome,
+            imageUrl: betoneira.imageUrl ?? "livro.jpg", 
+            preco: betoneira.preco,
             quantidade: 1
         });
     }

@@ -1,10 +1,10 @@
 
 <div class="container" *ngIf="carrinhoItens.length > 0; else carrinhoVazio">
     <div class="left-column">
-        <mat-card *ngFor="let item of carrinhoItens" class="manga-card">
-            <div class="manga-card-content">
-                <img mat-card-image [src]="item.imageUrl" class="manga-image" />
-                <div class="manga-details">
+        <mat-card *ngFor="let item of carrinhoItens" class="betoneira-card">
+            <div class="betoneira-card-content">
+                <img mat-card-image [src]="item.imageUrl" class="betoneira-image" />
+                <div class="betoneira-details">
                     <mat-card-title class="centered-text">{{ item.nome }}</mat-card-title>
                     <mat-card-content class="centro">Quantidade: {{item.quantidade}}</mat-card-content>
                     <mat-card-content class="centro">Preço: {{item.preco}}</mat-card-content>

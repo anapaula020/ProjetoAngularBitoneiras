@@ -1,20 +1,20 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { Manga } from '../../../models/manga.model';
-import { MangaService } from '../../../services/manga.service';
-import { MatCardActions, MatCardContent, MatCardFooter, MatCardModule, MatCardTitle } from '@angular/material/card';
+import { Component,OnInit,signal } from '@angular/core';
+import { Betoneira } from '../../../models/betoneira.model';
+import { BetoneiraService } from '../../../services/betoneira.service';
+import { MatCardActions,MatCardContent,MatCardFooter,MatCardModule,MatCardTitle } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { NgForOf } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder,FormGroup,FormsModule,NgModel,ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute,Router } from '@angular/router';
 import { CarrinhoService } from '../../../services/carrinho.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { GeneroManga } from '../../../models/generoManga.model';
+import { GeneroBetoneira } from '../../../models/generoBetoneira.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
-import { AutorManga } from '../../../models/autorManga.model';
-import { AutorService } from '../../../services/autorManga.service';
+import { AutorBetoneira } from '../../../models/autorBetoneira.model';
+import { AutorService } from '../../../services/autorBetoneira.service';
 
 type Card = {
     id: number;
@@ -23,34 +23,34 @@ type Card = {
     lancamento: number;
     preco: number;
     imageUrl: string;
-    genero: GeneroManga;
+    genero: GeneroBetoneira;
 }
 
 @Component({
-    imports: [FormsModule,MatSelectModule,MatCardModule, MatButtonModule, MatFormFieldModule, NgForOf, MatCardActions, MatCardContent, MatCardTitle, MatCardFooter, CommonModule, MatPaginator],
+    imports: [FormsModule,MatSelectModule,MatCardModule,MatButtonModule,MatFormFieldModule,NgForOf,MatCardActions,MatCardContent,MatCardTitle,MatCardFooter,CommonModule,MatPaginator],
     standalone: true,
-    templateUrl: './manga-card-list.component.html',
-    styleUrls: ['./manga-card-list.component.css']
+    templateUrl: './betoneira-card-list.component.html',
+    styleUrls: ['./betoneira-card-list.component.css']
 })
-export class MangaCardListComponent implements OnInit {
-    mangas: Manga[] = [];
+export class BetoneiraCardListComponent implements OnInit {
+    betoneiras: Betoneira[] = [];
     cards = signal<Card[]>([]);
     searchForm: FormGroup;
     selectedGenero: number | null = null;
-    generos: GeneroManga[] = [];
+    generos: GeneroBetoneira[] = [];
     precos: any[] = [];
-    autores: AutorManga[] = [];
+    autores: AutorBetoneira[] = [];
     selectedAutor: number | null = null;
     selectedPreco: number | null = null;
-    totalMangas = 0;
+    totalBetoneiras = 0;
     pageSize = 30;
     mostrarFiltros = false;
-    
-    pageSizeOptions = [10, 30, 60, 90, 110, 130];
-    currentPage = 0;          constructor(
+
+    pageSizeOptions = [10,30,60,90,110,130];
+    currentPage = 0; constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private mangaService: MangaService,
+        private betoneiraService: BetoneiraService,
         private formBuilder: FormBuilder,
         private autorService: AutorService,
         private carrinhoService: CarrinhoService,
@@ -65,28 +65,28 @@ export class MangaCardListComponent implements OnInit {
         this.autorService.findAll().subscribe((data) => {
             this.autores = data;
         });
-        this.mangaService.findGeneros().subscribe((data) => {
+        this.betoneiraService.findGeneros().subscribe((data) => {
             this.generos = data;
         });
-        this.mangaService.count().subscribe(total => {
-            this.totalMangas = total;
-            this.loadMangas();
+        this.betoneiraService.count().subscribe(total => {
+            this.totalBetoneiras = total;
+            this.loadBetoneiras();
         });
         this.route.queryParams.subscribe(params => {
-            if (!params["search"]) return;
-            this.mangaService.findByName(params["search"]).subscribe(data => {
-                this.mangas = data;
+            if(!params["search"]) return;
+            this.betoneiraService.findByName(params["search"]).subscribe(data => {
+                this.betoneiras = data;
                 this.carregarCards();
             });
         });
         this.precos = [
-            { id: 1, nome: 'Menor que 20', min: 0, max: 20 },
-            { id: 2, nome: 'Entre 20 e 30', min: 20, max: 30 },
-            { id: 3, nome: 'Entre 30 e 40', min: 30, max: 40 },
-            { id: 4, nome: 'Entre 40 e 50', min: 40, max: 50 },
-            { id: 5, nome: 'Entre 50 e 60', min: 50, max: 60 },
-            { id: 6, nome: 'Entre 60 e 80', min: 50, max: 80 },
-            { id: 7, nome: 'Maior que 80', min: 50, max: Infinity }
+            { id: 1,nome: 'Menor que 20',min: 0,max: 20 },
+            { id: 2,nome: 'Entre 20 e 30',min: 20,max: 30 },
+            { id: 3,nome: 'Entre 30 e 40',min: 30,max: 40 },
+            { id: 4,nome: 'Entre 40 e 50',min: 40,max: 50 },
+            { id: 5,nome: 'Entre 50 e 60',min: 50,max: 60 },
+            { id: 6,nome: 'Entre 60 e 80',min: 50,max: 80 },
+            { id: 7,nome: 'Maior que 80',min: 50,max: Infinity }
         ];
     }
 
@@ -94,53 +94,53 @@ export class MangaCardListComponent implements OnInit {
     toggleFiltros() {
         this.mostrarFiltros = !this.mostrarFiltros;
     }
-    
+
     filtrarPreco(id: number) {
         const selectedPrice = this.precos.find(preco => preco.id === id);
-        if (selectedPrice) {
-            this.mangaService.findByPrice(selectedPrice.min, selectedPrice.max).subscribe(data => {
-                this.mangas = data;
+        if(selectedPrice) {
+            this.betoneiraService.findByPrice(selectedPrice.min,selectedPrice.max).subscribe(data => {
+                this.betoneiras = data;
                 this.carregarCards();
             });
         }
     }
 
     filtrarAutor(id: number) {
-        this.mangaService.findByAuthor(id).subscribe(data => {
-            this.mangas = data;
+        this.betoneiraService.findByAuthor(id).subscribe(data => {
+            this.betoneiras = data;
             this.carregarCards();
         });
     }
 
     filtrarGenero(id: number) {
-        this.mangaService.findByGenre(id).subscribe(data => {
-            this.mangas = data;
+        this.betoneiraService.findByGenre(id).subscribe(data => {
+            this.betoneiras = data;
             this.carregarCards();
         });
     }
 
-    loadMangas(page: number = 0) {
-        this.mangaService.findAll(page, this.pageSize).subscribe(data => {
-            this.mangas = data;
+    loadBetoneiras(page: number = 0) {
+        this.betoneiraService.findAll(page,this.pageSize).subscribe(data => {
+            this.betoneiras = data;
             this.carregarCards();
         });
     }
 
-    verManga(id: number) {
-        this.router.navigateByUrl('loja/manga/' + id);
+    verBetoneira(id: number) {
+        this.router.navigateByUrl('loja/betoneira/' + id);
     }
 
     carregarCards() {
         const cards: Card[] = [];
-        this.mangas.forEach(manga => {
+        this.betoneiras.forEach(betoneira => {
             cards.push({
-                id: manga.id,
-                nome: manga.nome,
-                sinopse: manga.sinopse,
-                lancamento: manga.lancamento,
-                preco: manga.preco,
-                genero: manga.genero,
-                imageUrl: this.mangaService.toImageUrl(manga.imageUrl)
+                id: betoneira.id,
+                nome: betoneira.nome,
+                sinopse: betoneira.sinopse,
+                lancamento: betoneira.lancamento,
+                preco: betoneira.preco,
+                genero: betoneira.genero,
+                imageUrl: this.betoneiraService.toImageUrl(betoneira.imageUrl)
             });
         });
         this.cards.set(cards);
@@ -152,14 +152,14 @@ export class MangaCardListComponent implements OnInit {
             type: 1,
             id: card.id,
             nome: card.nome,
-            imageUrl: card.imageUrl ?? "livro.jpg", 
+            imageUrl: card.imageUrl ?? "betoneira.jpg",
             preco: card.preco,
             quantidade: 1
         });
     }
 
     showSnackbarTopPosition(content: any) {
-        this.snackBar.open(content, 'fechar', {
+        this.snackBar.open(content,'fechar',{
             duration: 3000,
             verticalPosition: "top",
             horizontalPosition: "center"
@@ -169,6 +169,6 @@ export class MangaCardListComponent implements OnInit {
     onPageChange(event: any) {
         this.currentPage = event.pageIndex;
         this.pageSize = event.pageSize;
-        this.loadMangas(this.currentPage);
+        this.loadBetoneiras(this.currentPage);
     }
 }

@@ -1,4 +1,4 @@
-export class GeneroManga {
+export class GeneroBetoneira {
     id!: number;
     nome!: string;
 }

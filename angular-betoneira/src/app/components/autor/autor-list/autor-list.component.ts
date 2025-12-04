@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component,OnInit, inject } from '@angular/core';
 import { Router,RouterModule } from '@angular/router';
-import { AutorManga } from '../../../models/autorManga.model';
-import { AutorService } from '../../../services/autorManga.service';
+import { AutorBetoneira } from '../../../models/autorBetoneira.model';
+import { AutorService } from '../../../services/autorBetoneira.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -16,15 +16,15 @@ import { ExclusaoComponent } from '../../confirmacao/exclusao/exclusao.component
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-    selector: 'app-autor-manga-list',
+    selector: 'app-autor-betoneira-list',
     standalone: true,
     templateUrl: './autor-list.component.html',
     styleUrls: ['./autor-list.component.css'],
     imports: [MatPaginatorModule,CommonModule,RouterModule,MatTableModule,MatButtonModule,MatCardModule,MatToolbarModule,HeaderAdminComponent,FooterAdminComponent,MatIconModule]
 })
-export class AutorMangaListComponent implements OnInit {
+export class AutorListComponent implements OnInit {
     displayedColumns: string[] = ['id','nome','anoNascimento','nacionalidade','sexo','actions'];
-    autores: AutorManga[] = [];
+    autores: AutorBetoneira[] = [];
     totalRecords = 0;
     pageSize = 10;
     page = 0;
@@ -43,7 +43,7 @@ export class AutorMangaListComponent implements OnInit {
     }
 
     loadAutores(): void {
-        this.autorService.findAll(this.page,this.pageSize).subscribe((data: AutorManga[]) => {
+        this.autorService.findAll(this.page,this.pageSize).subscribe((data: AutorBetoneira[]) => {
             this.autores = data;
         });
         this.autorService.count().subscribe(data => { this.totalRecords = data });

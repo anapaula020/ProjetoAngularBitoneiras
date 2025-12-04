@@ -9,36 +9,36 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ActivatedRoute,Router,RouterModule } from '@angular/router';
-import { AutorService } from '../../../services/autorManga.service';
-import { MangaService } from '../../../services/manga.service';
+import { AutorService } from '../../../services/autorBetoneira.service';
+import { BetoneiraService } from '../../../services/betoneira.service';
 import { HeaderAdminComponent } from "../../template/header-admin/header-admin.component";
 import { FooterAdminComponent } from "../../template/footer-admin/footer-admin.component";
-import { AutorManga } from '../../../models/autorManga.model';
-import { Manga } from '../../../models/manga.model';
+import { AutorBetoneira } from '../../../models/autorBetoneira.model';
+import { Betoneira } from '../../../models/betoneira.model';
 import { MatIcon } from '@angular/material/icon';
-import { GeneroManga } from '../../../models/generoManga.model';
+import { GeneroBetoneira } from '../../../models/generoBetoneira.model';
 import { ExclusaoComponent } from '../../confirmacao/exclusao/exclusao.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-    selector: 'app-manga-form',
+    selector: 'app-betoneira-form',
     standalone: true,
-    templateUrl: './manga-form.component.html',
-    styleUrls: ['./manga-form.component.css'],
+    templateUrl: './betoneira-form.component.html',
+    styleUrls: ['./betoneira-form.component.css'],
     imports: [CommonModule,FooterAdminComponent,HeaderAdminComponent,MatIcon,MatButtonModule,MatCardModule,MatFormFieldModule,MatInputModule,MatSelectModule,MatToolbarModule,NgIf,ReactiveFormsModule,RouterModule]
 })
-export class MangaFormComponent implements OnInit {
+export class BetoneiraFormComponent implements OnInit {
     formGroup: FormGroup;
-    autores: AutorManga[] = [];
-    generos: GeneroManga[] = [];
-    mangaId: number | null = null;
+    autores: AutorBetoneira[] = [];
+    generos: GeneroBetoneira[] = [];
+    betoneiraId: number | null = null;
     dialog = inject(MatDialog);
 
     fileName: string = '';
     selectedFile: File | null = null;
     imagePreview: string | ArrayBuffer | null = null;
 
-    constructor(private formBuilder: FormBuilder,private mangaService: MangaService,private autorService: AutorService,private router: Router,private activatedRoute: ActivatedRoute) {
+    constructor(private formBuilder: FormBuilder,private betoneiraService: BetoneiraService,private autorService: AutorService,private router: Router,private activatedRoute: ActivatedRoute) {
         this.formGroup = this.formBuilder.group({
             id: [null],
             nome: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(80)]],
@@ -55,17 +55,17 @@ export class MangaFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        const manga: Manga = this.activatedRoute.snapshot.data['manga'];
+        const betoneira: Betoneira = this.activatedRoute.snapshot.data['betoneira'];
         this.autorService.findAll().subscribe((data) => {
             this.autores = data;
         });
-        this.mangaService.findGeneros().subscribe((data) => {
+        this.betoneiraService.findGeneros().subscribe((data) => {
             this.generos = data;
         });
         this.activatedRoute.params.subscribe(params => {
-            this.mangaId = params['id'] ? +params['id'] : null;
-            if(this.mangaId) {
-                this.loadManga(this.mangaId);
+            this.betoneiraId = params['id'] ? +params['id'] : null;
+            if(this.betoneiraId) {
+                this.loadBetoneira(this.betoneiraId);
 
             }
 
@@ -75,32 +75,32 @@ export class MangaFormComponent implements OnInit {
     }
 
     initializeForm(): void {
-        const manga = this.activatedRoute.snapshot.data['manga'];
-        const genero = this.generos.find(m => m.id === (manga?.genero?.id || null));
-        if(manga && manga.imageUrl) {
-            this.imagePreview = this.mangaService.toImageUrl(manga.imageUrl);
-            this.fileName = manga.imageUrl;
+        const betoneira = this.activatedRoute.snapshot.data['betoneira'];
+        const genero = this.generos.find(m => m.id === (betoneira?.genero?.id || null));
+        if(betoneira && betoneira.imageUrl) {
+            this.imagePreview = this.betoneiraService.toImageUrl(betoneira.imageUrl);
+            this.fileName = betoneira.imageUrl;
         }
 
         this.formGroup = this.formBuilder.group({
-            id: [(manga && manga.id) ? manga.id : null],
-            nome: [(manga && manga.nome) ? manga.nome : null],
-            sinopse: [(manga && manga.sinopse) ? manga.sinopse : null],
+            id: [(betoneira && betoneira.id) ? betoneira.id : null],
+            nome: [(betoneira && betoneira.nome) ? betoneira.nome : null],
+            sinopse: [(betoneira && betoneira.sinopse) ? betoneira.sinopse : null],
             genero: [genero],
-            idAutor: [(manga && manga.idAutor) ? manga.idAutor : null],
-            lancamento: [(manga && manga.lancamento) ? manga.lancamento : null],
-            color: [(manga && manga.color) ? manga.color : null],
-            preco: [(manga && manga.preco) ? manga.preco : null],
-            estoque: [(manga && manga.estoque) ? manga.estoque : null],
-            paginas: [(manga && manga.paginas) ? manga.paginas : null],
-            imageUrl: [(manga && manga.imageUrl) ? manga.imageUrl : null]
+            idAutor: [(betoneira && betoneira.idAutor) ? betoneira.idAutor : null],
+            lancamento: [(betoneira && betoneira.lancamento) ? betoneira.lancamento : null],
+            color: [(betoneira && betoneira.color) ? betoneira.color : null],
+            preco: [(betoneira && betoneira.preco) ? betoneira.preco : null],
+            estoque: [(betoneira && betoneira.estoque) ? betoneira.estoque : null],
+            paginas: [(betoneira && betoneira.paginas) ? betoneira.paginas : null],
+            imageUrl: [(betoneira && betoneira.imageUrl) ? betoneira.imageUrl : null]
         });
     }
 
-    private uploadImage(mangaId: number) {
+    private uploadImage(betoneiraId: number) {
 
         if(this.selectedFile) {
-            this.mangaService.uploadImage(mangaId,this.selectedFile.name,this.selectedFile)
+            this.betoneiraService.uploadImage(betoneiraId,this.selectedFile.name,this.selectedFile)
 
                 .subscribe({
                     next: () => {
@@ -116,22 +116,22 @@ export class MangaFormComponent implements OnInit {
     }
 
     voltarPagina(): void {
-        this.router.navigateByUrl('/admin/manga');
+        this.router.navigateByUrl('/admin/betoneira');
     }
 
-    loadManga(id: number): void {
+    loadBetoneira(id: number): void {
         if(id != null && id > 0) {
-            this.mangaService.findById(id).subscribe(manga => {
-                this.formGroup.patchValue(manga);
-                if(manga.imageUrl) {
-                    this.imagePreview = this.mangaService.toImageUrl(manga.imageUrl);
-                    this.fileName = manga.imageUrl;
+            this.betoneiraService.findById(id).subscribe(betoneira => {
+                this.formGroup.patchValue(betoneira);
+                if(betoneira.imageUrl) {
+                    this.imagePreview = this.betoneiraService.toImageUrl(betoneira.imageUrl);
+                    this.fileName = betoneira.imageUrl;
                 }
-                if(manga.idAutor) {
-                    this.formGroup.get('idAutor')?.setValue(manga.idAutor.id);
+                if(betoneira.idAutor) {
+                    this.formGroup.get('idAutor')?.setValue(betoneira.idAutor.id);
                 }
-                if(manga.genero) {
-                    const generoSelecionado = this.generos.find(m => m.id === (manga?.genero?.id || null));
+                if(betoneira.genero) {
+                    const generoSelecionado = this.generos.find(m => m.id === (betoneira?.genero?.id || null));
                     this.formGroup.get('genero')?.setValue(generoSelecionado);
                 }
 
@@ -155,23 +155,23 @@ export class MangaFormComponent implements OnInit {
     salvar() {
         this.formGroup.markAllAsTouched();
         if(this.formGroup.valid) {
-            const manga = this.formGroup.value;
+            const betoneira = this.formGroup.value;
 
             if(!this.selectedFile && this.imagePreview) {
-                manga.imageUrl = this.fileName;
+                betoneira.imageUrl = this.fileName;
             }
-            const operacao = manga.id == null
-                ? this.mangaService.insert(manga)
-                : this.mangaService.update(manga);
+            const operacao = betoneira.id == null
+                ? this.betoneiraService.insert(betoneira)
+                : this.betoneiraService.update(betoneira);
 
             operacao.subscribe({
-                next: (mangaCadastrada) => {
-                    this.mangaService.findAll();
-                    if(this.mangaId !== null) {
-                        this.uploadImage(this.mangaId);
+                next: (betoneiraCadastrada) => {
+                    this.betoneiraService.findAll();
+                    if(this.betoneiraId !== null) {
+                        this.uploadImage(this.betoneiraId);
                     }
 
-                    this.uploadImage(mangaCadastrada.id);
+                    this.uploadImage(betoneiraCadastrada.id);
                 },
                 error: (error) => {
                     this.tratarErros(error);
@@ -187,8 +187,8 @@ export class MangaFormComponent implements OnInit {
             if(result === true) {
                 const id = this.formGroup.get('id')?.value;
                 if(id) {
-                    this.mangaService.delete(id).subscribe(() => {
-                        this.router.navigateByUrl('/admin/manga');
+                    this.betoneiraService.delete(id).subscribe(() => {
+                        this.router.navigateByUrl('/admin/betoneira');
                     },error => {
                         this.tratarErros(error);
                     });

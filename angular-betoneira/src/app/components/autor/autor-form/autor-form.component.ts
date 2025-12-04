@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component,OnInit,inject } from '@angular/core';
 import { FormBuilder,FormGroup,FormsModule,ReactiveFormsModule,ValidationErrors,Validators } from '@angular/forms';
 import { ActivatedRoute,Router,RouterModule } from '@angular/router';
-import { AutorService } from '../../../services/autorManga.service';
+import { AutorService } from '../../../services/autorBetoneira.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';

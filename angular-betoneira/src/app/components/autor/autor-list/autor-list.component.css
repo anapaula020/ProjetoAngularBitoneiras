@@ -2,7 +2,7 @@ body {
     height: 100vh;
 }
 
-.autor-manga-list-container {
+.autor-betoneira-list-container {
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -11,34 +11,34 @@ body {
     background-color: #fff;
 }
 
-.autor-manga-list-container h2 {
+.autor-betoneira-list-container h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #333;
 }
 
-.autor-manga-list-container table {
+.autor-betoneira-list-container table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
 
-.autor-manga-list-container th,
-.autor-manga-list-container td {
+.autor-betoneira-list-container th,
+.autor-betoneira-list-container td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
 
-.autor-manga-list-container th {
+.autor-betoneira-list-container th {
     background-color: #f2f2f2;
     font-weight: bold;
 }
 
-.autor-manga-list-container tr:nth-child(even) {
+.autor-betoneira-list-container tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-.autor-manga-list-container tr:hover {
+.autor-betoneira-list-container tr:hover {
     background-color: #f1f1f1;
 }

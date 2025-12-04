@@ -2,45 +2,45 @@
     <div class="toolbar-title"><h1>Informações do Mangá</h1></div>
 </mat-toolbar>
 
-<div *ngIf="manga">
+<div *ngIf="betoneira">
     <section class="product-container">
         <div class="img-card">
-            <img [src]="manga.imageUrl" alt="" id="featured-image">
+            <img [src]="betoneira.imageUrl" alt="" id="featured-image">
         </div>
         <div class="product-info">
-            <h3>{{manga.nome}}</h3>
-            <h5>R$ {{manga.preco}}</h5>
-            <h5>Sinopse: {{manga.sinopse}}</h5>
-            <h5>Páginas: {{manga.paginas}}</h5>
-            <h5>Estoque: {{manga.estoque}}</h5>
-            <h5>Ano: {{manga.lancamento}}</h5>
-            <h5>Gênero: {{manga.genero.nome}}</h5> 
-            <h5>Autor: {{manga.idAutor.nome}}</h5>
-            <p>{{manga.sinopse}}</p>
+            <h3>{{betoneira.nome}}</h3>
+            <h5>R$ {{betoneira.preco}}</h5>
+            <h5>Sinopse: {{betoneira.sinopse}}</h5>
+            <h5>Páginas: {{betoneira.paginas}}</h5>
+            <h5>Estoque: {{betoneira.estoque}}</h5>
+            <h5>Ano: {{betoneira.lancamento}}</h5>
+            <h5>Gênero: {{betoneira.genero.nome}}</h5> 
+            <h5>Autor: {{betoneira.idAutor.nome}}</h5>
+            <p>{{betoneira.sinopse}}</p>
             <div class="quantity">
-                <button mat-button (click)="adicionarAoCarrinho(manga)" color="accent" class="add-to-cart-button">Adicionar ao carrinho</button>
+                <button mat-button (click)="adicionarAoCarrinho(betoneira)" color="accent" class="add-to-cart-button">Adicionar ao carrinho</button>
             </div>
         </div>
     </section>
 </div>
 
-<section class="other-mangas-container">
+<section class="other-betoneiras-container">
     <h2>Mangás Do Gênero</h2>
-    <div class="other-mangas-grid">
-        <mat-card *ngFor="let otherManga of otherMangas" class="manga-card">
+    <div class="other-betoneiras-grid">
+        <mat-card *ngFor="let otherBetoneira of otherBetoneiras" class="betoneira-card">
             <div class="img-other">
                 
-                <img [src]="otherManga.imageUrl" alt=" ">
+                <img [src]="otherBetoneira.imageUrl" alt=" ">
             </div>
-            <mat-card-title>{{otherManga.nome}}</mat-card-title>
+            <mat-card-title>{{otherBetoneira.nome}}</mat-card-title>
             <mat-card-content>
-                <p>{{otherManga.sinopse.length > 30 ? (otherManga.sinopse | slice:0:30) + '...' : otherManga.sinopse}}</p>
-                <p>R$ {{otherManga.preco}}</p>
-                <p>{{otherManga.genero.nome}}</p>
+                <p>{{otherBetoneira.sinopse.length > 30 ? (otherBetoneira.sinopse | slice:0:30) + '...' : otherBetoneira.sinopse}}</p>
+                <p>R$ {{otherBetoneira.preco}}</p>
+                <p>{{otherBetoneira.genero.nome}}</p>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-button color="primary" (click)="verManga(otherManga.id)">Ver mais</button>
-                <button mat-button color="accent" (click)="adicionarAoCarrinho(otherManga)">Adicionar ao carrinho</button>
+                <button mat-button color="primary" (click)="verBetoneira(otherBetoneira.id)">Ver mais</button>
+                <button mat-button color="accent" (click)="adicionarAoCarrinho(otherBetoneira)">Adicionar ao carrinho</button>
             </mat-card-actions>
         </mat-card>
     </div>

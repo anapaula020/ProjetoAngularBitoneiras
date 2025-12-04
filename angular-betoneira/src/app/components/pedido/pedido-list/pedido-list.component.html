@@ -12,8 +12,8 @@
             <h3>Itens:</h3>
             <ul>
                 <li *ngFor="let item of pedido.itens">
-                    <strong>Mangá ID:</strong> {{ item.manga.id }}<br>
-                    <strong>Nome:</strong> {{ item.manga.nome }}<br>
+                    <strong>Mangá ID:</strong> {{ item.betoneira.id }}<br>
+                    <strong>Nome:</strong> {{ item.betoneira.nome }}<br>
                     <strong>Quantidade:</strong> {{ item.quantidade }}<br>
                     <strong>Preço:</strong> R$ {{ item.preco | number:'1.2-2' }}
                 </li>

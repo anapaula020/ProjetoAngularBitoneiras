@@ -1,4 +1,4 @@
-.manga-form-container {
+.betoneira-form-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -9,7 +9,7 @@
     margin-bottom: 100px;
 }
 
-.manga-form-container h2 {
+.betoneira-form-container h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #333;
@@ -26,28 +26,28 @@ img {
 }
 
 
-.manga-card .centered-text {
+.betoneira-card .centered-text {
     text-align: center;
     align-items: center;
     justify-content: center;
 }
 
-.manga-form-container .container {
+.betoneira-form-container .container {
     display: flex;
     flex-direction: column;
 }
 
-.manga-form-container .container {
+.betoneira-form-container .container {
     margin-bottom: 35px;
 }
 
-.manga-form-container label {
+.betoneira-form-container label {
     margin-bottom: 5px;
     font-weight: bold;
     color: #555;
 }
 
-.manga-form-container input {
+.betoneira-form-container input {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -56,7 +56,7 @@ img {
     box-sizing: border-box;
 }
 
-.manga-form-container .container button {
+.betoneira-form-container .container button {
     padding: 10px;
     background-color: #007bff;
     color: #fff;
@@ -68,11 +68,11 @@ img {
     margin-bottom: 100px;
 }
 
-.manga-form-container .container button:hover {
+.betoneira-form-container .container button:hover {
     background-color: #0056b3;
 }
 
-.manga-form-container .container textarea {
+.betoneira-form-container .container textarea {
     width: 100%;
     padding: 10px 10px;
     box-sizing: border-box;
@@ -82,7 +82,7 @@ img {
     font-size: 16px;
 }
 
-.manga-form-container .container mat-select {
+.betoneira-form-container .container mat-select {
     width: 100%;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -91,7 +91,7 @@ img {
     font-size: 16px;
 }
 
-.manga-card {
+.betoneira-card {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -103,13 +103,13 @@ img {
     max-height: 300px; /* Limitação de altura */
     overflow: hidden; /* Esconder conteúdo que ultrapassa o tamanho */
 }
-.manga-card-content {
+.betoneira-card-content {
     display: flex;
     flex-direction: row;
     width: 100%;
 }
 
-.manga-image {
+.betoneira-image {
     width: 180px;
     height: auto;
     object-fit: cover;
@@ -117,7 +117,7 @@ img {
     border-radius: 10px;
 }
 
-.manga-details {
+.betoneira-details {
     flex: 1;
 }
 
