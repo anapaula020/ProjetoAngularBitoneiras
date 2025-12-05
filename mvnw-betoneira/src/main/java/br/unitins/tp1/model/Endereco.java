@@ -6,7 +6,6 @@ import jakarta.persistence.JoinColumn;
 
 @Entity
 public class Endereco extends DefaultEntity {
-
     private String logradouro;
     private String numero;
     private String complemento;

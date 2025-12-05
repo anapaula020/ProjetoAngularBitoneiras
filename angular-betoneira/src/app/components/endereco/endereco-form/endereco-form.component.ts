@@ -9,7 +9,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ActivatedRoute,Router,RouterModule } from '@angular/router';
-import { GeneroNovelMap } from '../../../models/generoNovel.model';
 import { EscritorNovelService } from '../../../services/escritor.service';
 import { HeaderAdminComponent } from "../../template/header-admin/header-admin.component";
 import { FooterAdminComponent } from "../../template/footer-admin/footer-admin.component";
@@ -25,7 +24,6 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class EscritorFormComponent implements OnInit {
     formGroup: FormGroup;
-    generos = Object.entries(GeneroNovelMap);
     escritorId: number | null = null;
     readonly dialog = inject(MatDialog);
 
@@ -37,10 +35,12 @@ export class EscritorFormComponent implements OnInit {
     ) {
         this.formGroup = this.formBuilder.group({
             id: [null],
-            nome: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(40)]],
-            anoNascimento: [null,[Validators.required,Validators.min(0),Validators.max(9999)]],
-            nacionalidade: [null,[Validators.required,Validators.minLength(2),Validators.maxLength(30)]],
-            sexo: [null,[Validators.required]]
+            logradouro: [null, Validators.required,Validators.maxLength(200)], 
+            numero: [null, Validators.required,Validators.maxLength(20)], 
+            complemento: [null, Validators.required,Validators.maxLength(100)], 
+            bairro: [null, Validators.required,Validators.maxLength(100)], 
+            cep: [null, Validators.required,Validators.maxLength(8)], 
+            municipio: [null, Validators.required,Validators.maxLength(100)]
         });
     }
 
@@ -132,26 +132,34 @@ export class EscritorFormComponent implements OnInit {
     }
 
     errorMessages: { [controlName: string]: { [errorName: string]: string } } = {
-        nome: {
-            required: 'Nome é obrigatório.',
-            minlength: 'Nome deve conter ao menos 3 caracteres.',
-            maxlength: 'Nome deve conter no máximo 40 caracteres.',
+        logradouro: {
+            required: 'Logradouro é obrigatório.',
+            maxlength: 'Logradouro deve conter no máximo 200 caracteres.',
             apiError: 'API_ERROR'
         },
-        anoNascimento: {
-            required: 'Ano de nascimento é obrigatório.',
-            min: 'Ano de nascimento deve ser maior do que 0.',
-            max: 'Ano de nascimento deve ser menor do que 9999.',
+        numero: {
+            required: 'Numero é obrigatório.',
+            maxlength: 'Numero deve conter no máximo 20 caracteres.',
             apiError: 'API_ERROR'
         },
-        nacionalidade: {
-            required: 'Nacionalidade é obrigatório.',
-            minlength: 'Nacionalidade deve conter ao menos 2 caracteres.',
-            maxlength: 'Nacionalidade deve conter no máximo 30 caracteres.',
+        complemento: {
+            required: 'Complemento é obrigatório.',
+            maxlength: 'Complemento deve conter no máximo 100 caracteres.',
             apiError: 'API_ERROR'
         },
-        sexo: {
-            required: 'Sexo é obrigatório.',
+        bairro: {
+            required: 'Bairro é obrigatório.',
+            maxlength: 'Bairro deve conter no máximo 100 caracteres.',
+            apiError: 'API_ERROR'
+        },
+        cep: {
+            required: 'Cep é obrigatório.',
+            maxlength: 'Cep deve conter exatos 8 caracteres.',
+            apiError: 'API_ERROR'
+        },
+        municipio: {
+            required: 'Municipio é obrigatório.',
+            maxlength: 'Municipio deve conter no máximo 100 caracteres.',
             apiError: 'API_ERROR'
         }
     }
