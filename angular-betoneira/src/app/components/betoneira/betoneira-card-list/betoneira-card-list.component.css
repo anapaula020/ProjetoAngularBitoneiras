@@ -26,11 +26,8 @@ body {
     padding: 10px;
     margin-top: 20px;
     max-width: 600px;
-    /* Limitação de largura */
     max-height: 300px;
-    /* Limitação de altura */
     overflow: hidden;
-    /* Esconder conteúdo que ultrapassa o tamanho */
 }
 
 .betoneira-card-content {

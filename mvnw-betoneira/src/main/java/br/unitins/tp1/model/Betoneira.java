@@ -7,26 +7,25 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
 
 @Entity
-public class Betoneira extends DefaultEntity { // Assumindo que DefaultEntity j√° cuida do ID
+public class Betoneira extends DefaultEntity {
     private String nome;
     private String descricao;
     private Double preco;
     private Integer quantidadeEstoque;
     private String modelo;
-    private String marca; // Campo adicionado
-    private Double capacidade; // Campo adicionado
+    private String marca; 
+    private Double capacidade; 
 
     @Enumerated(EnumType.STRING)
-    private TipoBetoneiraEnum tipo; // Campo adicionado
+    private TipoBetoneiraEnum tipo; 
 
     @ManyToOne
     @JoinColumn(name = "fabricante_id")
-    private Fabricante fabricante; // Campo adicionado
+    private Fabricante fabricante; 
 
     public Betoneira() {
     }
 
-    // Getters
     public String getNome() { return nome; }
     public String getDescricao() { return descricao; }
     public Double getPreco() { return preco; }
@@ -37,7 +36,6 @@ public class Betoneira extends DefaultEntity { // Assumindo que DefaultEntity j√
     public TipoBetoneiraEnum getTipo() { return tipo; }
     public Fabricante getFabricante() { return fabricante; }
 
-    // Setters
     public void setNome(String nome) { this.nome = nome; }
     public void setDescricao(String descricao) { this.descricao = descricao; }
     public void setPreco(Double preco) { this.preco = preco; }

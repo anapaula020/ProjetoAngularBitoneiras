@@ -66,7 +66,7 @@ export class NovelFormComponent implements OnInit {
     loadNovel(id: number): void {
         this.novelService.findById(id).subscribe(novel => {
             this.formGroup.patchValue(novel);
-            this.formGroup.patchValue({ idAutor: novel.idAutor.id }); // arrumar
+            this.formGroup.patchValue({ idAutor: novel.idAutor.id });
         });
         this.formGroup.markAllAsTouched();
     }

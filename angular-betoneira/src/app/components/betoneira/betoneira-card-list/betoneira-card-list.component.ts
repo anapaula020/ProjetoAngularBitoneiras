@@ -12,8 +12,8 @@ import { CarrinhoService } from '../../../services/carrinho.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
-import { Fabricante } from '../../../models/fabricante';
-import { AutorService } from '../../../services/fabricante.service';
+import { Fabricante } from '../../../models/fabricante';    
+import { FabricanteService } from '../../../services/fabricante.service';
 
 type Card = {
     id: number, 
@@ -51,7 +51,7 @@ export class BetoneiraCardListComponent implements OnInit {
         private router: Router,
         private betoneiraService: BetoneiraService,
         private formBuilder: FormBuilder,
-        private autorService: AutorService,
+        private fabricanteService: FabricanteService,
         private carrinhoService: CarrinhoService,
         private snackBar: MatSnackBar
     ) {
@@ -61,7 +61,7 @@ export class BetoneiraCardListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.autorService.findAll().subscribe((data) => {
+        this.fabricanteService.findAll().subscribe((data) => {
             this.autores = data;
         });
         this.betoneiraService.count().subscribe(total => {

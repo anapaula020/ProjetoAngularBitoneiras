@@ -59,24 +59,23 @@ export class BetoneiraInfoComponent implements OnInit {
                 this.betoneiraService.findById(betoneiraId).subscribe((data: Betoneira) => {
                     this.betoneira = data;
                     this.betoneira.imageUrl = this.betoneiraService.toImageUrl(this.betoneira.imageUrl);
-                    // this.loadOtherBetoneiras();
+                    this.loadOtherBetoneiras();
                 });
             }
         });
     }
 
-    // loadOtherBetoneiras(): void {
-    //     // this.betoneiraService.findByGenre(this.betoneira.genero.id).subscribe(data => {
-    //     this.betoneiraService.subscribe(data => {
-    //         this.otherBetoneiras = data.filter(m => m.id !== this.betoneira.id);
-    //         this.otherBetoneiras.forEach(betoneira => {
-    //             if(!betoneira.imageUrl.startsWith('http')) {
-    //                 betoneira.imageUrl = 'http://localhost:8000/betoneira/image/download/' + betoneira.imageUrl;
-    //             }
-    //         });
-    //         this.carregarCards();
-    //     });
-    // }
+    loadOtherBetoneiras(): void {
+        this.betoneiraService.findAll().subscribe(data => {
+            this.otherBetoneiras = data.filter(m => m.id !== this.betoneira.id);
+            this.otherBetoneiras.forEach(betoneira => {
+                if(!betoneira.imageUrl.startsWith('http')) {
+                    betoneira.imageUrl = 'http://localhost:8000/betoneira/image/download/' + betoneira.imageUrl;
+                }
+            });
+            this.carregarCards();
+        });
+    }
 
     carregarCards() {
         const cards: Card[] = [];
@@ -90,7 +89,6 @@ export class BetoneiraInfoComponent implements OnInit {
             });
         });
         this.cards.set(cards);
-
     }
 
     verBetoneira(id: number): void {

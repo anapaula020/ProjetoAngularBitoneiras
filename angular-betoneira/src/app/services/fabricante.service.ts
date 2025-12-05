@@ -5,7 +5,7 @@ import { HttpClient } from "@angular/common/http";
 
 @Injectable({ providedIn: "root" })
 
-export class AutorService {
+export class FabricanteService {
     private baseUrl = "http://localhost:8000/fabricante";
 
     constructor(private httpClient: HttpClient) { }

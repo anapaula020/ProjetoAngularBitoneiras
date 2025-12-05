@@ -63,7 +63,7 @@ export class AutorFormComponent implements OnInit {
     }
 
     salvar(): void {
-        if(this.formGroup.invalid) { // remover?
+        if(this.formGroup.invalid) {
             this.formGroup.markAllAsTouched();
             return;
         }
