@@ -10,7 +10,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HeaderAdminComponent } from "../../template/header-admin/header-admin.component";
 import { FooterAdminComponent } from "../../template/footer-admin/footer-admin.component";
 import { MatIconModule } from '@angular/material/icon';
-import { Novel } from '../../../models/novel.model';
 import { MatPaginatorModule,PageEvent } from '@angular/material/paginator';
 import { ExclusaoComponent } from '../../confirmacao/exclusao/exclusao.component';
 import { MatDialog } from '@angular/material/dialog';

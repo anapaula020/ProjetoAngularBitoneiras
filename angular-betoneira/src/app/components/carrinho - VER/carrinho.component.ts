@@ -2,7 +2,7 @@ import { CommonModule,NgFor,NgIf } from '@angular/common';
 import { Component,OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CarrinhoService } from '../../services/carrinho.service';
-import { ItemCarrinho } from '../../models/item-carrinho';
+import { ItemCarrinho } from '../../models/itemCarrinho.model';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { MatButtonModule } from '@angular/material/button';

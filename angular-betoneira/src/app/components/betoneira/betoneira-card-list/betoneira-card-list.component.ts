@@ -6,13 +6,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { NgForOf } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormBuilder,FormGroup,FormsModule,NgModel,ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder,FormGroup,FormsModule } from '@angular/forms';
 import { ActivatedRoute,Router } from '@angular/router';
 import { CarrinhoService } from '../../../services/carrinho.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
-import { Fabricante } from '../../../models/fabricante';    
+import { Fabricante } from '../../../models/fabricante.model';    
 import { FabricanteService } from '../../../services/fabricante.service';
 
 type Card = {

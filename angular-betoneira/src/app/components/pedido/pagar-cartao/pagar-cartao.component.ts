@@ -6,7 +6,6 @@ import { AuthService } from '../../../services/auth.service';
 import { Usuario } from '../../../models/usuario.model';
 import { Subscription } from 'rxjs';
 import { NgIf } from '@angular/common';
-import { Cliente } from '../../../models/cliente.model';
 
 @Component({
     selector: 'app-pagar-cartao',
@@ -18,7 +17,7 @@ import { Cliente } from '../../../models/cliente.model';
 export class PagarCartaoComponent implements OnInit {
     pagarCartaoForm: FormGroup;
     pedidoId!: number;
-    usuarioLogado: Cliente | null = null;
+    usuarioLogado: Usuario | null = null;
     private subscription = new Subscription();
     titulo: string = '';
 

@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardActions,MatCardContent,MatCardFooter,MatCardModule,MatCardTitle } from '@angular/material/card';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { ItemCarrinho } from '../../models/item-carrinho';
+import { ItemCarrinho } from '../../models/itemCarrinho.model';
 import { Usuario } from '../../models/usuario.model';
 import { AuthService } from '../../services/auth.service';
 import { CarrinhoService } from '../../services/carrinho.service';
@@ -14,10 +14,10 @@ import { SidebarService } from '../../services/sidebar.service';
 import { FooterComponent } from '../template/footer/footer.component';
 import { HeaderComponent } from '../template/header/header.component';
 import { PedidoService } from '../../services/pedido.service';
-import { Pedido } from '../../models/pedido.model';
+// import { Pedido } from '../../models/pedido.model';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Endereco } from '../../models/endereco.model';
-import { ItemPedido } from '../../models/itemPedido.model';
+// import { Endereco } from '../../models/endereco.model';
+// import { ItemPedido } from '../../models/itemPedido.model';
 import { BetoneiraService } from '../../services/betoneira.service';
 import { Betoneira } from '../../models/betoneira.model';
 
@@ -65,6 +65,12 @@ export class ConfirmarCompraComponent implements OnInit,OnDestroy {
             this.userRole = this.authService.getUserRole();
             if(this.usuarioLogado) {
                 this.enderecoForm.patchValue({
+                    numero: this.usuarioLogado.endereco.numero;
+                    complemento: this.usuarioLogado.endereco.complemento;
+                    bairro: this.usuarioLogado.endereco.bairro;
+                    cep: this.usuarioLogado.endereco.cep;
+                    municipio: this.usuarioLogado.endereco.municipio;
+
                     email: this.usuarioLogado.email,
                     rua: this.usuarioLogado.endereco?.rua || '',
                     numero: this.usuarioLogado.endereco?.numero || '',

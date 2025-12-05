@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component,OnInit, inject } from '@angular/core';
 import { Router,RouterModule } from '@angular/router';
-import { Fabricante } from '../../../models/fabricante';
-import { AutorService } from '../../../services/fabricante.service';
+import { Fabricante } from '../../../models/fabricante.model';
+import { FabricanteService } from '../../../services/fabricante.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -10,7 +10,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HeaderAdminComponent } from "../../template/header-admin/header-admin.component";
 import { FooterAdminComponent } from "../../template/footer-admin/footer-admin.component";
 import { MatIconModule } from '@angular/material/icon';
-import { Novel } from '../../../models/novel.model';
 import { MatPaginatorModule,PageEvent } from '@angular/material/paginator';
 import { ExclusaoComponent } from '../../confirmacao/exclusao/exclusao.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -30,7 +29,7 @@ export class AutorListComponent implements OnInit {
     page = 0;
     readonly dialog = inject(MatDialog);
 
-    constructor(private autorService: AutorService,private router: Router) { }
+    constructor(private autorService: FabricanteService,private router: Router) { }
 
     ngOnInit(): void {
         this.loadAutores();

@@ -3,9 +3,9 @@ import { FormBuilder,FormGroup,ReactiveFormsModule,Validators } from '@angular/f
 import { ActivatedRoute,Router } from '@angular/router';
 import { PedidoService } from '../../../services/pedido.service';
 import { AuthService } from '../../../services/auth.service';
-import { Cliente } from '../../../models/cliente.model';
 import { Subscription } from 'rxjs';
 import { NgIf } from '@angular/common';
+import { Usuario } from '../../../models/usuario.model';
 
 @Component({
     selector: 'app-pagar-pix',
@@ -17,7 +17,7 @@ import { NgIf } from '@angular/common';
 export class PagarPixComponent implements OnInit {
     pagarPixForm: FormGroup;
     pedidoId!: number;
-    usuarioLogado: Cliente | null = null;
+    usuarioLogado: Usuario | null = null;
     private subscription = new Subscription();
 
     constructor(
