@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/service/ClienteService.java
 package br.unitins.tp1.service;
 
 import br.unitins.tp1.dto.ClienteRequestDTO;
@@ -29,10 +28,10 @@ public class ClienteService {
         Cliente cliente = new Cliente();
         cliente.setNome(dto.getNome());
         cliente.setEmail(dto.getEmail());
-        cliente.setSenha(HashUtil.hash(dto.getSenha())); // Correctly hashes for storage
+        cliente.setSenha(HashUtil.hash(dto.getSenha()));
         cliente.setCpf(dto.getCpf());
         cliente.setTelefone(dto.getTelefone());
-        cliente.setRole("USER"); // Default role for new users
+        cliente.setRole("USER");
 
         clienteRepository.persist(cliente);
         return ClienteResponseDTO.valueOf(cliente);
@@ -51,7 +50,7 @@ public class ClienteService {
 
         cliente.setNome(dto.getNome());
         cliente.setEmail(dto.getEmail());
-        cliente.setSenha(HashUtil.hash(dto.getSenha())); // Correctly hashes for storage
+        cliente.setSenha(HashUtil.hash(dto.getSenha()));
         cliente.setCpf(dto.getCpf());
         cliente.setTelefone(dto.getTelefone());
 
@@ -88,10 +87,9 @@ public class ClienteService {
                 .collect(Collectors.toList());
     }
 
-    // Corrected findByEmailAndSenha method for Bcrypt
-    public ClienteResponseDTO findByEmailAndSenha(String email, String rawSenha) { // rawSenha is the plaintext password
-        Cliente cliente = clienteRepository.findByEmail(email); // Find by email first
-        if (cliente == null || !HashUtil.verifyPassword(rawSenha, cliente.getSenha())) { // Then verify password
+    public ClienteResponseDTO findByEmailAndSenha(String email, String rawSenha) {
+        Cliente cliente = clienteRepository.findByEmail(email);
+        if (cliente == null || !HashUtil.verifyPassword(rawSenha, cliente.getSenha())) {
             throw new ServiceException("Email ou senha inválidos.", Response.Status.UNAUTHORIZED);
         }
         return ClienteResponseDTO.valueOf(cliente);

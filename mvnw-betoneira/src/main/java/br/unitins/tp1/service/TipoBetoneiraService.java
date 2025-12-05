@@ -1,10 +1,9 @@
-// src/main/java/br/unitins/tp1/service/TipoBetoneiraService.java
 package br.unitins.tp1.service;
 
 import br.unitins.tp1.dto.TipoBetoneiraDTO;
 import br.unitins.tp1.dto.TipoBetoneiraResponseDTO;
 import br.unitins.tp1.exception.ServiceException;
-import br.unitins.tp1.model.TipoBetoneiraEntity; // Using TipoBetoneiraEntity
+import br.unitins.tp1.model.TipoBetoneiraEntity;
 import br.unitins.tp1.repository.TipoBetoneiraRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -31,7 +30,7 @@ public class TipoBetoneiraService {
         }
 
         TipoBetoneiraEntity tipoBetoneira = new TipoBetoneiraEntity();
-        tipoBetoneira.setNome(dto.getNome()); // setNome is now defined in TipoBetoneiraEntity
+        tipoBetoneira.setNome(dto.getNome());
 
         tipoBetoneiraRepository.persist(tipoBetoneira);
         return TipoBetoneiraResponseDTO.valueOf(tipoBetoneira);
@@ -48,7 +47,7 @@ public class TipoBetoneiraService {
             throw new ServiceException("Tipo de betoneira não encontrado.", Response.Status.NOT_FOUND);
         }
 
-        tipoBetoneira.setNome(dto.getNome()); // setNome is now defined in TipoBetoneiraEntity
+        tipoBetoneira.setNome(dto.getNome());
 
         tipoBetoneiraRepository.persist(tipoBetoneira);
         return TipoBetoneiraResponseDTO.valueOf(tipoBetoneira);
@@ -81,7 +80,7 @@ public class TipoBetoneiraService {
     }
 
     public List<TipoBetoneiraResponseDTO> findByNome(String nome) {
-        return tipoBetoneiraRepository.findByNome(nome).stream() // findByNome is now defined in TipoBetoneiraRepository
+        return tipoBetoneiraRepository.findByNome(nome).stream()
                 .map(TipoBetoneiraResponseDTO::valueOf)
                 .collect(Collectors.toList());
     }

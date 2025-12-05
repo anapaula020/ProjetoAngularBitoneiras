@@ -121,7 +121,7 @@ public class EnderecoService {
         if (cliente == null) {
             throw new ServiceException("Cliente autenticado não encontrado.", Response.Status.UNAUTHORIZED);
         }
-        return enderecoRepository.findByCliente(cliente).stream() // Usar findByCliente()
+        return enderecoRepository.findByCliente(cliente).stream()
                 .map(EnderecoResponseDTO::valueOf)
                 .collect(Collectors.toList());
     }

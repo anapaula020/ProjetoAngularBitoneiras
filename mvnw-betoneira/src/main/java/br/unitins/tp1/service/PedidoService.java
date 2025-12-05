@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/service/PedidoService.java
 package br.unitins.tp1.service;
 
 import br.unitins.tp1.dto.PedidoRequestDTO;
@@ -6,11 +5,11 @@ import br.unitins.tp1.dto.PedidoResponseDTO;
 import br.unitins.tp1.dto.ItemPedidoRequestDTO;
 import br.unitins.tp1.exception.ServiceException;
 import br.unitins.tp1.model.Cliente;
-import br.unitins.tp1.model.Endereco; // Import Endereco
+import br.unitins.tp1.model.Endereco;
 import br.unitins.tp1.model.ItemPedido;
 import br.unitins.tp1.model.Pedido;
 import br.unitins.tp1.repository.ClienteRepository;
-import br.unitins.tp1.repository.EnderecoRepository; // Import EnderecoRepository
+import br.unitins.tp1.repository.EnderecoRepository;
 import br.unitins.tp1.repository.ItemPedidoRepository;
 import br.unitins.tp1.repository.PedidoRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -33,7 +32,7 @@ public class PedidoService {
     ClienteRepository clienteRepository;
 
     @Inject
-    EnderecoRepository enderecoRepository; // Inject EnderecoRepository
+    EnderecoRepository enderecoRepository;
 
     @Inject
     ItemPedidoRepository itemPedidoRepository;
@@ -50,12 +49,10 @@ public class PedidoService {
             throw new ServiceException("Cliente autenticado não encontrado.", Response.Status.UNAUTHORIZED);
         }
 
-        // Validate and set delivery address
         Endereco enderecoEntrega = enderecoRepository.findById(dto.getIdEnderecoEntrega());
         if (enderecoEntrega == null) {
             throw new ServiceException("Endereço de entrega não encontrado.", Response.Status.NOT_FOUND);
         }
-        // Ensure the delivery address belongs to the authenticated client (if a regular user)
         if (!securityContext.isUserInRole("ADMIN") && !enderecoEntrega.getCliente().getId().equals(cliente.getId())) {
              throw new ServiceException("Endereço de entrega não pertence ao cliente autenticado.", Response.Status.FORBIDDEN);
         }
@@ -63,13 +60,13 @@ public class PedidoService {
 
         Pedido pedido = new Pedido();
         pedido.setDataDoPedido(LocalDateTime.now());
-        pedido.setCliente(cliente); // Set the authenticated client to the order
-        pedido.setEnderecoEntrega(enderecoEntrega); // Set the delivery address
+        pedido.setCliente(cliente);
+        pedido.setEnderecoEntrega(enderecoEntrega);
 
         Double totalCalculado = 0.0;
         if (dto.getItens() != null && !dto.getItens().isEmpty()) {
             for (ItemPedidoRequestDTO itemDto : dto.getItens()) {
-                ItemPedido itemPedido = new ItemPedido(); // Corrected from PedidoItem
+                ItemPedido itemPedido = new ItemPedido();
                 itemPedido.setQuantidade(itemDto.getQuantidade());
                 itemPedido.setPrecoUnitario(itemDto.getPrecoUnitario());
                 itemPedido.setPedido(pedido);
@@ -97,7 +94,6 @@ public class PedidoService {
             throw new ServiceException("Usuário não autorizado a atualizar este pedido.", Response.Status.FORBIDDEN);
         }
 
-        // Update delivery address if provided and authorized
         if (dto.getIdEnderecoEntrega() != null) {
             Endereco enderecoEntrega = enderecoRepository.findById(dto.getIdEnderecoEntrega());
             if (enderecoEntrega == null) {
@@ -114,7 +110,7 @@ public class PedidoService {
              pedido.getItens().clear();
              Double totalCalculado = 0.0;
              for (ItemPedidoRequestDTO itemDto : dto.getItens()) {
-                 ItemPedido itemPedido = new ItemPedido(); // Corrected from PedidoItem
+                 ItemPedido itemPedido = new ItemPedido();
                  itemPedido.setQuantidade(itemDto.getQuantidade());
                  itemPedido.setPrecoUnitario(itemDto.getPrecoUnitario());
                  itemPedido.setPedido(pedido);

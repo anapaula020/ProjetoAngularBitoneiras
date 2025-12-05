@@ -23,9 +23,9 @@ public class ItemPedidoResourceTest {
 
     private String adminToken;
     private String userToken;
-    private Long userAddressId = 1L; // Assuming João Silva's address ID from import.sql
-    private Long fabricanteIdFromSql = 1L; // "Fabricante A" from import.sql
-    private Long tipoBetoneiraIdFromSql = 1L; // "Pequena" from import.sql
+    private Long userAddressId = 1L; 
+    private Long fabricanteIdFromSql = 1L; 
+    private Long tipoBetoneiraIdFromSql = 1L; 
 
     @BeforeEach
     public void setup() {
@@ -35,7 +35,6 @@ public class ItemPedidoResourceTest {
 
     @Test
     public void testCreateItemPedidoAsAdmin() {
-        // Use fixed IDs from import.sql for existing Fabricante and TipoBetoneira
         BetoneiraRequestDTO betoneiraDto = new BetoneiraRequestDTO(
                 "Betoneira Item Teste", "Desc item", 100.0, 10, tipoBetoneiraIdFromSql, fabricanteIdFromSql
         );
@@ -45,12 +44,12 @@ public class ItemPedidoResourceTest {
                 .body(betoneiraDto)
                 .when().post("/betoneiras")
                 .then().statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
         ItemPedidoRequestDTO itemPedido = new ItemPedidoRequestDTO(
                 betoneiraId,
                 2,
-                100.0 // price per unit
+                100.0 
         );
 
         given()
@@ -68,7 +67,7 @@ public class ItemPedidoResourceTest {
     @Test
     public void testCreateItemPedidoAsUserForbidden() {
         ItemPedidoRequestDTO itemPedido = new ItemPedidoRequestDTO(
-                1L, // Assuming valid Betoneira ID
+                1L, 
                 1,
                 50.0
         );
@@ -79,12 +78,11 @@ public class ItemPedidoResourceTest {
                 .body(itemPedido)
                 .when().post("/itens-pedido")
                 .then()
-                .statusCode(403); // Forbidden
+                .statusCode(403); 
     }
 
     @Test
     public void testUpdateItemPedidoAsAdmin() {
-        // Create a betoneira
         BetoneiraRequestDTO betoneiraDto = new BetoneiraRequestDTO(
                 "Betoneira Update Item", "Desc update", 200.0, 5, tipoBetoneiraIdFromSql, fabricanteIdFromSql
         );
@@ -94,9 +92,8 @@ public class ItemPedidoResourceTest {
                 .body(betoneiraDto)
                 .when().post("/betoneiras")
                 .then().statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Create an itemPedido first (as admin)
         ItemPedidoRequestDTO originalItem = new ItemPedidoRequestDTO(
                 betoneiraId,
                 1,
@@ -109,13 +106,12 @@ public class ItemPedidoResourceTest {
                 .when().post("/itens-pedido")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Update the itemPedido
         ItemPedidoRequestDTO updatedItem = new ItemPedidoRequestDTO(
                 betoneiraId,
                 3,
-                250.0 // updated price per unit
+                250.0 
         );
 
         given()
@@ -125,14 +121,13 @@ public class ItemPedidoResourceTest {
                 .when().put("/itens-pedido/" + itemId)
                 .then()
                 .statusCode(200)
-                .body("id", is(itemId.intValue())) // intValue for JSONPath comparison
+                .body("id", is(itemId.intValue())) 
                 .body("quantidade", is(3))
                 .body("precoUnitario", is(250.0F));
     }
 
     @Test
     public void testUpdateItemPedidoAsUserForbidden() {
-        // Create a betoneira
         BetoneiraRequestDTO betoneiraDto = new BetoneiraRequestDTO(
                 "Betoneira Update Forbidden", "Desc forbidden", 300.0, 1, tipoBetoneiraIdFromSql, fabricanteIdFromSql
         );
@@ -142,9 +137,8 @@ public class ItemPedidoResourceTest {
                 .body(betoneiraDto)
                 .when().post("/betoneiras")
                 .then().statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Create an itemPedido first (as admin)
         ItemPedidoRequestDTO originalItem = new ItemPedidoRequestDTO(
                 betoneiraId,
                 1,
@@ -157,9 +151,8 @@ public class ItemPedidoResourceTest {
                 .when().post("/itens-pedido")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Attempt to update as a regular user
         ItemPedidoRequestDTO attemptedUpdate = new ItemPedidoRequestDTO(
                 betoneiraId,
                 5,
@@ -172,12 +165,11 @@ public class ItemPedidoResourceTest {
                 .body(attemptedUpdate)
                 .when().put("/itens-pedido/" + itemId)
                 .then()
-                .statusCode(403); // Forbidden
+                .statusCode(403); 
     }
 
     @Test
     public void testDeleteItemPedidoAsAdmin() {
-        // Create a betoneira
         BetoneiraRequestDTO betoneiraDto = new BetoneiraRequestDTO(
                 "Betoneira Delete Item", "Desc delete", 400.0, 1, tipoBetoneiraIdFromSql, fabricanteIdFromSql
         );
@@ -187,9 +179,8 @@ public class ItemPedidoResourceTest {
                 .body(betoneiraDto)
                 .when().post("/betoneiras")
                 .then().statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Create an itemPedido first (as admin)
         ItemPedidoRequestDTO itemToDelete = new ItemPedidoRequestDTO(
                 betoneiraId,
                 1,
@@ -202,19 +193,17 @@ public class ItemPedidoResourceTest {
                 .when().post("/itens-pedido")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Delete the itemPedido
         given()
                 .header("Authorization", "Bearer " + adminToken)
                 .when().delete("/itens-pedido/" + itemId)
                 .then()
-                .statusCode(204); // No Content
+                .statusCode(204); 
     }
 
     @Test
     public void testDeleteItemPedidoAsUserForbidden() {
-        // Create a betoneira
         BetoneiraRequestDTO betoneiraDto = new BetoneiraRequestDTO(
                 "Betoneira Delete Forbidden", "Desc delete forbidden", 500.0, 1, tipoBetoneiraIdFromSql, fabricanteIdFromSql
         );
@@ -224,9 +213,8 @@ public class ItemPedidoResourceTest {
                 .body(betoneiraDto)
                 .when().post("/betoneiras")
                 .then().statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Create an itemPedido first (as admin)
         ItemPedidoRequestDTO itemToDelete = new ItemPedidoRequestDTO(
                 betoneiraId,
                 1,
@@ -239,14 +227,13 @@ public class ItemPedidoResourceTest {
                 .when().post("/itens-pedido")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Attempt to delete as a regular user
         given()
                 .header("Authorization", "Bearer " + userToken)
                 .when().delete("/itens-pedido/" + itemId)
                 .then()
-                .statusCode(403); // Forbidden
+                .statusCode(403); 
     }
 
 
@@ -257,7 +244,7 @@ public class ItemPedidoResourceTest {
                 .when().get("/itens-pedido")
                 .then()
                 .statusCode(200)
-                .body("size()", greaterThanOrEqualTo(2)); // From import.sql or previous tests
+                .body("size()", greaterThanOrEqualTo(2)); 
     }
 
     @Test
@@ -266,26 +253,24 @@ public class ItemPedidoResourceTest {
                 .header("Authorization", "Bearer " + userToken)
                 .when().get("/itens-pedido")
                 .then()
-                .statusCode(403); // Forbidden
+                .statusCode(403); 
     }
 
     @Test
     public void testFindItemPedidoByIdAsAdmin() {
-        // Use an ID from import.sql or create one
-        Long itemId = 1L; // ItemPedido with ID 1 from import.sql
+        Long itemId = 1L; 
 
         given()
                 .header("Authorization", "Bearer " + adminToken)
                 .when().get("/itens-pedido/" + itemId)
                 .then()
                 .statusCode(200)
-                .body("id", is(itemId.intValue())) // intValue for JSONPath comparison
+                .body("id", is(itemId.intValue())) 
                 .body("quantidade", is(1));
     }
 
     @Test
     public void testFindItemPedidoByIdAsUserSelfOwned() {
-        // Create a Betoneira (as admin, as user cannot create it directly)
         BetoneiraRequestDTO betoneiraDto = new BetoneiraRequestDTO(
                 "Betoneira for User Item", "Desc user item", 600.0, 5, tipoBetoneiraIdFromSql, fabricanteIdFromSql
         );
@@ -295,12 +280,11 @@ public class ItemPedidoResourceTest {
                 .body(betoneiraDto)
                 .when().post("/betoneiras")
                 .then().statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
 
-        // Create a Pedido for the user that contains this item
         ItemPedidoRequestDTO itemForPedido = new ItemPedidoRequestDTO(betoneiraId, 1, 600.0);
-        PedidoRequestDTO pedidoDto = new PedidoRequestDTO(LocalDateTime.now(), Arrays.asList(itemForPedido), userAddressId); // Pass address ID
+        PedidoRequestDTO pedidoDto = new PedidoRequestDTO(LocalDateTime.now(), Arrays.asList(itemForPedido), userAddressId); 
 
         Long pedidoId = given()
                 .header("Authorization", "Bearer " + userToken)
@@ -309,16 +293,13 @@ public class ItemPedidoResourceTest {
                 .when().post("/pedidos")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Now, find the itemPedido ID within this newly created pedido
-        // Assuming there's a way to get item IDs from PedidoResponseDTO or query directly
-        // For now, let's just assume the first item of the created order
         Long itemPedidoId = given()
                 .header("Authorization", "Bearer " + userToken)
                 .when().get("/pedidos/" + pedidoId)
                 .then().statusCode(200)
-                .extract().jsonPath().getLong("itens[0].id"); // Fixed extraction
+                .extract().jsonPath().getLong("itens[0].id"); 
 
 
         given()
@@ -326,19 +307,18 @@ public class ItemPedidoResourceTest {
                 .when().get("/itens-pedido/" + itemPedidoId)
                 .then()
                 .statusCode(200)
-                .body("id", is(itemPedidoId.intValue())) // intValue for JSONPath comparison
+                .body("id", is(itemPedidoId.intValue())) 
                 .body("quantidade", is(1));
     }
 
     @Test
     public void testFindItemPedidoByIdAsUserOtherUserForbidden() {
-        // Try to access an itemPedido that belongs to the admin's order (ID 3 in import.sql)
-        Long adminOwnedItemId = 3L; // ItemPedido with ID 3 from import.sql is linked to Pedido ID 3, which is admin's
+        Long adminOwnedItemId = 3L; 
 
         given()
                 .header("Authorization", "Bearer " + userToken)
                 .when().get("/itens-pedido/" + adminOwnedItemId)
                 .then()
-                .statusCode(403); // Forbidden
+                .statusCode(403); 
     }
 }

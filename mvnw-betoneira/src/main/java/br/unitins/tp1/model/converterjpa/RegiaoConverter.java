@@ -1,6 +1,6 @@
 package br.unitins.tp1.model.converterjpa;
 
-import br.unitins.tp1.model.Regiao; // Correct import for the new Regiao enum
+import br.unitins.tp1.model.Regiao;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 

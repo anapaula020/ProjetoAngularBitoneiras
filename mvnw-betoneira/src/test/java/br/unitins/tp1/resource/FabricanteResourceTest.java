@@ -48,12 +48,11 @@ public class FabricanteResourceTest {
                 .body(fabricante)
                 .when().post("/fabricantes")
                 .then()
-                .statusCode(403); // Forbidden
+                .statusCode(403); 
     }
 
     @Test
     public void testUpdateFabricanteAsAdmin() {
-        // Create a fabricante first
         FabricanteRequestDTO originalFabricante = new FabricanteRequestDTO("Fabricante Original");
         Long fabricanteId = given()
                 .header("Authorization", "Bearer " + adminToken)
@@ -62,9 +61,8 @@ public class FabricanteResourceTest {
                 .when().post("/fabricantes")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Update the fabricante
         FabricanteRequestDTO updatedFabricante = new FabricanteRequestDTO("Fabricante Atualizado");
         given()
                 .header("Authorization", "Bearer " + adminToken)
@@ -73,13 +71,12 @@ public class FabricanteResourceTest {
                 .when().put("/fabricantes/" + fabricanteId)
                 .then()
                 .statusCode(200)
-                .body("id", is(fabricanteId.intValue())) // intValue for JSONPath comparison
+                .body("id", is(fabricanteId.intValue())) 
                 .body("nome", is("Fabricante Atualizado"));
     }
 
     @Test
     public void testUpdateFabricanteAsUserForbidden() {
-        // Create a fabricante as admin
         FabricanteRequestDTO originalFabricante = new FabricanteRequestDTO("Fabricante para Update User Test");
         Long fabricanteId = given()
                 .header("Authorization", "Bearer " + adminToken)
@@ -88,9 +85,8 @@ public class FabricanteResourceTest {
                 .when().post("/fabricantes")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Attempt to update as a regular user
         FabricanteRequestDTO updatedFabricante = new FabricanteRequestDTO("Fabricante Tentativa User");
         given()
                 .header("Authorization", "Bearer " + userToken)
@@ -98,12 +94,11 @@ public class FabricanteResourceTest {
                 .body(updatedFabricante)
                 .when().put("/fabricantes/" + fabricanteId)
                 .then()
-                .statusCode(403); // Forbidden
+                .statusCode(403); 
     }
 
     @Test
     public void testDeleteFabricanteAsAdmin() {
-        // Create a fabricante first
         FabricanteRequestDTO fabricanteToDelete = new FabricanteRequestDTO("Fabricante a Deletar");
         Long fabricanteId = given()
                 .header("Authorization", "Bearer " + adminToken)
@@ -112,19 +107,17 @@ public class FabricanteResourceTest {
                 .when().post("/fabricantes")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Delete the fabricante
         given()
                 .header("Authorization", "Bearer " + adminToken)
                 .when().delete("/fabricantes/" + fabricanteId)
                 .then()
-                .statusCode(204); // No Content
+                .statusCode(204); 
     }
 
     @Test
     public void testDeleteFabricanteAsUserForbidden() {
-        // Create a fabricante as admin
         FabricanteRequestDTO fabricanteToDelete = new FabricanteRequestDTO("Fabricante Delete User Test");
         Long fabricanteId = given()
                 .header("Authorization", "Bearer " + adminToken)
@@ -133,45 +126,42 @@ public class FabricanteResourceTest {
                 .when().post("/fabricantes")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Attempt to delete as a regular user
         given()
                 .header("Authorization", "Bearer " + userToken)
                 .when().delete("/fabricantes/" + fabricanteId)
                 .then()
-                .statusCode(403); // Forbidden
+                .statusCode(403); 
     }
 
     @Test
     public void testFindAllFabricantes() {
         given()
-                .header("Authorization", "Bearer " + userToken) // User can also list
+                .header("Authorization", "Bearer " + userToken) 
                 .when().get("/fabricantes")
                 .then()
                 .statusCode(200)
-                .body("size()", greaterThanOrEqualTo(2)); // At least 2 from import.sql
+                .body("size()", greaterThanOrEqualTo(2)); 
     }
 
     @Test
     public void testFindFabricanteById() {
-        // Find an existing one from import.sql
-        Long fabricanteId = 1L; // Assuming ID 1 exists from import.sql
+        Long fabricanteId = 1L; 
 
         given()
-                .header("Authorization", "Bearer " + userToken) // User can also find by ID
+                .header("Authorization", "Bearer " + userToken) 
                 .when().get("/fabricantes/" + fabricanteId)
                 .then()
                 .statusCode(200)
-                .body("id", is(fabricanteId.intValue())) // intValue for JSONPath comparison
+                .body("id", is(fabricanteId.intValue())) 
                 .body("nome", is("Fabricante A"));
     }
 
     @Test
     public void testFindFabricanteByNome() {
-        // Find an existing one from import.sql
         given()
-                .header("Authorization", "Bearer " + userToken) // User can also find by name
+                .header("Authorization", "Bearer " + userToken) 
                 .when().get("/fabricantes/search/nome/Fabricante A")
                 .then()
                 .statusCode(200)

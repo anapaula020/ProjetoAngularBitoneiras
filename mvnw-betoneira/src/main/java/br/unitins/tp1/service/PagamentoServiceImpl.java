@@ -58,7 +58,6 @@ public class PagamentoServiceImpl implements PagamentoService {
         pagamento.setStatus(statusInicial);
 
         if (tipoPagamento == TipoPagamento.PIX) {
-            // Chamada para o novo método generatePix em PixService
             PixDTO pixDetails = pixService.generatePix(pagamento.getValor(), pedido.getCliente());
 
             if ("approved".equals(pixDetails.getStatus())) {
@@ -73,7 +72,6 @@ public class PagamentoServiceImpl implements PagamentoService {
             }
 
         } else if (tipoPagamento == TipoPagamento.CARTAO_CREDITO) {
-            // Mantendo a simulação para cartão, mas agora o método existe em PixService
             pagamento.setStatus(StatusPagamento.APROVADO);
             pedido.setStatusPedido(StatusPedido.PAGO);
         } else if (tipoPagamento == TipoPagamento.BOLETO) {

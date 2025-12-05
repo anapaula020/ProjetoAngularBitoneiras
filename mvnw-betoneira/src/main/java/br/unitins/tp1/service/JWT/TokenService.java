@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/service/JWT/TokenService.java
 package br.unitins.tp1.service.JWT;
 
 import br.unitins.tp1.model.Cliente;
@@ -8,7 +7,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Set;
-// Removed unused import: import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class TokenService {

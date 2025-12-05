@@ -17,9 +17,9 @@ public class BetoneiraResourceTest {
 
     private String adminToken;
     private String userToken;
-    // Using fixed IDs from import.sql for stable references
-    private Long fabricanteIdFromSql = 1L; // "Fabricante A" from import.sql
-    private Long tipoBetoneiraIdFromSql = 1L; // "Pequena" from import.sql
+    
+    private Long fabricanteIdFromSql = 1L; 
+    private Long tipoBetoneiraIdFromSql = 1L; 
 
     @BeforeEach
     public void setup() {
@@ -29,15 +29,13 @@ public class BetoneiraResourceTest {
 
     @Test
     public void testCreateBetoneiraAsAdmin() {
-        // Use fixed IDs from import.sql for existing Fabricante and TipoBetoneira
-        // No need to fetch them explicitly if their IDs are known and stable from import.sql.
         BetoneiraRequestDTO betoneira = new BetoneiraRequestDTO(
                 "Betoneira Teste",
                 "Descrição da Betoneira Teste",
                 1234.50,
                 5,
-                tipoBetoneiraIdFromSql, // Using fixed ID
-                fabricanteIdFromSql     // Using fixed ID
+                tipoBetoneiraIdFromSql, 
+                fabricanteIdFromSql     
         );
 
         given()
@@ -69,12 +67,11 @@ public class BetoneiraResourceTest {
                 .body(betoneira)
                 .when().post("/betoneiras")
                 .then()
-                .statusCode(403); // Forbidden
+                .statusCode(403); 
     }
 
     @Test
     public void testUpdateBetoneiraAsAdmin() {
-        // Create a betoneira first
         BetoneiraRequestDTO originalBetoneira = new BetoneiraRequestDTO(
                 "Betoneira Original",
                 "Original description",
@@ -91,9 +88,8 @@ public class BetoneiraResourceTest {
                 .when().post("/betoneiras")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Update the betoneira
         BetoneiraRequestDTO updatedBetoneira = new BetoneiraRequestDTO(
                 "Betoneira Updated",
                 "Updated description",
@@ -110,14 +106,13 @@ public class BetoneiraResourceTest {
                 .when().put("/betoneiras/" + betoneiraId)
                 .then()
                 .statusCode(200)
-                .body("id", is(betoneiraId.intValue())) // intValue for comparison in JSONPath
+                .body("id", is(betoneiraId.intValue())) 
                 .body("nome", is("Betoneira Updated"))
                 .body("preco", is(750.0F));
     }
 
     @Test
     public void testUpdateBetoneiraAsUserForbidden() {
-        // Create a betoneira as admin
         BetoneiraRequestDTO originalBetoneira = new BetoneiraRequestDTO(
                 "Betoneira for Update Test",
                 "Description",
@@ -134,9 +129,8 @@ public class BetoneiraResourceTest {
                 .when().post("/betoneiras")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Attempt to update as a regular user should be forbidden
         BetoneiraRequestDTO updatedBetoneira = new BetoneiraRequestDTO(
                 "Betoneira Updated By User Attempt",
                 "Updated by user",
@@ -152,12 +146,11 @@ public class BetoneiraResourceTest {
                 .body(updatedBetoneira)
                 .when().put("/betoneiras/" + betoneiraId)
                 .then()
-                .statusCode(403); // Forbidden
+                .statusCode(403); 
     }
 
     @Test
     public void testDeleteBetoneiraAsAdmin() {
-        // Create a betoneira first
         BetoneiraRequestDTO betoneira = new BetoneiraRequestDTO(
                 "Betoneira to Delete",
                 "Description to delete",
@@ -174,19 +167,17 @@ public class BetoneiraResourceTest {
                 .when().post("/betoneiras")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Delete the betoneira
         given()
                 .header("Authorization", "Bearer " + adminToken)
                 .when().delete("/betoneiras/" + betoneiraId)
                 .then()
-                .statusCode(204); // No Content
+                .statusCode(204); 
     }
 
     @Test
     public void testDeleteBetoneiraAsUserForbidden() {
-        // Create a betoneira as admin
         BetoneiraRequestDTO betoneira = new BetoneiraRequestDTO(
                 "Betoneira to Delete by User Attempt",
                 "Description",
@@ -203,20 +194,19 @@ public class BetoneiraResourceTest {
                 .when().post("/betoneiras")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Attempt to delete as a regular user should be forbidden
         given()
                 .header("Authorization", "Bearer " + userToken)
                 .when().delete("/betoneiras/" + betoneiraId)
                 .then()
-                .statusCode(403); // Forbidden
+                .statusCode(403); 
     }
 
     @Test
     public void testFindAllBetoneiras() {
         given()
-                .header("Authorization", "Bearer " + userToken) // User can also list
+                .header("Authorization", "Bearer " + userToken) 
                 .when().get("/betoneiras")
                 .then()
                 .statusCode(200)
@@ -225,7 +215,6 @@ public class BetoneiraResourceTest {
 
     @Test
     public void testFindBetoneiraById() {
-        // Create a betoneira as admin to ensure it exists
         BetoneiraRequestDTO betoneira = new BetoneiraRequestDTO(
                 "Betoneira Find By Id",
                 "Description for find by id",
@@ -242,20 +231,19 @@ public class BetoneiraResourceTest {
                 .when().post("/betoneiras")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
         given()
-                .header("Authorization", "Bearer " + userToken) // User can also find by ID
+                .header("Authorization", "Bearer " + userToken) 
                 .when().get("/betoneiras/" + betoneiraId)
                 .then()
                 .statusCode(200)
-                .body("id", is(betoneiraId.intValue())) // intValue for comparison in JSONPath
+                .body("id", is(betoneiraId.intValue())) 
                 .body("nome", is("Betoneira Find By Id"));
     }
 
     @Test
     public void testFindBetoneiraByNome() {
-        // Create a betoneira as admin to ensure it exists
         BetoneiraRequestDTO betoneira = new BetoneiraRequestDTO(
                 "Betoneira Pesquisa Nome",
                 "Description for name search",
@@ -274,7 +262,7 @@ public class BetoneiraResourceTest {
                 .statusCode(201);
 
         given()
-                .header("Authorization", "Bearer " + userToken) // User can also find by name
+                .header("Authorization", "Bearer " + userToken) 
                 .when().get("/betoneiras/search/nome/Betoneira Pesquisa Nome")
                 .then()
                 .statusCode(200)

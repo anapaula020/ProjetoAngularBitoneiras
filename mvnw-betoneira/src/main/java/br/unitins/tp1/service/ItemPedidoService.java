@@ -29,10 +29,8 @@ public class ItemPedidoService {
             throw new ServiceException("Usuário não autorizado a criar itens de pedido diretamente.", Response.Status.FORBIDDEN);
         }
         ItemPedido itemPedido = new ItemPedido();
-        // itemPedido.setBetoneira(betoneiraRepository.findById(dto.getIdBetoneira())); // Usar getIdBetoneira()
-        // itemPedido.setPedido(pedidoRepository.findById(dto.getPedidoId())); // Assumindo que ItemPedidoRequestDTO tem getPedidoId()
-        itemPedido.setQuantidade(dto.getQuantidade()); // Usar getQuantidade()
-        itemPedido.setPrecoUnitario(dto.getPrecoUnitario()); // Usar getPrecoUnitario()
+        itemPedido.setQuantidade(dto.getQuantidade());
+        itemPedido.setPrecoUnitario(dto.getPrecoUnitario());
 
         itemPedidoRepository.persist(itemPedido);
         return ItemPedidoResponseDTO.valueOf(itemPedido);
@@ -48,10 +46,8 @@ public class ItemPedidoService {
             throw new ServiceException("Item de pedido não encontrado.", Response.Status.NOT_FOUND);
         }
 
-        // itemPedido.setBetoneira(betoneiraRepository.findById(dto.getIdBetoneira()));
-        // itemPedido.setPedido(pedidoRepository.findById(dto.getPedidoId()));
-        itemPedido.setQuantidade(dto.getQuantidade()); // Usar getQuantidade()
-        itemPedido.setPrecoUnitario(dto.getPrecoUnitario()); // Usar getPrecoUnitario()
+        itemPedido.setQuantidade(dto.getQuantidade());
+        itemPedido.setPrecoUnitario(dto.getPrecoUnitario());
 
         itemPedidoRepository.persist(itemPedido);
         return ItemPedidoResponseDTO.valueOf(itemPedido);

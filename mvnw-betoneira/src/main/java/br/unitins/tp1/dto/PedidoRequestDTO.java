@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/dto/PedidoRequestDTO.java
 package br.unitins.tp1.dto;
 
 import jakarta.validation.constraints.NotNull;

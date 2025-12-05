@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/resource/AuthResource.java
 package br.unitins.tp1.resource;
 
 import br.unitins.tp1.dto.LoginRequestDTO;

@@ -71,7 +71,6 @@ public class EnderecoResourceTest {
 
     @Test
     public void testUpdateEnderecoAsUserSelf() {
-        // Create an address for the user first
         EnderecoRequestDTO newEndereco = new EnderecoRequestDTO(
                 "Rua para Atualizar",
                 "789",
@@ -89,9 +88,8 @@ public class EnderecoResourceTest {
                 .when().post("/enderecos")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Update the address
         EnderecoRequestDTO updatedEndereco = new EnderecoRequestDTO(
                 "Rua Atualizada do Cliente",
                 "789-Updated",
@@ -109,13 +107,12 @@ public class EnderecoResourceTest {
                 .when().put("/enderecos/" + enderecoId)
                 .then()
                 .statusCode(200)
-                .body("id", is(enderecoId.intValue())) // intValue for JSONPath comparison
+                .body("id", is(enderecoId.intValue())) 
                 .body("logradouro", is("Rua Atualizada do Cliente"));
     }
 
     @Test
     public void testUpdateEnderecoAsUserOtherUserForbidden() {
-        // Create an address for the admin user first
         EnderecoRequestDTO adminEndereco = new EnderecoRequestDTO(
                 "Rua do Admin para Teste",
                 "111",
@@ -133,9 +130,8 @@ public class EnderecoResourceTest {
                 .when().post("/enderecos")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Attempt to update admin's address as a regular user
         EnderecoRequestDTO attemptedUpdate = new EnderecoRequestDTO(
                 "Rua Tentativa User",
                 "222",
@@ -152,12 +148,11 @@ public class EnderecoResourceTest {
                 .body(attemptedUpdate)
                 .when().put("/enderecos/" + adminEnderecoId)
                 .then()
-                .statusCode(403); // Forbidden
+                .statusCode(403); 
     }
 
     @Test
     public void testUpdateEnderecoAsAdminAnyAddress() {
-        // Create an address for the user (as user)
         EnderecoRequestDTO userEndereco = new EnderecoRequestDTO(
                 "Rua do Usuario para Admin Update",
                 "333",
@@ -175,9 +170,8 @@ public class EnderecoResourceTest {
                 .when().post("/enderecos")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Admin updates user's address
         EnderecoRequestDTO adminUpdate = new EnderecoRequestDTO(
                 "Rua Atualizada pelo Admin",
                 "333-Admin",
@@ -195,14 +189,13 @@ public class EnderecoResourceTest {
                 .when().put("/enderecos/" + userEnderecoId)
                 .then()
                 .statusCode(200)
-                .body("id", is(userEnderecoId.intValue())) // intValue for JSONPath comparison
+                .body("id", is(userEnderecoId.intValue())) 
                 .body("logradouro", is("Rua Atualizada pelo Admin"));
     }
 
 
     @Test
     public void testDeleteEnderecoAsUserSelf() {
-        // Create an address for the user
         EnderecoRequestDTO newEndereco = new EnderecoRequestDTO(
                 "Rua para Deletar",
                 "111",
@@ -220,19 +213,17 @@ public class EnderecoResourceTest {
                 .when().post("/enderecos")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Delete the address
         given()
                 .header("Authorization", "Bearer " + userToken)
                 .when().delete("/enderecos/" + enderecoId)
                 .then()
-                .statusCode(204); // No Content
+                .statusCode(204); 
     }
 
     @Test
     public void testDeleteEnderecoAsUserOtherUserForbidden() {
-        // Create an address for the admin user
         EnderecoRequestDTO adminEndereco = new EnderecoRequestDTO(
                 "Rua do Admin para Deletar",
                 "555",
@@ -250,19 +241,17 @@ public class EnderecoResourceTest {
                 .when().post("/enderecos")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Attempt to delete admin's address as a regular user
         given()
                 .header("Authorization", "Bearer " + userToken)
                 .when().delete("/enderecos/" + adminEnderecoId)
                 .then()
-                .statusCode(403); // Forbidden
+                .statusCode(403); 
     }
 
     @Test
     public void testDeleteEnderecoAsAdminAnyAddress() {
-        // Create an address for the user (as user)
         EnderecoRequestDTO userEndereco = new EnderecoRequestDTO(
                 "Rua do Usuario para Admin Delete",
                 "666",
@@ -280,14 +269,13 @@ public class EnderecoResourceTest {
                 .when().post("/enderecos")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Admin deletes user's address
         given()
                 .header("Authorization", "Bearer " + adminToken)
                 .when().delete("/enderecos/" + userEnderecoId)
                 .then()
-                .statusCode(204); // No Content
+                .statusCode(204); 
     }
 
     @Test
@@ -297,7 +285,7 @@ public class EnderecoResourceTest {
                 .when().get("/enderecos")
                 .then()
                 .statusCode(200)
-                .body("size()", greaterThanOrEqualTo(2)); // At least 2 from import.sql
+                .body("size()", greaterThanOrEqualTo(2)); 
     }
 
     @Test
@@ -306,46 +294,43 @@ public class EnderecoResourceTest {
                 .header("Authorization", "Bearer " + userToken)
                 .when().get("/enderecos")
                 .then()
-                .statusCode(403); // Forbidden
+                .statusCode(403); 
     }
 
     @Test
     public void testFindEnderecoByIdAsUserSelf() {
-        // Using the address linked to 'joao@example.com' from import.sql (ID 1)
-        Long joaoAddressId = 1L; // Based on import.sql
+        Long joaoAddressId = 1L; 
 
         given()
                 .header("Authorization", "Bearer " + userToken)
                 .when().get("/enderecos/" + joaoAddressId)
                 .then()
                 .statusCode(200)
-                .body("id", is(joaoAddressId.intValue())) // intValue for JSONPath comparison
+                .body("id", is(joaoAddressId.intValue())) 
                 .body("logradouro", is("Rua A"));
     }
 
     @Test
     public void testFindEnderecoByIdAsUserOtherUserForbidden() {
-        // Using the address linked to admin from import.sql (ID 2)
-        Long adminAddressId = 2L; // Based on import.sql
+        Long adminAddressId = 2L; 
 
         given()
                 .header("Authorization", "Bearer " + userToken)
                 .when().get("/enderecos/" + adminAddressId)
                 .then()
-                .statusCode(403); // Forbidden
+                .statusCode(403); 
     }
 
     @Test
     public void testFindEnderecoByIdAsAdminAnyAddress() {
-        // Find an address linked to 'joao@example.com' (ID 1)
-        Long joaoAddressId = 1L; // Based on import.sql
+        Long joaoAddressId = 1L; 
 
         given()
                 .header("Authorization", "Bearer " + adminToken)
                 .when().get("/enderecos/" + joaoAddressId)
                 .then()
                 .statusCode(200)
-                .body("id", is(joaoAddressId.intValue())) // intValue for JSONPath comparison
+                .body("id", is(joaoAddressId.intValue())) 
                 .body("logradouro", is("Rua A"));
     }
 
@@ -356,7 +341,7 @@ public class EnderecoResourceTest {
                 .when().get("/enderecos/meus-enderecos")
                 .then()
                 .statusCode(200)
-                .body("size()", greaterThanOrEqualTo(1)) // At least one address from import.sql
+                .body("size()", greaterThanOrEqualTo(1)) 
                 .body("[0].logradouro", notNullValue());
     }
 }

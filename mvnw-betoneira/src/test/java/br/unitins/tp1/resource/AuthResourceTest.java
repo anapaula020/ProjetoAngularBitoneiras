@@ -62,12 +62,12 @@ public class AuthResourceTest {
                 .body(is("Email ou senha inválidos."));
     }
 
-    // Helper method to get a token for a given user (can be used by other tests)
-    // Added retry logic and logging for debugging 401 issues.
+    
+    
     public static String getAuthToken(String email, String password) {
         LoginRequestDTO authRequest = new LoginRequestDTO(email, password);
         int maxRetries = 5;
-        int retryDelayMs = 1000; // 1 second
+        int retryDelayMs = 1000; 
 
         for (int i = 0; i < maxRetries; i++) {
             try {
@@ -76,8 +76,8 @@ public class AuthResourceTest {
                         .body(authRequest)
                         .when().post("/auth")
                         .then()
-                        .log().all() // Log all request/response details for debugging
-                        .statusCode(200) // Expect 200 OK
+                        .log().all() 
+                        .statusCode(200) 
                         .extract().path("token");
             } catch (AssertionError e) {
                 if (e.getMessage().contains("status code <401>") || e.getMessage().contains("status code <500>")) {
@@ -89,10 +89,10 @@ public class AuthResourceTest {
                         throw new RuntimeException("Interrupted during token retry", ie);
                     }
                 } else {
-                    // If it's not a 401 or 500, rethrow immediately
+                    
                     throw e;
                 }
-            } catch (Exception e) { // Catch other potential exceptions during request
+            } catch (Exception e) { 
                 System.err.println("Attempt " + (i + 1) + "/" + maxRetries + ": Failed to get token due to unexpected error: " + e.getMessage() + ", retrying in " + retryDelayMs + "ms...");
                 try {
                     Thread.sleep(retryDelayMs);

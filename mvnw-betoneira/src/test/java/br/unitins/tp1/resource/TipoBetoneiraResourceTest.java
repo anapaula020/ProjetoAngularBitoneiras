@@ -48,12 +48,11 @@ public class TipoBetoneiraResourceTest {
                 .body(tipoBetoneira)
                 .when().post("/tipos-betoneira")
                 .then()
-                .statusCode(403); // Forbidden
+                .statusCode(403); 
     }
 
     @Test
     public void testUpdateTipoBetoneiraAsAdmin() {
-        // Create a tipoBetoneira first
         TipoBetoneiraDTO originalTipo = new TipoBetoneiraDTO("Tipo Original", "Original Desc");
         Long tipoId = given()
                 .header("Authorization", "Bearer " + adminToken)
@@ -62,9 +61,8 @@ public class TipoBetoneiraResourceTest {
                 .when().post("/tipos-betoneira")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Update the tipoBetoneira
         TipoBetoneiraDTO updatedTipo = new TipoBetoneiraDTO("Tipo Atualizado", "Atualizada Desc");
         given()
                 .header("Authorization", "Bearer " + adminToken)
@@ -73,13 +71,12 @@ public class TipoBetoneiraResourceTest {
                 .when().put("/tipos-betoneira/" + tipoId)
                 .then()
                 .statusCode(200)
-                .body("id", is(tipoId.intValue())) // intValue for JSONPath comparison
+                .body("id", is(tipoId.intValue())) 
                 .body("nome", is("Tipo Atualizado"));
     }
 
     @Test
     public void testUpdateTipoBetoneiraAsUserForbidden() {
-        // Create a tipoBetoneira as admin
         TipoBetoneiraDTO originalTipo = new TipoBetoneiraDTO("Tipo para Update User Test", "Desc");
         Long tipoId = given()
                 .header("Authorization", "Bearer " + adminToken)
@@ -88,9 +85,8 @@ public class TipoBetoneiraResourceTest {
                 .when().post("/tipos-betoneira")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Attempt to update as a regular user
         TipoBetoneiraDTO updatedTipo = new TipoBetoneiraDTO("Tipo Tentativa User", "Desc User");
         given()
                 .header("Authorization", "Bearer " + userToken)
@@ -98,12 +94,11 @@ public class TipoBetoneiraResourceTest {
                 .body(updatedTipo)
                 .when().put("/tipos-betoneira/" + tipoId)
                 .then()
-                .statusCode(403); // Forbidden
+                .statusCode(403); 
     }
 
     @Test
     public void testDeleteTipoBetoneiraAsAdmin() {
-        // Create a tipoBetoneira first
         TipoBetoneiraDTO tipoToDelete = new TipoBetoneiraDTO("Tipo a Deletar", "Desc Delete");
         Long tipoId = given()
                 .header("Authorization", "Bearer " + adminToken)
@@ -112,19 +107,17 @@ public class TipoBetoneiraResourceTest {
                 .when().post("/tipos-betoneira")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Delete the tipoBetoneira
         given()
                 .header("Authorization", "Bearer " + adminToken)
                 .when().delete("/tipos-betoneira/" + tipoId)
                 .then()
-                .statusCode(204); // No Content
+                .statusCode(204); 
     }
 
     @Test
     public void testDeleteTipoBetoneiraAsUserForbidden() {
-        // Create a tipoBetoneira as admin
         TipoBetoneiraDTO tipoToDelete = new TipoBetoneiraDTO("Tipo Delete User Test", "Desc");
         Long tipoId = given()
                 .header("Authorization", "Bearer " + adminToken)
@@ -133,16 +126,15 @@ public class TipoBetoneiraResourceTest {
                 .when().post("/tipos-betoneira")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Attempt to delete as a regular user
         given()
                 .header("Authorization", "Bearer " + userToken)
                 .when().delete("/tipos-betoneira/" + tipoId)
                 .then()
-                .statusCode(403); // Forbidden
+                .statusCode(403); 
     }
 
-    // Note: TipoBetoneiraService doesn't have findByNome method in resource.
-    // So skipping findByNome test for TipoBetoneiraResource.
+    
+    
 }

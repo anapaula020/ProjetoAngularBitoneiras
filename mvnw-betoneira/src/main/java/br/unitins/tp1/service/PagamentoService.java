@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/service/PagamentoService.java
 package br.unitins.tp1.service;
 
 import br.unitins.tp1.dto.PagamentoRequestDTO;
@@ -17,5 +16,5 @@ public interface PagamentoService {
     List<PagamentoResponseDTO> findByStatusPagamento(String status);
     void processarPagamento(Long idPagamento, StatusPagamento novoStatus);
     List<PagamentoResponseDTO> findByAuthenticatedUser();
-    List<PagamentoResponseDTO> findByNome(String nome); // NOVO MÉTODO
+    List<PagamentoResponseDTO> findByNome(String nome);
 }

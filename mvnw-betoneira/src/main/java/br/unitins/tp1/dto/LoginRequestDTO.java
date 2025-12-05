@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/dto/LoginRequestDTO.java
 package br.unitins.tp1.dto;
 
 import jakarta.validation.constraints.Email;

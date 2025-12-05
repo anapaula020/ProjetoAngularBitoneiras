@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/service/BetoneiraService.java
 package br.unitins.tp1.service;
 
 import br.unitins.tp1.dto.BetoneiraRequestDTO;
@@ -6,7 +5,6 @@ import br.unitins.tp1.dto.BetoneiraResponseDTO;
 import br.unitins.tp1.exception.ServiceException;
 import br.unitins.tp1.model.Betoneira;
 import br.unitins.tp1.model.Fabricante;
-// Removed unused import: import br.unitins.tp1.model.TipoBetoneiraEnum;
 import br.unitins.tp1.repository.BetoneiraRepository;
 import br.unitins.tp1.repository.FabricanteRepository;
 import jakarta.enterprise.context.ApplicationScoped;

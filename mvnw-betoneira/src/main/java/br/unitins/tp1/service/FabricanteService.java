@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/service/FabricanteService.java
 package br.unitins.tp1.service;
 
 import br.unitins.tp1.dto.FabricanteRequestDTO;
@@ -31,10 +30,6 @@ public class FabricanteService {
         }
         Fabricante fabricante = new Fabricante();
         fabricante.setNome(dto.getNome()); 
-        // The getCnpj() method is not in FabricanteRequestDTO based on the original structure.
-        // If it is needed, it should be added to FabricanteRequestDTO.
-        // For now, I'm commenting it out to resolve compilation errors.
-        // fabricante.setCnpj(dto.getCnpj()); 
         fabricanteRepository.persist(fabricante);
         return FabricanteResponseDTO.valueOf(fabricante);
     }
@@ -49,10 +44,6 @@ public class FabricanteService {
             throw new ServiceException("Fabricante não encontrado.", Response.Status.NOT_FOUND);
         }
         fabricante.setNome(dto.getNome()); 
-        // The getCnpj() method is not in FabricanteRequestDTO based on the original structure.
-        // If it is needed, it should be added to FabricanteRequestDTO.
-        // For now, I'm commenting it out to resolve compilation errors.
-        // fabricante.setCnpj(dto.getCnpj()); 
         fabricanteRepository.persist(fabricante);
         return FabricanteResponseDTO.valueOf(fabricante);
     }

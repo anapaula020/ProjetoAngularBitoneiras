@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/dto/mercadopago/MercadoPagoPixResponseDTO.java
 package br.unitins.tp1.dto.mercadopago;
 
 import com.fasterxml.jackson.annotation.JsonProperty;

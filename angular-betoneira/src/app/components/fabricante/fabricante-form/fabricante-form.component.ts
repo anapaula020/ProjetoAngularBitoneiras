@@ -58,7 +58,6 @@ export class AutorFormComponent implements OnInit {
     loadAutor(id: number): void {
         this.autorService.findById(id).subscribe(autor => {
             this.formGroup.patchValue(autor);
-            // this.formGroup.patchValue({sexo: autor.sexo.id});
         });
     }
 

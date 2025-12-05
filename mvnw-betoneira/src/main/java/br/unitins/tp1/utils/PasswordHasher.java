@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/utils/PasswordHasher.java
 package br.unitins.tp1.utils;
 
 import io.quarkus.elytron.security.common.BcryptUtil;

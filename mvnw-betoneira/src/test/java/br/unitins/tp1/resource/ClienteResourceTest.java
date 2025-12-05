@@ -30,10 +30,8 @@ public class ClienteResourceTest {
 
     @Test
     public void testUpdateClienteAsUserSelf() {
-        // User updates their own profile
-        Long clienteId = 1L; // ID of "João Silva" from import.sql
+        Long clienteId = 1L; 
 
-        // Create a DTO for update with slightly different data
         EnderecoRequestDTO endereco = new EnderecoRequestDTO(
                 "Rua do Usuário",
                 "500",
@@ -48,7 +46,7 @@ public class ClienteResourceTest {
                 "João User Update",
                 "joao.user.update@example.com",
                 "userupdatedpass",
-                "11122233344", // CPF might not change
+                "11122233344", 
                 LocalDate.of(1992, 7, 20),
                 "63999997777",
                 "MASCULINO",
@@ -62,7 +60,7 @@ public class ClienteResourceTest {
                 .when().put("/clientes/" + clienteId)
                 .then()
                 .statusCode(200)
-                .body("id", is(clienteId.intValue())) // intValue for JSONPath comparison
+                .body("id", is(clienteId.intValue())) 
                 .body("nome", is("João User Update"))
                 .body("email", is("joao.user.update@example.com"));
     }
@@ -70,7 +68,6 @@ public class ClienteResourceTest {
   
     @Test
     public void testDeleteClienteAsAdmin() {
-        // Create a new client to delete
         EnderecoRequestDTO endereco = new EnderecoRequestDTO(
                 "Rua Delete",
                 "1",
@@ -98,14 +95,13 @@ public class ClienteResourceTest {
                 .when().post("/clientes")
                 .then()
                 .statusCode(201)
-                .extract().jsonPath().getLong("id"); // Fixed extraction
+                .extract().jsonPath().getLong("id"); 
 
-        // Delete as admin
         given()
                 .header("Authorization", "Bearer " + adminToken)
                 .when().delete("/clientes/" + idToDelete)
                 .then()
-                .statusCode(204); // No Content
+                .statusCode(204); 
     }
 
    
