@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component,OnInit,inject } from '@angular/core';
 import { FormBuilder,FormGroup,FormsModule,ReactiveFormsModule,ValidationErrors,Validators } from '@angular/forms';
 import { ActivatedRoute,Router,RouterModule } from '@angular/router';
-import { AutorService } from '../../../services/fabricante.service';
+import { FabricanteService } from '../../../services/fabricante.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -14,7 +14,6 @@ import { FooterAdminComponent } from "../../template/footer-admin/footer-admin.c
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { Sexo } from '../../../models/sexo.model';
 import { ExclusaoComponent } from '../../confirmacao/exclusao/exclusao.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -29,10 +28,9 @@ import { MatDialog } from '@angular/material/dialog';
 export class AutorFormComponent implements OnInit {
     formGroup: FormGroup;
     autorId: number | null = null;
-    sexoIds: Sexo[] = [];
     readonly dialog = inject(MatDialog);
 
-    constructor(private formBuilder: FormBuilder,private autorService: AutorService,private router: Router,private activatedRoute: ActivatedRoute) {
+    constructor(private formBuilder: FormBuilder,private autorService: FabricanteService,private router: Router,private activatedRoute: ActivatedRoute) {
         this.formGroup = this.formBuilder.group({
             id: [null],
             nome: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(40)]],

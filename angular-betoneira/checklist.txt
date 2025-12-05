@@ -8,7 +8,7 @@
 [ ] Carrinho de Compras
 [ ] Conclusão da compra (com pagamento)
 [ ] Visualização das compras por usuário (geralmente no perfil)
-[ ] Interface (que nao seja de backend)
+[X] Interface (que nao seja de backend)
 
 Opcional:
 Conteúdo extra não implementado em sala de aula (0,5 - min.io e keycloak)
