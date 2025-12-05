@@ -8,7 +8,6 @@
             <form [formGroup]="formGroup" (ngSubmit)="salvar()">
                 <div class="container">
 
-                    <!-- Nome -->
                     <mat-form-field appearance="fill" class="full-width-input">
                         <mat-label>Nome da betoneira:</mat-label>
                         <input matInput type="text" id="nome" formControlName="nome" required>
@@ -17,7 +16,6 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <!-- Descrição -->
                     <mat-form-field appearance="fill" class="full-width-input">
                         <mat-label>Descrição:</mat-label>
                         <textarea matInput id="descricao" formControlName="descricao" required></textarea>
@@ -26,7 +24,6 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <!-- Preço -->
                     <mat-form-field appearance="fill" class="full-width-input">
                         <mat-label>Preço:</mat-label>
                         <input matInput type="number" id="preco" formControlName="preco" required>
@@ -35,7 +32,6 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <!-- Tipo da Betoneira -->
                     <mat-form-field appearance="fill" class="full-width-input">
                         <mat-label>Tipo de betoneira:</mat-label>
                         <mat-select id="idTipoBetoneira" formControlName="idTipoBetoneira" required>
@@ -48,7 +44,6 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <!-- Fabricante -->
                     <mat-form-field appearance="fill" class="full-width-input">
                         <mat-label>Fabricante:</mat-label>
                         <mat-select id="idFabricante" formControlName="idFabricante" required>
@@ -61,7 +56,6 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <!-- Upload de imagem -->
                     <mat-form-field appearance="outline" class="full-width-input">
                         <mat-label>Imagem da betoneira</mat-label>
                         <input type="file" (change)="carregarImagemSelecionada($event)" hidden #fileInput>
@@ -72,7 +66,6 @@
                     </mat-form-field>
                 </div>
 
-                <!-- PREVIEW -->
                 <div *ngIf="imagePreview" class="betoneira-card">
                     <img class="betoneira-image" [src]="imagePreview" alt="Preview">
                     <div class="betoneira-details">
@@ -91,7 +84,6 @@
                     </div>
                 </div>
 
-                <!-- Botões -->
                 <div class="container">
                     <mat-card-actions>
                         <button mat-raised-button routerLink="/admin/betoneira">Cancelar</button>

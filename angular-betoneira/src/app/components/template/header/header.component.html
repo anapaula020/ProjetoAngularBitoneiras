@@ -5,7 +5,7 @@
     <button *ngIf="userRole === 'user'" (click)="navigateTo('perfil')">Perfil</button>
     <button *ngIf="!userRole" (click)="navigateTo('login')">Login</button>
     <button (click)="navigateTo('compras')">Carrinho</button>
-    <!-- <button (click)="navigateTo('perfil')">Perfil</button> -->
+    <button (click)="navigateTo('perfil')">Perfil</button>
     <mat-toolbar color="primary" class="search">
         <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="search-form">
             <mat-form-field appearance="outline" class="search-field">

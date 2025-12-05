@@ -9,11 +9,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ActivatedRoute,Router,RouterModule } from '@angular/router';
-import { AutorService } from '../../../services/fabricante.service';
+import { FabricanteService } from '../../../services/fabricante.service';
 import { BetoneiraService } from '../../../services/betoneira.service';
 import { HeaderAdminComponent } from "../../template/header-admin/header-admin.component";
 import { FooterAdminComponent } from "../../template/footer-admin/footer-admin.component";
-import { Fabricante } from '../../../models/fabricante';
+import { Fabricante } from '../../../models/fabricante.model';
 import { Betoneira } from '../../../models/betoneira.model';
 import { MatIcon } from '@angular/material/icon';
 import { ExclusaoComponent } from '../../confirmacao/exclusao/exclusao.component';
@@ -36,7 +36,7 @@ export class BetoneiraFormComponent implements OnInit {
     selectedFile: File | null = null;
     imagePreview: string | ArrayBuffer | null = null;
 
-    constructor(private formBuilder: FormBuilder,private betoneiraService: BetoneiraService,private autorService: AutorService,private router: Router,private activatedRoute: ActivatedRoute) {
+    constructor(private formBuilder: FormBuilder,private betoneiraService: BetoneiraService,private fabricanteService: FabricanteService,private router: Router,private activatedRoute: ActivatedRoute) {
         this.formGroup = this.formBuilder.group({
             id: [null],
             nome: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(80)]],
@@ -50,19 +50,13 @@ export class BetoneiraFormComponent implements OnInit {
 
     ngOnInit(): void {
         const betoneira: Betoneira = this.activatedRoute.snapshot.data['betoneira'];
-        this.autorService.findAll().subscribe((data) => {
-            this.autores = data;
-        });
         this.activatedRoute.params.subscribe(params => {
             this.betoneiraId = params['id'] ? +params['id'] : null;
             if(this.betoneiraId) {
                 this.loadBetoneira(this.betoneiraId);
-
             }
-
         });
         this.initializeForm();
-
     }
 
     initializeForm(): void {
@@ -111,8 +105,8 @@ export class BetoneiraFormComponent implements OnInit {
                     this.imagePreview = this.betoneiraService.toImageUrl(betoneira.imageUrl);
                     this.fileName = betoneira.imageUrl;
                 }
-                if(betoneira.fabricante) {
-                    this.formGroup.get('fabricante')?.setValue(betoneira.fabricante.id);
+                if(betoneira.idFabricante) {
+                    this.formGroup.get('fabricante')?.setValue(betoneira.idFabricante.id);
                 }
             });
             this.formGroup.markAllAsTouched();
@@ -188,7 +182,7 @@ export class BetoneiraFormComponent implements OnInit {
         if(errorResponse.status === 400) {
             if(errorResponse.error?.errors) {
                 errorResponse.error.errors.forEach((validationError: any) => {
-                    const formControl = this.formGroup.get(validationError.fieldName);
+                    const formControl = this.formGroup.get(validationError.ifeldName);
                     if(formControl) {
                         formControl.setErrors({ apiError: validationError.message })
                     }
@@ -217,7 +211,6 @@ export class BetoneiraFormComponent implements OnInit {
             min: 'Preço deve ser maior do que 0.',
             apiError: 'API_ERROR'
         },
-    
         idFabricante: {
             required: 'Id do fabricante é obrigatório.',
             min: 'Id do fabricante deve ser maior do que 0.',

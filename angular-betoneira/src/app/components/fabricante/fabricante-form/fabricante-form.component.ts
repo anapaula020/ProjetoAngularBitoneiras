@@ -41,10 +41,6 @@ export class AutorFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.sexoIds = [
-            { id: 1,descricao: 'Feminino' },
-            { id: 2,descricao: 'Masculino' }
-        ];
         this.activatedRoute.params.subscribe(params => {
             this.autorId = params['id'] ? +params['id'] : null;
             if(this.autorId) {
@@ -140,10 +136,5 @@ export class AutorFormComponent implements OnInit {
             maxlength: 'Nacionalidade deve conter no máximo 30 caracteres.',
             apiError: 'API_ERROR'
         },
-        sexo: {
-            required: 'Sexo é obrigatório.',
-            apiError: 'API_ERROR'
-        },
-
     }
 }
