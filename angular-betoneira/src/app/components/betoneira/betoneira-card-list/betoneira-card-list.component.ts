@@ -12,18 +12,18 @@ import { CarrinhoService } from '../../../services/carrinho.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
-import { Fabricante } from '../../../models/fabricante.model';    
+import { Fabricante } from '../../../models/fabricante.model';
 import { FabricanteService } from '../../../services/fabricante.service';
 
 type Card = {
-    id: number, 
-    nome: string, 
-    descricao: string, 
-    preco: number, 
-    quantidadeEstoque: number, 
-    modelo: string, 
-    marca: string, 
-    capacidade: number, 
+    id: number,
+    nome: string,
+    descricao: string,
+    preco: number,
+    quantidadeEstoque: number,
+    modelo: string,
+    marca: string,
+    capacidade: number,
     imageUrl: string
 }
 
@@ -38,6 +38,7 @@ export class BetoneiraCardListComponent implements OnInit {
     cards = signal<Card[]>([]);
     searchForm: FormGroup;
     selectedTipo: string | null = null;
+    selectedFabricante: number | null = null;
     precos: any[] = [];
     autores: Fabricante[] = [];
     selectedFornecedor: number | null = null;
@@ -93,13 +94,12 @@ export class BetoneiraCardListComponent implements OnInit {
     }
 
     filtrarTipo(nome: string) {
-            this.betoneiraService.findByTipo(name).subscribe(data => {
-                this.betoneiras = data;
-                this.carregarCards();
-            });
-        }
+        this.betoneiraService.findByTipo(nome).subscribe(data => {
+            this.betoneiras = data;
+            this.carregarCards();
+        });
     }
-    
+
     filtrarPreco(id: number) {
         const selectedPrice = this.precos.find(preco => preco.id === id);
         if(selectedPrice) {
@@ -132,14 +132,14 @@ export class BetoneiraCardListComponent implements OnInit {
         const cards: Card[] = [];
         this.betoneiras.forEach(betoneira => {
             cards.push({
-                id: betoneira.id, 
-                nome: betoneira.nome, 
-                descricao: betoneira.descricao, 
-                preco: betoneira.preco, 
-                quantidadeEstoque: betoneira.quantidadeEstoque, 
-                modelo: betoneira.modelo, 
-                marca: betoneira.marca, 
-                capacidade: betoneira.capacidade, 
+                id: betoneira.id,
+                nome: betoneira.nome,
+                descricao: betoneira.descricao,
+                preco: betoneira.preco,
+                quantidadeEstoque: betoneira.quantidadeEstoque,
+                modelo: betoneira.modelo,
+                marca: betoneira.marca,
+                capacidade: betoneira.capacidade,
                 imageUrl: this.betoneiraService.toImageUrl(betoneira.imageUrl)
             });
         });
