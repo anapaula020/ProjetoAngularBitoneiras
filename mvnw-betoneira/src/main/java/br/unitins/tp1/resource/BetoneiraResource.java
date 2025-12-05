@@ -67,7 +67,7 @@ public class BetoneiraResource {
     @GET
     @Path("/search/tipo/{nome}")
     @RolesAllowed({"ADMIN", "USER"})
-    public Response findByNome(@PathParam("nome") String nome) {
+    public Response findByTipo(@PathParam("nome") String nome) {
         return Response.ok(betoneiraService.findByTipo(nome)).build();
     }
 }
