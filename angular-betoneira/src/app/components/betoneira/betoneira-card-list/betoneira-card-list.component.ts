@@ -14,6 +14,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { Fabricante } from '../../../models/fabricante.model';
 import { FabricanteService } from '../../../services/fabricante.service';
+import { TipoBetoneira } from '../../../models/tipoBetoneira.model';
 
 type Card = {
     id: number,
@@ -40,6 +41,7 @@ export class BetoneiraCardListComponent implements OnInit {
     selectedTipo: string | null = null;
     selectedFabricante: number | null = null;
     precos: any[] = [];
+    tipos: TipoBetoneira[] = [];
     autores: Fabricante[] = [];
     selectedFornecedor: number | null = null;
     selectedPreco: number | null = null;
