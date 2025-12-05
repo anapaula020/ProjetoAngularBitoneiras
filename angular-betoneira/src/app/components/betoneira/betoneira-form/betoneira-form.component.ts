@@ -45,7 +45,7 @@ export class BetoneiraFormComponent implements OnInit {
             quantidadeEstoque: [null,[Validators.required]],
             modelo: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(80)]],
             marca: ['',[Validators.required,Validators.minLength(10),Validators.maxLength(1000)]],
-            idTipoBetoneira: [null],
+            tipoBetoneira: [null],
             fabricante: [null],
             imageUrl: [null]
         });
@@ -74,7 +74,7 @@ export class BetoneiraFormComponent implements OnInit {
             nome: [(betoneira && betoneira.nome) ? betoneira.nome : null],
             descricao: [(betoneira && betoneira.descricao) ? betoneira.descricao : null],
             preco: [(betoneira && betoneira.preco) ? betoneira.preco : null],
-            idTipoBetoneira: [(betoneira && betoneira.idTipoBetoneira) ? betoneira.idTipoBetoneira : null],
+            tipoBetoneira: [(betoneira && betoneira.tipoBetoneira) ? betoneira.tipoBetoneira : null],
             fabricante: [(betoneira && betoneira.fabricante) ? betoneira.fabricante : null],
             imageUrl: [(betoneira && betoneira.imageUrl) ? betoneira.imageUrl : null]
         });
@@ -236,7 +236,7 @@ export class BetoneiraFormComponent implements OnInit {
             min: 'Capacidade deve ser maior do que 0.',
             apiError: 'API_ERROR'
         },
-        idTipoBetoneira: {
+        tipoBetoneira: {
             required: 'Id da betoneira é obrigatório.',
             min: 'Id da betoneira deve ser maior do que 0.',
             apiError: 'API_ERROR'

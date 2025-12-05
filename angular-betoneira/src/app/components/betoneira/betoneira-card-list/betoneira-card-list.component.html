@@ -9,8 +9,8 @@
     <mat-form-field appearance="fill">
         <mat-label>Tipo</mat-label>
         <mat-select [(ngModel)]="selectedTipo" (ngModelChange)="filtrarTipo($event)">
-            <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
-                {{ tipo.nome }}
+            <mat-option *ngFor="let tipo of tipos" [value]="tipo.nome">
+                {{ tipo.descricao }}
             </mat-option>
         </mat-select>
     </mat-form-field>
@@ -62,7 +62,7 @@
                 </mat-card-content>
 
                 <mat-card-content class="centered-text">
-                    Tipo: {{ betoneira.idTipoBetoneira }}
+                    Tipo: {{ betoneira.tipoBetoneira.nome }}
                 </mat-card-content>
 
                 <mat-card-content class="centered-text">

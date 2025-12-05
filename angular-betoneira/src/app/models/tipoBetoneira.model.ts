@@ -1,4 +1,4 @@
-export class TipoBenoneira {
+export class TipoBetoneira {
     id!: number;
     nome!: string;
     descricao!: string;

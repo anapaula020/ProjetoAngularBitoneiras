@@ -66,13 +66,13 @@
                     
                     <mat-form-field appearance="fill" class="full-width-input">
                         <mat-label>Tipo de betoneira:</mat-label>
-                        <mat-select id="idTipoBetoneira" formControlName="idTipoBetoneira" required>
+                        <mat-select id="tipoBetoneira" formControlName="tipoBetoneira" required>
                             <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
                                 {{ tipo.nome }}
                             </mat-option>
                         </mat-select>
-                        <mat-error *ngIf="formGroup.get("idTipoBetoneira")?.invalid && formGroup.get("idTipoBetoneira")?.touched">
-                            {{ getErrorMessage("idTipoBetoneira", formGroup.get("idTipoBetoneira")?.errors) }}
+                        <mat-error *ngIf="formGroup.get("tipoBetoneira")?.invalid && formGroup.get("tipoBetoneira")?.touched">
+                            {{ getErrorMessage("tipoBetoneira", formGroup.get("tipoBetoneira")?.errors) }}
                         </mat-error>
                     </mat-form-field>
 
@@ -105,7 +105,7 @@
                         <mat-card-content class="centered-text">
                             <h5>{{ formGroup.get("descricao")?.value }}</h5>
                             <h5>Fabricante: {{ fabricantes.find(f => f.id === formGroup.get("idFabricante")?.value)?.nome }}</h5>
-                            <h5>Tipo: {{ tipos.find(t => t.id === formGroup.get("idTipoBetoneira")?.value)?.nome }}</h5>
+                            <h5>Tipo: {{ tipos.find(t => t.name === formGroup.get("tipoBetoneira")?.value)?.nome }}</h5>
                             <h5>R$ {{ formGroup.get("preco")?.value }}</h5>
                         </mat-card-content>
 

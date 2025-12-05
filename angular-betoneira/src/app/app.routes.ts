@@ -4,22 +4,23 @@ import { authGuard } from "./guard/auth.guard";
 import { UserTemplateComponent } from "./components/template/user-template/user-template.component";
 import { AdminTemplateComponent } from "./components/template/admin-template/admin-template.component";
 
-import { LoginComponent } from "./components/login/login.component";
 import { AcessoProibidoComponent } from "./components/status/acesso-proibido/acesso-proibido.component";
-import { DesconhecidoComponent } from "./components/status/desconhecido/desconhecido.component";
 import { BetoneiraCardListComponent } from "./components/betoneira/betoneira-card-list/betoneira-card-list.component";
 import { BetoneiraFormComponent } from "./components/betoneira/betoneira-form/betoneira-form.component";
 import { BetoneiraInfoComponent } from "./components/betoneira/betoneira-info/betoneira-info.component";
 import { BetoneiraListComponent } from "./components/betoneira/betoneira-list/betoneira-list.component";    
+import { CadastroComponent } from "./components/cadastro/cadastro.component";
 import { CarrinhoComponent } from "./components/carrinho/carrinho.component";
 import { CompraComponent } from "./components/compra/compra.component";
 import { CompraFinalizadaComponent } from "./components/compra-finalizada/compra-finalizada.component";
+import { DesconhecidoComponent } from "./components/status/desconhecido/desconhecido.component";
 import { EnderecoFormComponent } from "./components/endereco/endereco-form/endereco-form.component";
 import { EnderecoListComponent } from "./components/endereco/endereco-list/endereco-list.component";
 import { FabricanteFormComponent } from "./components/fabricante/fabricante-form/fabricante-form.component";
 import { FabricanteListComponent } from "./components/fabricante/fabricante-list/fabricante-list.component";
 import { ItemPedidoFormComponent } from "./components/itempedido/itempedido-form/itempedido-form.component";
 import { ItemPedidoListComponent } from "./components/itempedido/itempedido-list/itempedido-list.component";
+import { LoginComponent } from "./components/login/login.component";
 import { PagamentoFormComponent } from "./components/pagamento/pagamento-form/pagamento-form.component";
 import { PagamentoListComponent } from "./components/pagamento/pagamento-list/pagamento-list.component";
 import { PagarCartaoComponent } from "./components/pedido/pagar-cartao/pagar-cartao.component";
@@ -36,7 +37,8 @@ export const routes: Routes = [
             { path: "loja", component: BetoneiraCardListComponent },
             { path: "betoneiras/:id", component: BetoneiraInfoComponent },
             { path: "betoneiras/search/nome/:nome", component: BetoneiraCardListComponent },
-            { path: "carrinho", component: CarrinhoComponent },
+            { path: 'cadastro',component: CadastroComponent,title: 'Cadastro' },
+            { path: "carrinho", component: CarrinhoComponent, canActivate: [authGuard], data: { role: "user" } },
             { path: "compra", component: CompraComponent, canActivate: [authGuard], data: { role: "user" } },
             { path: "compra-finalizada", component: CompraFinalizadaComponent, canActivate: [authGuard], data: { role: "user" } },
             { path: "enderecos", component: EnderecoListComponent, canActivate: [authGuard], data: { role: "user" } },

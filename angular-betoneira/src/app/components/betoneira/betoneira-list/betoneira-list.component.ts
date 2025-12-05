@@ -23,7 +23,7 @@ import { MatDialog } from '@angular/material/dialog';
     imports: [MatPaginatorModule,CommonModule,RouterModule,MatTableModule,MatButtonModule,MatCardModule,MatToolbarModule,HeaderAdminComponent,FooterAdminComponent]
 })
 export class BetoneiraListComponent implements OnInit {
-    displayedColumns: string[] = ['id', 'nome', 'descricao', 'preco', 'quantidadeEstoque', 'modelo', 'marca', 'idTipoBetoneira', 'idFabricante'];
+    displayedColumns: string[] = ['id', 'nome', 'descricao', 'preco', 'quantidadeEstoque', 'modelo', 'marca', 'tipoBetoneira', 'idFabricante'];
     betoneiras: Betoneira[] = [];
     totalRecords = 0;
     pageSize = 10;
