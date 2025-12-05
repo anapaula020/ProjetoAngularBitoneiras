@@ -1,8 +1,11 @@
-package mssaat.org.service;
+package br.unitins.tp1.service;
 
 import java.util.List;
 
+import br.unitins.tp1.dto.AdministradorDTO;
+import br.unitins.tp1.dto.AdministradorResponseDTO;
 import jakarta.validation.Valid;
+import jakarta.ws.rs.PathParam;
 
 public interface AdministradorService {
     public AdministradorResponseDTO create(@Valid AdministradorDTO adminDto);

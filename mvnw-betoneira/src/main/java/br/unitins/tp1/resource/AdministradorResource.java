@@ -1,5 +1,9 @@
-package mssaat.org.resources;
+package br.unitins.tp1.resource;
 
+import br.unitins.tp1.dto.AdministradorDTO;
+import br.unitins.tp1.dto.AdministradorResponseDTO;
+import br.unitins.tp1.service.AdministradorService;
+import br.unitins.tp1.service.UsuarioService;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -16,12 +20,6 @@ import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-import mssaat.org.DTO.AdministradorDTO;
-import mssaat.org.DTO.AdministradorResponseDTO;
-import mssaat.org.DTO.UsuarioDTO;
-import mssaat.org.DTO.UsuarioResponseDTO;
-import mssaat.org.service.AdministradorService;
-import mssaat.org.service.UsuarioService;
 
 @Path("/administradores")
 @Produces(MediaType.APPLICATION_JSON)

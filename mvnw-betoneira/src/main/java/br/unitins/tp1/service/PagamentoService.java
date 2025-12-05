@@ -1,10 +1,10 @@
-package mssaat.org.service;
+package br.unitins.tp1.service;
 
 import java.util.List;
 
-import jakarta.validation.Valid;
-import mssaat.org.DTO.AdministradorDTO;
-import mssaat.org.DTO.AdministradorResponseDTO;
+import br.unitins.tp1.dto.PagamentoRequestDTO;
+import br.unitins.tp1.dto.PagamentoResponseDTO;
+import br.unitins.tp1.model.StatusPagamento;
 
 public interface PagamentoService {
     public PagamentoResponseDTO create(PagamentoRequestDTO dto);

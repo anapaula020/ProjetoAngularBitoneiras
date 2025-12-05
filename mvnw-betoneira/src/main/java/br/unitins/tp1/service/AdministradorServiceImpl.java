@@ -1,17 +1,17 @@
-package mssaat.org.service;
+package br.unitins.tp1.service;
 
 import java.util.List;
 
+import br.unitins.tp1.dto.AdministradorDTO;
+import br.unitins.tp1.dto.AdministradorResponseDTO;
+import br.unitins.tp1.model.Administrador;
+import br.unitins.tp1.repository.AdministradorRepository;
+import br.unitins.tp1.validation.ValidationException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.PathParam;
-import mssaat.org.DTO.AdministradorDTO;
-import mssaat.org.DTO.AdministradorResponseDTO;
-import mssaat.org.model.Administrador;
-import mssaat.org.repository.AdministradorRepository;
-import mssaat.org.validation.ValidationException;
 
 @ApplicationScoped
 public class AdministradorServiceImpl implements AdministradorService {
@@ -25,9 +25,7 @@ public class AdministradorServiceImpl implements AdministradorService {
     public AdministradorResponseDTO create(@Valid AdministradorDTO adminDto) {
         Administrador userBanco = new Administrador();
         userBanco.setUsername(adminDto.username());
-        userBanco.setEmail(adminDto.email());
         userBanco.setSenha(hashService.getHashSenha(adminDto.senha()));
-        userBanco.setCpf(adminDto.cpf());
         administradorRepository.persist(userBanco);
         return AdministradorResponseDTO.valueOf(userBanco);
     }
@@ -40,9 +38,7 @@ public class AdministradorServiceImpl implements AdministradorService {
             throw new ValidationException("id", "Administrador não existe.");
         }
         userBanco.setUsername(adminDto.username());
-        userBanco.setEmail(adminDto.email());
         userBanco.setSenha(hashService.getHashSenha(adminDto.senha()));
-        userBanco.setCpf(adminDto.cpf());
     }
 
     @Override
@@ -63,11 +59,11 @@ public class AdministradorServiceImpl implements AdministradorService {
     @Override
     public List<AdministradorResponseDTO> findAll(int page, int pageSize) {
         List<Administrador> admins = administradorRepository.findAll().page(page, pageSize).list();
-        return admins.stream().map(e -> AdministradorResponseDTO.valueOf(e)).toList(); 
+        return admins.stream().map(e -> AdministradorResponseDTO.valueOf(e)).toList();
     }
 
     @Override
-    public AdministradorResponseDTO findById( Long id) {
+    public AdministradorResponseDTO findById(Long id) {
         Administrador admin = administradorRepository.findById(id);
         if (admin == null)
             return null;

@@ -6,7 +6,7 @@ import br.unitins.tp1.exception.ServiceException;
 import br.unitins.tp1.model.Cliente;
 import br.unitins.tp1.repository.ClienteRepository;
 import br.unitins.tp1.service.JWT.TokenService;
-import br.unitins.tp1.utils.HashUtil;
+import br.unitins.tp1.util.HashUtil;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;

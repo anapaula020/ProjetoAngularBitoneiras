@@ -1,9 +1,9 @@
-package mssaat.org.repository;
+package br.unitins.tp1.repository;
 
+import br.unitins.tp1.model.Administrador;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
-import mssaat.org.model.Administrador;
 
 @ApplicationScoped
 public class AdministradorRepository implements PanacheRepository<Administrador> {

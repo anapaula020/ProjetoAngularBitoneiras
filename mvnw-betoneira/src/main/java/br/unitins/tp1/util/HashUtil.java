@@ -1,4 +1,4 @@
-package br.unitins.tp1.utils;
+package br.unitins.tp1.util;
 
 import io.quarkus.elytron.security.common.BcryptUtil;
 

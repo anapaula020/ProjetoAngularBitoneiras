@@ -1,10 +1,9 @@
-package mssaat.org.service;
+package br.unitins.tp1.service;
 
 import java.util.List;
 
-import jakarta.validation.Valid;
-import mssaat.org.DTO.AdministradorDTO;
-import mssaat.org.DTO.AdministradorResponseDTO;
+import br.unitins.tp1.dto.TipoBetoneiraDTO;
+import br.unitins.tp1.dto.TipoBetoneiraResponseDTO;
 
 public interface TipoBetoneiraService {
     public TipoBetoneiraResponseDTO create(TipoBetoneiraDTO dto);

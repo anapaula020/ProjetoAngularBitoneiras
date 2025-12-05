@@ -1,6 +1,6 @@
-package mssaat.org.DTO;
+package br.unitins.tp1.dto;
 
-import mssaat.org.model.Administrador;
+import br.unitins.tp1.model.Administrador;
 
 public record AdministradorResponseDTO(Long id, String username, String email, String senha, String cpf) {
     public static AdministradorResponseDTO valueOf(Administrador admin) {
