@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component,OnInit, inject } from '@angular/core';
 import { Router,RouterModule } from '@angular/router';
-import { EscritorNovel } from '../../../models/escritorNovel.model';
+import { ItemPedido } from '../../../models/itemPedido.model';
 import { EscritorNovelService } from '../../../services/escritor.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,9 +20,9 @@ import { MatDialog } from '@angular/material/dialog';
     styleUrls: ['./escritor-list.component.css'],
     imports: [MatPaginatorModule,CommonModule,RouterModule,MatTableModule,MatButtonModule,MatCardModule,MatToolbarModule,HeaderAdminComponent,FooterAdminComponent]
 })
-export class EscritorNovelListComponent implements OnInit {
+export class ItemPedidoListComponent implements OnInit {
     displayedColumns: string[] = ['id','nome','anoNascimento','nacionalidade','sexo','actions'];
-    escritores: EscritorNovel[] = [];
+    escritores: ItemPedido[] = [];
     totalRecords = 0;
     pageSize = 10;
     page = 0;
@@ -41,7 +41,7 @@ export class EscritorNovelListComponent implements OnInit {
     }
 
     loadEscritores(): void {
-        this.escritorService.findAll(this.page,this.pageSize).subscribe((data: EscritorNovel[]) => {
+        this.escritorService.findAll(this.page,this.pageSize).subscribe((data: ItemPedido[]) => {
             this.escritores = data;
         });
         this.escritorService.count().subscribe(data => { this.totalRecords = data });
