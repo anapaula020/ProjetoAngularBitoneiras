@@ -1,0 +1,40 @@
+.endereco-novel-list-container {
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.endereco-novel-list-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.endereco-novel-list-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.endereco-novel-list-container th,
+.endereco-novel-list-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.endereco-novel-list-container th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.endereco-novel-list-container tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.endereco-novel-list-container tr:hover {
+    background-color: #f1f1f1;
+}

@@ -1,0 +1,55 @@
+<mat-toolbar color="primary">
+    <div class="toolbar-title">Registro de Pagamento</div>
+</mat-toolbar>
+
+<div class="pagamento-form-container">
+    <mat-card>
+        <mat-card-content>
+            <form [formGroup]="formGroup" (ngSubmit)="salvar()">
+
+                <mat-form-field appearance="fill" class="full-width-input">
+                    <mat-label>Valor</mat-label>
+                    <input matInput type="number" formControlName="valor" required>
+                    <mat-error *ngIf="formGroup.get('valor')?.invalid && formGroup.get('valor')?.touched">
+                        {{ getErrorMessage('valor', formGroup.get('valor')?.errors) }}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="full-width-input">
+                    <mat-label>Status do Pagamento</mat-label>
+                    <input matInput type="text" formControlName="statusPagamento" required>
+                    <mat-error *ngIf="formGroup.get('statusPagamento')?.invalid && formGroup.get('statusPagamento')?.touched">
+                        {{ getErrorMessage('statusPagamento', formGroup.get('statusPagamento')?.errors) }}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="full-width-input">
+                    <mat-label>Data do Pagamento</mat-label>
+                    <input matInput type="date" formControlName="dataPagamento" required>
+                    <mat-error *ngIf="formGroup.get('dataPagamento')?.invalid && formGroup.get('dataPagamento')?.touched">
+                        {{ getErrorMessage('dataPagamento', formGroup.get('dataPagamento')?.errors) }}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Tipo de Pagamento</mat-label>
+                    <mat-select formControlName="idTipoPagamento" required>
+                        <mat-option *ngFor="let tipo of tiposPagamento" [value]="tipo.id">
+                            {{tipo.descricao}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formGroup.get('idTipoPagamento')?.invalid && formGroup.get('idTipoPagamento')?.touched">
+                        {{ getErrorMessage('idTipoPagamento', formGroup.get('idTipoPagamento')?.errors) }}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-card-actions>
+                    <button mat-raised-button routerLink="/admin/pagamento">Cancelar</button>
+                    <button mat-raised-button color="warn" *ngIf="formGroup.get('id')?.value" (click)="excluir()">Excluir</button>
+                    <button mat-raised-button color="primary" type="submit">Salvar</button>
+                </mat-card-actions>
+
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

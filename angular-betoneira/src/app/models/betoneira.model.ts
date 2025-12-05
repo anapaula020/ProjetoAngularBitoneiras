@@ -13,19 +13,7 @@ export class Betoneira {
     idFabricante!: Fabricante;
     imageUrl!: string;
 
-    constructor(
-        id: number,
-        nome: string,
-        descricao: string,
-        preco: number,
-        quantidadeEstoque: number,
-        modelo: string, 
-        marca: string, 
-        capacidade: number, 
-        idTipoBetoneira: number,
-        idFabricante: Fabricante, 
-        imageUrl: string
-    ) {
+    constructor(id: number,nome: string,descricao: string,preco: number,quantidadeEstoque: number,modelo: string,marca: string,capacidade: number,idTipoBetoneira: number,idFabricante: Fabricante,imageUrl: string) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;

@@ -17,7 +17,6 @@ public class TipoBetoneira extends DefaultEntity {
         this.nome = nome;
     }
 
-   
     public String getNome() {
         return nome;
     }
