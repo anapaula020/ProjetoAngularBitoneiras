@@ -1,10 +1,9 @@
-// src/main/java/br/unitins/tp1/resource/ItemPedidoResource.java
 package br.unitins.tp1.resource;
 
 import br.unitins.tp1.dto.ItemPedidoRequestDTO;
 import br.unitins.tp1.dto.ItemPedidoResponseDTO;
 import br.unitins.tp1.service.ItemPedidoService;
-import jakarta.annotation.security.RolesAllowed; // Importar esta anotação
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
@@ -21,7 +20,7 @@ public class ItemPedidoResource {
 
     @POST
     @Transactional
-    @RolesAllowed("ADMIN") // Apenas ADMIN pode criar itens de pedido diretamente (geralmente via Pedido)
+    @RolesAllowed("ADMIN")
     public Response create(ItemPedidoRequestDTO dto) {
         ItemPedidoResponseDTO newItemPedido = itemPedidoService.create(dto);
         return Response.status(Response.Status.CREATED).entity(newItemPedido).build();
@@ -30,7 +29,7 @@ public class ItemPedidoResource {
     @PUT
     @Path("/{id}")
     @Transactional
-    @RolesAllowed("ADMIN") // Apenas ADMIN pode atualizar itens de pedido
+    @RolesAllowed("ADMIN")
     public Response update(@PathParam("id") Long id, ItemPedidoRequestDTO dto) {
         ItemPedidoResponseDTO updatedItemPedido = itemPedidoService.update(id, dto);
         return Response.status(Response.Status.OK).entity(updatedItemPedido).build();
@@ -39,21 +38,21 @@ public class ItemPedidoResource {
     @DELETE
     @Path("/{id}")
     @Transactional
-    @RolesAllowed("ADMIN") // Apenas ADMIN pode deletar itens de pedido
+    @RolesAllowed("ADMIN")
     public Response delete(@PathParam("id") Long id) {
         itemPedidoService.delete(id);
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
     @GET
-    @RolesAllowed("ADMIN") // Apenas ADMIN pode listar todos os itens de pedido
+    @RolesAllowed("ADMIN")
     public Response findAll() {
         return Response.ok(itemPedidoService.findAll()).build();
     }
 
     @GET
     @Path("/{id}")
-    @RolesAllowed({"ADMIN", "USER"}) // ADMIN pode buscar qualquer um, USER só os que fazem parte de seus pedidos
+    @RolesAllowed({"ADMIN", "USER"})
     public Response findById(@PathParam("id") Long id) {
         return Response.ok(itemPedidoService.findById(id)).build();
     }

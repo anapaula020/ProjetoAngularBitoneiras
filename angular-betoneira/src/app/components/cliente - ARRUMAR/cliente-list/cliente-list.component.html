@@ -1,41 +1,41 @@
 <mat-toolbar color="primary">
-    <div class="toolbar-title">Lista de Escritores de Novel</div>
+    <div class="toolbar-title">Lista de clientees de Novel</div>
 </mat-toolbar>
 
-<div class="escritor-novel-list-container">
+<div class="cliente-novel-list-container">
     <mat-card>
         <mat-card-content>
-            <table mat-table [dataSource]="escritores" class="mat-elevation-z8">
+            <table mat-table [dataSource]="clientees" class="mat-elevation-z8">
                 <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef> ID </th>
-                    <td mat-cell *matCellDef="let escritor"> {{escritor.id}} </td>
+                    <td mat-cell *matCellDef="let cliente"> {{cliente.id}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="nome">
                     <th mat-header-cell *matHeaderCellDef> Nome </th>
-                    <td mat-cell *matCellDef="let escritor"> {{escritor.nome}} </td>
+                    <td mat-cell *matCellDef="let cliente"> {{cliente.nome}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="anoNascimento">
                     <th mat-header-cell *matHeaderCellDef> Ano Nascimento </th>
-                    <td mat-cell *matCellDef="let escritor"> {{escritor.anoNascimento}} </td>
+                    <td mat-cell *matCellDef="let cliente"> {{cliente.anoNascimento}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="nacionalidade">
                     <th mat-header-cell *matHeaderCellDef> Nacionalidade </th>
-                    <td mat-cell *matCellDef="let escritor"> {{escritor.nacionalidade}} </td>
+                    <td mat-cell *matCellDef="let cliente"> {{cliente.nacionalidade}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="sexo">
                     <th mat-header-cell *matHeaderCellDef> Sexo </th>
-                    <td mat-cell *matCellDef="let escritor"> {{escritor.sexo}} </td>
+                    <td mat-cell *matCellDef="let cliente"> {{cliente.sexo}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef> Ações </th>
-                    <td mat-cell *matCellDef="let escritor">
-                        <button mat-button (click)="editEscritor(escritor.id)">Editar</button>
-                        <button mat-button color="warn" (click)="deleteEscritor(escritor.id)">Excluir</button>
+                    <td mat-cell *matCellDef="let cliente">
+                        <button mat-button (click)="editcliente(cliente.id)">Editar</button>
+                        <button mat-button color="warn" (click)="deletecliente(cliente.id)">Excluir</button>
                     </td>
                 </ng-container>
 

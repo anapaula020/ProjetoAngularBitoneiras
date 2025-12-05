@@ -1,4 +1,4 @@
-.escritor-form-container {
+.cliente-form-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -9,28 +9,28 @@
     margin-bottom: 100px;
 }
 
-.escritor-form-container h2 {
+.cliente-form-container h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #333;
 }
 
-.escritor-form-container form {
+.cliente-form-container form {
     display: flex;
     flex-direction: column;
 }
 
-.escritor-form-container .form-group {
+.cliente-form-container .form-group {
     margin-bottom: 35px;
 }
 
-.escritor-form-container label {
+.cliente-form-container label {
     margin-bottom: 5px;
     font-weight: bold;
     color: #555;
 }
 
-.escritor-form-container input {
+.cliente-form-container input {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -39,7 +39,7 @@
     box-sizing: border-box;
 }
 
-.escritor-form-container button {
+.cliente-form-container button {
     padding: 10px;
     background-color: #007bff;
     color: #fff;
@@ -51,11 +51,11 @@
     margin-bottom: 100px;
 }
 
-.escritor-form-container button:hover {
+.cliente-form-container button:hover {
     background-color: #0056b3;
 }
 
-.escritor-form-container textarea {
+.cliente-form-container textarea {
     width: 100%;
     padding: 10px 10px;
     box-sizing: border-box;
@@ -65,7 +65,7 @@
     font-size: 16px;
 }
 
-.escritor-form-container select {
+.cliente-form-container select {
     width: 100%;
     box-sizing: border-box;
     border: 2px solid #ccc;

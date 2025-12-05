@@ -1,10 +1,9 @@
-// src/main/java/br/unitins/tp1/resource/FabricanteResource.java
 package br.unitins.tp1.resource;
 
 import br.unitins.tp1.dto.FabricanteRequestDTO;
 import br.unitins.tp1.dto.FabricanteResponseDTO;
 import br.unitins.tp1.service.FabricanteService;
-import jakarta.annotation.security.RolesAllowed; // Importar esta anotação
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
@@ -21,7 +20,7 @@ public class FabricanteResource {
 
     @POST
     @Transactional
-    @RolesAllowed("ADMIN") // Apenas ADMIN pode criar fabricantes
+    @RolesAllowed("ADMIN")
     public Response create(FabricanteRequestDTO dto) {
         FabricanteResponseDTO newFabricante = fabricanteService.create(dto);
         return Response.status(Response.Status.CREATED).entity(newFabricante).build();
@@ -30,7 +29,7 @@ public class FabricanteResource {
     @PUT
     @Path("/{id}")
     @Transactional
-    @RolesAllowed("ADMIN") // Apenas ADMIN pode atualizar fabricantes
+    @RolesAllowed("ADMIN")
     public Response update(@PathParam("id") Long id, FabricanteRequestDTO dto) {
         FabricanteResponseDTO updatedFabricante = fabricanteService.update(id, dto);
         return Response.status(Response.Status.OK).entity(updatedFabricante).build();
@@ -39,28 +38,28 @@ public class FabricanteResource {
     @DELETE
     @Path("/{id}")
     @Transactional
-    @RolesAllowed("ADMIN") // Apenas ADMIN pode deletar fabricantes
+    @RolesAllowed("ADMIN")
     public Response delete(@PathParam("id") Long id) {
         fabricanteService.delete(id);
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
     @GET
-    @RolesAllowed({"ADMIN", "USER"}) // ADMIN e USER podem listar fabricantes
+    @RolesAllowed({"ADMIN", "USER"})
     public Response findAll() {
         return Response.ok(fabricanteService.findAll()).build();
     }
 
     @GET
     @Path("/{id}")
-    @RolesAllowed({"ADMIN", "USER"}) // ADMIN e USER podem buscar fabricante por ID
+    @RolesAllowed({"ADMIN", "USER"})
     public Response findById(@PathParam("id") Long id) {
         return Response.ok(fabricanteService.findById(id)).build();
     }
 
     @GET
     @Path("/search/nome/{nome}")
-    @RolesAllowed({"ADMIN", "USER"}) // ADMIN e USER podem buscar fabricante por nome
+    @RolesAllowed({"ADMIN", "USER"})
     public Response findByNome(@PathParam("nome") String nome) {
         return Response.ok(fabricanteService.findByNome(nome)).build();
     }

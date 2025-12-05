@@ -20,7 +20,6 @@ import br.unitins.tp1.dto.PixDTO;
 import br.unitins.tp1.model.Cliente;
 import br.unitins.tp1.repository.ClienteRepository;
 import br.unitins.tp1.service.PixService;
-// Remova: import br.unitins.tp1.service.PixService.CardPaymentRequest; // Removido para evitar o warning "is never used"
 import br.unitins.tp1.dto.CardPaymentRequestDTO;
 import br.unitins.tp1.exception.ServiceException;
 
@@ -59,8 +58,6 @@ public class PagamentoResource {
             return Response.status(Response.Status.UNAUTHORIZED).entity(Result.valueOf("Usuário não encontrado.")).build();
         }
 
-        // Mapeia o DTO de entrada para o DTO interno do PixService (CardPaymentRequest)
-        // Referência a PixService.CardPaymentRequest diretamente
         PixService.CardPaymentRequest serviceCardRequest = new PixService.CardPaymentRequest();
         serviceCardRequest.cardNumber = cardDto.getCardNumber();
         serviceCardRequest.securityCode = cardDto.getSecurityCode();
@@ -71,7 +68,6 @@ public class PagamentoResource {
         serviceCardRequest.cpf = cliente.getCpf();
 
         try {
-            // A chamada agora está correta, usando o novo método em PixService
             PixDTO pixResponse = pixService.createCardPayment(serviceCardRequest, cliente);
             return Response.ok(pixResponse).build();
         } catch (ServiceException e) {
