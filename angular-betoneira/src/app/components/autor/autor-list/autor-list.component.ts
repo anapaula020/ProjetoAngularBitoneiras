@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component,OnInit, inject } from '@angular/core';
 import { Router,RouterModule } from '@angular/router';
-import { AutorBetoneira } from '../../../models/autorBetoneira.model';
-import { AutorService } from '../../../services/autorBetoneira.service';
+import { Fabricante } from '../../../models/fabricante';
+import { AutorService } from '../../../services/fabricante.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -24,7 +24,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AutorListComponent implements OnInit {
     displayedColumns: string[] = ['id','nome','anoNascimento','nacionalidade','sexo','actions'];
-    autores: AutorBetoneira[] = [];
+    autores: Fabricante[] = [];
     totalRecords = 0;
     pageSize = 10;
     page = 0;
@@ -43,7 +43,7 @@ export class AutorListComponent implements OnInit {
     }
 
     loadAutores(): void {
-        this.autorService.findAll(this.page,this.pageSize).subscribe((data: AutorBetoneira[]) => {
+        this.autorService.findAll(this.page,this.pageSize).subscribe((data: Fabricante[]) => {
             this.autores = data;
         });
         this.autorService.count().subscribe(data => { this.totalRecords = data });

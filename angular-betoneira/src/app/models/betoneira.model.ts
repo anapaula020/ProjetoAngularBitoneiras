@@ -1,29 +1,41 @@
-import { AutorBetoneira } from "./autorBetoneira.model";
+import { Fabricante } from "./fabricante";
 
 export class Betoneira {
     id!: number;
     nome!: string;
-    description!: string; // descricao
+    descricao!: string;
     preco!: number;
-    idTipoBetoneira!: number;
-    idAutor!: AutorBetoneira; // fabricante
+    quantidadeEstoque!: number;
+    modelo!: string;
+    marca!: string;
+    capacidade!: number;
+    tipo!: number;
+    fabricante!: Fabricante;
     imageUrl!: string;
 
     constructor(
-        id: number,
-        nome: string,
-        description: string,
-        preco: number,
-        idTipoBetoneira: number,
-        idAutor: AutorBetoneira,
+        id: number, 
+        nome: string, 
+        descricao: string, 
+        preco: number, 
+        quantidadeEstoque: number, 
+        modelo: string, 
+        marca: string, 
+        capacidade: number, 
+        tipo: number, 
+        fabricante: Fabricante, 
         imageUrl: string
     ) {
         this.id = id;
         this.nome = nome;
-        this.description = description;
+        this.descricao = descricao;
         this.preco = preco;
-        this.idTipoBetoneira = idTipoBetoneira;
-        this.idAutor = idAutor;
+        this.quantidadeEstoque = quantidadeEstoque;
+        this.modelo = modelo;
+        this.marca = marca;
+        this.capacidade = capacidade;
+        this.tipo = tipo;
+        this.fabricante = fabricante;
         this.imageUrl = imageUrl;
     }
 }

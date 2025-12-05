@@ -9,11 +9,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ActivatedRoute,Router,RouterModule } from '@angular/router';
-import { AutorService } from '../../../services/autorBetoneira.service';
+import { AutorService } from '../../../services/fabricante.service';
 import { BetoneiraService } from '../../../services/betoneira.service';
 import { HeaderAdminComponent } from "../../template/header-admin/header-admin.component";
 import { FooterAdminComponent } from "../../template/footer-admin/footer-admin.component";
-import { AutorBetoneira } from '../../../models/autorBetoneira.model';
+import { Fabricante } from '../../../models/fabricante';
 import { Betoneira } from '../../../models/betoneira.model';
 import { MatIcon } from '@angular/material/icon';
 import { ExclusaoComponent } from '../../confirmacao/exclusao/exclusao.component';
@@ -28,7 +28,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class BetoneiraFormComponent implements OnInit {
     formGroup: FormGroup;
-    autores: AutorBetoneira[] = [];
+    autores: Fabricante[] = [];
     betoneiraId: number | null = null;
     dialog = inject(MatDialog);
 
@@ -40,14 +40,10 @@ export class BetoneiraFormComponent implements OnInit {
         this.formGroup = this.formBuilder.group({
             id: [null],
             nome: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(80)]],
-            sinopse: ['',[Validators.required,Validators.minLength(10),Validators.maxLength(1000)]],
-            genero: [null],
-            idAutor: [null],
-            lancamento: [null,[Validators.required,Validators.min(0)]],
-            color: [null,[Validators.required,Validators.minLength(2),Validators.maxLength(12)]],
+            descricao: ['',[Validators.required,Validators.minLength(10),Validators.maxLength(1000)]],
             preco: [null,[Validators.required,Validators.min(0)]],
-            estoque: [null,[Validators.required,Validators.min(0)]],
-            paginas: [null,[Validators.required,Validators.min(0)]],
+            idTipoBetoneira: [null],
+            fabricante: [null],
             imageUrl: [null]
         });
     }
@@ -71,7 +67,6 @@ export class BetoneiraFormComponent implements OnInit {
 
     initializeForm(): void {
         const betoneira = this.activatedRoute.snapshot.data['betoneira'];
-        const genero = this.generos.find(m => m.id === (betoneira?.genero?.id || null));
         if(betoneira && betoneira.imageUrl) {
             this.imagePreview = this.betoneiraService.toImageUrl(betoneira.imageUrl);
             this.fileName = betoneira.imageUrl;
@@ -80,23 +75,17 @@ export class BetoneiraFormComponent implements OnInit {
         this.formGroup = this.formBuilder.group({
             id: [(betoneira && betoneira.id) ? betoneira.id : null],
             nome: [(betoneira && betoneira.nome) ? betoneira.nome : null],
-            sinopse: [(betoneira && betoneira.sinopse) ? betoneira.sinopse : null],
-            genero: [genero],
-            idAutor: [(betoneira && betoneira.idAutor) ? betoneira.idAutor : null],
-            lancamento: [(betoneira && betoneira.lancamento) ? betoneira.lancamento : null],
-            color: [(betoneira && betoneira.color) ? betoneira.color : null],
+            descricao: [(betoneira && betoneira.descricao) ? betoneira.descricao : null],
             preco: [(betoneira && betoneira.preco) ? betoneira.preco : null],
-            estoque: [(betoneira && betoneira.estoque) ? betoneira.estoque : null],
-            paginas: [(betoneira && betoneira.paginas) ? betoneira.paginas : null],
+            idTipoBetoneira: [(betoneira && betoneira.idTipoBetoneira) ? betoneira.idTipoBetoneira : null],
+            fabricante: [(betoneira && betoneira.fabricante) ? betoneira.fabricante : null],
             imageUrl: [(betoneira && betoneira.imageUrl) ? betoneira.imageUrl : null]
         });
     }
 
     private uploadImage(betoneiraId: number) {
-
         if(this.selectedFile) {
             this.betoneiraService.uploadImage(betoneiraId,this.selectedFile.name,this.selectedFile)
-
                 .subscribe({
                     next: () => {
                         this.voltarPagina();
@@ -122,14 +111,9 @@ export class BetoneiraFormComponent implements OnInit {
                     this.imagePreview = this.betoneiraService.toImageUrl(betoneira.imageUrl);
                     this.fileName = betoneira.imageUrl;
                 }
-                if(betoneira.idAutor) {
-                    this.formGroup.get('idAutor')?.setValue(betoneira.idAutor.id);
+                if(betoneira.fabricante) {
+                    this.formGroup.get('fabricante')?.setValue(betoneira.fabricante.id);
                 }
-                if(betoneira.genero) {
-                    const generoSelecionado = this.generos.find(m => m.id === (betoneira?.genero?.id || null));
-                    this.formGroup.get('genero')?.setValue(generoSelecionado);
-                }
-
             });
             this.formGroup.markAllAsTouched();
         }
@@ -137,10 +121,8 @@ export class BetoneiraFormComponent implements OnInit {
 
     carregarImagemSelecionada(event: any) {
         this.selectedFile = event.target.files[0];
-
         if(this.selectedFile) {
             this.fileName = this.selectedFile.name;
-
             const reader = new FileReader();
             reader.onload = e => this.imagePreview = reader.result;
             reader.readAsDataURL(this.selectedFile);
@@ -224,31 +206,10 @@ export class BetoneiraFormComponent implements OnInit {
             maxlength: 'Nome deve conter no máximo 40 caracteres.',
             apiError: 'API_ERROR'
         },
-        sinopse: {
-            required: 'Sinopse é obrigatório.',
-            minlength: 'Sinopse deve conter ao menos 10 caracteres.',
-            maxlength: 'Sinopse deve conter no máximo 1000 caracteres.',
-            apiError: 'API_ERROR'
-        },
-        genero: {
-            required: 'Gênero é obrigatório.',
-            min: 'Gênero deve ser maior do que 0.',
-            apiError: 'API_ERROR'
-        },
-        idAutor: {
-            required: 'Id do autor é obrigatório.',
-            min: 'Id do autor deve ser maior do que 0.',
-            apiError: 'API_ERROR'
-        },
-        lancamento: {
-            required: 'Ano de lançamento é obrigatório.',
-            min: 'Ano de lançamento deve ser maior do que 0.',
-            apiError: 'API_ERROR'
-        },
-        color: {
-            required: 'Color é obrigatório.',
-            minlength: 'Color deve conter ao menos 1 caracteres.',
-            maxlength: 'Color deve conter no máximo 12 caracteres.',
+        descricao: {
+            required: 'Descricao é obrigatório.',
+            minlength: 'Descricao deve conter ao menos 10 caracteres.',
+            maxlength: 'Descricao deve conter no máximo 1000 caracteres.',
             apiError: 'API_ERROR'
         },
         preco: {
@@ -256,14 +217,15 @@ export class BetoneiraFormComponent implements OnInit {
             min: 'Preço deve ser maior do que 0.',
             apiError: 'API_ERROR'
         },
+    
+        idFabricante: {
+            required: 'Id do fabricante é obrigatório.',
+            min: 'Id do fabricante deve ser maior do que 0.',
+            apiError: 'API_ERROR'
+        },
         estoque: {
             required: 'Estoque é obrigatório.',
             min: 'Estoque deve ser maior do que 0.',
-            apiError: 'API_ERROR'
-        },
-        paginas: {
-            required: 'Páginas é obrigatório.',
-            min: 'Páginas deve ser maior do que 0.',
             apiError: 'API_ERROR'
         }
     }

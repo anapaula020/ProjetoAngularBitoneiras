@@ -8,7 +8,6 @@ import jakarta.persistence.EnumType;
 
 @Entity
 public class Betoneira extends DefaultEntity { // Assumindo que DefaultEntity já cuida do ID
-
     private String nome;
     private String descricao;
     private Double preco;

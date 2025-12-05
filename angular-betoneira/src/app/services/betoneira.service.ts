@@ -9,7 +9,7 @@ export class BetoneiraService {
 
     constructor(private httpClient: HttpClient) { }
 
-    findByAuthor(id: number): Observable<Betoneira[]> {
+    findByFabricante(id: number): Observable<Betoneira[]> {
         return this.httpClient.get<Betoneira[]>(`${this.baseUrl}/autor/${id}`);
     }
 
@@ -48,39 +48,36 @@ export class BetoneiraService {
         return this.httpClient.get<Betoneira[]>(`${this.baseUrl}/name/${term}`);
     }
 
-    findByGenre(id: number): Observable<Betoneira[]> {
-        return this.httpClient.get<Betoneira[]>(`${this.baseUrl}/genero/${id}`);
-    }
-
-    insert(Betoneira: Betoneira): Observable<Betoneira> {
+    insert(betoneira: Betoneira): Observable<Betoneira> {
         const data = {
-            nome: Betoneira.nome,
-            idAutor: Betoneira.idAutor,
-            sinopse: Betoneira.sinopse,
-            lancamento: Betoneira.lancamento,
-            estoque: Betoneira.estoque,
-            preco: Betoneira.preco,
-            color: Betoneira.color,
-            paginas: Betoneira.paginas,
-            imageUrl: Betoneira.imageUrl
+            nome: betoneira.nome, 
+            descricao: betoneira.descricao, 
+            preco: betoneira.preco, 
+            quantidadeEstoque: betoneira.quantidadeEstoque, 
+            modelo: betoneira.modelo, 
+            marca: betoneira.marca, 
+            capacidade: betoneira.capacidade, 
+            tipo: betoneira.tipo, 
+            fabricante: betoneira.fabricante, 
+            imageUrl: betoneira.imageUrl
         };
         return this.httpClient.post<Betoneira>(this.baseUrl,data);
     }
 
-    update(Betoneira: Betoneira): Observable<Betoneira> {
+    update(betoneira: Betoneira): Observable<Betoneira> {
         const data = {
-            nome: Betoneira.nome,
-            idAutor: Betoneira.idAutor,
-            genero: Betoneira.genero.id,
-            sinopse: Betoneira.sinopse,
-            lancamento: Betoneira.lancamento,
-            estoque: Betoneira.estoque,
-            color: Betoneira.color,
-            preco: Betoneira.preco,
-            paginas: Betoneira.paginas,
-            imageUrl: Betoneira.imageUrl
+            nome: betoneira.nome, 
+            descricao: betoneira.descricao, 
+            preco: betoneira.preco, 
+            quantidadeEstoque: betoneira.quantidadeEstoque, 
+            modelo: betoneira.modelo, 
+            marca: betoneira.marca, 
+            capacidade: betoneira.capacidade, 
+            tipo: betoneira.tipo, 
+            fabricante: betoneira.fabricante, 
+            imageUrl: betoneira.imageUrl
         };
-        return this.httpClient.put<Betoneira>(`${this.baseUrl}/${Betoneira.id}`,data);
+        return this.httpClient.put<Betoneira>(`${this.baseUrl}/${betoneira.id}`,data);
     }
 
     delete(id: number): Observable<void> {

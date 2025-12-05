@@ -19,7 +19,7 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>Autor</mat-label>
-        <mat-select [(ngModel)]="selectedAutor" (ngModelChange)="filtrarAutor($event)">
+        <mat-select [(ngModel)]="selectedAutor" (ngModelChange)="filtrarFabricante($event)">
             <mat-option *ngFor="let autor of autores" [value]="autor.id">{{ autor.nome }}</mat-option>
         </mat-select>
     </mat-form-field>
