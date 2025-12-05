@@ -8,6 +8,7 @@ export class Betoneira {
     quantidadeEstoque!: number;
     modelo!: string;
     marca!: string;
+    capacidade!: number;
     idTipoBetoneira!: number;
     idFabricante!: Fabricante;
     imageUrl!: string;
@@ -20,6 +21,7 @@ export class Betoneira {
         quantidadeEstoque: number,
         modelo: string, 
         marca: string, 
+        capacidade: number, 
         idTipoBetoneira: number,
         idFabricante: Fabricante, 
         imageUrl: string
@@ -29,8 +31,9 @@ export class Betoneira {
         this.descricao = descricao;
         this.preco = preco;
         this.quantidadeEstoque = quantidadeEstoque;
-        this.modelo = imageUrl;
-        this.marca = imageUrl;
+        this.modelo = modelo;
+        this.marca = marca;
+        this.capacidade = capacidade;
         this.idTipoBetoneira = idTipoBetoneira;
         this.idFabricante = idFabricante;
         this.imageUrl = imageUrl;

@@ -6,7 +6,6 @@
 
 <div class="filtros" *ngIf="mostrarFiltros">
 
-    <!-- FILTRO 1 Tipo da Betoneira -->
     <mat-form-field appearance="fill">
         <mat-label>Tipo</mat-label>
         <mat-select [(ngModel)]="selectedTipo" (ngModelChange)="filtrarTipo($event)">
@@ -16,7 +15,6 @@
         </mat-select>
     </mat-form-field>
 
-    <!-- FILTRO 2 Preço -->
     <mat-form-field appearance="fill">
         <mat-label>Preço</mat-label>
         <mat-select [(ngModel)]="selectedPreco" (ngModelChange)="filtrarPreco($event)">
@@ -26,7 +24,6 @@
         </mat-select>
     </mat-form-field>
 
-    <!-- FILTRO 3 Fabricante -->
     <mat-form-field appearance="fill">
         <mat-label>Fabricante</mat-label>
         <mat-select [(ngModel)]="selectedFabricante" (ngModelChange)="filtrarFabricante($event)">

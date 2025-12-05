@@ -50,15 +50,15 @@ export class BetoneiraService {
 
     insert(betoneira: Betoneira): Observable<Betoneira> {
         const data = {
-            nome: betoneira.nome,
-            descricao: betoneira.descricao,
-            preco: betoneira.preco,
-            quantidadeEstoque: betoneira.quantidadeEstoque,
-            modelo: betoneira.modelo,
-            marca: betoneira.marca,
-            capacidade: betoneira.capacidade,
-            tipo: betoneira.tipo,
-            fabricante: betoneira.fabricante,
+            nome: betoneira.nome, 
+            descricao: betoneira.descricao, 
+            preco: betoneira.preco, 
+            quantidadeEstoque: betoneira.quantidadeEstoque, 
+            modelo: betoneira.modelo, 
+            marca: betoneira.marca, 
+            capacidade: betoneira.capacidade, 
+            idTipoBetoneira: betoneira.idTipoBetoneira, 
+            idFabricante: betoneira.idFabricante, 
             imageUrl: betoneira.imageUrl
         };
         return this.httpClient.post<Betoneira>(this.baseUrl,data);
@@ -66,15 +66,15 @@ export class BetoneiraService {
 
     update(betoneira: Betoneira): Observable<Betoneira> {
         const data = {
-            nome: betoneira.nome,
-            descricao: betoneira.descricao,
-            preco: betoneira.preco,
-            quantidadeEstoque: betoneira.quantidadeEstoque,
-            modelo: betoneira.modelo,
-            marca: betoneira.marca,
-            capacidade: betoneira.capacidade,
-            tipo: betoneira.tipo,
-            fabricante: betoneira.fabricante,
+            nome: betoneira.nome, 
+            descricao: betoneira.descricao, 
+            preco: betoneira.preco, 
+            quantidadeEstoque: betoneira.quantidadeEstoque, 
+            modelo: betoneira.modelo, 
+            marca: betoneira.marca, 
+            capacidade: betoneira.capacidade, 
+            idTipoBetoneira: betoneira.idTipoBetoneira, 
+            idFabricante: betoneira.idFabricante, 
             imageUrl: betoneira.imageUrl
         };
         return this.httpClient.put<Betoneira>(`${this.baseUrl}/${betoneira.id}`,data);
