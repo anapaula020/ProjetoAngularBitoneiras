@@ -1,0 +1,21 @@
+<div class="container responsive-grid">
+    <mat-card *ngFor="let novel of cards()">
+
+        <img mat-card-image [src]="novel.imageUrl" />
+
+        <mat-card-title class="centered-text">{{novel.nome}}</mat-card-title>
+        <mat-card-content class="centered-text">{{novel.sinopse}}</mat-card-content><br>
+        <mat-card-content class="centered-text">Ano: {{novel.lancamento}}</mat-card-content><br>
+        <mat-card-content class="centered-text">Preço: {{novel.preco}}</mat-card-content><br>
+        <mat-card-content class="centered-text">Capítulos: {{novel.capitulos}}</mat-card-content><br>
+
+        <mat-card-actions class="centered-text">
+            <button mat-button color="primary">Observar mais</button>
+        </mat-card-actions>
+
+        <mat-card-footer>
+            <button mat-button (click)="adicionarAoCarrinho(novel)" color="accent" style="width: 100%; padding: 16px;">Adicionar ao carrinho.</button>
+        </mat-card-footer>
+
+    </mat-card>
+</div>

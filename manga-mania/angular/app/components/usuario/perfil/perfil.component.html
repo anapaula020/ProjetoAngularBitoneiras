@@ -1,0 +1,41 @@
+<div class="perfil-container">
+    <h1>Perfil do Usuário</h1>
+
+    <div *ngIf="usuario" class="user-info">
+        <p><strong>Nome:</strong> {{ usuario.username }}</p>
+        <p><strong>Email:</strong> {{ usuario.email }}</p>
+        <p *ngIf="usuario.endereco"><strong>Endereço:</strong> {{ usuario.endereco.rua }}, {{ usuario.endereco.numero }}, {{ usuario.endereco.cep }}, {{ usuario.endereco.cidade }}, {{ usuario.endereco.estado }}</p>
+        <p><strong>CPF:</strong> {{ usuario.cpf }}</p>
+        <p><strong>Sexo:</strong> {{ usuario.sexo }}</p>
+    </div>
+    <div class="botao">
+        <button (click)="pedidos()">Ver Meus Pedidos</button>
+    </div>
+    <div class="form-group">
+        <h2>Alterar Senha</h2>
+        <input type="password" placeholder="Senha Antiga" [(ngModel)]="senhaAntiga" required>
+        <input type="password" placeholder="Nova Senha" [(ngModel)]="novaSenha" required>
+        <input type="password" placeholder="Confirmação da Nova Senha" [(ngModel)]="confimacao" required>
+        <button (click)="changePassword()">Alterar Senha</button>
+    </div>
+
+    <div class="form-group">
+        <h2>Alterar Email</h2>
+        <input type="email" placeholder="Novo Email" [(ngModel)]="newEmail" required>
+        <button (click)="changeEmail()">Alterar Email</button>
+    </div>
+
+    <div class="form-group">
+        <h2>Alterar Endereço</h2>
+        <input type="text" placeholder="Rua" [(ngModel)]="rua" required>
+        <input type="text" placeholder="Número" [(ngModel)]="numero" required>
+        <input type="text" placeholder="CEP" [(ngModel)]="cep" required>
+        <input type="text" placeholder="Cidade" [(ngModel)]="cidade" required>
+        <input type="text" placeholder="Estado" [(ngModel)]="estado" required>
+        <button (click)="changeAddress()">Alterar Endereço</button>
+    </div>
+
+    <div *ngIf="message" class="feedback-message">
+        <p>{{ message }}</p>
+    </div>
+</div>

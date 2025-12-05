@@ -1,6 +1,6 @@
 import { CommonModule,NgIf } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component,OnInit, inject } from '@angular/core';
+import { Component,OnInit,inject } from '@angular/core';
 import { FormBuilder,FormGroup,ReactiveFormsModule,ValidationErrors,Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -24,7 +24,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class EscritorFormComponent implements OnInit {
     formGroup: FormGroup;
-    escritorId: number | null = null;
+    pagamentoId: number | null = null;
     readonly dialog = inject(MatDialog);
 
     constructor(
@@ -35,18 +35,18 @@ export class EscritorFormComponent implements OnInit {
     ) {
         this.formGroup = this.formBuilder.group({
             id: [null],
-            valor: [null, Validators.required], 
-            statusPagamento: [null, Validators.required], 
-            dataPagamento: [null, Validators.required], 
-            idTipoPagamento: [null, Validators.required]
+            valor: [null,[Validators.required,Validators.min(0)]],
+            statusPagamento: [null,[Validators.required]],
+            dataPagamento: [null,[Validators.required]],
+            idTipoPagamento: [null,[Validators.required]]
         });
     }
 
     ngOnInit(): void {
         this.activatedRoute.params.subscribe(params => {
-            this.escritorId = params['id'] ? +params['id'] : null;
-            if(this.escritorId) {
-                this.loadEscritor(this.escritorId);
+            this.pagamentoId = params['id'] ? +params['id'] : null;
+            if(this.pagamentoId) {
+                this.loadEscritor(this.pagamentoId);
             }
         });
 
@@ -130,27 +130,23 @@ export class EscritorFormComponent implements OnInit {
     }
 
     errorMessages: { [controlName: string]: { [errorName: string]: string } } = {
-        nome: {
-            required: 'Nome é obrigatório.',
-            minlength: 'Nome deve conter ao menos 3 caracteres.',
-            maxlength: 'Nome deve conter no máximo 40 caracteres.',
+        valor: {
+            required: "Valor é obrigatório.",
+            min: 'Valor deve ser maior do que 0.',
             apiError: 'API_ERROR'
         },
-        anoNascimento: {
-            required: 'Ano de nascimento é obrigatório.',
-            min: 'Ano de nascimento deve ser maior do que 0.',
-            max: 'Ano de nascimento deve ser menor do que 9999.',
+        statusPagamento: {
+            required: "Status pagamento é obrigatório.",
+            min: 'Status pagamento deve ser maior do que 0.',
             apiError: 'API_ERROR'
         },
-        nacionalidade: {
-            required: 'Nacionalidade é obrigatório.',
-            minlength: 'Nacionalidade deve conter ao menos 2 caracteres.',
-            maxlength: 'Nacionalidade deve conter no máximo 30 caracteres.',
+        dataPagamento: {
+            required: "Data pagamento é obrigatório.",
             apiError: 'API_ERROR'
         },
-        sexo: {
-            required: 'Sexo é obrigatório.',
+        idTipoPagamento: {
+            required: "Id tipo pagamento é obrigatório.",
             apiError: 'API_ERROR'
-        }
+        },
     }
 }

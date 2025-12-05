@@ -1,40 +1,110 @@
-.pedido-novel-list-container {
-    margin: 0 auto;
+/* Container principal */
+.pedido-list-container {
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
 }
 
-.pedido-novel-list-container h2 {
+.pedido-list-container h1 {
     text-align: center;
-    margin-bottom: 20px;
+    font-size: 36px;
+    margin-bottom: 30px;
     color: #333;
 }
 
-.pedido-novel-list-container table {
-    width: 100%;
-    border-collapse: collapse;
+.pedido-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
     margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
 }
 
-.pedido-novel-list-container th,
-.pedido-novel-list-container td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+.pedido-card:hover {
+    transform: scale(1.02);
 }
 
-.pedido-novel-list-container th {
-    background-color: #f2f2f2;
-    font-weight: bold;
+.pedido-card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #007bff;
 }
 
-.pedido-novel-list-container tr:nth-child(even) {
-    background-color: #f9f9f9;
+.pedido-preco {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #28a745;
 }
 
-.pedido-novel-list-container tr:hover {
-    background-color: #f1f1f1;
+.pedido-card p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.pedido-itens h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.pedido-itens ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.pedido-itens li {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #555;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.pedido-itens li:last-child {
+    border-bottom: none;
+}
+
+.vazio {
+    color: wheat !important;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin: 10px 0;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+p {
+    font-size: 1.2rem;
+    margin: 20px 0;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    text-decoration: none;
+    background: #4a90e2;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+    background: #0066cc;
+    transform: scale(1.05);
 }

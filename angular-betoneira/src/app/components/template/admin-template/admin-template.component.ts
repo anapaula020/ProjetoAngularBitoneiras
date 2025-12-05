@@ -10,4 +10,4 @@ import { FooterComponent } from '../footer/footer.component';
     templateUrl: './admin-template.component.html',
     styleUrl: './admin-template.component.css'
 })
-export class AdminTemplateComponent {}
+export class AdminTemplateComponent { }

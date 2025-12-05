@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Pedido } from '../models/pedido.model';
-import { ItemCarrinho } from '../models/item-carrinho';
-import { Usuario } from '../models/usuario.model';
+import { ItemCarrinho } from '../models/itemCarrinho.model';
 import { Endereco } from '../models/endereco.model';
 
 @Injectable({
@@ -18,7 +17,7 @@ export class PedidoService {
         return this.httpClient.get<Pedido[]>(this.baseUrl);
     }
 
-    findMyPedidos(): Observable<Pedido[]>{
+    findMyPedidos(): Observable<Pedido[]> {
         return this.httpClient.get<Pedido[]>(`${this.baseUrl}/meus`)
     }
 
@@ -30,36 +29,36 @@ export class PedidoService {
         return this.httpClient.get<Pedido>(`${this.baseUrl}/${id}`);
     }
 
-    insert(itens: ItemCarrinho[], endereco: Endereco): Observable<Pedido> {
+    insert(itens: ItemCarrinho[],endereco: Endereco): Observable<Pedido> {
         const data = {
-            itens: itens.map(e => Object.assign({idBetoneira: e.id, desconto: 0}, e)), endereco
+            itens: itens.map(e => Object.assign({ idBetoneira: e.id,desconto: 0 },e)),endereco
         };
-    console.log(data);
+        console.log(data);
 
-        return this.httpClient.post<Pedido>(this.baseUrl, data);
+        return this.httpClient.post<Pedido>(this.baseUrl,data);
     }
 
-    pagarPeloPix(id: number, cpf: string, valor: number): Observable<any> {
+    pagarPeloPix(id: number,cpf: string,valor: number): Observable<any> {
         const data = {
             idPedido: id,
             cpf,
             valor
         }
-        return this.httpClient.patch(`${this.baseUrl}/pagar/pix`, data);
+        return this.httpClient.patch(`${this.baseUrl}/pagar/pix`,data);
     }
 
-    pagarPeloCredito(id: number,numero: number, nome: string,cvv:string,limite: number, parcelas: number): Observable<any> {
-        const data ={
+    pagarPeloCredito(id: number,numero: number,nome: string,cvv: string,limite: number,parcelas: number): Observable<any> {
+        const data = {
             idPedido: id,
             numero,
             nome,
             cvv,
             limite
         }
-        return this.httpClient.patch(`${this.baseUrl}/pagar/credito/${parcelas}`, data);
+        return this.httpClient.patch(`${this.baseUrl}/pagar/credito/${parcelas}`,data);
     }
 
-    pagarPeloDebito(id: number,numero: number, nome: string,cvv:string,limite: number): Observable<any> {
+    pagarPeloDebito(id: number,numero: number,nome: string,cvv: string,limite: number): Observable<any> {
         const cartao = {
             idPedido: id,
             numero,
@@ -67,6 +66,6 @@ export class PedidoService {
             cvv,
             limite
         }
-        return this.httpClient.patch(`${this.baseUrl}/pagar/debito`, cartao);
+        return this.httpClient.patch(`${this.baseUrl}/pagar/debito`,cartao);
     }
 }

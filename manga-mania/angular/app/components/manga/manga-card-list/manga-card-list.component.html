@@ -1,0 +1,47 @@
+<div class="filtros-toggle">
+    <button mat-button (click)="toggleFiltros()">
+        {{ mostrarFiltros ? 'Esconder Filtros' : 'Mostrar Filtros' }}
+    </button>
+</div>
+
+<div class="filtros" *ngIf="mostrarFiltros">
+    <mat-form-field appearance="fill">
+        <mat-label>Gênero</mat-label>
+        <mat-select [(ngModel)]="selectedGenero" (ngModelChange)="filtrarGenero($event)">
+            <mat-option *ngFor="let genero of generos" [value]="genero.id">{{ genero.nome }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Preço</mat-label>
+        <mat-select [(ngModel)]="selectedPreco" (ngModelChange)="filtrarPreco($event)">
+            <mat-option *ngFor="let preco of precos" [value]="preco.id">{{ preco.nome }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Autor</mat-label>
+        <mat-select [(ngModel)]="selectedAutor" (ngModelChange)="filtrarAutor($event)">
+            <mat-option *ngFor="let autor of autores" [value]="autor.id">{{ autor.nome }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div class="container responsive-grid">
+    <mat-card *ngFor="let manga of cards()" class="manga-card">
+        <div class="manga-card-content">
+            <img mat-card-image [src]="manga.imageUrl" class="manga-image" />
+            <div class="manga-details">
+                <mat-card-title class="centered-text">{{ manga.nome }}</mat-card-title>
+                <mat-card-content class="centered-text" style="background-color: #c5c5c5;">{{ manga.sinopse.length > 20 ? (manga.sinopse | slice: 0: 20) + '...' : manga.sinopse }}<br></mat-card-content>
+                <mat-card-content class="centered-text"> {{ manga.genero.nome }}</mat-card-content> 
+                <mat-card-content class="centered-text"> {{ manga.lancamento }}</mat-card-content><br>
+                <mat-card-content class="centered-text"> R$ {{ manga.preco }}</mat-card-content>
+                <mat-card-actions class="centered-text">
+                    <button mat-button color="primary" (click)="verManga(manga.id);">Observar mais.</button>
+                </mat-card-actions>
+                <mat-card-footer>
+                    <button mat-button (click)="adicionarAoCarrinho(manga)" color="accent" style="width: 100%; padding: 16px;">Adicionar ao carrinho.</button>
+                </mat-card-footer>
+            </div>
+        </div>
+    </mat-card>
+</div>
+<mat-paginator [length]="totalMangas" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)"></mat-paginator>

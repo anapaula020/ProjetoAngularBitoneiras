@@ -4,6 +4,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import { BehaviorSubject,Observable,tap } from "rxjs";
 import { Usuario } from "../models/usuario.model";
 import { LocalStorageService } from "./local-storage.service";
+import { Cliente } from "../models/cliente.model";
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthService {
     private baseUrl = 'http://localhost:8000/auth';
     private tokenKey = 'jwt_token';
     private usuarioLogadoKey = 'usuario_logado';
-    private usuarioLogadoSubject = new BehaviorSubject<Usuario | null>(null);
+    private usuarioLogadoSubject = new BehaviorSubject<Cliente | null>(null);
 
     constructor(private httpClient: HttpClient,private localStorageService: LocalStorageService,private jwtHelper: JwtHelperService) {
         this.init();
