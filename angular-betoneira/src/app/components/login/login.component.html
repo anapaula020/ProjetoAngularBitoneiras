@@ -1,0 +1,33 @@
+<main>
+    <div class="login-register">
+        <h1 id="login">Login</h1>
+        <h1><a href="cadastro" id="register">Cadastro</a></h1>
+    </div>
+    <section id="login">
+        <div id="img"></div>
+        <div id="form">
+            <p>Seja bem-vindo(a), por favor conecte-se</p>
+            <form [formGroup]="formGroup" (ngSubmit)="login()">
+                <div class="field">
+                    <span class="material-symbols-outlined">Usuário</span>
+                    <input matInput type="text" formControlName="username" placeholder="Digite seu nome de usuário"
+                        required />
+                    <mat-error *ngIf="formGroup.get('username')?.invalid && formGroup.get('username')?.touched">
+                        {{ getErrorMessage('username', formGroup.get('username')?.errors) }}
+                    </mat-error>
+                </div>
+                <div class="field">
+                    <span class="material-symbols-outlined">Senha</span>
+                    <input matInput type="password" value="123456789123456789" formControlName="senha"
+                        placeholder="********" required autocomplete="current-password" minlength="6" maxlength="60" />
+                    <mat-error *ngIf="formGroup.get('senha')?.invalid && formGroup.get('senha')?.touched">
+                        {{ getErrorMessage('senha', formGroup.get('senha')?.errors) }}
+                    </mat-error>
+                </div>
+                <div>
+                    <input type="submit" class="botao" value="Entrar" />
+                </div>
+            </form>
+        </div>
+    </section>
+</main>

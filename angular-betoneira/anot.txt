@@ -1,0 +1,4 @@
+carrinho
+compra
+compra-finalizada
+itempedido

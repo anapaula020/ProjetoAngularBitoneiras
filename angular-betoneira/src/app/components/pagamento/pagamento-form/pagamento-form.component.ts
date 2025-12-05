@@ -22,7 +22,7 @@ import { MatDialog } from '@angular/material/dialog';
     styleUrls: ['./escritor-form.component.css'],
     imports: [NgIf,ReactiveFormsModule,MatFormFieldModule,MatInputModule,MatButtonModule,MatCardModule,MatToolbarModule,RouterModule,MatSelectModule,CommonModule,HeaderAdminComponent,FooterAdminComponent]
 })
-export class EscritorFormComponent implements OnInit {
+export class PagamentoFormComponent implements OnInit {
     formGroup: FormGroup;
     pagamentoId: number | null = null;
     readonly dialog = inject(MatDialog);

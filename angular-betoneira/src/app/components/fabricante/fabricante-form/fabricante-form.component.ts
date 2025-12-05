@@ -25,7 +25,7 @@ import { MatDialog } from '@angular/material/dialog';
     imports: [MatDatepickerModule,MatNativeDateModule,CommonModule,FormsModule,ReactiveFormsModule,MatFormFieldModule,MatInputModule,MatButtonModule,MatCardModule,MatToolbarModule,MatSelectModule,RouterModule,HeaderAdminComponent,FooterAdminComponent],
     providers: [MatDatepickerModule]
 })
-export class AutorFormComponent implements OnInit {
+export class FabricanteFormComponent implements OnInit {
     formGroup: FormGroup;
     autorId: number | null = null;
     readonly dialog = inject(MatDialog);

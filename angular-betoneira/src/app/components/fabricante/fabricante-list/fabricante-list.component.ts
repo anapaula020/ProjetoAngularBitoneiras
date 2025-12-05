@@ -21,7 +21,7 @@ import { MatDialog } from '@angular/material/dialog';
     styleUrls: ['./autor-list.component.css'],
     imports: [MatPaginatorModule,CommonModule,RouterModule,MatTableModule,MatButtonModule,MatCardModule,MatToolbarModule,HeaderAdminComponent,FooterAdminComponent,MatIconModule]
 })
-export class AutorListComponent implements OnInit {
+export class FabricanteListComponent implements OnInit {
     displayedColumns: string[] = ['id','nome','anoNascimento','nacionalidade','sexo','actions'];
     autores: Fabricante[] = [];
     totalRecords = 0;

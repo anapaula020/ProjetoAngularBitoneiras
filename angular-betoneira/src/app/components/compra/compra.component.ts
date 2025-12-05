@@ -28,7 +28,7 @@ import { Betoneira } from '../../models/betoneira.model';
     styleUrls: ['./compra.component.css'],
     imports: [NgIf,ReactiveFormsModule,CommonModule,MatCardModule,MatButtonModule,NgFor,MatCardActions,MatCardContent,MatCardTitle,MatCardFooter,HeaderComponent,FooterComponent]
 })
-export class ConfirmarCompraComponent implements OnInit,OnDestroy {
+export class CompraComponent implements OnInit,OnDestroy {
     private subscription = new Subscription();
     carrinhoItens: ItemCarrinho[] = [];
     userRole: string | null = null;
@@ -61,22 +61,13 @@ export class ConfirmarCompraComponent implements OnInit,OnDestroy {
             this.carrinhoItens = items;
         });
         this.subscription.add(this.authService.getUsuarioLogado().subscribe(usuario => {
-            this.usuarioLogado = usuario;
-            this.userRole = this.authService.getUserRole();
-            if(this.usuarioLogado) {
+            if(this.enderecoForm.dirty) {
                 this.enderecoForm.patchValue({
-                    numero: this.usuarioLogado.endereco.numero;
-                    complemento: this.usuarioLogado.endereco.complemento;
-                    bairro: this.usuarioLogado.endereco.bairro;
-                    cep: this.usuarioLogado.endereco.cep;
-                    municipio: this.usuarioLogado.endereco.municipio;
-
-                    email: this.usuarioLogado.email,
-                    rua: this.usuarioLogado.endereco?.rua || '',
-                    numero: this.usuarioLogado.endereco?.numero || '',
-                    cep: this.usuarioLogado.endereco?.cep || '',
-                    cidade: this.usuarioLogado.endereco?.cidade || '',
-                    estado: this.usuarioLogado.endereco?.estado || ''
+                    numero: this.enderecoForm.get("numero"), 
+                    complemento: this.enderecoForm.get("complemento"), 
+                    bairro: this.enderecoForm.get("bairro"), 
+                    cep: this.enderecoForm.get("cep"), 
+                    municipio: this.enderecoForm.get("municipio")
                 });
             }
         }));
@@ -103,8 +94,7 @@ export class ConfirmarCompraComponent implements OnInit,OnDestroy {
         ).subscribe(() => {
             this.router.navigateByUrl('/meuspedidos');
         },error => {
-console.log(error);
-
+            console.log(error);
             this.tratarErros(error);
         });
         /*

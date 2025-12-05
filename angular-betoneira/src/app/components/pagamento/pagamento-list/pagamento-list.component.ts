@@ -20,7 +20,7 @@ import { MatDialog } from '@angular/material/dialog';
     styleUrls: ['./escritor-list.component.css'],
     imports: [MatPaginatorModule,CommonModule,RouterModule,MatTableModule,MatButtonModule,MatCardModule,MatToolbarModule,HeaderAdminComponent,FooterAdminComponent]
 })
-export class EscritorNovelListComponent implements OnInit {
+export class PagamentoListComponent implements OnInit {
     displayedColumns: string[] = ['id','nome','anoNascimento','nacionalidade','sexo','actions'];
     escritores: EscritorNovel[] = [];
     totalRecords = 0;
