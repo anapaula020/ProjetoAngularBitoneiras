@@ -6,7 +6,12 @@ import br.unitins.tp1.model.Cliente;
 import br.unitins.tp1.service.PixServiceImpl.CardPaymentRequest;
 
 public interface PixService {
-    public PixDTO generatePix(Double amount, Cliente cliente);
+    public static PixDTO generatePix(Double amount, Cliente cliente) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'generatePix'");
+    }
+
     public PixDTO createCardPayment(CardPaymentRequest cardRequest, Cliente cliente);
+
     public MercadoPagoPixResponseDTO processPixPayment(Long pedidoId, PixDTO pixDto);
 }

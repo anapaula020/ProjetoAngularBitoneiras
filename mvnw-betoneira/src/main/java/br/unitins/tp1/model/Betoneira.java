@@ -13,36 +13,97 @@ public class Betoneira extends DefaultEntity {
     private Double preco;
     private Integer quantidadeEstoque;
     private String modelo;
-    private String marca; 
-    private Double capacidade; 
+    private String marca;
+    private Double capacidade;
 
     @Enumerated(EnumType.STRING)
-    private TipoBetoneiraEnum tipo; 
+    private TipoBetoneiraEnum tipo;
 
     @ManyToOne
     @JoinColumn(name = "fabricante_id")
-    private Fabricante fabricante; 
+    private Fabricante fabricante;
+    private String imageUrl;
 
     public Betoneira() {
     }
 
-    public String getNome() { return nome; }
-    public String getDescricao() { return descricao; }
-    public Double getPreco() { return preco; }
-    public Integer getQuantidadeEstoque() { return quantidadeEstoque; }
-    public String getModelo() { return modelo; }
-    public String getMarca() { return marca; }
-    public Double getCapacidade() { return capacidade; }
-    public TipoBetoneiraEnum getTipo() { return tipo; }
-    public Fabricante getFabricante() { return fabricante; }
+    public String getNome() {
+        return nome;
+    }
 
-    public void setNome(String nome) { this.nome = nome; }
-    public void setDescricao(String descricao) { this.descricao = descricao; }
-    public void setPreco(Double preco) { this.preco = preco; }
-    public void setQuantidadeEstoque(Integer quantidadeEstoque) { this.quantidadeEstoque = quantidadeEstoque; }
-    public void setModelo(String modelo) { this.modelo = modelo; }
-    public void setMarca(String marca) { this.marca = marca; }
-    public void setCapacidade(Double capacidade) { this.capacidade = capacidade; }
-    public void setTipo(TipoBetoneiraEnum tipo) { this.tipo = tipo; }
-    public void setFabricante(Fabricante fabricante) { this.fabricante = fabricante; }
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public Integer getQuantidadeEstoque() {
+        return quantidadeEstoque;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public Double getCapacidade() {
+        return capacidade;
+    }
+
+    public TipoBetoneiraEnum getTipo() {
+        return tipo;
+    }
+
+    public Fabricante getFabricante() {
+        return fabricante;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public void setQuantidadeEstoque(Integer quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public void setCapacidade(Double capacidade) {
+        this.capacidade = capacidade;
+    }
+
+    public void setTipo(TipoBetoneiraEnum tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setFabricante(Fabricante fabricante) {
+        this.fabricante = fabricante;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }

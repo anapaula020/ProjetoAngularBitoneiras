@@ -57,7 +57,8 @@ public class PixServiceImpl implements PixService {
         dtoValidator.validate(pixRequest);
 
         String idempotencyKey = UUID.randomUUID().toString();
-        MercadoPagoPixResponseDTO response = pixRestClient.createPixPayment("Bearer " + accessToken, idempotencyKey, pixRequest);
+        MercadoPagoPixResponseDTO response = pixRestClient.createPixPayment("Bearer " + accessToken, idempotencyKey,
+                pixRequest);
 
         PixDTO pixResponse = new PixDTO();
         pixResponse.setId(response.getId());
@@ -73,7 +74,8 @@ public class PixServiceImpl implements PixService {
     public PixDTO createCardPayment(CardPaymentRequest cardRequest, Cliente cliente) {
         System.out.println("Simulando pagamento com cartão para o cliente: " + cliente.getEmail());
         System.out.println("Valor: " + cardRequest.amount);
-        System.out.println("Número do Cartão (últimos 4): ****" + cardRequest.cardNumber.substring(cardRequest.cardNumber.length() - 4));
+        System.out.println("Número do Cartão (últimos 4): ****"
+                + cardRequest.cardNumber.substring(cardRequest.cardNumber.length() - 4));
         PixDTO simulatedResponse = new PixDTO();
         simulatedResponse.setStatus("approved");
         simulatedResponse.setId(UUID.randomUUID().toString());
@@ -101,7 +103,8 @@ public class PixServiceImpl implements PixService {
         dtoValidator.validate(pixRequest);
 
         String idempotencyKey = UUID.randomUUID().toString();
-        MercadoPagoPixResponseDTO response = pixRestClient.createPixPayment("Bearer " + accessToken, idempotencyKey, pixRequest);
+        MercadoPagoPixResponseDTO response = pixRestClient.createPixPayment("Bearer " + accessToken, idempotencyKey,
+                pixRequest);
         return response;
     }
 }

@@ -41,60 +41,74 @@ public class PagamentoResource {
     ClienteRepository clienteRepository;
 
     @POST
-    @RolesAllowed({"ADMIN"})
+    @RolesAllowed({ "ADMIN" })
     public Response create(PagamentoRequestDTO dto) {
         PagamentoResponseDTO pagamento = pagamentoService.create(dto);
         return Response.status(Response.Status.CREATED).entity(pagamento).build();
     }
 
-    @POST
-    @Path("/cartao")
-    @RolesAllowed({"USER", "ADMIN"})
-    public Response processCardPayment(CardPaymentRequestDTO cardDto) {
-        String email = securityContext.getUserPrincipal().getName();
-        Cliente cliente = clienteRepository.findByEmail(email);
+    // @POST
+    // @Path("/mercadopago/pix")
+    // @RolesAllowed({ "USER", "ADMIN" })
+    // public Response processCardPayment(CardPaymentRequestDTO cardDto) {
+    //     String email = securityContext.getUserPrincipal().getName();
+    //     Cliente cliente = clienteRepository.findByEmail(email);
 
-        if (cliente == null) {
-            return Response.status(Response.Status.UNAUTHORIZED).entity(Result.valueOf("Usuário não encontrado.")).build();
-        }
+    //     if (cliente == null) {
+    //         return Response.status(Response.Status.UNAUTHORIZED).entity(Result.valueOf("Usuário não encontrado."))
+    //                 .build();
+    //     }
 
-        PixService.CardPaymentRequest serviceCardRequest = new PixService.CardPaymentRequest();
-        serviceCardRequest.cardNumber = cardDto.getCardNumber();
-        serviceCardRequest.securityCode = cardDto.getSecurityCode();
-        serviceCardRequest.expirationDate = cardDto.getExpirationDate();
-        serviceCardRequest.cardHolderName = cardDto.getCardHolderName();
-        serviceCardRequest.amount = cardDto.getAmount();
-        serviceCardRequest.email = cliente.getEmail();
-        serviceCardRequest.cpf = cliente.getCpf();
+    //     try {
+    //         PixDTO servicePixRequest = PixService.generatePix(cardDto.getAmount(), cliente);
+    //         return Response.ok(servicePixRequest).build();
+    //     } catch (ServiceException e) {
+    //         System.err.println("Erro ao processar pagamento com pix: " + e.getMessage());
+    //         return Response.status(e.getStatusCode())
+    //                 .entity(Result.valueOf("Falha no pagamento com pix: " + e.getMessage())).build();
+    //     } catch (Exception e) {
+    //         System.err.println("Erro inesperado ao processar pagamento com pix: " + e.getMessage());
+    //         return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+    //                 .entity(Result.valueOf("Erro inesperado no pagamento: " + e.getMessage())).build();
+    //     }
+        // servicePixRequest.cardNumber = cardDto.getCardNumber();
+        // servicePixRequest.securityCode = cardDto.getSecurityCode();
+        // servicePixRequest.expirationDate = cardDto.getExpirationDate();
+        // servicePixRequest.cardHolderName = cardDto.getCardHolderName();
+        // servicePixRequest.amount = cardDto.getAmount();
+        // servicePixRequest.email = cliente.getEmail();
+        // servicePixRequest.cpf = cliente.getCpf();
 
-        try {
-            PixDTO pixResponse = pixService.createCardPayment(serviceCardRequest, cliente);
-            return Response.ok(pixResponse).build();
-        } catch (ServiceException e) {
-            System.err.println("Erro ao processar pagamento com cartão: " + e.getMessage());
-            return Response.status(e.getStatusCode()).entity(Result.valueOf("Falha no pagamento com cartão: " + e.getMessage())).build();
-        } catch (Exception e) {
-            System.err.println("Erro inesperado ao processar pagamento com cartão: " + e.getMessage());
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(Result.valueOf("Erro inesperado no pagamento: " + e.getMessage())).build();
-        }
-    }
+        // try {
+        //     PixDTO pixResponse = pixService.createCardPayment(servicePixRequest, cliente);
+        //     return Response.ok(pixResponse).build();
+        // } catch (ServiceException e) {
+        //     System.err.println("Erro ao processar pagamento com cartão: " + e.getMessage());
+        //     return Response.status(e.getStatusCode())
+        //             .entity(Result.valueOf("Falha no pagamento com cartão: " + e.getMessage())).build();
+        // } catch (Exception e) {
+        //     System.err.println("Erro inesperado ao processar pagamento com cartão: " + e.getMessage());
+        //     return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+        //             .entity(Result.valueOf("Erro inesperado no pagamento: " + e.getMessage())).build();
+        // }
+    // }
 
     @GET
-    @RolesAllowed({"ADMIN"})
+    @RolesAllowed({ "ADMIN" })
     public Response findAll() {
         return Response.ok(pagamentoService.findAll()).build();
     }
 
     @GET
     @Path("/{id}")
-    @RolesAllowed({"ADMIN", "USER"})
+    @RolesAllowed({ "ADMIN", "USER" })
     public Response findById(@PathParam("id") Long id) {
         return Response.ok(pagamentoService.findById(id)).build();
     }
 
     @GET
     @Path("/search/{nome}")
-    @RolesAllowed({"ADMIN"})
+    @RolesAllowed({ "ADMIN" })
     public Response findByNome(@PathParam("nome") String nome) {
         return Response.ok(pagamentoService.findByNome(nome)).build();
     }
