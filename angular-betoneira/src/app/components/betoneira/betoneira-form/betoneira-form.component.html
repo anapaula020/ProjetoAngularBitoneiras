@@ -120,7 +120,7 @@
                     <mat-card-actions>
                         <button mat-raised-button routerLink="/admin/betoneira">Cancelar</button>
 
-                        <button mat-raised-button *ngIf="formGroup.get("id")?.value" color="warn" (click)="excluir()" [disabled]="formGroup.invalid">
+                        <button mat-raised-button *ngIf="formGroup.get('id')?.value" color="warn" (click)="excluir()" [disabled]="formGroup.invalid">
                             Excluir
                         </button>
 

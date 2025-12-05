@@ -25,6 +25,7 @@ type Card = {
     modelo: string,
     marca: string,
     capacidade: number,
+    idFabricante: number, 
     imageUrl: string
 }
 
@@ -42,7 +43,7 @@ export class BetoneiraCardListComponent implements OnInit {
     selectedFabricante: number | null = null;
     precos: any[] = [];
     tipos: TipoBetoneira[] = [];
-    autores: Fabricante[] = [];
+    fabricantes: Fabricante[] = [];
     selectedFornecedor: number | null = null;
     selectedPreco: number | null = null;
     totalBetoneiras = 0;
@@ -66,7 +67,7 @@ export class BetoneiraCardListComponent implements OnInit {
 
     ngOnInit(): void {
         this.fabricanteService.findAll().subscribe((data) => {
-            this.autores = data;
+            this.fabricantes = data;
         });
         this.betoneiraService.count().subscribe(total => {
             this.totalBetoneiras = total;
@@ -142,6 +143,7 @@ export class BetoneiraCardListComponent implements OnInit {
                 modelo: betoneira.modelo,
                 marca: betoneira.marca,
                 capacidade: betoneira.capacidade,
+                idFabricante: betoneira.idFabricante.id, 
                 imageUrl: this.betoneiraService.toImageUrl(betoneira.imageUrl)
             });
         });
