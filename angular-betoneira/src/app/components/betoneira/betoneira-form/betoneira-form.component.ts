@@ -18,6 +18,7 @@ import { Betoneira } from '../../../models/betoneira.model';
 import { MatIcon } from '@angular/material/icon';
 import { ExclusaoComponent } from '../../confirmacao/exclusao/exclusao.component';
 import { MatDialog } from '@angular/material/dialog';
+import { TipoBetoneira } from '../../../models/tipoBetoneira.model';
 
 @Component({
     selector: 'app-betoneira-form',
@@ -28,9 +29,10 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class BetoneiraFormComponent implements OnInit {
     formGroup: FormGroup;
-    autores: Fabricante[] = [];
+    fabricantes: Fabricante[] = [];
     betoneiraId: number | null = null;
     dialog = inject(MatDialog);
+    tipos: TipoBetoneira[] = [];
 
     fileName: string = '';
     selectedFile: File | null = null;
@@ -52,6 +54,9 @@ export class BetoneiraFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.fabricanteService.findAll().subscribe((data) => {
+            this.fabricantes = data;
+        });
         const betoneira: Betoneira = this.activatedRoute.snapshot.data['betoneira'];
         this.activatedRoute.params.subscribe(params => {
             this.betoneiraId = params['id'] ? +params['id'] : null;
