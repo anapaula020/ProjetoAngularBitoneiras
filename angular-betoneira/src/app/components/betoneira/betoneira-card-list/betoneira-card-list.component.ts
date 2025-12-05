@@ -26,7 +26,7 @@ type Card = {
     marca: string,
     capacidade: number,
     tipoBetoneira: TipoBetoneira, 
-    idFabricante: number, 
+    idFabricante: Fabricante, 
     imageUrl: string
 }
 
@@ -145,7 +145,7 @@ export class BetoneiraCardListComponent implements OnInit {
                 marca: betoneira.marca,
                 capacidade: betoneira.capacidade,
                 tipoBetoneira: betoneira.tipoBetoneira, 
-                idFabricante: betoneira.idFabricante.id, 
+                idFabricante: betoneira.idFabricante, 
                 imageUrl: this.betoneiraService.toImageUrl(betoneira.imageUrl)
             });
         });

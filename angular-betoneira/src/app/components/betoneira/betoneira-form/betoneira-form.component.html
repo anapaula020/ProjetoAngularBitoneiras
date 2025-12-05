@@ -103,9 +103,9 @@
                     <div class="betoneira-details">
                         <mat-card-title class="centered-text">{{ formGroup.get("nome")?.value }}</mat-card-title>
                         <mat-card-content class="centered-text">
-                            <h5>{{ formGroup.get("descricao")?.value }}</h5>
-                            <h5>Fabricante: {{ fabricantes.find(f => f.nome === formGroup.get("idFabricante")?.value)?.nome }}</h5>
-                            <h5>Tipo: {{ tipos.find(t => t.name === formGroup.get("tipoBetoneira")?.value)?.nome }}</h5>
+                            <h5>{{ formGroup.get('descricao')?.value }}</h5>
+                            <h5>Fabricante: {{ fabricantes.find(f => f.id === formGroup.get('idFabricante')?.value)?.id }}</h5>
+                            <h5>Tipo: {{ tipos.find(t => t.name === formGroup.get('tipoBetoneira')?.value)?.nome }}</h5>
                             <h5>R$ {{ formGroup.get("preco")?.value }}</h5>
                         </mat-card-content>
 
