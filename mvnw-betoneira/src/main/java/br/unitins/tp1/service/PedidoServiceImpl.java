@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
-public class BetoneiraServiceImpl implements BetoneiraService {
+public class PedidoServiceImpl implements PedidoService {
     @Inject
     PedidoRepository pedidoRepository;
 

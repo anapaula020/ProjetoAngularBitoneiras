@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
-public class BetoneiraServiceImpl implements BetoneiraService {
+public class FabricanteServiceImpl implements FabricanteService {
     @Inject
     FabricanteRepository fabricanteRepository;
 

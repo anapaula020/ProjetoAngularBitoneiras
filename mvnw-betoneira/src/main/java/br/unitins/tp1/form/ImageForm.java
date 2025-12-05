@@ -1,11 +1,11 @@
 package br.unitins.tp1.form;
 
+import org.jboss.resteasy.annotations.providers.multipart.PartType;
+
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.core.MediaType;
 
 public class ImageForm {
-    
-
     @FormParam("imageUrl")
     @PartType(MediaType.TEXT_PLAIN)
     private String imageUrl;

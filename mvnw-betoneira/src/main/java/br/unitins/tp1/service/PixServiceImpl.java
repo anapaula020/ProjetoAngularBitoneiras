@@ -15,7 +15,7 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 import java.util.UUID;
 
 @ApplicationScoped
-public class BetoneiraServiceImpl implements BetoneiraService {
+public class PixServiceImpl implements PixService {
     @Inject
     @RestClient
     MercadoPagoPixRestClient pixRestClient;

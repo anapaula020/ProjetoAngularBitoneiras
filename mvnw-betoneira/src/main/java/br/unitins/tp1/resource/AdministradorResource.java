@@ -2,6 +2,8 @@ package br.unitins.tp1.resource;
 
 import br.unitins.tp1.dto.AdministradorDTO;
 import br.unitins.tp1.dto.AdministradorResponseDTO;
+import br.unitins.tp1.dto.UsuarioDTO;
+import br.unitins.tp1.dto.UsuarioResponseDTO;
 import br.unitins.tp1.service.AdministradorService;
 import br.unitins.tp1.service.UsuarioService;
 import jakarta.annotation.security.RolesAllowed;

@@ -5,10 +5,15 @@ import java.util.stream.Collectors;
 
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
+import br.unitins.tp1.dto.EnderecoDTO;
+import br.unitins.tp1.dto.TrocaSenhaDTO;
 import br.unitins.tp1.dto.UsuarioDTO;
 import br.unitins.tp1.dto.UsuarioResponseDTO;
+import br.unitins.tp1.dto.mercadopago.EmailDTO;
+import br.unitins.tp1.model.Endereco;
 import br.unitins.tp1.model.Usuario;
 import br.unitins.tp1.repository.UsuarioRepository;
+import br.unitins.tp1.validation.ValidationException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -32,20 +37,22 @@ public class UsuarioServiceImpl implements UsuarioService {
         userBanco.setEmail(userDto.email());
         userBanco.setSenha(hashService.getHashSenha(userDto.senha()));
         userBanco.setCpf(userDto.cpf());
-        
-        if(userDto.endereco()!=null){
+
+        if (userDto.endereco() != null) {
             Endereco endereco = new Endereco();
-            endereco.setRua(userDto.endereco().rua());
-            endereco.setNumero(userDto.endereco().numero());
-            endereco.setCidade(userDto.endereco().cidade());
-            endereco.setEstado(userDto.endereco().estado());
-            endereco.setCep(userDto.endereco().cep());
+            endereco.setLogradouro(endereco.getLogradouro());
+            endereco.setNumero(endereco.getNumero());
+            endereco.setComplemento(endereco.getComplemento());
+            endereco.setBairro(endereco.getBairro());
+            endereco.setCidade(endereco.getCidade());
+            endereco.setEstado(endereco.getEstado());
+            endereco.setCep(endereco.getCep());
             userBanco.setEndereco(endereco);
         }
         usuarioRepository.persist(userBanco);
         return UsuarioResponseDTO.valueOf(userBanco);
     }
-    
+
     @Override
     @Transactional
     public Response updateSenha(TrocaSenhaDTO senhaDTO) {
@@ -53,17 +60,17 @@ public class UsuarioServiceImpl implements UsuarioService {
         String novaSenha = senhaDTO.novaSenha();
         String confirmacao = senhaDTO.confirmacao();
         String senhaAtual = senhaDTO.senhaAtual();
-        if(!(novaSenha.equals(confirmacao))){
-            throw new ValidationException("confirmacao","Senhas divergentes");
+        if (!(novaSenha.equals(confirmacao))) {
+            throw new ValidationException("confirmacao", "Senhas divergentes");
         }
-        if(hashService.getHashSenha(senhaAtual).equals(usuario.getSenha())){
+        if (hashService.getHashSenha(senhaAtual).equals(usuario.getSenha())) {
             usuario.setSenha(hashService.getHashSenha(novaSenha));
             UsuarioResponseDTO user = UsuarioResponseDTO.valueOf(usuario);
             return Response.ok(user).build();
-        }else{
-            throw new ValidationException("senhaAtual","Senha atual incorreta");
+        } else {
+            throw new ValidationException("senhaAtual", "Senha atual incorreta");
         }
-        
+
     }
 
     @Override
@@ -80,20 +87,23 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     @Transactional
     public Response updateEndereco(EnderecoDTO enderecoDTO) {
-    Usuario userBanco = usuarioRepository.findNomeEqual(jsonWebToken.getName());
-    if (userBanco == null) {
-        throw new ValidationException("id", "Usuário não existe.");
-    }
+        Usuario userBanco = usuarioRepository.findNomeEqual(jsonWebToken.getName());
+        if (userBanco == null) {
+            throw new ValidationException("id", "Usuário não existe.");
+        }
         Endereco endereco = new Endereco();
-        endereco.setRua(enderecoDTO.rua());
-        endereco.setNumero(enderecoDTO.numero());
-        endereco.setCidade(enderecoDTO.cidade());
-        endereco.setEstado(enderecoDTO.estado());
-        endereco.setCep(enderecoDTO.cep());
+        endereco.setLogradouro(endereco.getLogradouro());
+        endereco.setNumero(endereco.getNumero());
+        endereco.setComplemento(endereco.getComplemento());
+        endereco.setBairro(endereco.getBairro());
+        endereco.setCidade(endereco.getCidade());
+        endereco.setEstado(endereco.getEstado());
+        endereco.setCep(endereco.getCep());
         userBanco.setEndereco(endereco);
         UsuarioResponseDTO user = UsuarioResponseDTO.valueOf(userBanco);
         return Response.ok(user).build();
     }
+
     @Override
     @Transactional
     public void update(Long id, UsuarioDTO userDto) {
@@ -105,17 +115,16 @@ public class UsuarioServiceImpl implements UsuarioService {
         userBanco.setEmail(userDto.email());
         userBanco.setSenha(hashService.getHashSenha(userDto.senha()));
         userBanco.setCpf(userDto.cpf());
-        Endereco endereco = new Endereco();
-        endereco.setRua(userDto.endereco().rua());
-        endereco.setNumero(userDto.endereco().numero());
-        endereco.setCidade(userDto.endereco().cidade());
-        endereco.setEstado(userDto.endereco().estado());
-        endereco.setCep(userDto.endereco().cep());
-        userBanco.setEndereco(endereco);
-       
-        userBanco.setSexo(Sexo.valueOf(userDto.sexo()));
 
-        
+        Endereco endereco = new Endereco();
+        endereco.setLogradouro(endereco.getLogradouro());
+        endereco.setNumero(endereco.getNumero());
+        endereco.setComplemento(endereco.getComplemento());
+        endereco.setBairro(endereco.getBairro());
+        endereco.setCidade(endereco.getCidade());
+        endereco.setEstado(endereco.getEstado());
+        endereco.setCep(endereco.getCep());
+        userBanco.setEndereco(endereco);
     }
 
     @Override

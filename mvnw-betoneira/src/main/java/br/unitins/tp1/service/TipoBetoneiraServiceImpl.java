@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
-public class TipoBetoneiraService {
+public class TipoBetoneiraServiceImpl {
 
     @Inject
     TipoBetoneiraRepository tipoBetoneiraRepository;

@@ -2,6 +2,11 @@ package br.unitins.tp1.service;
 
 import java.util.List;
 
+import br.unitins.tp1.dto.EnderecoDTO;
+import br.unitins.tp1.dto.TrocaSenhaDTO;
+import br.unitins.tp1.dto.UsuarioDTO;
+import br.unitins.tp1.dto.UsuarioResponseDTO;
+import br.unitins.tp1.dto.mercadopago.EmailDTO;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.core.Response;
 

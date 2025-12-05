@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
-public class BetoneiraServiceImpl implements BetoneiraService {
+public class EnderecoServiceImpl implements EnderecoService {
     @Inject
     EnderecoRepository enderecoRepository;
 
