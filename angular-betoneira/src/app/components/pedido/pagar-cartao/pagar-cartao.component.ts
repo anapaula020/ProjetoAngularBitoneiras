@@ -1,11 +1,11 @@
-import { Component,OnInit } from '@angular/core';
-import { FormBuilder,FormGroup,ReactiveFormsModule,Validators } from '@angular/forms';
-import { ActivatedRoute,Router } from '@angular/router';
-import { PedidoService } from '../../../services/pedido.service';
-import { AuthService } from '../../../services/auth.service';
-import { Usuario } from '../../../models/usuario.model';
 import { Subscription } from 'rxjs';
 import { NgIf } from '@angular/common';
+import { Component,OnInit } from '@angular/core';
+import { ActivatedRoute,Router } from '@angular/router';
+import { FormBuilder,FormGroup,ReactiveFormsModule,Validators } from '@angular/forms';
+import { Usuario } from '../../../models/usuario.model';
+import { AuthService } from '../../../services/auth.service';
+import { PedidoService } from '../../../services/pedido.service';
 
 @Component({
     selector: 'app-pagar-cartao',

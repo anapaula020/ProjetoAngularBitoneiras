@@ -26,13 +26,11 @@ export class PedidosMeusComponent implements OnInit {
         this.pedidoService.findMyPedidos().subscribe((data: Pedido[]) => {
             this.pedidos = data.map(pedido => ({
                 ...pedido,
-                
                 estadoPagamento: PagamentoEstado[pedido.estadoPagamento as keyof typeof PagamentoEstado]
             }));
         });
     }
     
-
     pagarPix(id: number): void {
         this.router.navigate([`/meuspedidos/pagarpix/${id}`]);
     }

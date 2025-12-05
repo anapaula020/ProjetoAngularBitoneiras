@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ItemCarrinho } from '../models/item-carrinho';
+import { ItemCarrinho } from '../models/itemCarrinho.model';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
