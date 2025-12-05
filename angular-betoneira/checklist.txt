@@ -1,9 +1,9 @@
 [ ] Todos CRUDS 
-[ ] Telas Principais (regras de negócio do sistema)
-[ ] Validações dos campos
+[X] Telas Principais (regras de negócio do sistema)
+[X] Validações dos campos
 [ ] Perfil do usuário (Troca de senha, alterar dados, deslogar)
-[ ] Imagens em produtos (upload e download)
-[ ] Segurança (Autenticação e Autorização)
+[x] Imagens em produtos (upload e download)
+[x] Segurança (Autenticação e Autorização)
 [ ] Cadastro de Usuario (pelo usuario)
 [ ] Carrinho de Compras
 [ ] Conclusão da compra (com pagamento)
