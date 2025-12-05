@@ -9,7 +9,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ActivatedRoute,Router,RouterModule } from '@angular/router';
-import { GeneroNovelMap } from '../../../models/generoNovel.model';
 import { EscritorNovelService } from '../../../services/escritor.service';
 import { HeaderAdminComponent } from "../../template/header-admin/header-admin.component";
 import { FooterAdminComponent } from "../../template/footer-admin/footer-admin.component";
@@ -25,7 +24,6 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class EscritorFormComponent implements OnInit {
     formGroup: FormGroup;
-    generos = Object.entries(GeneroNovelMap);
     escritorId: number | null = null;
     readonly dialog = inject(MatDialog);
 
@@ -37,10 +35,10 @@ export class EscritorFormComponent implements OnInit {
     ) {
         this.formGroup = this.formBuilder.group({
             id: [null],
-            nome: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(40)]],
-            anoNascimento: [null,[Validators.required,Validators.min(0),Validators.max(9999)]],
-            nacionalidade: [null,[Validators.required,Validators.minLength(2),Validators.maxLength(30)]],
-            sexo: [null,[Validators.required]]
+            valor: [null, Validators.required], 
+            statusPagamento: [null, Validators.required], 
+            dataPagamento: [null, Validators.required], 
+            idTipoPagamento: [null, Validators.required]
         });
     }
 

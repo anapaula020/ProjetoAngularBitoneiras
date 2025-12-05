@@ -33,10 +33,7 @@ export class AutorFormComponent implements OnInit {
     constructor(private formBuilder: FormBuilder,private autorService: FabricanteService,private router: Router,private activatedRoute: ActivatedRoute) {
         this.formGroup = this.formBuilder.group({
             id: [null],
-            nome: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(40)]],
-            anoNascimento: [null,[Validators.required,Validators.min(0),Validators.max(9999)]],
-            nacionalidade: [null,[Validators.required,Validators.min(2),Validators.maxLength(30)]],
-            sexo: [null,[Validators.required]]
+            nome: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(40)]]
         });
     }
 
@@ -123,18 +120,6 @@ export class AutorFormComponent implements OnInit {
             minlength: 'Nome deve conter ao menos 3 caracteres.',
             maxlength: 'Nome deve conter no máximo 40 caracteres.',
             apiError: 'API_ERROR'
-        },
-        anoNascimento: {
-            required: 'Ano de nascimento é obrigatório.',
-            min: 'Ano de nascimento deve ser maior do que 0.',
-            max: 'Ano de nascimento deve ser menor do que 9999.',
-            apiError: 'API_ERROR'
-        },
-        nacionalidade: {
-            required: 'Nacionalidade é obrigatório.',
-            minlength: 'Nacionalidade deve conter ao menos 2 caracteres.',
-            maxlength: 'Nacionalidade deve conter no máximo 30 caracteres.',
-            apiError: 'API_ERROR'
-        },
+        }
     }
 }
