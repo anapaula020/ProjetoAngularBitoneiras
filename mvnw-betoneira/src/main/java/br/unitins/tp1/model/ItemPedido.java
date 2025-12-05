@@ -6,31 +6,28 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
-// ... outras importações que você já tem
 
-@Entity // Ou sua anotação de entidade
+@Entity
 public class ItemPedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer quantidade;
-    private Double precoUnitario; // Adicione este campo se não existir
-    private Double totalItem;     // Adicione este campo se não existir (ou será calculado)
+    private Double precoUnitario;
+    private Double totalItem;    
 
     @ManyToOne
-    @JoinColumn(name = "pedido_id") // Confirme o nome da coluna de chave estrangeira
+    @JoinColumn(name = "pedido_id")
     private Pedido pedido;
 
     @ManyToOne
-    @JoinColumn(name = "betoneira_id") // Confirme o nome da coluna de chave estrangeira
+    @JoinColumn(name = "betoneira_id")
     private Betoneira betoneira;
 
-    // Construtor padrão
     public ItemPedido() {
     }
 
-    // --- GETTERS NECESSÁRIOS (Adicione/Confirme a existência de todos estes) ---
     public Long getId() {
         return id;
     }
@@ -39,29 +36,22 @@ public class ItemPedido {
         return quantidade;
     }
 
-    public Double getPrecoUnitario() { // MÉTODO FALTANTE (Erro em ItemPedidoResponseDTO)
+    public Double getPrecoUnitario() {
         return precoUnitario;
     }
 
-    public Double getTotalItem() { // MÉTODO FALTANTE (Erro em ItemPedidoResponseDTO e PedidoService)
-        // Se 'totalItem' é um campo que você persiste:
+    public Double getTotalItem() {
         return totalItem;
-        // OU, se 'totalItem' é sempre calculado e não persistido:
-        // if (this.precoUnitario != null && this.quantidade != null) {
-        //     return this.precoUnitario * this.quantidade;
-        // }
-        // return 0.0; // Ou lance uma exceção, ou retorne null
     }
 
-    public Pedido getPedido() { // MÉTODO JÁ EXISTENTE (Mas verifique)
+    public Pedido getPedido() {
         return pedido;
     }
 
-    public Betoneira getBetoneira() { // MÉTODO JÁ EXISTENTE (Mas verifique)
+    public Betoneira getBetoneira() {
         return betoneira;
     }
 
-    // --- SETTERS (Adicione/Confirme a existência) ---
     public void setId(Long id) {
         this.id = id;
     }
@@ -74,7 +64,7 @@ public class ItemPedido {
         this.precoUnitario = precoUnitario;
     }
 
-    public void setTotalItem(Double totalItem) { // Adicione este setter se você persistir totalItem
+    public void setTotalItem(Double totalItem) {
         this.totalItem = totalItem;
     }
 

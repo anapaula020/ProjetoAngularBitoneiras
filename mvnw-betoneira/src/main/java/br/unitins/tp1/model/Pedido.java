@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/model/Pedido.java
 package br.unitins.tp1.model;
 
 import jakarta.persistence.CascadeType;
@@ -22,27 +21,26 @@ public class Pedido extends DefaultEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private StatusPedido statusPedido; // Added statusPedido field
+    private StatusPedido statusPedido; 
 
     @Column(nullable = false)
-    private Double totalPedido; // Changed from valorTotal to totalPedido for consistency
+    private Double totalPedido; 
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false) // ALTERADO: de id_cliente para cliente_id
+    @JoinColumn(name = "cliente_id", nullable = false) 
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(name = "endereco_entrega_id", nullable = false) // ALTERADO: de id_endereco_entrega para endereco_entrega_id
+    @JoinColumn(name = "endereco_entrega_id", nullable = false) 
     private Endereco enderecoEntrega;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedido> itens;
 
-    // Constructors
     public Pedido() {
         this.itens = new ArrayList<>();
-        this.dataDoPedido = LocalDateTime.now(); // Default to current time
-        this.statusPedido = StatusPedido.PENDENTE; // Default status
+        this.dataDoPedido = LocalDateTime.now(); 
+        this.statusPedido = StatusPedido.PENDENTE; 
     }
 
     public Pedido(LocalDateTime dataDoPedido, StatusPedido statusPedido, Double totalPedido, Cliente cliente, Endereco enderecoEntrega, List<ItemPedido> itens) {
@@ -54,12 +52,11 @@ public class Pedido extends DefaultEntity {
         this.itens = itens != null ? itens : new ArrayList<>();
     }
 
-    // Getters
     public LocalDateTime getDataDoPedido() {
         return dataDoPedido;
     }
 
-    public StatusPedido getStatusPedido() { // Added getter for statusPedido
+    public StatusPedido getStatusPedido() { 
         return statusPedido;
     }
 
@@ -79,12 +76,12 @@ public class Pedido extends DefaultEntity {
         return itens;
     }
 
-    // Setters
+    
     public void setDataDoPedido(LocalDateTime dataDoPedido) {
         this.dataDoPedido = dataDoPedido;
     }
 
-    public void setStatusPedido(StatusPedido statusPedido) { // Added setter for statusPedido
+    public void setStatusPedido(StatusPedido statusPedido) { 
         this.statusPedido = statusPedido;
     }
 

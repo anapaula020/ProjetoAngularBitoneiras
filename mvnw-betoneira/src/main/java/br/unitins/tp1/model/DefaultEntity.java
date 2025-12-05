@@ -51,7 +51,4 @@ public class DefaultEntity {
     public void setDataAlteracao(LocalDateTime dataAlteracao) {
         this.dataAlteracao = dataAlteracao;
     }
-
-    
-  
 }

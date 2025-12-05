@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/model/Cliente.java
 package br.unitins.tp1.model;
 
 import jakarta.persistence.Column;
@@ -7,7 +6,7 @@ import jakarta.persistence.OneToMany;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.HashSet; // Added for Set implementation
+import java.util.HashSet;
 
 @Entity
 public class Cliente extends DefaultEntity {
@@ -20,14 +19,12 @@ public class Cliente extends DefaultEntity {
     private String cpf;
     private String telefone;
 
-    // Assuming a simple role management, e.g., "ADMIN" or "USER" stored as a string
-    // For more complex roles, a separate entity or collection table would be used.
-    private String role; // Added for role management
+    private String role;
 
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos;
 
-    // Constructors
+   
     public Cliente() {
     }
 
@@ -37,10 +34,9 @@ public class Cliente extends DefaultEntity {
         this.senha = senha;
         this.cpf = cpf;
         this.telefone = telefone;
-        this.role = role; // Initializing role
+        this.role = role;
     }
 
-    // Getters
     public String getNome() {
         return nome;
     }
@@ -65,18 +61,17 @@ public class Cliente extends DefaultEntity {
         return enderecos;
     }
 
-    // New method for roles as a Set, required by ClienteResponseDTO and TokenService
     public Set<String> getRolesAsSet() {
         if (this.role == null || this.role.isEmpty()) {
             return Collections.emptySet();
         }
-        // Assuming role is a single string like "ADMIN" or "USER"
+       
         Set<String> roles = new HashSet<>();
         roles.add(this.role);
         return roles;
     }
 
-    // Getters and Setters for role
+   
     public String getRole() {
         return role;
     }
@@ -85,7 +80,6 @@ public class Cliente extends DefaultEntity {
         this.role = role;
     }
 
-    // Setters
     public void setNome(String nome) {
         this.nome = nome;
     }

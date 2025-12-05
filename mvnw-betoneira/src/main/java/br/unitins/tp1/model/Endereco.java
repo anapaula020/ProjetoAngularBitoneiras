@@ -11,13 +11,13 @@ public class Endereco extends DefaultEntity {
     private String numero;
     private String complemento;
     private String bairro;
-    private String cidade; // Adicionado
-    private String estado; // Adicionado
+    private String cidade;
+    private String estado;
     private String cep;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id") // Confirmar o nome da FK
-    private Cliente cliente; // Adicionado para associação com Cliente
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 
     public String getLogradouro() {
         return logradouro;
@@ -51,19 +51,19 @@ public class Endereco extends DefaultEntity {
         this.bairro = bairro;
     }
 
-    public String getCidade() { // Adicionado
+    public String getCidade() {
         return cidade;
     }
 
-    public void setCidade(String cidade) { // Adicionado
+    public void setCidade(String cidade) {
         this.cidade = cidade;
     }
 
-    public String getEstado() { // Adicionado
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) { // Adicionado
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -75,11 +75,11 @@ public class Endereco extends DefaultEntity {
         this.cep = cep;
     }
 
-    public Cliente getCliente() { // Adicionado
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) { // Adicionado
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 }

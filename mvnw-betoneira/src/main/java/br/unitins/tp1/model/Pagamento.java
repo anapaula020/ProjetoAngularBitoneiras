@@ -1,4 +1,4 @@
-// src/main/java/br/unitins/tp1/model/Pagamento.java
+
 package br.unitins.tp1.model;
 
 import jakarta.persistence.Column;
@@ -18,7 +18,7 @@ public class Pagamento extends DefaultEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private StatusPagamento status; // Added status field of type StatusPagamento
+    private StatusPagamento status;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -28,10 +28,9 @@ public class Pagamento extends DefaultEntity {
     private Double valor;
 
     @ManyToOne
-    @JoinColumn(name = "pedido_id", nullable = false) // ALTERADO: de id_pedido para pedido_id
+    @JoinColumn(name = "pedido_id", nullable = false)
     private Pedido pedido;
 
-    // Constructors
     public Pagamento() {
     }
 
@@ -43,12 +42,11 @@ public class Pagamento extends DefaultEntity {
         this.pedido = pedido;
     }
 
-    // Getters
     public LocalDateTime getDataPagamento() {
         return dataPagamento;
     }
 
-    public StatusPagamento getStatus() { // Added getter for status
+    public StatusPagamento getStatus() {
         return status;
     }
 
@@ -64,12 +62,11 @@ public class Pagamento extends DefaultEntity {
         return pedido;
     }
 
-    // Setters
     public void setDataPagamento(LocalDateTime dataPagamento) {
         this.dataPagamento = dataPagamento;
     }
 
-    public void setStatus(StatusPagamento status) { // Added setter for status
+    public void setStatus(StatusPagamento status) {
         this.status = status;
     }
 
