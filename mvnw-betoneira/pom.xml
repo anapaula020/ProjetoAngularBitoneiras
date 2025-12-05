@@ -129,7 +129,7 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-resteasy-multipart</artifactId>
+            <artifactId>quarkus-rest-multipart</artifactId>
         </dependency>
     </dependencies>
 
