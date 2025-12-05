@@ -32,8 +32,8 @@ export class BetoneiraService {
         return this.httpClient.get<Betoneira[]>(this.baseUrl,{ params });
     }
 
-    findByTipo(id: number): Observable<Betoneira[]> {
-        return this.httpClient.get<Betoneira[]>(`${this.baseUrl}/fabricante/${id}`);
+    findByTipo(nome: string): Observable<Betoneira[]> {
+        return this.httpClient.get<Betoneira[]>(`${this.baseUrl}/tipo/${nome}`);
     }
     
     findByFabricante(id: number): Observable<Betoneira[]> {

@@ -107,4 +107,10 @@ public class BetoneiraService {
                 .map(BetoneiraResponseDTO::valueOf)
                 .collect(Collectors.toList());
     }
+
+    public List<BetoneiraResponseDTO> findByTipo(String nome) {
+        return betoneiraRepository.findByTipo(nome).stream()
+                .map(BetoneiraResponseDTO::valueOf)
+                .collect(Collectors.toList());
+    }
 }
