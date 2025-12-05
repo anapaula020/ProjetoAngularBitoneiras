@@ -1,47 +1,95 @@
 <div class="filtros-toggle">
     <button mat-button (click)="toggleFiltros()">
-        {{ mostrarFiltros ? 'Esconder Filtros' : 'Mostrar Filtros' }}
+        {{ mostrarFiltros ? "Esconder Filtros" : "Mostrar Filtros" }}
     </button>
 </div>
 
 <div class="filtros" *ngIf="mostrarFiltros">
+
+    <!-- FILTRO 1 Tipo da Betoneira -->
     <mat-form-field appearance="fill">
-        <mat-label>Gênero</mat-label>
-        <mat-select [(ngModel)]="selectedGenero" (ngModelChange)="filtrarGenero($event)">
-            <mat-option *ngFor="let genero of generos" [value]="genero.id">{{ genero.nome }}</mat-option>
+        <mat-label>Tipo</mat-label>
+        <mat-select [(ngModel)]="selectedTipo" (ngModelChange)="filtrarTipo($event)">
+            <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
+                {{ tipo.nome }}
+            </mat-option>
         </mat-select>
     </mat-form-field>
+
+    <!-- FILTRO 2 Preço -->
     <mat-form-field appearance="fill">
         <mat-label>Preço</mat-label>
         <mat-select [(ngModel)]="selectedPreco" (ngModelChange)="filtrarPreco($event)">
-            <mat-option *ngFor="let preco of precos" [value]="preco.id">{{ preco.nome }}</mat-option>
+            <mat-option *ngFor="let preco of precos" [value]="preco.id">
+                {{ preco.nome }}
+            </mat-option>
         </mat-select>
     </mat-form-field>
+
+    <!-- FILTRO 3 Fabricante -->
     <mat-form-field appearance="fill">
-        <mat-label>Autor</mat-label>
-        <mat-select [(ngModel)]="selectedAutor" (ngModelChange)="filtrarFabricante($event)">
-            <mat-option *ngFor="let autor of autores" [value]="autor.id">{{ autor.nome }}</mat-option>
+        <mat-label>Fabricante</mat-label>
+        <mat-select [(ngModel)]="selectedFabricante" (ngModelChange)="filtrarFabricante($event)">
+            <mat-option *ngFor="let fab of fabricantes" [value]="fab.id">
+                {{ fab.nome }}
+            </mat-option>
         </mat-select>
     </mat-form-field>
+
 </div>
+
 <div class="container responsive-grid">
     <mat-card *ngFor="let betoneira of cards()" class="betoneira-card">
         <div class="betoneira-card-content">
-            <img mat-card-image [src]="betoneira.imageUrl" class="betoneira-image" />
+            <img
+                mat-card-image
+                [src]="betoneira.imageUrl"
+                class="betoneira-image"
+            />
+
             <div class="betoneira-details">
-                <mat-card-title class="centered-text">{{ betoneira.nome }}</mat-card-title>
-                <mat-card-content class="centered-text" style="background-color: #c5c5c5;">{{ betoneira.sinopse.length > 20 ? (betoneira.sinopse | slice: 0: 20) + '...' : betoneira.sinopse }}<br></mat-card-content>
-                <mat-card-content class="centered-text"> {{ betoneira.genero.nome }}</mat-card-content> 
-                <mat-card-content class="centered-text"> {{ betoneira.lancamento }}</mat-card-content><br>
-                <mat-card-content class="centered-text"> R$ {{ betoneira.preco }}</mat-card-content>
+
+                <mat-card-title class="centered-text">
+                    {{ betoneira.nome }}
+                </mat-card-title>
+
+                <mat-card-content class="centered-text" style="background-color: #c5c5c5;">
+                    {{ betoneira.descricao.length > 20
+                        ? (betoneira.descricao | slice: 0:20) + "..."
+                        : betoneira.descricao }}
+                    <br>
+                </mat-card-content>
+
+                <mat-card-content class="centered-text">
+                    Fabricante: {{ betoneira.idFabricante?.nome }}
+                </mat-card-content>
+
+                <mat-card-content class="centered-text">
+                    Tipo: {{ betoneira.idTipoBetoneira }}
+                </mat-card-content>
+
+                <mat-card-content class="centered-text">
+                    R$ {{ betoneira.preco }}
+                </mat-card-content>
+
                 <mat-card-actions class="centered-text">
-                    <button mat-button color="primary" (click)="verBetoneira(betoneira.id);">Observar mais.</button>
+                    <button mat-button color="primary" (click)="verBetoneira(betoneira.id)">
+                        Observar mais.
+                    </button>
                 </mat-card-actions>
+
                 <mat-card-footer>
-                    <button mat-button (click)="adicionarAoCarrinho(betoneira)" color="accent" style="width: 100%; padding: 16px;">Adicionar ao carrinho.</button>
+                    <button mat-button (click)="adicionarAoCarrinho(betoneira)" color="accent" style="width: 100%; padding: 16px">Adicionar ao carrinho.</button>
                 </mat-card-footer>
+
             </div>
         </div>
     </mat-card>
 </div>
-<mat-paginator [length]="totalBetoneiras" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)"></mat-paginator>
+
+<mat-paginator
+    [length]="totalBetoneiras"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="onPageChange($event)">
+</mat-paginator>

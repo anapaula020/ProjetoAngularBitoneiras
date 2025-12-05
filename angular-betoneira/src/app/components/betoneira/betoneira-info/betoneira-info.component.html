@@ -1,42 +1,35 @@
-<mat-toolbar >
-    <div class="toolbar-title"><h1>Informações do Mangá</h1></div>
+<mat-toolbar>
+    <div class="toolbar-title"><h1>Informações da Betoneira</h1></div>
 </mat-toolbar>
 
 <div *ngIf="betoneira">
     <section class="product-container">
         <div class="img-card">
-            <img [src]="betoneira.imageUrl" alt="" id="featured-image">
+            <img [src]="betoneira.imageUrl" id="featured-image">
         </div>
         <div class="product-info">
             <h3>{{betoneira.nome}}</h3>
             <h5>R$ {{betoneira.preco}}</h5>
-            <h5>Sinopse: {{betoneira.sinopse}}</h5>
-            <h5>Páginas: {{betoneira.paginas}}</h5>
-            <h5>Estoque: {{betoneira.estoque}}</h5>
-            <h5>Ano: {{betoneira.lancamento}}</h5>
-            <h5>Gênero: {{betoneira.genero.nome}}</h5> 
-            <h5>Autor: {{betoneira.idAutor.nome}}</h5>
-            <p>{{betoneira.sinopse}}</p>
-            <div class="quantity">
-                <button mat-button (click)="adicionarAoCarrinho(betoneira)" color="accent" class="add-to-cart-button">Adicionar ao carrinho</button>
-            </div>
+            <h5>Descrição: {{betoneira.descricao}}</h5>
+            <h5>Tipo: {{betoneira.idTipoBetoneira.nome}}</h5>
+            <h5>Fabricante: {{betoneira.idFabricante.nome}}</h5>
+            <button mat-button (click)="adicionarAoCarrinho(betoneira)" color="accent" class="add-to-cart-button">Adicionar ao carrinho</button>
         </div>
     </section>
 </div>
 
 <section class="other-betoneiras-container">
-    <h2>Mangás Do Gênero</h2>
+    <h2>Outras Betoneiras</h2>
     <div class="other-betoneiras-grid">
         <mat-card *ngFor="let otherBetoneira of otherBetoneiras" class="betoneira-card">
             <div class="img-other">
-                
-                <img [src]="otherBetoneira.imageUrl" alt=" ">
+                <img [src]="otherBetoneira.imageUrl">
             </div>
             <mat-card-title>{{otherBetoneira.nome}}</mat-card-title>
             <mat-card-content>
-                <p>{{otherBetoneira.sinopse.length > 30 ? (otherBetoneira.sinopse | slice:0:30) + '...' : otherBetoneira.sinopse}}</p>
+                <p>{{otherBetoneira.descricao.length > 30 ? (otherBetoneira.descricao | slice:0:30) + "..." : otherBetoneira.descricao}}</p>
                 <p>R$ {{otherBetoneira.preco}}</p>
-                <p>{{otherBetoneira.genero.nome}}</p>
+                <p>{{otherBetoneira.idFabricante.nome}}</p>
             </mat-card-content>
             <mat-card-actions>
                 <button mat-button color="primary" (click)="verBetoneira(otherBetoneira.id)">Ver mais</button>
