@@ -1,0 +1,107 @@
+package br.unitins.tp1.service;
+
+import br.unitins.tp1.client.MercadoPagoPixRestClient;
+import br.unitins.tp1.dto.PixDTO;
+import br.unitins.tp1.dto.mercadopago.IdentificationDTO;
+import br.unitins.tp1.dto.mercadopago.MercadoPagoPixRequestDTO;
+import br.unitins.tp1.dto.mercadopago.MercadoPagoPixResponseDTO;
+import br.unitins.tp1.dto.mercadopago.PayerDTO;
+import br.unitins.tp1.model.Cliente;
+import br.unitins.tp1.util.DTOValidator;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
+import java.util.UUID;
+
+@ApplicationScoped
+public class BetoneiraServiceImpl implements BetoneiraService {
+    @Inject
+    @RestClient
+    MercadoPagoPixRestClient pixRestClient;
+
+    @ConfigProperty(name = "mercadopago.access.token")
+    String accessToken;
+
+    @Inject
+    DTOValidator dtoValidator;
+
+    public static class CardPaymentRequest {
+        public String cardNumber;
+        public String securityCode;
+        public String expirationDate;
+        public String cardHolderName;
+        public Double amount;
+        public String email;
+        public String cpf;
+    }
+
+    public PixDTO generatePix(Double amount, Cliente cliente) {
+        MercadoPagoPixRequestDTO pixRequest = new MercadoPagoPixRequestDTO();
+        pixRequest.setTransactionAmount(amount);
+        pixRequest.setDescription("Pagamento via PIX");
+        pixRequest.setPaymentMethodId("pix");
+
+        PayerDTO payer = new PayerDTO();
+        payer.setEmail(cliente.getEmail());
+        payer.setFirstName(cliente.getNome());
+        payer.setLastName("Não Informado");
+
+        IdentificationDTO identification = new IdentificationDTO();
+        identification.setType("CPF");
+        identification.setNumber(cliente.getCpf());
+
+        payer.setIdentification(identification);
+        pixRequest.setPayer(payer);
+
+        dtoValidator.validate(pixRequest);
+
+        String idempotencyKey = UUID.randomUUID().toString();
+        MercadoPagoPixResponseDTO response = pixRestClient.createPixPayment("Bearer " + accessToken, idempotencyKey, pixRequest);
+
+        PixDTO pixResponse = new PixDTO();
+        pixResponse.setId(response.getId());
+        pixResponse.setStatus(response.getStatus());
+        if (response.getPointOfInteraction() != null && response.getPointOfInteraction().getTransactionData() != null) {
+            pixResponse.setQrCode(response.getPointOfInteraction().getTransactionData().getQrCode());
+            pixResponse.setQrCodeBase64(response.getPointOfInteraction().getTransactionData().getQrCodeBase64());
+            pixResponse.setTicketUrl(response.getPointOfInteraction().getTransactionData().getTicketUrl());
+        }
+        return pixResponse;
+    }
+
+    public PixDTO createCardPayment(CardPaymentRequest cardRequest, Cliente cliente) {
+        System.out.println("Simulando pagamento com cartão para o cliente: " + cliente.getEmail());
+        System.out.println("Valor: " + cardRequest.amount);
+        System.out.println("Número do Cartão (últimos 4): ****" + cardRequest.cardNumber.substring(cardRequest.cardNumber.length() - 4));
+        PixDTO simulatedResponse = new PixDTO();
+        simulatedResponse.setStatus("approved");
+        simulatedResponse.setId(UUID.randomUUID().toString());
+        return simulatedResponse;
+    }
+
+    public MercadoPagoPixResponseDTO processPixPayment(Long pedidoId, PixDTO pixDto) {
+        MercadoPagoPixRequestDTO pixRequest = new MercadoPagoPixRequestDTO();
+        pixRequest.setTransactionAmount(pixDto.getAmount());
+        pixRequest.setDescription("Pagamento de Compra via PIX (Pedido #" + pedidoId + ")");
+        pixRequest.setPaymentMethodId("pix");
+
+        PayerDTO payer = new PayerDTO();
+        payer.setEmail(pixDto.getEmail());
+        payer.setFirstName(pixDto.getFirstName());
+        payer.setLastName(pixDto.getLastName());
+
+        IdentificationDTO identification = new IdentificationDTO();
+        identification.setType(pixDto.getIdentificationType());
+        identification.setNumber(pixDto.getIdentificationNumber());
+
+        payer.setIdentification(identification);
+        pixRequest.setPayer(payer);
+
+        dtoValidator.validate(pixRequest);
+
+        String idempotencyKey = UUID.randomUUID().toString();
+        MercadoPagoPixResponseDTO response = pixRestClient.createPixPayment("Bearer " + accessToken, idempotencyKey, pixRequest);
+        return response;
+    }
+}

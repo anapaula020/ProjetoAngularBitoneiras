@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ActivatedRoute,Router,RouterModule } from '@angular/router';
-import { EscritorNovelService } from '../../../services/escritor.service';
+import { EscritorNovelService } from '../../../services/endereco.service';
 import { HeaderAdminComponent } from "../../template/header-admin/header-admin.component";
 import { FooterAdminComponent } from "../../template/footer-admin/footer-admin.component";
 import { ExclusaoComponent } from '../../confirmacao/exclusao/exclusao.component';

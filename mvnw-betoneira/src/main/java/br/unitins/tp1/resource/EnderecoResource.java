@@ -50,12 +50,12 @@ public class EnderecoResource {
         return Response.ok(enderecoService.findAll()).build();
     }
 
-    @GET
-    @Path("/{id}")
-    @RolesAllowed({"ADMIN", "USER"})
-    public Response findById(@PathParam("id") Long id) {
-        return Response.ok(enderecoService.findById(id)).build();
-    }
+    // @GET
+    // @Path("/{id}")
+    // @RolesAllowed({"ADMIN", "USER"})
+    // public Response findById(@PathParam("id") Long id) {
+    //     return Response.ok(enderecoService.findById(id)).build();
+    // }
 
     @GET
     @Path("/meus-enderecos")

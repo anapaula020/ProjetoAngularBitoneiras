@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class PagamentoServiceImpl implements PagamentoService {
-
     @Inject
     PagamentoRepository pagamentoRepository;
 

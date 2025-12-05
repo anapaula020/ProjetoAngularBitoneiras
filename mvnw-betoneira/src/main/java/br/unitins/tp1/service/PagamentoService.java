@@ -1,20 +1,19 @@
-package br.unitins.tp1.service;
-
-import br.unitins.tp1.dto.PagamentoRequestDTO;
-import br.unitins.tp1.dto.PagamentoResponseDTO;
-import br.unitins.tp1.model.StatusPagamento;
+package mssaat.org.service;
 
 import java.util.List;
 
-public interface PagamentoService {
+import jakarta.validation.Valid;
+import mssaat.org.DTO.AdministradorDTO;
+import mssaat.org.DTO.AdministradorResponseDTO;
 
-    PagamentoResponseDTO create(PagamentoRequestDTO dto);
-    PagamentoResponseDTO update(Long id, PagamentoRequestDTO dto);
-    void delete(Long id);
-    PagamentoResponseDTO findById(Long id);
-    List<PagamentoResponseDTO> findAll();
-    List<PagamentoResponseDTO> findByStatusPagamento(String status);
-    void processarPagamento(Long idPagamento, StatusPagamento novoStatus);
-    List<PagamentoResponseDTO> findByAuthenticatedUser();
-    List<PagamentoResponseDTO> findByNome(String nome);
+public interface PagamentoService {
+    public PagamentoResponseDTO create(PagamentoRequestDTO dto);
+    public PagamentoResponseDTO update(Long id, PagamentoRequestDTO dto);
+    public void delete(Long id);
+    public PagamentoResponseDTO findById(Long id);
+    public List<PagamentoResponseDTO> findAll();
+    public List<PagamentoResponseDTO> findByStatusPagamento(String status);
+    public void processarPagamento(Long idPagamento, StatusPagamento novoStatus);
+    public List<PagamentoResponseDTO> findByAuthenticatedUser();
+    public List<PagamentoResponseDTO> findByNome(String nome);
 }

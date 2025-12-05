@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component,OnInit, inject } from '@angular/core';
 import { Router,RouterModule } from '@angular/router';
 import { ItemPedido } from '../../../models/itemPedido.model';
-import { EscritorNovelService } from '../../../services/escritor.service';
+import { EscritorNovelService } from '../../../services/endereco.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';

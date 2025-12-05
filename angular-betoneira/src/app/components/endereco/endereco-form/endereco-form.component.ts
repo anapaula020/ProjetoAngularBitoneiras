@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ActivatedRoute,Router,RouterModule } from '@angular/router';
-import { EscritorNovelService } from '../../../services/escritor.service';
+import { EnderecoService } from '../../../services/endereco.service';
 import { HeaderAdminComponent } from "../../template/header-admin/header-admin.component";
 import { FooterAdminComponent } from "../../template/footer-admin/footer-admin.component";
 import { ExclusaoComponent } from '../../confirmacao/exclusao/exclusao.component';
@@ -29,7 +29,7 @@ export class EnderecoFormComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private escritorService: EscritorNovelService,
+        private escritorService: EnderecoService,
         private router: Router,
         private activatedRoute: ActivatedRoute
     ) {
@@ -61,7 +61,7 @@ export class EnderecoFormComponent implements OnInit {
     }
 
     loadEscritor(id: number): void {
-        this.escritorService.findById(id).subscribe(escritor => {
+        this.escritorService.findById(id).subscribe((escritor: { [key: string]: any; }) => {
             this.formGroup.patchValue(escritor);
         });
         this.formGroup.markAllAsTouched();
@@ -77,13 +77,13 @@ export class EnderecoFormComponent implements OnInit {
             if(escritor.id) {
                 this.escritorService.update(escritor).subscribe(() => {
                     this.router.navigateByUrl('/admin/escritor');
-                },error => {
+                },(error: HttpErrorResponse) => {
                     this.tratarErros(error);
                 });
             } else {
                 this.escritorService.insert(escritor).subscribe(() => {
                     this.router.navigateByUrl('/admin/escritor');
-                },error => {
+                },(error: HttpErrorResponse) => {
                     this.tratarErros(error);
                 });
             }
@@ -98,7 +98,7 @@ export class EnderecoFormComponent implements OnInit {
                 if(id) {
                     this.escritorService.delete(id).subscribe(() => {
                         this.router.navigateByUrl('/admin/escritor');
-                    },error => {
+                    },(error: HttpErrorResponse) => {
                         this.tratarErros(error);
                     });
                 }

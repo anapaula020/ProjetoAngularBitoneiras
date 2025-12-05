@@ -5,7 +5,6 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class EnderecoDTO {
-
     @NotBlank(message = "O logradouro não pode ser nulo ou vazio.")
     @Size(max = 200, message = "Logradouro deve ter no máximo 200 caracteres.")
     private String logradouro;
