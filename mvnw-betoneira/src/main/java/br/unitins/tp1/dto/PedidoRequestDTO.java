@@ -7,26 +7,23 @@ import java.util.List;
 
 public class PedidoRequestDTO {
 
-    private LocalDateTime dataPedido; // Pode ser gerado no backend
+    private LocalDateTime dataPedido;
 
     @NotNull(message = "A lista de itens do pedido não pode ser nula.")
-    private List<ItemPedidoRequestDTO> itens; // Lista de DTOs para os itens do pedido
+    private List<ItemPedidoRequestDTO> itens;
 
-    @NotNull(message = "O ID do endereço de entrega não pode ser nulo.") // New validation
-    private Long idEnderecoEntrega; // New field for delivery address ID
+    @NotNull(message = "O ID do endereço de entrega não pode ser nulo.")
+    private Long idEnderecoEntrega;
 
-    // Construtor padrão
     public PedidoRequestDTO() {
     }
 
-    // Construtor completo
-    public PedidoRequestDTO(LocalDateTime dataPedido, List<ItemPedidoRequestDTO> itens, Long idEnderecoEntrega) { // Updated constructor
+    public PedidoRequestDTO(LocalDateTime dataPedido, List<ItemPedidoRequestDTO> itens, Long idEnderecoEntrega) {
         this.dataPedido = dataPedido;
         this.itens = itens;
-        this.idEnderecoEntrega = idEnderecoEntrega; // New field
+        this.idEnderecoEntrega = idEnderecoEntrega;
     }
 
-    // Getters
     public LocalDateTime getDataPedido() {
         return dataPedido;
     }
@@ -35,11 +32,10 @@ public class PedidoRequestDTO {
         return itens;
     }
 
-    public Long getIdEnderecoEntrega() { // New getter
+    public Long getIdEnderecoEntrega() {
         return idEnderecoEntrega;
     }
 
-    // Setters
     public void setDataPedido(LocalDateTime dataPedido) {
         this.dataPedido = dataPedido;
     }
@@ -48,7 +44,7 @@ public class PedidoRequestDTO {
         this.itens = itens;
     }
 
-    public void setIdEnderecoEntrega(Long idEnderecoEntrega) { // New setter
+    public void setIdEnderecoEntrega(Long idEnderecoEntrega) {
         this.idEnderecoEntrega = idEnderecoEntrega;
     }
 }

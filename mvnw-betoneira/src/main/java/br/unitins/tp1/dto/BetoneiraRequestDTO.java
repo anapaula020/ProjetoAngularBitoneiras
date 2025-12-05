@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/dto/BetoneiraRequestDTO.java
 package br.unitins.tp1.dto;
 
 import jakarta.validation.constraints.NotBlank;
@@ -10,7 +9,7 @@ public class BetoneiraRequestDTO {
     @NotBlank(message = "O nome da betoneira não pode ser nulo ou vazio.")
     private String nome;
 
-    private String descricao; // Pode ser nulo
+    private String descricao;
 
     @NotNull(message = "O preço da betoneira não pode ser nulo.")
     @Positive(message = "O preço da betoneira deve ser um valor positivo.")
@@ -26,11 +25,9 @@ public class BetoneiraRequestDTO {
     @NotNull(message = "O ID do fabricante é obrigatório.")
     private Long idFabricante;
 
-    // Construtor padrão (necessário para desserialização de JSON)
     public BetoneiraRequestDTO() {
     }
 
-    // Construtor completo
     public BetoneiraRequestDTO(String nome, String descricao, Double preco, Integer quantidadeEstoque, Long idTipoBetoneira, Long idFabricante) {
         this.nome = nome;
         this.descricao = descricao;
@@ -40,7 +37,6 @@ public class BetoneiraRequestDTO {
         this.idFabricante = idFabricante;
     }
 
-    // Getters
     public String getNome() {
         return nome;
     }
@@ -65,7 +61,6 @@ public class BetoneiraRequestDTO {
         return idFabricante;
     }
 
-    // Setters
     public void setNome(String nome) {
         this.nome = nome;
     }

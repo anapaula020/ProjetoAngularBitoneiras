@@ -1,7 +1,7 @@
 package br.unitins.tp1.dto;
 
 import br.unitins.tp1.model.Betoneira;
-import br.unitins.tp1.model.TipoBetoneiraEnum; // Make sure this is imported
+import br.unitins.tp1.model.TipoBetoneiraEnum;
 
 public class BetoneiraResponseDTO {
     private Long id;
@@ -12,13 +12,12 @@ public class BetoneiraResponseDTO {
     private String marca;
     private String modelo;
     private Double capacidade;
-    private TipoBetoneiraEnum tipo; // TipoBetoneiraEnum está no Model
+    private TipoBetoneiraEnum tipo;
     private FabricanteResponseDTO fabricante;
 
     public BetoneiraResponseDTO() {
     }
 
-    // Construtor para mapear a partir da entidade Betoneira
     public BetoneiraResponseDTO(Betoneira betoneira) {
         this.id = betoneira.getId();
         this.nome = betoneira.getNome();
@@ -28,7 +27,7 @@ public class BetoneiraResponseDTO {
         this.marca = betoneira.getMarca();
         this.modelo = betoneira.getModelo();
         this.capacidade = betoneira.getCapacidade();
-        this.tipo = betoneira.getTipo(); // Usando getTipo() que retorna TipoBetoneiraEnum
+        this.tipo = betoneira.getTipo();
         this.fabricante = betoneira.getFabricante() != null ? FabricanteResponseDTO.valueOf(betoneira.getFabricante()) : null;
     }
 
@@ -36,7 +35,6 @@ public class BetoneiraResponseDTO {
         return new BetoneiraResponseDTO(betoneira);
     }
 
-    // Getters
     public Long getId() { return id; }
     public String getNome() { return nome; }
     public String getDescricao() { return descricao; }
@@ -48,7 +46,6 @@ public class BetoneiraResponseDTO {
     public TipoBetoneiraEnum getTipo() { return tipo; }
     public FabricanteResponseDTO getFabricante() { return fabricante; }
 
-    // Setters (para DTOs de resposta, setters são geralmente omitidos, mas se o framework precisar, mantenha)
     public void setId(Long id) { this.id = id; }
     public void setNome(String nome) { this.nome = nome; }
     public void setDescricao(String descricao) { this.descricao = descricao; }

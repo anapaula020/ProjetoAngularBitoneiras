@@ -5,12 +5,11 @@ import jakarta.validation.constraints.NotBlank;
 public class IdentificationDTO {
 
     @NotBlank
-    private String type; // "CPF" ou "CNPJ"
+    private String type;
 
     @NotBlank
     private String number;
 
-    // Getters e Setters
     public String getType() { return type; }
     public void setType(String type) { this.type = type; }
 

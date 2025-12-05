@@ -19,7 +19,7 @@ public interface MercadoPagoPixRestClient {
     @Produces(MediaType.APPLICATION_JSON)
     MercadoPagoPixResponseDTO createPixPayment(
         @HeaderParam("Authorization") String authorization,
-        @HeaderParam("X-Idempotency-Key") String idempotencyKey, // <-- Adicione esta linha
+        @HeaderParam("X-Idempotency-Key") String idempotencyKey, 
         MercadoPagoPixRequestDTO request
     );
 }

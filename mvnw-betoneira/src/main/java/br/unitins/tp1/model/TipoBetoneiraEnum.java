@@ -16,7 +16,6 @@ public enum TipoBetoneiraEnum {
         return id;
     }
 
-    // --- NOVO MÉTODO fromId ---
     public static TipoBetoneiraEnum fromId(Integer id) {
         if (id == null) {
             throw new IllegalArgumentException("ID não pode ser nulo.");

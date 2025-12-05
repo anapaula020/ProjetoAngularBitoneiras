@@ -1,9 +1,6 @@
-// src/main/java/br/unitins/tp1/dto/PagamentoResponseDTO.java
 package br.unitins.tp1.dto;
 
 import br.unitins.tp1.model.Pagamento;
-// Removed unused import: import br.unitins.tp1.model.StatusPagamento;
-// Removed unused import: import br.unitins.tp1.model.TipoPagamento;
 
 import java.time.LocalDateTime;
 
@@ -28,7 +25,6 @@ public class PagamentoResponseDTO {
         return new PagamentoResponseDTO(pagamento);
     }
 
-    // Getters
     public Long getId() {
         return id;
     }
@@ -53,7 +49,6 @@ public class PagamentoResponseDTO {
         return idPedido;
     }
 
-    // Setters (optional for DTOs)
     public void setId(Long id) {
         this.id = id;
     }

@@ -23,7 +23,6 @@ public class MercadoPagoPixRequestDTO {
     @Valid
     private PayerDTO payer;
 
-    // Getters e Setters
     public Double getTransactionAmount() { return transactionAmount; }
     public void setTransactionAmount(Double transactionAmount) { this.transactionAmount = transactionAmount; }
 

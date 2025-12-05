@@ -8,12 +8,12 @@ public class MercadoPagoCardPaymentRequestDTO {
     private Double transactionAmount;
     private String description;
     @JsonProperty("payment_method_id")
-    private String paymentMethodId; // Ex: "visa", "mastercard"
+    private String paymentMethodId;
     private PayerDTO payer;
-    private String token; // O token do cartão (para teste, pode-se simular com o número do cartão)
-    private Integer installments; // Número de parcelas
+    private String token;
+    private Integer installments;
     @JsonProperty("issuer_id")
-    private String issuerId; // ID da bandeira/emissor (opcional, pode ser inferido pelo MP)
+    private String issuerId;
 
     public MercadoPagoCardPaymentRequestDTO() {
     }
@@ -28,7 +28,6 @@ public class MercadoPagoCardPaymentRequestDTO {
         this.issuerId = issuerId;
     }
 
-    // Getters e Setters
     public Double getTransactionAmount() {
         return transactionAmount;
     }

@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/dto/LoginResponseDTO.java
 package br.unitins.tp1.dto;
 
 public class LoginResponseDTO {
@@ -12,7 +11,6 @@ public class LoginResponseDTO {
         this.token = token;
     }
 
-    // Getters
     public Long getId() {
         return id;
     }
@@ -25,7 +23,6 @@ public class LoginResponseDTO {
         return token;
     }
 
-    // Setters (optional, but good practice for DTOs if they might be mutated)
     public void setId(Long id) {
         this.id = id;
     }

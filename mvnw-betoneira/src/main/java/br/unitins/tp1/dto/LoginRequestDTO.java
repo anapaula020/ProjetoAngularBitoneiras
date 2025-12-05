@@ -12,10 +12,8 @@ public class LoginRequestDTO {
     @NotBlank(message = "A senha é obrigatória.")
     private String senha;
 
-    // Construtor padrão
     public LoginRequestDTO() {}
 
-    // Construtor com todos os campos (útil para testes)
     public LoginRequestDTO(String email, String senha) {
         this.email = email;
         this.senha = senha;

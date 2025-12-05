@@ -7,11 +7,10 @@ public class MercadoPagoPixResponseDTO {
     private String id;
     private String status;
     @JsonProperty("status_detail")
-    private String statusDetail; // Added statusDetail field
+    private String statusDetail;
     @JsonProperty("point_of_interaction")
     private PointOfInteractionDTO pointOfInteraction;
 
-    // Getters
     public String getId() {
         return id;
     }
@@ -20,7 +19,7 @@ public class MercadoPagoPixResponseDTO {
         return status;
     }
 
-    public String getStatusDetail() { // Added getter for statusDetail
+    public String getStatusDetail() {
         return statusDetail;
     }
 
@@ -28,7 +27,6 @@ public class MercadoPagoPixResponseDTO {
         return pointOfInteraction;
     }
 
-    // Setters
     public void setId(String id) {
         this.id = id;
     }
@@ -37,7 +35,7 @@ public class MercadoPagoPixResponseDTO {
         this.status = status;
     }
 
-    public void setStatusDetail(String statusDetail) { // Added setter for statusDetail
+    public void setStatusDetail(String statusDetail) {
         this.statusDetail = statusDetail;
     }
 

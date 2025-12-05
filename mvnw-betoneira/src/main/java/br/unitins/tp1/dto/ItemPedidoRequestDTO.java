@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Positive;
 public class ItemPedidoRequestDTO {
 
     @NotNull(message = "O ID da betoneira não pode ser nulo.")
-    private Long idBetoneira; // ID da betoneira
+    private Long idBetoneira;
 
     @NotNull(message = "A quantidade não pode ser nula.")
     @Positive(message = "A quantidade deve ser um valor positivo.")
@@ -16,18 +16,15 @@ public class ItemPedidoRequestDTO {
     @Positive(message = "O preço unitário deve ser positivo.")
     private Double precoUnitario;
 
-    // Construtor padrão
     public ItemPedidoRequestDTO() {
     }
 
-    // Construtor completo
     public ItemPedidoRequestDTO(Long idBetoneira, Integer quantidade, Double precoUnitario) {
         this.idBetoneira = idBetoneira;
         this.quantidade = quantidade;
         this.precoUnitario = precoUnitario;
     }
 
-    // Getters
     public Long getIdBetoneira() {
         return idBetoneira;
     }
@@ -40,7 +37,6 @@ public class ItemPedidoRequestDTO {
         return precoUnitario;
     }
 
-    // Setters
     public void setIdBetoneira(Long idBetoneira) {
         this.idBetoneira = idBetoneira;
     }

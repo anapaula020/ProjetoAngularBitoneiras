@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/dto/BetoneiraDTO.java
 package br.unitins.tp1.dto;
 
 import jakarta.validation.constraints.NotBlank;
@@ -22,11 +21,9 @@ public class BetoneiraDTO {
     @NotNull(message = "O ID do fabricante não pode ser nulo.")
     private Long idFabricante;
 
-    // Construtor padrão
     public BetoneiraDTO() {
     }
 
-    // Construtor completo
     public BetoneiraDTO(String nome, String descricao, Double preco, Long idTipoBetoneira, Long idFabricante) {
         this.nome = nome;
         this.descricao = descricao;
@@ -35,7 +32,6 @@ public class BetoneiraDTO {
         this.idFabricante = idFabricante;
     }
 
-    // Getters
     public String getNome() {
         return nome;
     }
@@ -56,7 +52,6 @@ public class BetoneiraDTO {
         return idFabricante;
     }
 
-    // Setters
     public void setNome(String nome) {
         this.nome = nome;
     }

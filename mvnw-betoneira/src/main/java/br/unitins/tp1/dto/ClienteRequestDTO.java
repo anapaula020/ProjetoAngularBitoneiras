@@ -10,7 +10,7 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 
-public class ClienteRequestDTO { // Mudado de record para class
+public class ClienteRequestDTO {
 
     @NotBlank(message = "O nome não pode estar em branco.")
     private String nome;
@@ -37,13 +37,11 @@ public class ClienteRequestDTO { // Mudado de record para class
     @NotBlank(message = "O sexo não pode estar em branco.")
     private String sexo;
 
-    private List<EnderecoRequestDTO> enderecos; // New field for delivery addresses
+    private List<EnderecoRequestDTO> enderecos;
 
-    // Construtor padrão
     public ClienteRequestDTO() {
     }
 
-    // Construtor completo (ajuste conforme necessário)
     public ClienteRequestDTO(String nome, String email, String senha, String cpf, LocalDate dataNascimento, String telefone, String sexo, List<EnderecoRequestDTO> enderecos) {
         this.nome = nome;
         this.email = email;
@@ -55,7 +53,6 @@ public class ClienteRequestDTO { // Mudado de record para class
         this.enderecos = enderecos;
     }
 
-    // Getters e Setters
     public String getNome() {
         return nome;
     }

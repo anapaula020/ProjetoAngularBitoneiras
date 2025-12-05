@@ -22,7 +22,6 @@ public enum TipoPagamento {
         return label;
     }
 
-    // Method to get enum from ID
     public static TipoPagamento valueOf(int id) {
         for (TipoPagamento tipo : TipoPagamento.values()) {
             if (tipo.getId() == id) {
@@ -32,7 +31,6 @@ public enum TipoPagamento {
         throw new IllegalArgumentException("ID de TipoPagamento inválido: " + id);
     }
 
-    // Method to get enum from String label (case-insensitive)
     public static TipoPagamento valueOfLabel(String label) {
         for (TipoPagamento tipo : TipoPagamento.values()) {
             if (tipo.getLabel().equalsIgnoreCase(label)) {

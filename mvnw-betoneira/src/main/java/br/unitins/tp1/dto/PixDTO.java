@@ -1,31 +1,25 @@
 package br.unitins.tp1.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-// Importações de validação, se aplicável, como jakarta.validation.constraints.NotBlank etc.
-// Por simplicidade, não as incluirei aqui, mas você pode adicioná-las se precisar.
-
 public class PixDTO {
 
-    private String id; // ID da transação do Mercado Pago
-    private String status; // Status do pagamento (e.g., "approved", "pending", "rejected")
-    private String qrCode; // QR Code para pagamento PIX
-    private String qrCodeBase64; // QR Code em Base64
-    private String ticketUrl; // URL do ticket, se houver
+    private String id;
+    private String status;
+    private String qrCode;
+    private String qrCodeBase64;
+    private String ticketUrl;
 
-    // Campos adicionados para resolver os erros de 'undefined method' no PixService
-    private Double amount; // Valor da transação
-    private String email; // Email do pagador
-    @JsonProperty("first_name") // Mapeamento para JSON se necessário na entrada
-    private String firstName; // Primeiro nome do pagador
-    @JsonProperty("last_name") // Mapeamento para JSON se necessário na entrada
-    private String lastName; // Sobrenome do pagador
-    @JsonProperty("identification_type") // Mapeamento para JSON se necessário na entrada
-    private String identificationType; // Tipo de identificação (e.g., "CPF", "CNPJ")
-    @JsonProperty("identification_number") // Mapeamento para JSON se necessário na entrada
-    private String identificationNumber; // Número de identificação
+    private Double amount;
+    private String email;
+    @JsonProperty("first_name")
+    private String firstName;
+    @JsonProperty("last_name")
+    private String lastName;
+    @JsonProperty("identification_type")
+    private String identificationType;
+    @JsonProperty("identification_number")
+    private String identificationNumber;
 
-
-    // --- Getters e Setters ---
 
     public String getId() {
         return id;
@@ -59,59 +53,59 @@ public class PixDTO {
         this.qrCodeBase64 = qrCodeBase64;
     }
 
-    public String getTicketUrl() { // Adicionado
+    public String getTicketUrl() {
         return ticketUrl;
     }
 
-    public void setTicketUrl(String ticketUrl) { // Adicionado
+    public void setTicketUrl(String ticketUrl) {
         this.ticketUrl = ticketUrl;
     }
 
-    public Double getAmount() { // Adicionado
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) { // Adicionado
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
-    public String getEmail() { // Adicionado
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) { // Adicionado
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getFirstName() { // Adicionado
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) { // Adicionado
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastName() { // Adicionado
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) { // Adicionado
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public String getIdentificationType() { // Adicionado
+    public String getIdentificationType() {
         return identificationType;
     }
 
-    public void setIdentificationType(String identificationType) { // Adicionado
+    public void setIdentificationType(String identificationType) {
         this.identificationType = identificationType;
     }
 
-    public String getIdentificationNumber() { // Adicionado
+    public String getIdentificationNumber() {
         return identificationNumber;
     }
 
-    public void setIdentificationNumber(String identificationNumber) { // Adicionado
+    public void setIdentificationNumber(String identificationNumber) {
         this.identificationNumber = identificationNumber;
     }
 }

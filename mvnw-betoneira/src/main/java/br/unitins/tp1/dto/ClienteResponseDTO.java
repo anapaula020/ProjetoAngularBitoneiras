@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/dto/ClienteResponseDTO.java
 package br.unitins.tp1.dto;
 
 import br.unitins.tp1.model.Cliente;
@@ -12,14 +11,12 @@ public class ClienteResponseDTO {
     private String nome;
     private String email;
     private String cpf;
-    private Set<String> roles; // Retornar as roles como um Set
-    private List<EnderecoResponseDTO> enderecos; // Assumindo que você quer retornar os endereços
+    private Set<String> roles;
+    private List<EnderecoResponseDTO> enderecos;
 
-    // Construtor padrão
     public ClienteResponseDTO() {
     }
 
-    // Construtor completo
     public ClienteResponseDTO(Long id, String nome, String email, String cpf, Set<String> roles, List<EnderecoResponseDTO> enderecos) {
         this.id = id;
         this.nome = nome;
@@ -29,7 +26,6 @@ public class ClienteResponseDTO {
         this.enderecos = enderecos;
     }
 
-    // Método estático para conversão de Model para DTO
     public static ClienteResponseDTO valueOf(Cliente cliente) {
         List<EnderecoResponseDTO> enderecosDTO = null;
         if (cliente.getEnderecos() != null) {
@@ -43,12 +39,11 @@ public class ClienteResponseDTO {
             cliente.getNome(),
             cliente.getEmail(),
             cliente.getCpf(),
-            cliente.getRolesAsSet(), // Usar o método que retorna Set<String>
+            cliente.getRolesAsSet(), 
             enderecosDTO
         );
     }
 
-    // Getters
     public Long getId() {
         return id;
     }
@@ -73,7 +68,6 @@ public class ClienteResponseDTO {
         return enderecos;
     }
 
-    // Setters (geralmente não são necessários para DTOs de resposta, mas incluídos para completude)
     public void setId(Long id) {
         this.id = id;
     }

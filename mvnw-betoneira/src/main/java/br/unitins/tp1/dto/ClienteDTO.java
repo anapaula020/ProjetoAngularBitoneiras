@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/dto/ClienteDTO.java
 package br.unitins.tp1.dto;
 
 import jakarta.validation.constraints.Email;
@@ -18,14 +17,11 @@ public class ClienteDTO {
     @Pattern(regexp = "\\d{11}", message = "CPF deve conter 11 dígitos numéricos.")
     private String cpf;
 
-    // A senha pode ser opcional em um DTO de atualização parcial
     private String senha;
 
-    // Construtor padrão
     public ClienteDTO() {
     }
 
-    // Construtor completo
     public ClienteDTO(String nome, String email, String cpf, String senha) {
         this.nome = nome;
         this.email = email;
@@ -33,7 +29,6 @@ public class ClienteDTO {
         this.senha = senha;
     }
 
-    // Getters
     public String getNome() {
         return nome;
     }
@@ -50,7 +45,6 @@ public class ClienteDTO {
         return senha;
     }
 
-    // Setters
     public void setNome(String nome) {
         this.nome = nome;
     }

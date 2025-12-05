@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 public class PedidoResponseDTO {
     private Long id;
-    private LocalDateTime dataPedido; // Corresponde a getDataDoPedido() do Model
-    private Double totalPedido;      // Corresponde a getTotalPedido() do Model
+    private LocalDateTime dataPedido;
+    private Double totalPedido;
     private Long clienteId;
     private String clienteNome;
     private String clienteEmail;
@@ -19,8 +19,8 @@ public class PedidoResponseDTO {
 
     public PedidoResponseDTO(Pedido pedido) {
         this.id = pedido.getId();
-        this.dataPedido = pedido.getDataDoPedido(); // Corrigido para getDataDoPedido()
-        this.totalPedido = pedido.getTotalPedido();  // Corrigido para getTotalPedido()
+        this.dataPedido = pedido.getDataDoPedido();
+        this.totalPedido = pedido.getTotalPedido();
         this.clienteId = pedido.getCliente() != null ? pedido.getCliente().getId() : null;
         this.clienteNome = pedido.getCliente() != null ? pedido.getCliente().getNome() : null;
         this.clienteEmail = pedido.getCliente() != null ? pedido.getCliente().getEmail() : null;
@@ -34,7 +34,6 @@ public class PedidoResponseDTO {
         return new PedidoResponseDTO(pedido);
     }
 
-    // Getters
     public Long getId() { return id; }
     public LocalDateTime getDataPedido() { return dataPedido; }
     public Double getTotalPedido() { return totalPedido; }
@@ -43,7 +42,6 @@ public class PedidoResponseDTO {
     public String getClienteEmail() { return clienteEmail; }
     public List<ItemPedidoResponseDTO> getItens() { return itens; }
 
-    // Setters (se usados)
     public void setId(Long id) { this.id = id; }
     public void setDataPedido(LocalDateTime dataPedido) { this.dataPedido = dataPedido; }
     public void setTotalPedido(Double totalPedido) { this.totalPedido = totalPedido; }

@@ -5,15 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class TransactionDataDTO {
 
     @JsonProperty("qr_code")
-    private String qrCode; // Pix Copia e Cola
+    private String qrCode;
 
     @JsonProperty("qr_code_base64")
-    private String qrCodeBase64; // QR code em Base64
+    private String qrCodeBase64;
 
-    @JsonProperty("ticket_url") // Pode ser útil para outros tipos de pagamento ou recibos
+    @JsonProperty("ticket_url")
     private String ticketUrl;
-
-    // Adicione outros campos de transaction_data se necessário da documentação do Mercado Pago
 
     @JsonProperty("qr_code")
     public String getQrCode() {

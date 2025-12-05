@@ -7,7 +7,7 @@ public class Result {
     private boolean success;
     private Object data;
     private String message;
-    private Map<String, String> errors; // For validation errors
+    private Map<String, String> errors;
 
     private Result(boolean success, Object data, String message, Map<String, String> errors) {
         this.success = success;
@@ -32,7 +32,6 @@ public class Result {
         return new Result(false, null, "Erros de validação", errors);
     }
 
-    // Getters
     public boolean isSuccess() {
         return success;
     }

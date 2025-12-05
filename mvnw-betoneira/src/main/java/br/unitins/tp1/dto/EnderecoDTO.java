@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/dto/EnderecoDTO.java
 package br.unitins.tp1.dto;
 
 import jakarta.validation.constraints.NotBlank;
@@ -30,11 +29,9 @@ public class EnderecoDTO {
     @Size(max = 100, message = "Município deve ter no máximo 100 caracteres.")
     private String municipio;
 
-    // Construtor padrão
     public EnderecoDTO() {
     }
 
-    // Construtor completo
     public EnderecoDTO(String logradouro, String numero, String complemento, String bairro, String cep, String municipio) {
         this.logradouro = logradouro;
         this.numero = numero;
@@ -44,7 +41,6 @@ public class EnderecoDTO {
         this.municipio = municipio;
     }
 
-    // Getters
     public String getLogradouro() {
         return logradouro;
     }
@@ -69,7 +65,6 @@ public class EnderecoDTO {
         return municipio;
     }
 
-    // Setters
     public void setLogradouro(String logradouro) {
         this.logradouro = logradouro;
     }

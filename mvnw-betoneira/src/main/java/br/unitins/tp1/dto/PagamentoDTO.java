@@ -11,18 +11,16 @@ public class PagamentoDTO {
     @Positive(message = "O valor do pagamento deve ser um valor positivo.")
     private Double valor;
 
-    private String statusPagamento; // String para o status, pode ser um Enum ou Entidade
+    private String statusPagamento;
 
     private LocalDateTime dataPagamento;
 
     @NotNull(message = "O ID do tipo de pagamento não pode ser nulo.")
     private Long idTipoPagamento;
 
-    // Construtor padrão
     public PagamentoDTO() {
     }
 
-    // Construtor completo
     public PagamentoDTO(Double valor, String statusPagamento, LocalDateTime dataPagamento, Long idTipoPagamento) {
         this.valor = valor;
         this.statusPagamento = statusPagamento;
@@ -30,7 +28,6 @@ public class PagamentoDTO {
         this.idTipoPagamento = idTipoPagamento;
     }
 
-    // Getters
     public Double getValor() {
         return valor;
     }
@@ -47,7 +44,6 @@ public class PagamentoDTO {
         return idTipoPagamento;
     }
 
-    // Setters
     public void setValor(Double valor) {
         this.valor = valor;
     }

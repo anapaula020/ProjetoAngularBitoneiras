@@ -1,4 +1,3 @@
-// src/main/java/br/unitins/tp1/dto/TipoBetoneiraDTO.java
 package br.unitins.tp1.dto;
 
 import jakarta.validation.constraints.NotBlank;
@@ -12,17 +11,14 @@ public class TipoBetoneiraDTO {
 
     private String descricao;
 
-    // Construtor padrão
     public TipoBetoneiraDTO() {
     }
 
-    // Construtor completo
     public TipoBetoneiraDTO(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
     }
 
-    // Getters
     public String getNome() {
         return nome;
     }
@@ -31,7 +27,6 @@ public class TipoBetoneiraDTO {
         return descricao;
     }
 
-    // Setters
     public void setNome(String nome) {
         this.nome = nome;
     }

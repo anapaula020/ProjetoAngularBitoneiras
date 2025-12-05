@@ -1,7 +1,7 @@
 package br.unitins.tp1.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern; // Importação adicionada
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class EnderecoRequestDTO {
@@ -17,21 +17,19 @@ public class EnderecoRequestDTO {
     private String bairro;
 
     @NotBlank(message = "A cidade não pode estar em branco.")
-    private String cidade; // Adicionado para consistência
+    private String cidade;
 
     @NotBlank(message = "O estado não pode estar em branco.")
     @Size(min = 2, max = 2, message = "O estado deve ter 2 caracteres (UF).")
-    private String estado; // Adicionado para consistência
+    private String estado;
 
     @NotBlank(message = "O CEP não pode estar em branco.")
     @Pattern(regexp = "^\\d{8}$", message = "CEP inválido. Deve conter 8 dígitos.")
     private String cep;
 
-    // Construtor padrão
     public EnderecoRequestDTO() {
     }
 
-    // Construtor completo
     public EnderecoRequestDTO(String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String cep) {
         this.logradouro = logradouro;
         this.numero = numero;
@@ -42,7 +40,6 @@ public class EnderecoRequestDTO {
         this.cep = cep;
     }
 
-    // Getters e Setters
     public String getLogradouro() {
         return logradouro;
     }

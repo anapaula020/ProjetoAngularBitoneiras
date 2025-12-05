@@ -17,7 +17,7 @@ public class CardPaymentRequestDTO {
 
     @NotBlank(message = "A data de vencimento não pode estar em branco.")
     @Pattern(regexp = "^(0[1-9]|1[0-2])\\/([0-9]{2})$", message = "A data de vencimento deve estar no formato MM/AA.")
-    private String expirationDate; // MM/YY
+    private String expirationDate;
 
     @NotBlank(message = "O nome do titular do cartão não pode estar em branco.")
     private String cardHolderName;
@@ -25,7 +25,6 @@ public class CardPaymentRequestDTO {
     @NotNull(message = "O valor do pagamento não pode ser nulo.")
     private Double amount;
 
-    // Construtor, Getters e Setters
     public CardPaymentRequestDTO() {
     }
 
