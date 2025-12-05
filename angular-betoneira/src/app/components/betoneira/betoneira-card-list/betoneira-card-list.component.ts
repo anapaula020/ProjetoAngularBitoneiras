@@ -37,6 +37,7 @@ export class BetoneiraCardListComponent implements OnInit {
     betoneiras: Betoneira[] = [];
     cards = signal<Card[]>([]);
     searchForm: FormGroup;
+    selectedTipo: string | null = null;
     precos: any[] = [];
     autores: Fabricante[] = [];
     selectedFornecedor: number | null = null;
@@ -91,6 +92,14 @@ export class BetoneiraCardListComponent implements OnInit {
         this.mostrarFiltros = !this.mostrarFiltros;
     }
 
+    filtrarTipo(nome: string) {
+            this.betoneiraService.findByTipo(name).subscribe(data => {
+                this.betoneiras = data;
+                this.carregarCards();
+            });
+        }
+    }
+    
     filtrarPreco(id: number) {
         const selectedPrice = this.precos.find(preco => preco.id === id);
         if(selectedPrice) {

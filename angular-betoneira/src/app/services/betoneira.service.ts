@@ -9,6 +9,10 @@ export class BetoneiraService {
 
     constructor(private httpClient: HttpClient) { }
 
+    count(): Observable<number> {
+        return this.httpClient.get<number>(`${this.baseUrl}/count`);
+    }
+
     uploadImage(id: number,imageUrl: string,imagem: File): Observable<any> {
         const formData: FormData = new FormData();
         formData.append('imageUrl',imageUrl);
@@ -28,16 +32,16 @@ export class BetoneiraService {
         return this.httpClient.get<Betoneira[]>(this.baseUrl,{ params });
     }
 
+    findByTipo(id: number): Observable<Betoneira[]> {
+        return this.httpClient.get<Betoneira[]>(`${this.baseUrl}/fabricante/${id}`);
+    }
+    
     findByFabricante(id: number): Observable<Betoneira[]> {
         return this.httpClient.get<Betoneira[]>(`${this.baseUrl}/fabricante/${id}`);
     }
 
     findByPrice(price: number,price2: number): Observable<Betoneira[]> {
         return this.httpClient.get<Betoneira[]>(`${this.baseUrl}/price/${price}/${price2}`);
-    }
-
-    count(): Observable<number> {
-        return this.httpClient.get<number>(`${this.baseUrl}/count`);
     }
 
     findById(id: number): Observable<Betoneira> {
@@ -50,15 +54,15 @@ export class BetoneiraService {
 
     insert(betoneira: Betoneira): Observable<Betoneira> {
         const data = {
-            nome: betoneira.nome, 
-            descricao: betoneira.descricao, 
-            preco: betoneira.preco, 
-            quantidadeEstoque: betoneira.quantidadeEstoque, 
-            modelo: betoneira.modelo, 
-            marca: betoneira.marca, 
-            capacidade: betoneira.capacidade, 
-            tipoBetoneira: betoneira.tipoBetoneira, 
-            idFabricante: betoneira.idFabricante, 
+            nome: betoneira.nome,
+            descricao: betoneira.descricao,
+            preco: betoneira.preco,
+            quantidadeEstoque: betoneira.quantidadeEstoque,
+            modelo: betoneira.modelo,
+            marca: betoneira.marca,
+            capacidade: betoneira.capacidade,
+            tipoBetoneira: betoneira.tipoBetoneira,
+            idFabricante: betoneira.idFabricante,
             imageUrl: betoneira.imageUrl
         };
         return this.httpClient.post<Betoneira>(this.baseUrl,data);
@@ -66,15 +70,15 @@ export class BetoneiraService {
 
     update(betoneira: Betoneira): Observable<Betoneira> {
         const data = {
-            nome: betoneira.nome, 
-            descricao: betoneira.descricao, 
-            preco: betoneira.preco, 
-            quantidadeEstoque: betoneira.quantidadeEstoque, 
-            modelo: betoneira.modelo, 
-            marca: betoneira.marca, 
-            capacidade: betoneira.capacidade, 
-            tipoBetoneira: betoneira.tipoBetoneira, 
-            idFabricante: betoneira.idFabricante, 
+            nome: betoneira.nome,
+            descricao: betoneira.descricao,
+            preco: betoneira.preco,
+            quantidadeEstoque: betoneira.quantidadeEstoque,
+            modelo: betoneira.modelo,
+            marca: betoneira.marca,
+            capacidade: betoneira.capacidade,
+            tipoBetoneira: betoneira.tipoBetoneira,
+            idFabricante: betoneira.idFabricante,
             imageUrl: betoneira.imageUrl
         };
         return this.httpClient.put<Betoneira>(`${this.baseUrl}/${betoneira.id}`,data);
