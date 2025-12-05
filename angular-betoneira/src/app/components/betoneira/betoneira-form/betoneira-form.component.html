@@ -31,7 +31,39 @@
                             {{ getErrorMessage("preco", formGroup.get("preco")?.errors) }}
                         </mat-error>
                     </mat-form-field>
+                    
+                    <mat-form-field appearance="fill" class="full-width-input">
+                        <mat-label>Estoque:</mat-label>
+                        <input matInput type="number" id="quantidadeEstoque" formControlName="quantidadeEstoque" required>
+                        <mat-error *ngIf="formGroup.get("quantidadeEstoque")?.invalid && formGroup.get("quantidadeEstoque")?.touched">
+                            {{ getErrorMessage("quantidadeEstoque", formGroup.get("quantidadeEstoque")?.errors) }}
+                        </mat-error>
+                    </mat-form-field>
 
+                    <mat-form-field appearance="fill" class="full-width-input">
+                        <mat-label>Modelo da betoneira:</mat-label>
+                        <input matInput type="text" id="modelo" formControlName="modelo" required>
+                        <mat-error *ngIf="formGroup.get("modelo")?.invalid && formGroup.get("modelo")?.touched">
+                            {{ getErrorMessage("modelo", formGroup.get("modelo")?.errors) }}
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="full-width-input">
+                        <mat-label>Marca da betoneira:</mat-label>
+                        <input matInput type="text" id="marca" formControlName="marca" required>
+                        <mat-error *ngIf="formGroup.get("marca")?.invalid && formGroup.get("marca")?.touched">
+                            {{ getErrorMessage("marca", formGroup.get("marca")?.errors) }}
+                        </mat-error>
+                    </mat-form-field>
+                    
+                    <mat-form-field appearance="fill" class="full-width-input">
+                        <mat-label>Capacidade da betoneira:</mat-label>
+                        <input matInput type="number" id="capacidade" formControlName="capacidade" required>
+                        <mat-error *ngIf="formGroup.get("capacidade")?.invalid && formGroup.get("capacidade")?.touched">
+                            {{ getErrorMessage("capacidade", formGroup.get("capacidade")?.errors) }}
+                        </mat-error>
+                    </mat-form-field>
+                    
                     <mat-form-field appearance="fill" class="full-width-input">
                         <mat-label>Tipo de betoneira:</mat-label>
                         <mat-select id="idTipoBetoneira" formControlName="idTipoBetoneira" required>

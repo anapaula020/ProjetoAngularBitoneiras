@@ -42,6 +42,9 @@ export class BetoneiraFormComponent implements OnInit {
             nome: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(80)]],
             descricao: ['',[Validators.required,Validators.minLength(10),Validators.maxLength(1000)]],
             preco: [null,[Validators.required,Validators.min(0)]],
+            quantidadeEstoque: [null,[Validators.required]],
+            modelo: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(80)]],
+            marca: ['',[Validators.required,Validators.minLength(10),Validators.maxLength(1000)]],
             idTipoBetoneira: [null],
             fabricante: [null],
             imageUrl: [null]
@@ -211,14 +214,36 @@ export class BetoneiraFormComponent implements OnInit {
             min: 'Preço deve ser maior do que 0.',
             apiError: 'API_ERROR'
         },
+        quantidadeEstoque: {
+            required: 'Quantidade de estoque é obrigatório.',
+            min: 'Quantidade de estoque deve ser maior do que 0.',
+            apiError: 'API_ERROR'
+        },
+        modelo: {
+            required: 'Modelo é obrigatório.',
+            minlength: 'Modelo deve conter ao menos 3 caracteres.',
+            maxlength: 'Modelo deve conter no máximo 40 caracteres.',
+            apiError: 'API_ERROR'
+        },
+        marca: {
+            required: 'Marca é obrigatório.',
+            minlength: 'Marca deve conter ao menos 10 caracteres.',
+            maxlength: 'Marca deve conter no máximo 1000 caracteres.',
+            apiError: 'API_ERROR'
+        },
+        capacidade: {
+            required: 'Capacidade é obrigatório.',
+            min: 'Capacidade deve ser maior do que 0.',
+            apiError: 'API_ERROR'
+        },
+        idTipoBetoneira: {
+            required: 'Id da betoneira é obrigatório.',
+            min: 'Id da betoneira deve ser maior do que 0.',
+            apiError: 'API_ERROR'
+        },
         idFabricante: {
             required: 'Id do fabricante é obrigatório.',
             min: 'Id do fabricante deve ser maior do que 0.',
-            apiError: 'API_ERROR'
-        },
-        estoque: {
-            required: 'Estoque é obrigatório.',
-            min: 'Estoque deve ser maior do que 0.',
             apiError: 'API_ERROR'
         }
     }
