@@ -25,7 +25,7 @@ type Card = {
     marca: string,
     capacidade: number,
     tipo: string, 
-    idFabricante: Fabricante, 
+    idFabricante?: Fabricante | null, 
     imageUrl: string
 }
 
