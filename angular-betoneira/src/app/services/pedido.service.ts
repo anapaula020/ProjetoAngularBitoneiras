@@ -9,7 +9,7 @@ import { Endereco } from '../models/endereco.model';
     providedIn: 'root'
 })
 export class PedidoService {
-    private baseUrl = 'http://localhost:8000/pedidos';
+    private baseUrl = 'http://localhost:8080/pedidos';
 
     constructor(private httpClient: HttpClient) { }
 

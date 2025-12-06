@@ -9,7 +9,7 @@ import { Cliente } from "../models/cliente.model";
     providedIn: 'root'
 })
 export class AuthService {
-    private baseUrl = 'http://localhost:8000/auth';
+    private baseUrl = 'http://localhost:8080/auth';
     private tokenKey = 'jwt_token';
     private clienteLogadoKey = 'cliente_logado';
     private clienteLogadoSubject = new BehaviorSubject<Cliente | null>(null);

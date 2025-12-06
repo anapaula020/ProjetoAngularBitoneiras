@@ -69,7 +69,7 @@ export class BetoneiraInfoComponent implements OnInit {
             this.otherBetoneiras = data.filter(m => m.id !== this.betoneira.id);
             this.otherBetoneiras.forEach(betoneira => {
                 if(!betoneira.imageUrl.startsWith('http')) {
-                    betoneira.imageUrl = 'http://localhost:8000/betoneira/image/download/' + betoneira.imageUrl;
+                    betoneira.imageUrl = 'http://localhost:8080/betoneira/image/download/' + betoneira.imageUrl;
                 }
             });
             this.carregarCards();

@@ -5,7 +5,7 @@ import { Betoneira } from '../models/betoneira.model';
 
 @Injectable({ providedIn: 'root' })
 export class BetoneiraService {
-    private baseUrl = 'http://localhost:8000/betoneira';
+    private baseUrl = 'http://localhost:8080/betoneira';
 
     constructor(private httpClient: HttpClient) { }
 
