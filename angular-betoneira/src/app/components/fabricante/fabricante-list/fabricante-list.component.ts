@@ -16,10 +16,9 @@ import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-fabricante-betoneira-list',
-    standalone: true,
     templateUrl: './fabricante-list.component.html',
     styleUrls: ['./fabricante-list.component.css'],
-    imports: [MatPaginatorModule,CommonModule,RouterModule,MatTableModule,MatButtonModule,MatCardModule,MatToolbarModule,HeaderAdminComponent,FooterAdminComponent,MatIconModule]
+    imports: [MatPaginatorModule, CommonModule, RouterModule, MatTableModule, MatButtonModule, MatCardModule, MatToolbarModule, HeaderAdminComponent, FooterAdminComponent, MatIconModule]
 })
 export class FabricanteListComponent implements OnInit {
     displayedColumns: string[] = ['id','nome','anoNascimento','nacionalidade','sexo','actions'];

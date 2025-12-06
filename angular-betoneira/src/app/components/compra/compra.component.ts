@@ -23,10 +23,9 @@ import { Betoneira } from '../../models/betoneira.model';
 
 @Component({
     selector: 'app-compra',
-    standalone: true,
     templateUrl: './compra.component.html',
     styleUrls: ['./compra.component.css'],
-    imports: [NgIf,ReactiveFormsModule,CommonModule,MatCardModule,MatButtonModule,NgFor,MatCardActions,MatCardContent,MatCardTitle,MatCardFooter,HeaderComponent,FooterComponent]
+    imports: [NgIf, ReactiveFormsModule, CommonModule, MatCardModule, MatButtonModule, NgFor, MatCardActions, MatCardContent, MatCardTitle, MatCardFooter, HeaderComponent, FooterComponent]
 })
 export class CompraComponent implements OnInit,OnDestroy {
     private subscription = new Subscription();

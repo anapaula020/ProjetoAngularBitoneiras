@@ -30,8 +30,7 @@ type Card = {
 }
 
 @Component({
-    imports: [FormsModule,MatSelectModule,MatCardModule,MatButtonModule,MatFormFieldModule,NgForOf,MatCardActions,MatCardContent,MatCardTitle,MatCardFooter,CommonModule,MatPaginator],
-    standalone: true,
+    imports: [FormsModule, MatSelectModule, MatCardModule, MatButtonModule, MatFormFieldModule, NgForOf, MatCardActions, MatCardContent, MatCardTitle, MatCardFooter, CommonModule, MatPaginator],
     templateUrl: './betoneira-card-list.component.html',
     styleUrls: ['./betoneira-card-list.component.css']
 })

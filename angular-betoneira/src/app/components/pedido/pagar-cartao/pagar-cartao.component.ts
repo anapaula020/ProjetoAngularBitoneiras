@@ -11,8 +11,7 @@ import { PedidoService } from '../../../services/pedido.service';
     selector: 'app-pagar-cartao',
     templateUrl: './pagar-cartao.component.html',
     styleUrls: ['./pagar-cartao.component.css'],
-    imports: [ReactiveFormsModule,NgIf],
-    standalone: true
+    imports: [ReactiveFormsModule, NgIf]
 })
 export class PagarCartaoComponent implements OnInit {
     pagarCartaoForm: FormGroup;

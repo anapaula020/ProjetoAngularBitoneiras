@@ -9,10 +9,9 @@ import { FooterComponent } from '../../template/footer/footer.component';
 
 @Component({
     selector: 'app-desconhecido',
-    standalone: true,
     templateUrl: './desconhecido.component.html',
     styleUrls: ['./desconhecido.component.css'],
-    imports: [NgIf,ReactiveFormsModule,CommonModule,MatCardModule,MatButtonModule,NgFor,MatCardActions,MatCardContent,MatCardTitle,MatCardFooter,HeaderComponent,FooterComponent]
+    imports: [NgIf, ReactiveFormsModule, CommonModule, MatCardModule, MatButtonModule, NgFor, MatCardActions, MatCardContent, MatCardTitle, MatCardFooter, HeaderComponent, FooterComponent]
 })
 export class DesconhecidoComponent implements OnInit {
     constructor(private router: Router) {

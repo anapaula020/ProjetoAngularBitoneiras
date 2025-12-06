@@ -14,8 +14,7 @@ import { SidebarService } from '../../../services/sidebar.service';
     selector: 'app-header-login',
     templateUrl: './header-login.component.html',
     styleUrls: ['./header-login.component.css'],
-    imports: [CommonModule,RouterModule,ReactiveFormsModule,MatFormFieldModule,MatInputModule,MatButtonModule,MatToolbarModule,MatToolbar,MatIcon,MatBadge,MatButton,MatIconButton,RouterModule],
-    standalone: true
+    imports: [CommonModule, RouterModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatToolbarModule, MatToolbar, MatIcon, MatBadge, MatButton, MatIconButton, RouterModule]
 })
 export class HeaderLoginComponent implements OnInit, OnDestroy {
     searchForm: FormGroup;

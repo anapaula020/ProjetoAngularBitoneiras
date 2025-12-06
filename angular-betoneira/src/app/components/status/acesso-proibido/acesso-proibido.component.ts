@@ -9,10 +9,9 @@ import { HeaderComponent } from '../../template/header/header.component';
 
 @Component({
     selector: 'app-acesso-proibido',
-    standalone: true,
     templateUrl: './acesso-proibido.component.html',
     styleUrls: ['./acesso-proibido.component.css'],
-    imports: [NgIf,ReactiveFormsModule,CommonModule,MatCardModule,MatButtonModule,NgFor,MatCardActions,MatCardContent,MatCardTitle,MatCardFooter,HeaderComponent,FooterComponent]
+    imports: [NgIf, ReactiveFormsModule, CommonModule, MatCardModule, MatButtonModule, NgFor, MatCardActions, MatCardContent, MatCardTitle, MatCardFooter, HeaderComponent, FooterComponent]
 })
 export class AcessoProibidoComponent implements OnInit {
     constructor(private router: Router) {

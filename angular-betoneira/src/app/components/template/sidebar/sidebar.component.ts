@@ -8,8 +8,7 @@ import {MatIconModule} from '@angular/material/icon';
 
 @Component({
     selector: 'app-sidebar',
-    standalone: true,
-    imports: [MatIconModule,MatSidenav,MatDrawer,MatDrawerContainer,RouterModule,MatDrawerContent,MatToolbar,MatList,MatNavList,MatListItem,RouterOutlet],
+    imports: [MatIconModule, MatSidenav, MatDrawer, MatDrawerContainer, RouterModule, MatDrawerContent, MatToolbar, MatList, MatNavList, MatListItem, RouterOutlet],
     templateUrl: './sidebar.component.html',
     styleUrl: './sidebar.component.css'
 })
