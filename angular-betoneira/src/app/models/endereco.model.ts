@@ -1,17 +1,17 @@
 export class Endereco {
     id!: number;
+    rua!: string;
     numero!: string;
-    complemento!: string;
-    bairro!: string;
     cep!: string;
-    municipio!: string;
+    cidade!: string;
+    estado!: string;
 
-    constructor(id: number,numero: string,complemento: string,bairro: string,cep: string,municipio: string) {
+    constructor(id: number,rua: string,numero: string,cep: string,cidade: string,estado: string) {
         this.id = id;
+        this.rua = rua;
         this.numero = numero;
-        this.complemento = complemento;
-        this.bairro = bairro;
         this.cep = cep;
-        this.municipio = municipio;
+        this.cidade = cidade;
+        this.estado = estado;
     }
 }

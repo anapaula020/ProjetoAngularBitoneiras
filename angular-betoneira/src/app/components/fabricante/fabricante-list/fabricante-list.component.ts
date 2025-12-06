@@ -23,7 +23,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class FabricanteListComponent implements OnInit {
     displayedColumns: string[] = ['id','nome','anoNascimento','nacionalidade','sexo','actions'];
-    fabricante: Fabricante[] = [];
+    fabricantes: Fabricante[] = [];
     totalRecords = 0;
     pageSize = 10;
     page = 0;
@@ -43,7 +43,7 @@ export class FabricanteListComponent implements OnInit {
 
     loadFabricante(): void {
         this.autorService.findAll(this.page,this.pageSize).subscribe((data: Fabricante[]) => {
-            this.fabricante = data;
+            this.fabricantes = data;
         });
         this.autorService.count().subscribe(data => { this.totalRecords = data });
     }

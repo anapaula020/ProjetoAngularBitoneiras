@@ -64,7 +64,6 @@ export class CompraComponent implements OnInit,OnDestroy {
             if(this.enderecoForm.dirty) {
                 this.enderecoForm.patchValue({
                     numero: this.enderecoForm.get("numero"), 
-                    complemento: this.enderecoForm.get("complemento"), 
                     bairro: this.enderecoForm.get("bairro"), 
                     cep: this.enderecoForm.get("cep"), 
                     municipio: this.enderecoForm.get("municipio")
