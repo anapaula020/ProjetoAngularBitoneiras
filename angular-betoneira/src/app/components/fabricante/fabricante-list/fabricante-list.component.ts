@@ -29,7 +29,7 @@ export class FabricanteListComponent implements OnInit {
     page = 0;
     readonly dialog = inject(MatDialog);
 
-    constructor(private autorService: FabricanteService,private router: Router) { }
+    constructor(private fabricanteService: FabricanteService,private router: Router) { }
 
     ngOnInit(): void {
         this.loadFabricante();
@@ -42,21 +42,21 @@ export class FabricanteListComponent implements OnInit {
     }
 
     loadFabricante(): void {
-        this.autorService.findAll(this.page,this.pageSize).subscribe((data: Fabricante[]) => {
+        this.fabricanteService.findAll(this.page,this.pageSize).subscribe((data: Fabricante[]) => {
             this.fabricantes = data;
         });
-        this.autorService.count().subscribe(data => { this.totalRecords = data });
+        this.fabricanteService.count().subscribe(data => { this.totalRecords = data });
     }
 
-    editAutor(id: number): void {
-        this.router.navigate(['admin/autor/edit',id]);
+    editFabricante(id: number): void {
+        this.router.navigate(['admin/fabricante/edit',id]);
     }
 
-    deleteAutor(id: number): void {
+    deleteFabricante(id: number): void {
         const dialogRef = this.dialog.open(ExclusaoComponent);
         dialogRef.afterClosed().subscribe(result => {
             if(result === true) {
-                this.autorService.delete(id).subscribe(() => {
+                this.fabricanteService.delete(id).subscribe(() => {
                     this.loadFabricante();
                 });
             }

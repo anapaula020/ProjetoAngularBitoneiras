@@ -18,19 +18,19 @@ import { ExclusaoComponent } from '../../confirmacao/exclusao/exclusao.component
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-    selector: 'app-autor-form',
+    selector: 'app-fabricante-form',
     standalone: true,
-    templateUrl: './autor-form.component.html',
-    styleUrls: ['./autor-form.component.css'],
+    templateUrl: './fabricante-form.component.html',
+    styleUrls: ['./fabricante-form.component.css'],
     imports: [MatDatepickerModule,MatNativeDateModule,CommonModule,FormsModule,ReactiveFormsModule,MatFormFieldModule,MatInputModule,MatButtonModule,MatCardModule,MatToolbarModule,MatSelectModule,RouterModule,HeaderAdminComponent,FooterAdminComponent],
     providers: [MatDatepickerModule]
 })
 export class FabricanteFormComponent implements OnInit {
     formGroup: FormGroup;
-    autorId: number | null = null;
+    fabricanteId: number | null = null;
     readonly dialog = inject(MatDialog);
 
-    constructor(private formBuilder: FormBuilder,private autorService: FabricanteService,private router: Router,private activatedRoute: ActivatedRoute) {
+    constructor(private formBuilder: FormBuilder,private fabricanteService: FabricanteService,private router: Router,private activatedRoute: ActivatedRoute) {
         this.formGroup = this.formBuilder.group({
             id: [null],
             nome: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(40)]]
@@ -39,16 +39,16 @@ export class FabricanteFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.activatedRoute.params.subscribe(params => {
-            this.autorId = params['id'] ? +params['id'] : null;
-            if(this.autorId) {
-                this.loadAutor(this.autorId);
+            this.fabricanteId = params['id'] ? +params['id'] : null;
+            if(this.fabricanteId) {
+                this.loadFabricante(this.fabricanteId);
             }
         });
     }
 
-    loadAutor(id: number): void {
-        this.autorService.findById(id).subscribe(autor => {
-            this.formGroup.patchValue(autor);
+    loadFabricante(id: number): void {
+        this.fabricanteService.findById(id).subscribe(fabricante => {
+            this.formGroup.patchValue(fabricante);
         });
     }
 
@@ -58,15 +58,15 @@ export class FabricanteFormComponent implements OnInit {
             return;
         }
         if(this.formGroup.valid) {
-            if(this.autorId) {
-                this.autorService.update(this.formGroup.value).subscribe(() => {
-                    this.router.navigateByUrl('/admin/autor');
+            if(this.fabricanteId) {
+                this.fabricanteService.update(this.formGroup.value).subscribe(() => {
+                    this.router.navigateByUrl('/admin/fabricantes');
                 },error => {
                     this.tratarErros(error);
                 });
             } else {
-                this.autorService.insert(this.formGroup.value).subscribe(() => {
-                    this.router.navigateByUrl('/admin/autor');
+                this.fabricanteService.insert(this.formGroup.value).subscribe(() => {
+                    this.router.navigateByUrl('/admin/fabricantes');
                 },error => {
                     this.tratarErros(error);
                 });
@@ -79,8 +79,8 @@ export class FabricanteFormComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             if(result === true) {
                 if(this.formGroup.get('id')?.value) {
-                    this.autorService.delete(this.formGroup.get('id')?.value).subscribe(() => {
-                        this.router.navigateByUrl('/admin/autor');
+                    this.fabricanteService.delete(this.formGroup.get('id')?.value).subscribe(() => {
+                        this.router.navigateByUrl('/admin/fabricantes');
                     },error => {
                         this.tratarErros(error);
                     });

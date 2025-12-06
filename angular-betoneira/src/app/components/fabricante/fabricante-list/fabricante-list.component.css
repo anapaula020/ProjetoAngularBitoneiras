@@ -2,7 +2,7 @@ body {
     height: 100vh;
 }
 
-.autor-betoneira-list-container {
+.fabricante-betoneira-list-container {
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -11,34 +11,34 @@ body {
     background-color: #fff;
 }
 
-.autor-betoneira-list-container h2 {
+.fabricante-betoneira-list-container h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #333;
 }
 
-.autor-betoneira-list-container table {
+.fabricante-betoneira-list-container table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
 
-.autor-betoneira-list-container th,
-.autor-betoneira-list-container td {
+.fabricante-betoneira-list-container th,
+.fabricante-betoneira-list-container td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
 
-.autor-betoneira-list-container th {
+.fabricante-betoneira-list-container th {
     background-color: #f2f2f2;
     font-weight: bold;
 }
 
-.autor-betoneira-list-container tr:nth-child(even) {
+.fabricante-betoneira-list-container tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-.autor-betoneira-list-container tr:hover {
+.fabricante-betoneira-list-container tr:hover {
     background-color: #f1f1f1;
 }
