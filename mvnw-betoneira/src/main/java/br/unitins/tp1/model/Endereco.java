@@ -1,9 +1,9 @@
 package br.unitins.tp1.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.Embeddable;
 
-@Entity
-public class Endereco extends DefaultEntity {
+@Embeddable
+public class Endereco {
     private String numero;
     private String complemento;
     private String bairro;
