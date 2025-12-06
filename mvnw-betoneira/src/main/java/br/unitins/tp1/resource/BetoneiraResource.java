@@ -1,6 +1,6 @@
 package br.unitins.tp1.resource;
 
-import br.unitins.tp1.dto.BetoneiraRequestDTO;
+import br.unitins.tp1.dto.BetoneiraDTO;
 import br.unitins.tp1.dto.BetoneiraResponseDTO;
 import br.unitins.tp1.form.ImageForm;
 import br.unitins.tp1.service.BetoneiraFileServiceImpl;
@@ -37,16 +37,15 @@ public class BetoneiraResource {
     @POST
     @Transactional
     @RolesAllowed("ADMIN")
-    public Response create(BetoneiraRequestDTO dto) {
-        BetoneiraResponseDTO newBetoneira = betoneiraService.create(dto);
-        return Response.status(Response.Status.CREATED).entity(newBetoneira).build();
+    public Response create(BetoneiraDTO dto) {
+        return Response.status(Response.Status.CREATED).entity(betoneiraService.create(dto)).build();
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
     @RolesAllowed("ADMIN")
-    public Response update(@PathParam("id") Long id, BetoneiraRequestDTO dto) {
+    public Response update(@PathParam("id") Long id, BetoneiraDTO dto) {
         BetoneiraResponseDTO updatedBetoneira = betoneiraService.update(id, dto);
         return Response.status(Response.Status.OK).entity(updatedBetoneira).build();
     }

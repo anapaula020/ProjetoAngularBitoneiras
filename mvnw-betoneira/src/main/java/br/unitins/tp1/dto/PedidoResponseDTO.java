@@ -24,29 +24,68 @@ public class PedidoResponseDTO {
         this.clienteId = pedido.getCliente() != null ? pedido.getCliente().getId() : null;
         this.clienteNome = pedido.getCliente() != null ? pedido.getCliente().getNome() : null;
         this.clienteEmail = pedido.getCliente() != null ? pedido.getCliente().getEmail() : null;
-        this.itens = pedido.getItens() != null ?
-                     pedido.getItens().stream()
-                            .map(ItemPedidoResponseDTO::valueOf)
-                            .collect(Collectors.toList()) : null;
+        this.itens = pedido.getItens() != null ? pedido.getItens().stream()
+                .map(ItemPedidoResponseDTO::valueOf)
+                .collect(Collectors.toList()) : null;
     }
 
     public static PedidoResponseDTO valueOf(Pedido pedido) {
         return new PedidoResponseDTO(pedido);
     }
 
-    public Long getId() { return id; }
-    public LocalDateTime getDataPedido() { return dataPedido; }
-    public Double getTotalPedido() { return totalPedido; }
-    public Long getClienteId() { return clienteId; }
-    public String getClienteNome() { return clienteNome; }
-    public String getClienteEmail() { return clienteEmail; }
-    public List<ItemPedidoResponseDTO> getItens() { return itens; }
+    public Long getId() {
+        return id;
+    }
 
-    public void setId(Long id) { this.id = id; }
-    public void setDataPedido(LocalDateTime dataPedido) { this.dataPedido = dataPedido; }
-    public void setTotalPedido(Double totalPedido) { this.totalPedido = totalPedido; }
-    public void setClienteId(Long clienteId) { this.clienteId = clienteId; }
-    public void setClienteNome(String clienteNome) { this.clienteNome = clienteNome; }
-    public void setClienteEmail(String clienteEmail) { this.clienteEmail = clienteEmail; }
-    public void setItens(List<ItemPedidoResponseDTO> itens) { this.itens = itens; }
+    public LocalDateTime getDataPedido() {
+        return dataPedido;
+    }
+
+    public Double getTotalPedido() {
+        return totalPedido;
+    }
+
+    public Long getClienteId() {
+        return clienteId;
+    }
+
+    public String getClienteNome() {
+        return clienteNome;
+    }
+
+    public String getClienteEmail() {
+        return clienteEmail;
+    }
+
+    public List<ItemPedidoResponseDTO> getItens() {
+        return itens;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setDataPedido(LocalDateTime dataPedido) {
+        this.dataPedido = dataPedido;
+    }
+
+    public void setTotalPedido(Double totalPedido) {
+        this.totalPedido = totalPedido;
+    }
+
+    public void setClienteId(Long clienteId) {
+        this.clienteId = clienteId;
+    }
+
+    public void setClienteNome(String clienteNome) {
+        this.clienteNome = clienteNome;
+    }
+
+    public void setClienteEmail(String clienteEmail) {
+        this.clienteEmail = clienteEmail;
+    }
+
+    public void setItens(List<ItemPedidoResponseDTO> itens) {
+        this.itens = itens;
+    }
 }

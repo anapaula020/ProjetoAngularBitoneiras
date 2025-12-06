@@ -33,7 +33,7 @@ public class PagamentoServiceImpl implements PagamentoService {
 
     @Inject
     SecurityContext securityContext;
-
+/* 
     @Override
     @Transactional
     public PagamentoResponseDTO create(PagamentoRequestDTO dto) {
@@ -85,7 +85,7 @@ public class PagamentoServiceImpl implements PagamentoService {
 
         return PagamentoResponseDTO.valueOf(pagamento);
     }
-
+ */
     @Override
     @Transactional
     public PagamentoResponseDTO update(Long id, PagamentoRequestDTO dto) {

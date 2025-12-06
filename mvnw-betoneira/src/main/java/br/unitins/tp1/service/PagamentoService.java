@@ -7,7 +7,7 @@ import br.unitins.tp1.dto.PagamentoResponseDTO;
 import br.unitins.tp1.model.StatusPagamento;
 
 public interface PagamentoService {
-    public PagamentoResponseDTO create(PagamentoRequestDTO dto);
+    // public PagamentoResponseDTO create(PagamentoRequestDTO dto);
     public PagamentoResponseDTO update(Long id, PagamentoRequestDTO dto);
     public void delete(Long id);
     public PagamentoResponseDTO findById(Long id);

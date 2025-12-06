@@ -40,12 +40,12 @@ public class PagamentoResource {
     @Inject
     ClienteRepository clienteRepository;
 
-    @POST
-    @RolesAllowed({ "ADMIN" })
-    public Response create(PagamentoRequestDTO dto) {
-        PagamentoResponseDTO pagamento = pagamentoService.create(dto);
-        return Response.status(Response.Status.CREATED).entity(pagamento).build();
-    }
+    // @POST
+    // @RolesAllowed({ "USER" })
+    // public Response create(PagamentoRequestDTO dto) {
+    //     PagamentoResponseDTO pagamento = pagamentoService.create(dto);
+    //     return Response.status(Response.Status.CREATED).entity(pagamento).build();
+    // }
 
     // @POST
     // @Path("/mercadopago/pix")

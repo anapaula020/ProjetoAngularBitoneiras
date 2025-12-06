@@ -71,4 +71,9 @@ public class BetoneiraDTO {
     public void setIdFabricante(Long idFabricante) {
         this.idFabricante = idFabricante;
     }
+
+    public Integer getQuantidadeEstoque() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getQuantidadeEstoque'");
+    }
 }

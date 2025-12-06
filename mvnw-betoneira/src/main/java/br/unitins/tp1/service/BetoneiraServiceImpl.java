@@ -1,6 +1,6 @@
 package br.unitins.tp1.service;
 
-import br.unitins.tp1.dto.BetoneiraRequestDTO;
+import br.unitins.tp1.dto.BetoneiraDTO;
 import br.unitins.tp1.dto.BetoneiraResponseDTO;
 import br.unitins.tp1.exception.ServiceException;
 import br.unitins.tp1.model.Betoneira;
@@ -28,7 +28,7 @@ public class BetoneiraServiceImpl implements BetoneiraService {
     SecurityContext securityContext;
 
     @Transactional
-    public BetoneiraResponseDTO create(BetoneiraRequestDTO dto) {
+    public BetoneiraResponseDTO create(BetoneiraDTO dto) {
         if (!securityContext.isUserInRole("ADMIN")) {
             throw new ServiceException("Usuário não autorizado a criar betoneiras.", Response.Status.FORBIDDEN);
         }
@@ -50,7 +50,7 @@ public class BetoneiraServiceImpl implements BetoneiraService {
     }
 
     @Transactional
-    public BetoneiraResponseDTO update(Long id, BetoneiraRequestDTO dto) {
+    public BetoneiraResponseDTO update(Long id, BetoneiraDTO dto) {
         if (!securityContext.isUserInRole("ADMIN")) {
             throw new ServiceException("Usuário não autorizado a atualizar betoneiras.", Response.Status.FORBIDDEN);
         }
