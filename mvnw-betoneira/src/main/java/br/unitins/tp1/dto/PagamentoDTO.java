@@ -15,12 +15,12 @@ public class PagamentoDTO {
     private LocalDateTime dataPagamento;
 
     @NotNull(message = "O ID do tipo de pagamento não pode ser nulo.")
-    private Long idTipoPagamento;
+    private Integer idTipoPagamento;
 
     public PagamentoDTO() {
     }
 
-    public PagamentoDTO(Double valor, String statusPagamento, LocalDateTime dataPagamento, Long idTipoPagamento) {
+    public PagamentoDTO(Double valor, String statusPagamento, LocalDateTime dataPagamento, Integer idTipoPagamento) {
         this.valor = valor;
         this.statusPagamento = statusPagamento;
         this.dataPagamento = dataPagamento;
@@ -39,7 +39,7 @@ public class PagamentoDTO {
         return dataPagamento;
     }
 
-    public Long getIdTipoPagamento() {
+    public Integer getIdTipoPagamento() {
         return idTipoPagamento;
     }
 
@@ -55,7 +55,7 @@ public class PagamentoDTO {
         this.dataPagamento = dataPagamento;
     }
 
-    public void setIdTipoPagamento(Long idTipoPagamento) {
+    public void setIdTipoPagamento(Integer idTipoPagamento) {
         this.idTipoPagamento = idTipoPagamento;
     }
 }

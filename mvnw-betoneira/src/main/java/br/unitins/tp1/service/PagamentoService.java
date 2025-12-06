@@ -2,13 +2,13 @@ package br.unitins.tp1.service;
 
 import java.util.List;
 
-import br.unitins.tp1.dto.PagamentoRequestDTO;
+import br.unitins.tp1.dto.PagamentoDTO;
 import br.unitins.tp1.dto.PagamentoResponseDTO;
 import br.unitins.tp1.model.EnumStatusPagamento;
 
 public interface PagamentoService {
-    // public PagamentoResponseDTO create(PagamentoRequestDTO dto);
-    public PagamentoResponseDTO update(Long id, PagamentoRequestDTO dto);
+    // public PagamentoResponseDTO create(PagamentoDTO dto);
+    public PagamentoResponseDTO update(Long id, PagamentoDTO dto);
     public void delete(Long id);
     public PagamentoResponseDTO findById(Long id);
     public List<PagamentoResponseDTO> findAll();

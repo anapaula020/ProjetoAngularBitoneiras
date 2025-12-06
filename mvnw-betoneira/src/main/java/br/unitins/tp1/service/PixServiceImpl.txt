@@ -3,7 +3,7 @@ package br.unitins.tp1.service;
 import br.unitins.tp1.client.MercadoPagoPixRestClient;
 import br.unitins.tp1.dto.PixDTO;
 import br.unitins.tp1.dto.mercadopago.IdentificationDTO;
-import br.unitins.tp1.dto.mercadopago.MercadoPagoPixRequestDTO;
+import br.unitins.tp1.dto.mercadopago.MercadoPagoPixDTO;
 import br.unitins.tp1.dto.mercadopago.MercadoPagoPixResponseDTO;
 import br.unitins.tp1.dto.mercadopago.PayerDTO;
 import br.unitins.tp1.model.Cliente;
@@ -37,7 +37,7 @@ public class PixServiceImpl implements PixService {
     }
 
     public PixDTO generatePix(Double amount, Cliente cliente) {
-        MercadoPagoPixRequestDTO pixRequest = new MercadoPagoPixRequestDTO();
+        MercadoPagoPixDTO pixRequest = new MercadoPagoPixDTO();
         pixRequest.setTransactionAmount(amount);
         pixRequest.setDescription("Pagamento via PIX");
         pixRequest.setPaymentMethodId("pix");
@@ -83,7 +83,7 @@ public class PixServiceImpl implements PixService {
     }
 
     public MercadoPagoPixResponseDTO processPixPayment(Long pedidoId, PixDTO pixDto) {
-        MercadoPagoPixRequestDTO pixRequest = new MercadoPagoPixRequestDTO();
+        MercadoPagoPixDTO pixRequest = new MercadoPagoPixDTO();
         pixRequest.setTransactionAmount(pixDto.getAmount());
         pixRequest.setDescription("Pagamento de Compra via PIX (Pedido #" + pedidoId + ")");
         pixRequest.setPaymentMethodId("pix");

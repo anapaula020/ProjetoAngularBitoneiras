@@ -1,6 +1,6 @@
 package br.unitins.tp1.service;
 
-import br.unitins.tp1.dto.PagamentoRequestDTO;
+import br.unitins.tp1.dto.PagamentoDTO;
 import br.unitins.tp1.dto.PagamentoResponseDTO;
 import br.unitins.tp1.exception.ServiceException;
 import br.unitins.tp1.model.Pagamento;
@@ -33,7 +33,7 @@ public class PagamentoServiceImpl implements PagamentoService {
 /* 
     @Override
     @Transactional
-    public PagamentoResponseDTO create(PagamentoRequestDTO dto) {
+    public PagamentoResponseDTO create(PagamentoDTO dto) {
         Pedido pedido = pedidoRepository.findById(dto.getIdPedido());
         if (pedido == null) {
             throw new ServiceException("404", "Pedido não encontrado.");
@@ -85,7 +85,7 @@ public class PagamentoServiceImpl implements PagamentoService {
  */
     @Override
     @Transactional
-    public PagamentoResponseDTO update(Long id, PagamentoRequestDTO dto) {
+    public PagamentoResponseDTO update(Long id, PagamentoDTO dto) {
         Pagamento pagamento = pagamentoRepository.findById(id);
         if (pagamento == null) {
             throw new ServiceException("404", "Pagamento não encontrado.");
