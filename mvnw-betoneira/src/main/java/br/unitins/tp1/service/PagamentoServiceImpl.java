@@ -4,9 +4,9 @@ import br.unitins.tp1.dto.PagamentoRequestDTO;
 import br.unitins.tp1.dto.PagamentoResponseDTO;
 import br.unitins.tp1.exception.ServiceException;
 import br.unitins.tp1.model.Pagamento;
-import br.unitins.tp1.model.StatusPagamento;
-import br.unitins.tp1.model.StatusPedido;
-import br.unitins.tp1.model.TipoPagamento;
+import br.unitins.tp1.model.EnumStatusPagamento;
+import br.unitins.tp1.model.EnumStatusPedido;
+import br.unitins.tp1.model.EnumTipoPagamento;
 import br.unitins.tp1.repository.PagamentoRepository;
 import br.unitins.tp1.repository.PedidoRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -98,7 +98,7 @@ public class PagamentoServiceImpl implements PagamentoService {
             throw new ServiceException("403", "Usuário não autorizado a atualizar este pagamento.");
         }
 
-        pagamento.setTipoPagamento(TipoPagamento.valueOf(dto.getIdTipoPagamento()));
+        pagamento.setTipoPagamento(EnumTipoPagamento.valueOf(dto.getIdTipoPagamento()));
 
         pagamentoRepository.persist(pagamento);
         return PagamentoResponseDTO.valueOf(pagamento);
@@ -151,7 +151,7 @@ public class PagamentoServiceImpl implements PagamentoService {
             throw new ServiceException("403", "Usuário não autorizado a listar pagamentos por status.");
         }
         try {
-            StatusPagamento statusEnum = StatusPagamento.valueOf(status.toUpperCase());
+            EnumStatusPagamento statusEnum = EnumStatusPagamento.valueOf(status.toUpperCase());
             return pagamentoRepository.findByStatus(statusEnum).stream()
                     .map(PagamentoResponseDTO::valueOf)
                     .collect(Collectors.toList());
@@ -162,7 +162,7 @@ public class PagamentoServiceImpl implements PagamentoService {
 
     @Override
     @Transactional
-    public void processarPagamento(Long idPagamento, StatusPagamento novoStatus) {
+    public void processarPagamento(Long idPagamento, EnumStatusPagamento novoStatus) {
         if (!securityContext.isUserInRole("ADMIN")) {
             throw new ServiceException("403", "Usuário não autorizado a processar pagamentos.");
         }
@@ -173,10 +173,10 @@ public class PagamentoServiceImpl implements PagamentoService {
         }
 
         pagamento.setStatus(novoStatus);
-        if (novoStatus == StatusPagamento.APROVADO) {
-            pagamento.getPedido().setStatusPedido(StatusPedido.PAGO);
-        } else if (novoStatus == StatusPagamento.REJEITADO || novoStatus == StatusPagamento.CANCELADO) {
-            pagamento.getPedido().setStatusPedido(StatusPedido.CANCELADO);
+        if (novoStatus == EnumStatusPagamento.APROVADO) {
+            pagamento.getPedido().setStatusPedido(EnumStatusPedido.PAGO);
+        } else if (novoStatus == EnumStatusPagamento.REJEITADO || novoStatus == EnumStatusPagamento.CANCELADO) {
+            pagamento.getPedido().setStatusPedido(EnumStatusPedido.CANCELADO);
         }
 
         pagamentoRepository.persist(pagamento);

@@ -21,7 +21,7 @@ public class Pedido extends DefaultEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private StatusPedido statusPedido; 
+    private EnumStatusPedido statusPedido; 
 
     @Column(nullable = false)
     private Double totalPedido; 
@@ -40,10 +40,10 @@ public class Pedido extends DefaultEntity {
     public Pedido() {
         this.itens = new ArrayList<>();
         this.dataDoPedido = LocalDateTime.now(); 
-        this.statusPedido = StatusPedido.PENDENTE; 
+        this.statusPedido = EnumStatusPedido.PENDENTE; 
     }
 
-    public Pedido(LocalDateTime dataDoPedido, StatusPedido statusPedido, Double totalPedido, Cliente cliente, Endereco enderecoEntrega, List<ItemPedido> itens) {
+    public Pedido(LocalDateTime dataDoPedido, EnumStatusPedido statusPedido, Double totalPedido, Cliente cliente, Endereco enderecoEntrega, List<ItemPedido> itens) {
         this.dataDoPedido = dataDoPedido;
         this.statusPedido = statusPedido;
         this.totalPedido = totalPedido;
@@ -56,7 +56,7 @@ public class Pedido extends DefaultEntity {
         return dataDoPedido;
     }
 
-    public StatusPedido getStatusPedido() { 
+    public EnumStatusPedido getStatusPedido() { 
         return statusPedido;
     }
 
@@ -81,7 +81,7 @@ public class Pedido extends DefaultEntity {
         this.dataDoPedido = dataDoPedido;
     }
 
-    public void setStatusPedido(StatusPedido statusPedido) { 
+    public void setStatusPedido(EnumStatusPedido statusPedido) { 
         this.statusPedido = statusPedido;
     }
 

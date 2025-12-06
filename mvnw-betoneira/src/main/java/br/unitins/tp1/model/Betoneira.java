@@ -26,7 +26,7 @@ public class Betoneira extends DefaultEntity {
     @Column(nullable = true, name = "nome_imagem")
     private String nomeImagem;
     @Enumerated(EnumType.STRING)
-    private TipoBetoneiraEnum tipo;
+    private EnumTipoBetoneira tipo;
     @ManyToOne
     @JoinColumn(name = "fabricante_id")
     private Fabricante fabricante;
@@ -62,7 +62,7 @@ public class Betoneira extends DefaultEntity {
         return capacidade;
     }
 
-    public TipoBetoneiraEnum getTipo() {
+    public EnumTipoBetoneira getTipo() {
         return tipo;
     }
 
@@ -98,7 +98,7 @@ public class Betoneira extends DefaultEntity {
         this.capacidade = capacidade;
     }
 
-    public void setTipo(TipoBetoneiraEnum tipo) {
+    public void setTipo(EnumTipoBetoneira tipo) {
         this.tipo = tipo;
     }
 

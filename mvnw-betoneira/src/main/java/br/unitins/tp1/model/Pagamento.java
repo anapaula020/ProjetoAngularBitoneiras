@@ -18,11 +18,11 @@ public class Pagamento extends DefaultEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private StatusPagamento status;
+    private EnumStatusPagamento status;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TipoPagamento tipoPagamento;
+    private EnumTipoPagamento tipoPagamento;
 
     @Column(nullable = false)
     private Double valor;
@@ -34,7 +34,7 @@ public class Pagamento extends DefaultEntity {
     public Pagamento() {
     }
 
-    public Pagamento(LocalDateTime dataPagamento, StatusPagamento status, TipoPagamento tipoPagamento, Double valor, Pedido pedido) {
+    public Pagamento(LocalDateTime dataPagamento, EnumStatusPagamento status, EnumTipoPagamento tipoPagamento, Double valor, Pedido pedido) {
         this.dataPagamento = dataPagamento;
         this.status = status;
         this.tipoPagamento = tipoPagamento;
@@ -46,11 +46,11 @@ public class Pagamento extends DefaultEntity {
         return dataPagamento;
     }
 
-    public StatusPagamento getStatus() {
+    public EnumStatusPagamento getStatus() {
         return status;
     }
 
-    public TipoPagamento getTipoPagamento() {
+    public EnumTipoPagamento getTipoPagamento() {
         return tipoPagamento;
     }
 
@@ -66,11 +66,11 @@ public class Pagamento extends DefaultEntity {
         this.dataPagamento = dataPagamento;
     }
 
-    public void setStatus(StatusPagamento status) {
+    public void setStatus(EnumStatusPagamento status) {
         this.status = status;
     }
 
-    public void setTipoPagamento(TipoPagamento tipoPagamento) {
+    public void setTipoPagamento(EnumTipoPagamento tipoPagamento) {
         this.tipoPagamento = tipoPagamento;
     }
 

@@ -5,7 +5,7 @@ import br.unitins.tp1.dto.ClienteResponseDTO;
 import br.unitins.tp1.exception.ServiceException;
 import br.unitins.tp1.model.Cliente;
 import br.unitins.tp1.repository.ClienteRepository;
-import br.unitins.tp1.util.HashUtil;
+// import br.unitins.tp1.util.HashUtil;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -27,7 +27,7 @@ public class ClienteServiceImpl implements ClienteService {
         Cliente cliente = new Cliente();
         cliente.setNome(dto.getNome());
         cliente.setEmail(dto.getEmail());
-        cliente.setSenha(HashUtil.hash(dto.getSenha()));
+        // cliente.setSenha(HashUtil.hash(dto.getSenha()));
         cliente.setCpf(dto.getCpf());
         cliente.setTelefone(dto.getTelefone());
         cliente.setRole("USER");
@@ -49,7 +49,7 @@ public class ClienteServiceImpl implements ClienteService {
 
         cliente.setNome(dto.getNome());
         cliente.setEmail(dto.getEmail());
-        cliente.setSenha(HashUtil.hash(dto.getSenha()));
+        // cliente.setSenha(HashUtil.hash(dto.getSenha()));
         cliente.setCpf(dto.getCpf());
         cliente.setTelefone(dto.getTelefone());
 
@@ -88,9 +88,9 @@ public class ClienteServiceImpl implements ClienteService {
 
     public ClienteResponseDTO findByEmailAndSenha(String email, String rawSenha) {
         Cliente cliente = clienteRepository.findByEmail(email);
-        if (cliente == null || !HashUtil.verifyPassword(rawSenha, cliente.getSenha())) {
-            throw new ServiceException("Email ou senha inválidos.", Response.Status.UNAUTHORIZED);
-        }
+        // if (cliente == null || !HashUtil.verifyPassword(rawSenha, cliente.getSenha())) {
+        //     throw new ServiceException("Email ou senha inválidos.", Response.Status.UNAUTHORIZED);
+        // }
         return ClienteResponseDTO.valueOf(cliente);
     }
 }

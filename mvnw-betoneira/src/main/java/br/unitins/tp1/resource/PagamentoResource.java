@@ -13,7 +13,6 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
 
 import br.unitins.tp1.repository.ClienteRepository;
-import br.unitins.tp1.service.PixService;
 
 @Path("/pagamentos")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -23,8 +22,8 @@ public class PagamentoResource {
     @Inject
     PagamentoService pagamentoService;
 
-    @Inject
-    PixService pixService;
+    // @Inject
+    // PixService pixService;
 
     @Inject
     SecurityContext securityContext;

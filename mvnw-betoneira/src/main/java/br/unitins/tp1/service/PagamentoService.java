@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.unitins.tp1.dto.PagamentoRequestDTO;
 import br.unitins.tp1.dto.PagamentoResponseDTO;
-import br.unitins.tp1.model.StatusPagamento;
+import br.unitins.tp1.model.EnumStatusPagamento;
 
 public interface PagamentoService {
     // public PagamentoResponseDTO create(PagamentoRequestDTO dto);
@@ -13,7 +13,7 @@ public interface PagamentoService {
     public PagamentoResponseDTO findById(Long id);
     public List<PagamentoResponseDTO> findAll();
     public List<PagamentoResponseDTO> findByStatusPagamento(String status);
-    public void processarPagamento(Long idPagamento, StatusPagamento novoStatus);
+    public void processarPagamento(Long idPagamento, EnumStatusPagamento novoStatus);
     public List<PagamentoResponseDTO> findByAuthenticatedUser();
     public List<PagamentoResponseDTO> findByNome(String nome);
 }

@@ -1,7 +1,7 @@
 package br.unitins.tp1.dto;
 
 import br.unitins.tp1.model.Betoneira;
-import br.unitins.tp1.model.TipoBetoneiraEnum;
+import br.unitins.tp1.model.EnumTipoBetoneira;
 
 public class BetoneiraResponseDTO {
     private Long id;
@@ -12,7 +12,7 @@ public class BetoneiraResponseDTO {
     private String marca;
     private String modelo;
     private Double capacidade;
-    private TipoBetoneiraEnum tipo;
+    private EnumTipoBetoneira tipo;
     private FabricanteResponseDTO fabricante;
 
     public BetoneiraResponseDTO() {
@@ -43,7 +43,7 @@ public class BetoneiraResponseDTO {
     public String getMarca() { return marca; }
     public String getModelo() { return modelo; }
     public Double getCapacidade() { return capacidade; }
-    public TipoBetoneiraEnum getTipo() { return tipo; }
+    public EnumTipoBetoneira getTipo() { return tipo; }
     public FabricanteResponseDTO getFabricante() { return fabricante; }
 
     public void setId(Long id) { this.id = id; }
@@ -54,6 +54,6 @@ public class BetoneiraResponseDTO {
     public void setMarca(String marca) { this.marca = marca; }
     public void setModelo(String modelo) { this.modelo = modelo; }
     public void setCapacidade(Double capacidade) { this.capacidade = capacidade; }
-    public void setTipo(TipoBetoneiraEnum tipo) { this.tipo = tipo; }
+    public void setTipo(EnumTipoBetoneira tipo) { this.tipo = tipo; }
     public void setFabricante(FabricanteResponseDTO fabricante) { this.fabricante = fabricante; }
 }
