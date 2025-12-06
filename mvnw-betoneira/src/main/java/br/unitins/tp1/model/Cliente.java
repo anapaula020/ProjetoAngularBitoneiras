@@ -18,7 +18,7 @@ public class Cliente extends DefaultEntity {
     private String senha;
     @Column(length = 12)
     private String cpf;
-    @Nullable
+    @Column(nullable = true)
     private Endereco endereco;
     private Perfil perfil;
 

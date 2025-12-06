@@ -22,6 +22,7 @@ public class Pedido extends DefaultEntity {
     private List<ItemPedido> itens;
     @Column
     private Double preco;
+    @Column(nullable = true)
     private Endereco endereco;
     @Column(nullable = true)
     private EnumTipoPagamento tipoPagamento;
