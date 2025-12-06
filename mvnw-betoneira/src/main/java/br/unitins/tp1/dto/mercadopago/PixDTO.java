@@ -1,4 +1,4 @@
-package br.unitins.tp1.dto;
+package br.unitins.tp1.dto.mercadopago;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 public class PixDTO {

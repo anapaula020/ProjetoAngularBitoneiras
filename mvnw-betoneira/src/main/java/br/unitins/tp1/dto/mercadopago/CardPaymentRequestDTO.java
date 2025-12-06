@@ -1,4 +1,4 @@
-package br.unitins.tp1.dto;
+package br.unitins.tp1.dto.mercadopago;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

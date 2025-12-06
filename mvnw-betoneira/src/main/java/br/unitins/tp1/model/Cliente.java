@@ -24,7 +24,6 @@ public class Cliente extends DefaultEntity {
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos;
 
-   
     public Cliente() {
     }
 
@@ -65,13 +64,12 @@ public class Cliente extends DefaultEntity {
         if (this.role == null || this.role.isEmpty()) {
             return Collections.emptySet();
         }
-       
+
         Set<String> roles = new HashSet<>();
         roles.add(this.role);
         return roles;
     }
 
-   
     public String getRole() {
         return role;
     }
