@@ -1,4 +1,3 @@
-/* Container principal */
 .container {
     display: flex;
     flex-direction: row;
@@ -8,13 +7,11 @@
     margin: 0 auto;
 }
 
-/* Coluna esquerda (mangás) */
 .left-column {
     flex: 2;
     margin-right: 20px;
 }
 
-/* Coluna direita (detalhes do pedido) */
 .right-column {
     flex: 1;
     background-color: #f9f9f9;
@@ -23,19 +20,16 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Título total */
 .total {
     text-align: center;
     font-size: 32px;
     margin-bottom: 20px;
 }
 
-/* Botões principais */
 button {
     margin: 10px 5px;
 }
 
-/* Estilo do card do mangá */
 .carrinho-card {
     display: flex;
     flex-direction: row;
