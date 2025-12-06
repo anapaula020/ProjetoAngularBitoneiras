@@ -2,62 +2,12 @@ package br.unitins.tp1.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
-public class ClienteDTO {
-
-    @NotBlank(message = "O nome não pode ser nulo ou vazio.")
-    private String nome;
-
-    @NotBlank(message = "O email não pode ser nulo ou vazio.")
-    @Email(message = "Formato de email inválido.")
-    private String email;
-
-    @NotBlank(message = "O CPF não pode ser nulo ou vazio.")
-    @Pattern(regexp = "\\d{11}", message = "CPF deve conter 11 dígitos numéricos.")
-    private String cpf;
-
-    private String senha;
-
-    public ClienteDTO() {
-    }
-
-    public ClienteDTO(String nome, String email, String cpf, String senha) {
-        this.nome = nome;
-        this.email = email;
-        this.cpf = cpf;
-        this.senha = senha;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+public record ClienteDTO(
+        @NotBlank(message = "Nome não pode ficar vazio.") @Size(min = 4, max = 80, message = "Nome está grande demais.") String username,
+        @NotBlank(message = "Email não pode ficar vazio.") @Size(min = 6, message = "Email está pequeno demais.") @Size(max = 60, message = "Email está grande demais.") @Email String email,
+        @NotBlank(message = "Senha não pode ficar vazia.") @Size(min = 6, message = "Senha está pequena demais.") @Size(max = 60, message = "Senha está grande demais.") String senha,
+        @NotBlank(message = "CPF não pode ficar vazio.") @Size(min = 10, message = "CPF está pequeno demais.") @Size(max = 12, message = "CPF está grande demais.") String cpf,
+        EnderecoDTO endereco) {
 }

@@ -1,10 +1,10 @@
 package br.unitins.tp1.resource;
 
 import br.unitins.tp1.dto.AuthUsuarioDTO;
-import br.unitins.tp1.dto.UsuarioResponseDTO;
+import br.unitins.tp1.dto.ClienteResponseDTO;
 import br.unitins.tp1.service.HashService;
 import br.unitins.tp1.service.JwtService;
-import br.unitins.tp1.service.UsuarioService;
+import br.unitins.tp1.service.ClienteService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
@@ -23,7 +23,7 @@ public class AuthResource {
     HashService hashService;
 
     @Inject
-    UsuarioService usuarioService;
+    ClienteService clienteService;
 
     @Inject
     JwtService jwtService;
@@ -32,14 +32,14 @@ public class AuthResource {
     public Response login(AuthUsuarioDTO authDTO) {
         String hash = hashService.getHashSenha(authDTO.senha());
 
-        UsuarioResponseDTO usuario = usuarioService.findByLoginAndSenha(authDTO.login(), hash);
+        ClienteResponseDTO cliente = clienteService.findByLoginAndSenha(authDTO.login(), hash);
 
-        if (usuario == null) {
+        if (cliente == null) {
             return Response.status(Status.NOT_FOUND)
                 .entity("Usuario não encontrado").build();
         } 
-        return Response.ok(usuario)
-            .header("Authorization", jwtService.generateJwt(usuario))
+        return Response.ok(cliente)
+            .header("Authorization", jwtService.generateJwt(cliente))
             .build();
     }
 }

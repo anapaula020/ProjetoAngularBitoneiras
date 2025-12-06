@@ -2,10 +2,10 @@ package br.unitins.tp1.resource;
 
 import br.unitins.tp1.dto.AdministradorDTO;
 import br.unitins.tp1.dto.AdministradorResponseDTO;
-import br.unitins.tp1.dto.UsuarioDTO;
-import br.unitins.tp1.dto.UsuarioResponseDTO;
+import br.unitins.tp1.dto.ClienteDTO;
+import br.unitins.tp1.dto.ClienteResponseDTO;
 import br.unitins.tp1.service.AdministradorService;
-import br.unitins.tp1.service.UsuarioService;
+import br.unitins.tp1.service.ClienteService;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -31,7 +31,7 @@ public class AdministradorResource {
     public AdministradorService administradorService;
 
     @Inject
-    public UsuarioService usuarioService;
+    public ClienteService clienteService;
 
     @GET
     @RolesAllowed("Administrador")
@@ -94,12 +94,12 @@ public class AdministradorResource {
     @RolesAllowed("Administrador")
     @Path("/usuarios/edit/{id}")
     @Transactional
-    public Response update(@PathParam("id") Long id, UsuarioDTO userDto) {
-        UsuarioResponseDTO usuarioBanco = usuarioService.findById(id);
-        if (usuarioBanco == null) {
+    public Response update(@PathParam("id") Long id, ClienteDTO userDto) {
+        ClienteResponseDTO clienteBanco = clienteService.findById(id);
+        if (clienteBanco == null) {
             return Response.status(Status.NOT_FOUND).build();
         }
-        usuarioService.update(id, userDto);
+        clienteService.update(id, userDto);
         return Response.status(Status.NO_CONTENT).build();
     }
 

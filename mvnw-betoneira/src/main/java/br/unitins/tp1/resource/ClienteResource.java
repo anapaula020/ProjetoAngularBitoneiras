@@ -1,67 +1,136 @@
 package br.unitins.tp1.resource;
 
+import br.unitins.tp1.dto.EnderecoDTO;
+import br.unitins.tp1.dto.TrocaSenhaDTO;
 import br.unitins.tp1.dto.ClienteDTO;
 import br.unitins.tp1.dto.ClienteResponseDTO;
+import br.unitins.tp1.dto.mercadopago.EmailDTO;
 import br.unitins.tp1.service.ClienteService;
-import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.DefaultValue;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PATCH;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 
 @Path("/clientes")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ClienteResource {
-
     @Inject
-    ClienteService clienteService;
+    public ClienteService clienteService;
+
+    @GET
+    @RolesAllowed("Administrador")
+    public Response findAll(@QueryParam("page") @DefaultValue("0") int page,
+            @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
+        return Response.ok(clienteService.findAll(page, pageSize)).build();
+    }
+
+    @GET
+    @Path("/count")
+    @RolesAllowed("Administrador")
+    public long count() {
+        return clienteService.count();
+    }
+
+    @GET
+    @Path("/{id}")
+    public Response findById(@PathParam("id") Long id) {
+        ClienteResponseDTO user = clienteService.findById(id);
+        if (user == null) {
+            return Response.status(Status.NOT_FOUND).build();
+        }
+        return Response.ok(user).build();
+    }
+
+    @GET
+    @Path("/search/username/{content}")
+    @RolesAllowed({ "Administrador", "Cliente" })
+    public Response findByUsername(@PathParam("content") String content,
+            @QueryParam("page") @DefaultValue("0") int page,
+            @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
+        return Response.ok(clienteService.findByUsername(content, page, pageSize)).build();
+    }
+
+    @GET
+    @Path("/search/email/{email}")
+    @RolesAllowed({ "Administrador" })
+    public Response findByEmail(@PathParam("email") String email, @QueryParam("page") @DefaultValue("0") int page,
+            @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
+        return Response.ok(clienteService.findByEmail(email, page, pageSize)).build();
+    }
+
+    @GET
+    @Path("/search/cpf/{cpf}")
+    @RolesAllowed({ "Administrador" })
+    public Response findByCpf(@PathParam("cpf") String cpf, @QueryParam("page") @DefaultValue("0") int page,
+            @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
+        return Response.ok(clienteService.findByCpf(cpf, page, pageSize)).build();
+    }
+
+    @GET
+    @Path("/search/endereco/{endereco}")
+    @RolesAllowed({ "Administrador" })
+    public Response findByEndereco(@PathParam("endereco") String endereco,
+            @QueryParam("page") @DefaultValue("0") int page,
+            @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
+        return Response.ok(clienteService.findByEndereco(endereco, page, pageSize)).build();
+    }
 
     @POST
-    @Transactional
-    @PermitAll
-    public Response create(ClienteDTO dto) {
-        ClienteResponseDTO newCliente = clienteService.create(dto);
-        return Response.status(Response.Status.CREATED).entity(newCliente).build();
+    public Response create(ClienteDTO userDto) {
+        return Response.status(Status.CREATED).entity(clienteService.create(userDto)).build();
     }
 
     @PUT
     @Path("/{id}")
-    @Transactional
-    @RolesAllowed({"ADMIN", "USER"})
-    public Response update(@PathParam("id") Long id, ClienteDTO dto) {
-        ClienteResponseDTO updatedCliente = clienteService.update(id, dto);
-        return Response.status(Response.Status.OK).entity(updatedCliente).build();
+    @RolesAllowed({ "Administrador" })
+    public Response update(@PathParam("id") Long id, ClienteDTO userDto) {
+        ClienteResponseDTO clienteBanco = clienteService.findById(id);
+        if (clienteBanco == null){
+            return Response.status(Status.NOT_FOUND).build();
+        }
+        clienteService.update(id, userDto);
+        return Response.status(Status.NO_CONTENT).build();
     }
 
     @DELETE
     @Path("/{id}")
-    @Transactional
-    @RolesAllowed("ADMIN")
-    public Response delete(@PathParam("id") Long id) {
-        clienteService.delete(id);
-        return Response.status(Response.Status.NO_CONTENT).build();
+    @RolesAllowed({ "Administrador" })
+    public Response deleteById(@PathParam("id") Long id) {
+        clienteService.deleteById(id);
+        return Response.status(Status.NO_CONTENT).build();
     }
 
-    @GET
-    @RolesAllowed("ADMIN")
-    public Response findAll() {
-        return Response.ok(clienteService.findAll()).build();
+    @PATCH
+    @Path("/updateSenha")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateSenha(TrocaSenhaDTO senhaDTO) {
+        return clienteService.updateSenha(senhaDTO);
     }
 
-    @GET
-    @Path("/{id}")
-    @RolesAllowed({"ADMIN", "USER"})
-    public Response findById(@PathParam("id") Long id) {
-        return Response.ok(clienteService.findById(id)).build();
+    @PATCH
+    @Path("/updateEmail")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateEmail(EmailDTO email) {
+        return clienteService.updateEmail(email);
     }
 
-    @GET
-    @Path("/search/nome/{nome}")
-    @RolesAllowed({"ADMIN", "USER"})
-    public Response findByNome(@PathParam("nome") String nome) {
-        return Response.ok(clienteService.findByNome(nome)).build();
+    @PATCH
+    @Path("/updateEndereco")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateEndereco(EnderecoDTO endereco) {
+        return clienteService.updateEndereco(endereco);
     }
 }

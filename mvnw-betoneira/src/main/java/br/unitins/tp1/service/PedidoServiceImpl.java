@@ -14,7 +14,6 @@ import br.unitins.tp1.model.EnumStatusPedido;
 import br.unitins.tp1.model.ItemPedido;
 import br.unitins.tp1.model.Pedido;
 import br.unitins.tp1.repository.BetoneiraRepository;
-import br.unitins.tp1.repository.ItemPedidoRepository;
 import br.unitins.tp1.repository.PedidoRepository;
 import br.unitins.tp1.validation.ValidationException;
 import br.unitins.tp1.repository.ClienteRepository;
@@ -28,9 +27,6 @@ import jakarta.ws.rs.PathParam;
 public class PedidoServiceImpl implements PedidoService {
     @Inject
     public PedidoRepository pedidoRepository;
-
-    @Inject
-    public ItemPedidoRepository itemPedidoRepository;
 
     @Inject
     private ClienteRepository clienteRepository;
@@ -73,7 +69,6 @@ public class PedidoServiceImpl implements PedidoService {
 
             total += itemPedido.getPreco() / (itemDTO.desconto() / 100 + 1) * itemDTO.quantidade();
             betoneiraBanco.setQuantidadeEstoque(betoneiraBanco.getQuantidadeEstoque() - itemDTO.quantidade());
-            itemPedidoRepository.persist(itemPedido);
             itens.add(itemPedido);
         }
         pedidoBanco.setStatusPedido(EnumStatusPedido.PENDENTE);
@@ -113,7 +108,6 @@ public class PedidoServiceImpl implements PedidoService {
 
             total += itemPedido.getPreco() / (itemDTO.desconto() / 100 + 1) * itemDTO.quantidade();
             betoneiraBanco.setQuantidadeEstoque(betoneiraBanco.getQuantidadeEstoque() - itemDTO.quantidade());
-            itemPedidoRepository.persist(itemPedido);
             itens.add(itemPedido);
         }
         pedidoBanco.setPreco(total);

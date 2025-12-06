@@ -37,7 +37,7 @@ public class BetoneiraServiceImpl implements BetoneiraService {
         betoneira.setNome(dto.getNome());
         betoneira.setDescricao(dto.getDescricao());
         betoneira.setPreco(dto.getPreco());
-        betoneira.setQuantidadeEstoque(dto.getQuantidadeEstoque());
+        betoneira.setQuantidadeEstoque(dto.getEstoque());
 
         Fabricante fabricante = fabricanteRepository.findById(dto.getIdFabricante());
         if (fabricante == null) {
@@ -63,7 +63,7 @@ public class BetoneiraServiceImpl implements BetoneiraService {
         betoneira.setNome(dto.getNome());
         betoneira.setDescricao(dto.getDescricao());
         betoneira.setPreco(dto.getPreco());
-        betoneira.setQuantidadeEstoque(dto.getQuantidadeEstoque());
+        betoneira.setQuantidadeEstoque(dto.getEstoque());
 
         Fabricante fabricante = fabricanteRepository.findById(dto.getIdFabricante());
         if (fabricante == null) {
