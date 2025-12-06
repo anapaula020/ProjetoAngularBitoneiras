@@ -36,7 +36,7 @@ button {
 }
 
 /* Estilo do card do mangá */
-.manga-card {
+.carrinho-card {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -48,13 +48,13 @@ button {
     overflow: hidden;
 }
 
-.manga-card-content {
+.carrinho-card-content {
     display: flex;
     flex-direction: row;
     width: 100%;
 }
 
-.manga-image {
+.carrinho-image {
     width: 180px;
     height: auto;
     object-fit: cover;
@@ -62,7 +62,7 @@ button {
     border-radius: 10px;
 }
 
-.manga-details {
+.carrinho-details {
     display: flex;
     flex-direction: column;
     flex: 1;
