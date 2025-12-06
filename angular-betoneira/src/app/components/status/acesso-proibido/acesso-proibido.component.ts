@@ -8,10 +8,10 @@ import { FooterComponent } from '../../template/footer/footer.component';
 import { HeaderComponent } from '../../template/header/header.component';
 
 @Component({
-    selector: 'app-acessoproibido',
+    selector: 'app-acesso-proibido',
     standalone: true,
-    templateUrl: './acessoproibido.component.html',
-    styleUrls: ['./acessoproibido.component.css'],
+    templateUrl: './acesso-proibido.component.html',
+    styleUrls: ['./acesso-proibido.component.css'],
     imports: [NgIf,ReactiveFormsModule,CommonModule,MatCardModule,MatButtonModule,NgFor,MatCardActions,MatCardContent,MatCardTitle,MatCardFooter,HeaderComponent,FooterComponent]
 })
 export class AcessoProibidoComponent implements OnInit {
