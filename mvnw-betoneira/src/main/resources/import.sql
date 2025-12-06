@@ -19,8 +19,10 @@ INSERT INTO Betoneira (nome, preco, quantidadeEstoque, fabricante_id, tipo, nome
 INSERT INTO Betoneira (nome, preco, quantidadeEstoque, fabricante_id, tipo, nomeImagem) VALUES ('Super Betoneira', 5000.00, 2, 2, 'PORTATIL', '9e810b34fa7147b84fcf4fcd1eea2229.jpeg');
 INSERT INTO Betoneira (nome, preco, quantidadeEstoque, fabricante_id, tipo, nomeImagem) VALUES ('Mini Betoneira', 800.00, 20, 2, 'MISTURADOR', 'aeac8c814ee90cca4a268804bb0d1e7d.jpeg');
 
-INSERT INTO Cliente (nome, email, senha, cpf, telefone, role) VALUES ('JoãoSilva', 'joao@example.com', '$2a$10$H3NFbBEFjreeSnMcGXCoqOinImxlWXXa5VaOVAkmfmayEMprQIyZC', '111.222.333-44', '63999998888', 'USER');
-INSERT INTO Cliente (nome, email, senha, cpf, telefone, role) VALUES ('MariaAdmin', 'admin@example.com', '$2a$10$98NdXT9.EmWPuPBnsvAfxeIhumDh70TE5v2lwb3blsk7d4jfWsqgC', '555.666.777-88', '63988887777', 'ADMIN');
+INSERT INTO Administrador (username, email, senha, cpf) VALUES ('admin1', 'joao@example.com', '$2a$10$H3NFbBEFjreeSnMcGXCoqOinImxlWXXa5VaOVAkmfmayEMprQIyZC', '111.222.333-44');
+
+INSERT INTO Cliente (nome, email, senha, cpf) VALUES ('joao', 'joao@example.com', '$2a$10$H3NFbBEFjreeSnMcGXCoqOinImxlWXXa5VaOVAkmfmayEMprQIyZC', '111.222.333-44';
+INSERT INTO Cliente (nome, email, senha, cpf) VALUES ('maria', 'admin@example.com', '$2a$10$98NdXT9.EmWPuPBnsvAfxeIhumDh70TE5v2lwb3blsk7d4jfWsqgC', '555.666.777-88');
 
 INSERT INTO Endereco (logradouro, numero, bairro, cep, cliente_id) VALUES ('Rua A', '123', 'Centro', '77000-000', 1);
 INSERT INTO Endereco (logradouro, numero, bairro, cep, cliente_id) VALUES ('Av. B', '456', 'Jardim', '77000-001', 2);
