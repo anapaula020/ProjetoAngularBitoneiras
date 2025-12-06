@@ -18,6 +18,7 @@ public class Usuario extends DefaultEntity {
     private String cpf;
     @Nullable
     private Endereco endereco;
+    private Perfil perfil;
 
     public Usuario() {
     }
@@ -60,5 +61,13 @@ public class Usuario extends DefaultEntity {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 }

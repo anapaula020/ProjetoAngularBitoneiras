@@ -25,8 +25,8 @@ public class PagamentoServiceImpl implements PagamentoService {
     @Inject
     PedidoRepository pedidoRepository;
 
-    @Inject
-    PixService pixService;
+    // @Inject
+    // PixService pixService;
 
     @Inject
     SecurityContext securityContext;
