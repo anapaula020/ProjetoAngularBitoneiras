@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "manga-mania-front": {
+        "shine-betoneiras": {
             "projectType": "application",
             "schematics": {},
             "root": "",
@@ -13,7 +13,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:application",
                     "options": {
-                        "outputPath": "dist/manga-mania-front",
+                        "outputPath": "dist/shine-betoneiras",
                         "index": "src/index.html",
                         "browser": "src/main.ts",
                         "polyfills": [
@@ -60,10 +60,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "buildTarget": "manga-mania-front:build:production"
+                            "buildTarget": "shine-betoneiras:build:production"
                         },
                         "development": {
-                            "buildTarget": "manga-mania-front:build:development"
+                            "buildTarget": "shine-betoneiras:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
