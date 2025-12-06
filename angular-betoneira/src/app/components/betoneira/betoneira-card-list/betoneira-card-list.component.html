@@ -5,16 +5,6 @@
 </div>
 
 <div class="filtros" *ngIf="mostrarFiltros">
-
-    <mat-form-field appearance="fill">
-        <mat-label>Tipo</mat-label>
-        <mat-select [(ngModel)]="selectedTipo" (ngModelChange)="filtrarTipo($event)">
-            <mat-option *ngFor="let tipo of tipos" [value]="tipo.nome">
-                {{ tipo.descricao }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-
     <mat-form-field appearance="fill">
         <mat-label>Preço</mat-label>
         <mat-select [(ngModel)]="selectedPreco" (ngModelChange)="filtrarPreco($event)">

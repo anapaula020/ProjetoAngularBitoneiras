@@ -31,8 +31,6 @@ export class BetoneiraFormComponent implements OnInit {
     fabricantes: Fabricante[] = [];
     betoneiraId: number | null = null;
     dialog = inject(MatDialog);
-    tipos: string[] = [];
-
     fileName: string = '';
     selectedFile: File | null = null;
     imagePreview: string | ArrayBuffer | null = null;
@@ -203,12 +201,6 @@ export class BetoneiraFormComponent implements OnInit {
     get fabricanteSelecionado() {
         const id = this.formGroup.get("idFabricante")?.value;
         return this.fabricantes.find(f => f.id === id);
-    }
-
-
-    get tipoSelecionado() {
-        const id = this.formGroup.get("tipo")?.value;
-        return this.tipos.find(t => t === id);
     }
 
     errorMessages: { [controlName: string]: { [errorName: string]: string } } = {

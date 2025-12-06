@@ -42,7 +42,6 @@ export class BetoneiraCardListComponent implements OnInit {
     selectedTipo: string | null = null;
     selectedFabricante: number | null = null;
     precos: any[] = [];
-    tipos: string[] = [];
     fabricantes: Fabricante[] = [];
     selectedFornecedor: number | null = null;
     selectedPreco: number | null = null;
