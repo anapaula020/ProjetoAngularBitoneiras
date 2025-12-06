@@ -1,8 +1,11 @@
 package br.unitins.tp1.model;
 
+import java.util.Set;
+
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Email;
 
 @Entity
@@ -17,6 +20,7 @@ public class Cliente extends DefaultEntity {
     @Column(length = 12)
     private String cpf;
     @Nullable
+    @ManyToOne
     private Endereco endereco;
     private Perfil perfil;
 
@@ -69,5 +73,9 @@ public class Cliente extends DefaultEntity {
 
     public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
+    }
+
+    public Set<String> getRolesAsSet() {
+        return Set.of(perfil.name());
     }
 }

@@ -10,7 +10,6 @@ import java.util.Set;
 
 @ApplicationScoped
 public class TokenService {
-
     private static final String ISSUER = "unitins-tp1-issuer";
 
     public String generateJwt(Cliente cliente) {

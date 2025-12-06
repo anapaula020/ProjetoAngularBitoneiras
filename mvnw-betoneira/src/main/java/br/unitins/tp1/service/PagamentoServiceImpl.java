@@ -197,8 +197,8 @@ public class PagamentoServiceImpl implements PagamentoService {
         return pagamentoRepository.listAll().stream()
                 .filter(pagamento -> pagamento.getPedido() != null &&
                                      pagamento.getPedido().getCliente() != null &&
-                                     pagamento.getPedido().getCliente().getNome() != null &&
-                                     pagamento.getPedido().getCliente().getNome().toLowerCase().contains(nome.toLowerCase()))
+                                     pagamento.getPedido().getCliente().getUsername() != null &&
+                                     pagamento.getPedido().getCliente().getUsername().toLowerCase().contains(nome.toLowerCase()))
                 .map(PagamentoResponseDTO::valueOf)
                 .collect(Collectors.toList());
     }
