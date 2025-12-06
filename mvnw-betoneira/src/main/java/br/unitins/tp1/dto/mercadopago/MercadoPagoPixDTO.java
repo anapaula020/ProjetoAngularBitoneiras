@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.Valid;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class MercadoPagoPixRequestDTO {
+public class MercadoPagoPixDTO {
 
     @NotNull
     @Positive

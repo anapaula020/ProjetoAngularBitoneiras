@@ -33,7 +33,7 @@ public class PagamentoResource {
 
     // @POST
     // @RolesAllowed({ "USER" })
-    // public Response create(PagamentoRequestDTO dto) {
+    // public Response create(PagamentoDTO dto) {
     // PagamentoResponseDTO pagamento = pagamentoService.create(dto);
     // return Response.status(Response.Status.CREATED).entity(pagamento).build();
     // }
@@ -41,7 +41,7 @@ public class PagamentoResource {
     // @POST
     // @Path("/mercadopago/pix")
     // @RolesAllowed({ "USER", "ADMIN" })
-    // public Response processCardPayment(CardPaymentRequestDTO cardDto) {
+    // public Response processCardPayment(CardPaymentDTO cardDto) {
     // String email = securityContext.getUserPrincipal().getName();
     // Cliente cliente = clienteRepository.findByEmail(email);
 

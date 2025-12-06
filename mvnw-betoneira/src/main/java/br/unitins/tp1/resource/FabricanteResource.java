@@ -1,6 +1,6 @@
 package br.unitins.tp1.resource;
 
-import br.unitins.tp1.dto.FabricanteRequestDTO;
+import br.unitins.tp1.dto.FabricanteDTO;
 import br.unitins.tp1.dto.FabricanteResponseDTO;
 import br.unitins.tp1.service.FabricanteService;
 import jakarta.annotation.security.RolesAllowed;
@@ -21,7 +21,7 @@ public class FabricanteResource {
     @POST
     @Transactional
     @RolesAllowed("ADMIN")
-    public Response create(FabricanteRequestDTO dto) {
+    public Response create(FabricanteDTO dto) {
         FabricanteResponseDTO newFabricante = fabricanteService.create(dto);
         return Response.status(Response.Status.CREATED).entity(newFabricante).build();
     }
@@ -30,7 +30,7 @@ public class FabricanteResource {
     @Path("/{id}")
     @Transactional
     @RolesAllowed("ADMIN")
-    public Response update(@PathParam("id") Long id, FabricanteRequestDTO dto) {
+    public Response update(@PathParam("id") Long id, FabricanteDTO dto) {
         FabricanteResponseDTO updatedFabricante = fabricanteService.update(id, dto);
         return Response.status(Response.Status.OK).entity(updatedFabricante).build();
     }

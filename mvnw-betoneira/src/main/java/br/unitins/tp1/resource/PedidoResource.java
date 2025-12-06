@@ -1,6 +1,6 @@
 package br.unitins.tp1.resource;
 
-import br.unitins.tp1.dto.PedidoRequestDTO;
+import br.unitins.tp1.dto.PedidoDTO;
 import br.unitins.tp1.dto.PedidoResponseDTO;
 import br.unitins.tp1.service.PedidoService;
 import jakarta.annotation.security.RolesAllowed;
@@ -20,7 +20,7 @@ public class PedidoResource {
     @POST
     @Transactional
     @RolesAllowed("USER")
-    public Response create(PedidoRequestDTO dto) {
+    public Response create(PedidoDTO dto) {
         PedidoResponseDTO newPedido = pedidoService.create(dto);
         return Response.status(Response.Status.CREATED).entity(newPedido).build();
     }
@@ -29,7 +29,7 @@ public class PedidoResource {
     @Path("/{id}")
     @Transactional
     @RolesAllowed("ADMIN")
-    public Response update(@PathParam("id") Long id, PedidoRequestDTO dto) {
+    public Response update(@PathParam("id") Long id, PedidoDTO dto) {
         PedidoResponseDTO updatedPedido = pedidoService.update(id, dto);
         return Response.status(Response.Status.OK).entity(updatedPedido).build();
     }
@@ -39,7 +39,7 @@ public class PedidoResource {
     @Transactional
     @RolesAllowed("ADMIN")
     public Response delete(@PathParam("id") Long id) {
-        pedidoService.delete(id);
+        pedidoService.deleteById(id);
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
@@ -60,6 +60,6 @@ public class PedidoResource {
     @Path("/meus-pedidos")
     @RolesAllowed("USER")
     public Response getMyOrders() {
-        return Response.ok(pedidoService.getPurchaseHistoryForAuthenticatedUser()).build();
+        return Response.ok(pedidoService.findMyCompras()).build();
     }
 }

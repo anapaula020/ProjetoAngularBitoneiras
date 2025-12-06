@@ -85,7 +85,7 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Override
     @Transactional
-    public void update(Long id, PedidoDTO pedidoDTO) {
+    public PedidoResponseDTO update(Long id, PedidoDTO pedidoDTO) {
         Pedido pedidoBanco = pedidoRepository.findById(id);
         if (pedidoBanco == null) {
             throw new ValidationException("id", "Pedido não existe.");
@@ -120,6 +120,7 @@ public class PedidoServiceImpl implements PedidoService {
         pedidoBanco.setItens(itens);
         pedidoBanco.setStatusPedido(EnumStatusPedido.PENDENTE);
         pedidoBanco.setItens(itens);
+        return PedidoResponseDTO.valueOf(pedidoBanco);
     }
 
     @Override
@@ -176,33 +177,34 @@ public class PedidoServiceImpl implements PedidoService {
     // @Override
     // @Transactional
     // public Response PagarPeloPix(@Valid PixDTO pix) {
-    //     Pedido pedidoPagar = pedidoRepository.findById(pix.idPedido());
-    //     processarPedido(pix.idPedido(), pix.valor());
-    //     pedidoPagar.setEstadoPamento(EnumStatusPagamento.APROVADO);
-    //     pedidoPagar.setTipoPagamento(PagamentoTipo.PIX);
-    //     return Response.ok().build();
+    // Pedido pedidoPagar = pedidoRepository.findById(pix.idPedido());
+    // processarPedido(pix.idPedido(), pix.valor());
+    // pedidoPagar.setEstadoPamento(EnumStatusPagamento.APROVADO);
+    // pedidoPagar.setTipoPagamento(PagamentoTipo.PIX);
+    // return Response.ok().build();
     // }
 
     // @Override
     // @Transactional
     // public Response PagarPeloCredito(@Valid CartaoDTO cartao, int parcelas) {
-    //     if (parcelas < 1 || parcelas > 12) {
-    //         throw new ValidationException("Parcelas", "Parcelas inválidas, deve estar entre 1 e 12");
-    //     }
-    //     Pedido pedidoPagar = pedidoRepository.findById(cartao.idPedido());
-    //     processarPedido(cartao.idPedido(), cartao.limite());
-    //     pedidoPagar.setEstadoPamento(EnumStatusPagamento.PARCELAS);
-    //     pedidoPagar.setTipoPagamento(PagamentoTipo.CREDITO);
-    //     return Response.ok().build();
+    // if (parcelas < 1 || parcelas > 12) {
+    // throw new ValidationException("Parcelas", "Parcelas inválidas, deve estar
+    // entre 1 e 12");
+    // }
+    // Pedido pedidoPagar = pedidoRepository.findById(cartao.idPedido());
+    // processarPedido(cartao.idPedido(), cartao.limite());
+    // pedidoPagar.setEstadoPamento(EnumStatusPagamento.PARCELAS);
+    // pedidoPagar.setTipoPagamento(PagamentoTipo.CREDITO);
+    // return Response.ok().build();
     // }
 
     // @Override
     // @Transactional
     // public Response PagarPeloDebito(@Valid CartaoDTO cartao) {
-    //     Pedido pedidoPagar = pedidoRepository.findById(cartao.idPedido());
-    //     processarPedido(cartao.idPedido(), cartao.limite());
-    //     pedidoPagar.setEstadoPamento(EnumStatusPagamento.APROVADO);
-    //     pedidoPagar.setTipoPagamento(PagamentoTipo.DEBITO);
-    //     return Response.ok().build();
+    // Pedido pedidoPagar = pedidoRepository.findById(cartao.idPedido());
+    // processarPedido(cartao.idPedido(), cartao.limite());
+    // pedidoPagar.setEstadoPamento(EnumStatusPagamento.APROVADO);
+    // pedidoPagar.setTipoPagamento(PagamentoTipo.DEBITO);
+    // return Response.ok().build();
     // }
 }

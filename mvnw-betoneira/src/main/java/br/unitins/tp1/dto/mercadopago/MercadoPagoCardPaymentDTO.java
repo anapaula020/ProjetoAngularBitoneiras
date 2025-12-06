@@ -2,7 +2,7 @@ package br.unitins.tp1.dto.mercadopago;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class MercadoPagoCardPaymentRequestDTO {
+public class MercadoPagoCardPaymentDTO {
 
     @JsonProperty("transaction_amount")
     private Double transactionAmount;
@@ -15,10 +15,10 @@ public class MercadoPagoCardPaymentRequestDTO {
     @JsonProperty("issuer_id")
     private String issuerId;
 
-    public MercadoPagoCardPaymentRequestDTO() {
+    public MercadoPagoCardPaymentDTO() {
     }
 
-    public MercadoPagoCardPaymentRequestDTO(Double transactionAmount, String description, String paymentMethodId, PayerDTO payer, String token, Integer installments, String issuerId) {
+    public MercadoPagoCardPaymentDTO(Double transactionAmount, String description, String paymentMethodId, PayerDTO payer, String token, Integer installments, String issuerId) {
         this.transactionAmount = transactionAmount;
         this.description = description;
         this.paymentMethodId = paymentMethodId;

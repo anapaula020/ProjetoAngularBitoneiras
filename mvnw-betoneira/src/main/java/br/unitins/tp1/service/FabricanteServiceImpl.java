@@ -1,6 +1,6 @@
 package br.unitins.tp1.service;
 
-import br.unitins.tp1.dto.FabricanteRequestDTO;
+import br.unitins.tp1.dto.FabricanteDTO;
 import br.unitins.tp1.dto.FabricanteResponseDTO;
 import br.unitins.tp1.exception.ServiceException;
 import br.unitins.tp1.model.Fabricante;
@@ -23,7 +23,7 @@ public class FabricanteServiceImpl implements FabricanteService {
     SecurityContext securityContext;
 
     @Transactional
-    public FabricanteResponseDTO create(FabricanteRequestDTO dto) {
+    public FabricanteResponseDTO create(FabricanteDTO dto) {
         if (!securityContext.isUserInRole("ADMIN")) {
             throw new ServiceException("Usuário não autorizado a criar fabricantes.", Response.Status.FORBIDDEN);
         }
@@ -34,7 +34,7 @@ public class FabricanteServiceImpl implements FabricanteService {
     }
 
     @Transactional
-    public FabricanteResponseDTO update(Long id, FabricanteRequestDTO dto) {
+    public FabricanteResponseDTO update(Long id, FabricanteDTO dto) {
         if (!securityContext.isUserInRole("ADMIN")) {
             throw new ServiceException("Usuário não autorizado a atualizar fabricantes.", Response.Status.FORBIDDEN);
         }

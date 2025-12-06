@@ -5,8 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public class CardPaymentRequestDTO {
-
+public class CardPaymentDTO {
     @NotBlank(message = "O número do cartão não pode estar em branco.")
     @Size(min = 13, max = 19, message = "O número do cartão deve ter entre 13 e 19 dígitos.")
     private String cardNumber;
@@ -25,10 +24,10 @@ public class CardPaymentRequestDTO {
     @NotNull(message = "O valor do pagamento não pode ser nulo.")
     private Double amount;
 
-    public CardPaymentRequestDTO() {
+    public CardPaymentDTO() {
     }
 
-    public CardPaymentRequestDTO(String cardNumber, String securityCode, String expirationDate, String cardHolderName, Double amount) {
+    public CardPaymentDTO(String cardNumber, String securityCode, String expirationDate, String cardHolderName, Double amount) {
         this.cardNumber = cardNumber;
         this.securityCode = securityCode;
         this.expirationDate = expirationDate;
