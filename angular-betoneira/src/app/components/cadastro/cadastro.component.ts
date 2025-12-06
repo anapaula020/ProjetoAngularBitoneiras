@@ -105,10 +105,6 @@ export class CadastroComponent implements OnInit {
             minlength: 'CPF deve conter ao menos 10 caracteres.',
             maxlength: 'CPF deve conter no máximo 12 caracteres.',
             apiError: 'API_ERROR'
-        },
-        sexo: {
-            required: 'O sexo é obrigatório.',
-            apiError: 'API_ERROR'
         }
     }
 }

@@ -21,7 +21,7 @@ import { MatDialog } from '@angular/material/dialog';
     imports: [MatPaginatorModule, CommonModule, RouterModule, MatTableModule, MatButtonModule, MatCardModule, MatToolbarModule, HeaderAdminComponent, FooterAdminComponent, MatIconModule]
 })
 export class FabricanteListComponent implements OnInit {
-    displayedColumns: string[] = ['id','nome','anoNascimento','nacionalidade','sexo','actions'];
+    displayedColumns: string[] = ['id','nome','anoNascimento','nacionalidade','actions'];
     fabricantes: Fabricante[] = [];
     totalRecords = 0;
     pageSize = 10;

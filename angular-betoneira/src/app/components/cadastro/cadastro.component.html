@@ -38,16 +38,6 @@
                         {{ getErrorMessage('cpf', formGroup.get('cpf')?.errors) }}
                     </mat-error>
                 </div>
-                <div class="field">
-                    <span class="material-symbols-outlined">Sexo</span>
-                    <mat-select formControlName="sexo" required>
-                        <mat-option value="1">Feminino</mat-option>
-                        <mat-option value="2">Masculino</mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="formGroup.get('sexo')?.invalid && formGroup.get('sexo')?.touched">
-                        {{ getErrorMessage('sexo', formGroup.get('sexo')?.errors) }}
-                    </mat-error>
-                </div>
                 <div>
                     <input type="submit" class="botao" value="Cadastrar" />
                 </div>
