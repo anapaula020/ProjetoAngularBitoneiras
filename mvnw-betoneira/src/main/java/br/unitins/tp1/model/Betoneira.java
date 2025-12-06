@@ -1,5 +1,6 @@
 package br.unitins.tp1.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
@@ -8,21 +9,27 @@ import jakarta.persistence.EnumType;
 
 @Entity
 public class Betoneira extends DefaultEntity {
+    @Column(nullable = true, name = "nome")
     private String nome;
+    @Column(nullable = true, name = "descricao")
     private String descricao;
+    @Column(nullable = true, name = "preco")
     private Double preco;
+    @Column(nullable = true, name = "quantidade_estoque")
     private Integer quantidadeEstoque;
+    @Column(nullable = true, name = "modelo")
     private String modelo;
+    @Column(nullable = true, name = "marca")
     private String marca;
+    @Column(nullable = true, name = "capacidade")
     private Double capacidade;
-
+    @Column(nullable = true, name = "nome_imagem")
+    private String nomeImagem;
     @Enumerated(EnumType.STRING)
     private TipoBetoneiraEnum tipo;
-
     @ManyToOne
     @JoinColumn(name = "fabricante_id")
     private Fabricante fabricante;
-    private String imageUrl;
 
     public Betoneira() {
     }
@@ -99,11 +106,11 @@ public class Betoneira extends DefaultEntity {
         this.fabricante = fabricante;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getNomeImagem() {
+        return nomeImagem;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
     }
 }

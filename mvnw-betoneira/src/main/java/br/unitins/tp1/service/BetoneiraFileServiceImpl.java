@@ -1,130 +1,109 @@
 package br.unitins.tp1.service;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Arrays;
-import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Locale;
+import java.util.Set;
 import java.util.UUID;
+
+import org.jboss.resteasy.reactive.multipart.FileUpload;
 
 import br.unitins.tp1.model.Betoneira;
 import br.unitins.tp1.repository.BetoneiraRepository;
-import br.unitins.tp1.validation.ValidationException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.Response;
 
 @ApplicationScoped
 public class BetoneiraFileServiceImpl implements FileService {
-    private final String PATH_USER = System.getProperty("user.dir") + File.separator + "images" + File.separator
-            + "betoneiras" + File.separator;
+    private static final Path PLANO_UPLOAD_DIR = Paths.get(System.getProperty("user.home"), "images", "betoneiras");
+    private static final Set<String> ALLOWED_EXTENSIONS = Set.of("jpg", "jpeg", "png", "gif");
+    private static final long MAX_FILE_SIZE = 5L * 1024 * 1024; // 5 MB
+    private static final long MIN_FILE_SIZE = 1L * 1024; // 1 KB
 
     @Inject
     BetoneiraRepository betoneiraRepository;
 
     @Override
     @Transactional
-    public void salvar(Long id, String imageUrl, byte[] imagem) {
-        if (id == null) {
-            throw new ValidationException("id", "ID cannot be null");
-        }
-        if (imageUrl == null || imageUrl.isEmpty()) {
-            throw new ValidationException("imageUrl", "Image URL cannot be null or empty");
-        }
-        if (imagem == null) {
-            throw new ValidationException("imagem", "Image cannot be null");
-        }
-
+    public void salvar(Long id, FileUpload file) throws IOException {
         Betoneira betoneira = betoneiraRepository.findById(id);
-        if (betoneira == null) {
-            throw new ValidationException("betoneira", "betoneira not found");
-        }
-        if (betoneira.getImageUrl() != null) {
-            String deletar = betoneira.getImageUrl();
-            deleteImagem(deletar);
+        String novoNomeImagem = salvarImagem(file);
+        betoneira.setNomeImagem(novoNomeImagem);
+    }
+
+    private String salvarImagem(FileUpload file) {
+        if (file == null || file.uploadedFile() == null) {
+            throw new WebApplicationException(
+                    "Arquivo de imagem não informado.",
+                    Response.Status.BAD_REQUEST);
         }
         try {
-            betoneira.setImageUrl(salvarImagem(imageUrl, imagem));
+            validarTamanho(file);
+            validarExtensao(file);
+            Files.createDirectories(PLANO_UPLOAD_DIR);
+            String novoNome = gerarNomeAleatorio(file.fileName());
+            Path destino = PLANO_UPLOAD_DIR.resolve(novoNome);
+            Files.copy(file.uploadedFile(), destino, StandardCopyOption.REPLACE_EXISTING);
+            return novoNome;
         } catch (IOException e) {
-            throw new ValidationException("imagem", e.getMessage());
+            throw new WebApplicationException(
+                    "Erro ao salvar a imagem.",
+                    e,
+                    Response.Status.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @Override
-    @Transactional
-    public void deleteImagem(Long id) {
-        Betoneira betoneira = betoneiraRepository.findById(id);
-        if (betoneira == null)
-            return;
-        deleteImagem(betoneira.getImageUrl());
-        betoneira.setImageUrl(null);
-    }
-
-    @Override
-    @Transactional
-    public void deleteImagem(String imageUrl) {
-        if (imageUrl == null || imageUrl.isEmpty()) {
-            return;
+    private void validarTamanho(FileUpload file) {
+        long size = file.size();
+        if (size <= 0) {
+            throw new WebApplicationException("Arquivo vazio.", Response.Status.BAD_REQUEST);
         }
-        File file = new File(PATH_USER + imageUrl);
-        if (file.exists()) {
-            file.delete();
+        if (size < MIN_FILE_SIZE) {
+            throw new WebApplicationException("Arquivo muito pequeno para ser considerado uma imagem válida.", Response.Status.BAD_REQUEST);
+        }
+        if (size > MAX_FILE_SIZE) {
+            throw new WebApplicationException(String.format("Arquivo muito grande. Tamanho máximo permitido: %d bytes.", MAX_FILE_SIZE), Response.Status.BAD_REQUEST);
         }
     }
 
-    @Override
-    @Transactional
-    public String salvarImagem(String imageUrl, byte[] imagem) throws IOException {
-        System.out.println("imagem: " + imageUrl);
-        if (imagem == null) {
-            throw new ValidationException("imagem", "A imagem não pode ser nula");
+    private void validarExtensao(FileUpload file) {
+        String ext = getExtension(file.fileName());
+        if (ext == null || !ALLOWED_EXTENSIONS.contains(ext.toLowerCase(Locale.ROOT))) {
+            throw new WebApplicationException("Extensão de arquivo não suportada.",Response.Status.BAD_REQUEST);
         }
-
-        // Sanitize the file name
-        String sanitizedFileName = sanitizeFileName(imageUrl);
-
-        String mimeType = Files.probeContentType(new File(sanitizedFileName).toPath());
-        List<String> listMimeType = Arrays.asList("image/jpg", "image/gif", "image/png", "image/jpeg");
-        if (!listMimeType.contains(mimeType)) {
-            throw new IOException("Tipo de imagem não suportado.");
-        }
-
-        if (imagem.length > 1024 * 1024 * 10) {
-            throw new IOException("Arquivo muito grande, tamanho máximo 10MB.");
-        }
-
-        File diretorio = new File(PATH_USER);
-        if (!diretorio.exists()) {
-            diretorio.mkdirs();
-        }
-
-        String nomeArquivo = UUID.randomUUID() + "." + mimeType.substring(mimeType.lastIndexOf("/") + 1);
-
-        File file = new File(PATH_USER + nomeArquivo);
-        if (file.exists()) {
-            throw new IOException("Este arquivo já existe.");
-        }
-
-        file.createNewFile();
-
-        try (FileOutputStream stream = new FileOutputStream(file)) {
-            stream.write(imagem);
-            stream.flush();
-        }
-
-        return nomeArquivo;
     }
 
-    @Override
-    public File download(String imageUrl) {
-        if (imageUrl == null || imageUrl.isEmpty()) {
+    private String getExtension(String fileName) {
+        if (fileName == null)
+            return null;
+        String onlyName = Paths.get(fileName).getFileName().toString();
+        int idx = onlyName.lastIndexOf('.');
+        if (idx == -1 || idx == onlyName.length() - 1) {
             return null;
         }
-        return new File(PATH_USER + imageUrl);
+        return onlyName.substring(idx + 1);
     }
 
-    private String sanitizeFileName(String fileName) {
-        return fileName.replaceAll("[^a-zA-Z0-9\\.\\-]", "_");
+    private String gerarNomeAleatorio(String originalName) {
+        String onlyName = Paths.get(originalName).getFileName().toString();
+        String ext = "";
+        int idx = onlyName.lastIndexOf('.');
+        if (idx != -1) {
+            ext = onlyName.substring(idx).toLowerCase(Locale.ROOT);
+        }
+        return UUID.randomUUID().toString() + ext;
+    }
+
+    @Override
+    public File download(String nomeArquivo) {
+        File file = PLANO_UPLOAD_DIR.resolve(nomeArquivo).toFile();
+        return file;
     }
 }

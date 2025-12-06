@@ -2,10 +2,8 @@ package br.unitins.tp1.service;
 
 import br.unitins.tp1.dto.PagamentoRequestDTO;
 import br.unitins.tp1.dto.PagamentoResponseDTO;
-import br.unitins.tp1.dto.PixDTO;
 import br.unitins.tp1.exception.ServiceException;
 import br.unitins.tp1.model.Pagamento;
-import br.unitins.tp1.model.Pedido;
 import br.unitins.tp1.model.StatusPagamento;
 import br.unitins.tp1.model.StatusPedido;
 import br.unitins.tp1.model.TipoPagamento;
@@ -16,7 +14,6 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.SecurityContext;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
