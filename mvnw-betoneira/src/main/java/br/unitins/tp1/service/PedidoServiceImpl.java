@@ -1,176 +1,208 @@
 package br.unitins.tp1.service;
 
-import br.unitins.tp1.dto.PedidoRequestDTO;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.microprofile.jwt.JsonWebToken;
+
+import br.unitins.tp1.dto.ItemPedidoDTO;
+import br.unitins.tp1.dto.PedidoDTO;
 import br.unitins.tp1.dto.PedidoResponseDTO;
-import br.unitins.tp1.dto.ItemPedidoRequestDTO;
-import br.unitins.tp1.exception.ServiceException;
-import br.unitins.tp1.model.Cliente;
+import br.unitins.tp1.model.Betoneira;
 import br.unitins.tp1.model.Endereco;
+import br.unitins.tp1.model.EnumStatusPedido;
 import br.unitins.tp1.model.ItemPedido;
 import br.unitins.tp1.model.Pedido;
-import br.unitins.tp1.repository.ClienteRepository;
-import br.unitins.tp1.repository.EnderecoRepository;
+import br.unitins.tp1.repository.BetoneiraRepository;
 import br.unitins.tp1.repository.ItemPedidoRepository;
 import br.unitins.tp1.repository.PedidoRepository;
+import br.unitins.tp1.validation.ValidationException;
+import br.unitins.tp1.repository.ClienteRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.SecurityContext;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
+import jakarta.validation.Valid;
+import jakarta.ws.rs.PathParam;
 
 @ApplicationScoped
 public class PedidoServiceImpl implements PedidoService {
     @Inject
-    PedidoRepository pedidoRepository;
+    public PedidoRepository pedidoRepository;
 
     @Inject
-    ClienteRepository clienteRepository;
+    public ItemPedidoRepository itemPedidoRepository;
 
     @Inject
-    EnderecoRepository enderecoRepository;
+    private ClienteRepository clienteRepository;
 
     @Inject
-    ItemPedidoRepository itemPedidoRepository;
+    private BetoneiraRepository betoneiraRepository;
 
     @Inject
-    SecurityContext securityContext;
+    private JsonWebToken jsonWebToken;
 
-    @Transactional
-    public PedidoResponseDTO create(PedidoRequestDTO dto) {
-        String userEmail = securityContext.getUserPrincipal().getName();
-        Cliente cliente = clienteRepository.findByEmail(userEmail);
-
-        if (cliente == null) {
-            throw new ServiceException("Cliente autenticado não encontrado.", Response.Status.UNAUTHORIZED);
-        }
-
-        Endereco enderecoEntrega = enderecoRepository.findById(dto.getIdEnderecoEntrega());
-        if (enderecoEntrega == null) {
-            throw new ServiceException("Endereço de entrega não encontrado.", Response.Status.NOT_FOUND);
-        }
-        if (!securityContext.isUserInRole("ADMIN") && !enderecoEntrega.getCliente().getId().equals(cliente.getId())) {
-             throw new ServiceException("Endereço de entrega não pertence ao cliente autenticado.", Response.Status.FORBIDDEN);
-        }
-
-
-        Pedido pedido = new Pedido();
-        pedido.setDataDoPedido(LocalDateTime.now());
-        pedido.setCliente(cliente);
-        pedido.setEnderecoEntrega(enderecoEntrega);
-
-        Double totalCalculado = 0.0;
-        if (dto.getItens() != null && !dto.getItens().isEmpty()) {
-            for (ItemPedidoRequestDTO itemDto : dto.getItens()) {
-                ItemPedido itemPedido = new ItemPedido();
-                itemPedido.setQuantidade(itemDto.getQuantidade());
-                itemPedido.setPrecoUnitario(itemDto.getPrecoUnitario());
-                itemPedido.setPedido(pedido);
-                pedido.getItens().add(itemPedido);
-                totalCalculado += itemDto.getQuantidade() * itemDto.getPrecoUnitario();
-            }
-        }
-        pedido.setTotalPedido(totalCalculado);
-
-        pedidoRepository.persist(pedido);
-        return PedidoResponseDTO.valueOf(pedido);
+    @Override
+    public long count() {
+        return pedidoRepository.count();
     }
 
+    @Override
     @Transactional
-    public PedidoResponseDTO update(Long id, PedidoRequestDTO dto) {
-        Pedido pedido = pedidoRepository.findById(id);
-        if (pedido == null) {
-            throw new ServiceException("Pedido não encontrado.", Response.Status.NOT_FOUND);
+    public PedidoResponseDTO create(@Valid PedidoDTO pedidoDTO) {
+        Pedido pedidoBanco = new Pedido();
+        pedidoBanco.setCliente(
+                clienteRepository.findById(clienteRepository.findNomeEqual(jsonWebToken.getName()).getId()));
+        Endereco endereco = new Endereco();
+        endereco.setRua(pedidoDTO.endereco().getRua());
+        endereco.setNumero(pedidoDTO.endereco().getNumero());
+        endereco.setComplemento(pedidoDTO.endereco().getComplemento());
+        endereco.setBairro(pedidoDTO.endereco().getBairro());
+        endereco.setCep(pedidoDTO.endereco().getCep());
+        pedidoBanco.setEndereco(endereco);
+        List<ItemPedido> itens = new ArrayList<>();
+        Double total = 0.0;
+        for (ItemPedidoDTO itemDTO : pedidoDTO.itens()) {
+            Betoneira betoneiraBanco = betoneiraRepository.findById(itemDTO.idBetoneira());
+            validarQuantidade(betoneiraBanco.getQuantidadeEstoque(), itemDTO.quantidade());
+
+            ItemPedido itemPedido = new ItemPedido();
+            itemPedido.setBetoneira(betoneiraBanco);
+            itemPedido.setDesconto(itemDTO.desconto());
+            itemPedido.setPreco(betoneiraBanco.getPreco());
+            itemPedido.setQuantidade(itemDTO.quantidade());
+
+            total += itemPedido.getPreco() / (itemDTO.desconto() / 100 + 1) * itemDTO.quantidade();
+            betoneiraBanco.setQuantidadeEstoque(betoneiraBanco.getQuantidadeEstoque() - itemDTO.quantidade());
+            itemPedidoRepository.persist(itemPedido);
+            itens.add(itemPedido);
         }
-
-        String userEmail = securityContext.getUserPrincipal().getName();
-        boolean isAdmin = securityContext.isUserInRole("ADMIN");
-
-        if (!isAdmin && !pedido.getCliente().getEmail().equals(userEmail)) {
-            throw new ServiceException("Usuário não autorizado a atualizar este pedido.", Response.Status.FORBIDDEN);
-        }
-
-        if (dto.getIdEnderecoEntrega() != null) {
-            Endereco enderecoEntrega = enderecoRepository.findById(dto.getIdEnderecoEntrega());
-            if (enderecoEntrega == null) {
-                throw new ServiceException("Endereço de entrega não encontrado.", Response.Status.NOT_FOUND);
-            }
-            if (!isAdmin && !enderecoEntrega.getCliente().getId().equals(pedido.getCliente().getId())) {
-                throw new ServiceException("Endereço de entrega não pertence ao cliente do pedido.", Response.Status.FORBIDDEN);
-            }
-            pedido.setEnderecoEntrega(enderecoEntrega);
-        }
-
-
-        if (dto.getItens() != null) {
-             pedido.getItens().clear();
-             Double totalCalculado = 0.0;
-             for (ItemPedidoRequestDTO itemDto : dto.getItens()) {
-                 ItemPedido itemPedido = new ItemPedido();
-                 itemPedido.setQuantidade(itemDto.getQuantidade());
-                 itemPedido.setPrecoUnitario(itemDto.getPrecoUnitario());
-                 itemPedido.setPedido(pedido);
-                 pedido.getItens().add(itemPedido);
-                 totalCalculado += itemDto.getQuantidade() * itemDto.getPrecoUnitario();
-             }
-             pedido.setTotalPedido(totalCalculado);
-        }
-
-        pedidoRepository.persist(pedido);
-        return PedidoResponseDTO.valueOf(pedido);
+        pedidoBanco.setStatusPedido(EnumStatusPedido.PENDENTE);
+        pedidoBanco.setPreco(total);
+        pedidoBanco.setItens(itens);
+        pedidoRepository.persist(pedidoBanco);
+        return PedidoResponseDTO.valueOf(pedidoBanco);
     }
 
+    @Override
     @Transactional
-    public void delete(Long id) {
-        Pedido pedido = pedidoRepository.findById(id);
-        if (pedido == null) {
-            throw new ServiceException("Pedido não encontrado.", Response.Status.NOT_FOUND);
+    public void update(Long id, PedidoDTO pedidoDTO) {
+        Pedido pedidoBanco = pedidoRepository.findById(id);
+        if (pedidoBanco == null) {
+            throw new ValidationException("id", "Pedido não existe.");
         }
+        pedidoBanco.setCliente(
+                clienteRepository.findById(clienteRepository.findNomeEqual(jsonWebToken.getName()).getId()));
+        Endereco endereco = new Endereco();
+        endereco.setRua(pedidoDTO.endereco().getRua());
+        endereco.setNumero(pedidoDTO.endereco().getNumero());
+        endereco.setComplemento(pedidoDTO.endereco().getComplemento());
+        endereco.setBairro(pedidoDTO.endereco().getBairro());
+        endereco.setCep(pedidoDTO.endereco().getCep());
+        pedidoBanco.setEndereco(endereco);
+        List<ItemPedido> itens = new ArrayList<>();
+        Double total = 0.0;
+        for (ItemPedidoDTO itemDTO : pedidoDTO.itens()) {
+            Betoneira betoneiraBanco = betoneiraRepository.findById(itemDTO.idBetoneira());
+            validarQuantidade(betoneiraBanco.getQuantidadeEstoque(), itemDTO.quantidade());
 
-        String userEmail = securityContext.getUserPrincipal().getName();
-        boolean isAdmin = securityContext.isUserInRole("ADMIN");
+            ItemPedido itemPedido = new ItemPedido();
+            itemPedido.setBetoneira(betoneiraBanco);
+            itemPedido.setDesconto(itemDTO.desconto());
+            itemPedido.setPreco(betoneiraBanco.getPreco());
+            itemPedido.setQuantidade(itemDTO.quantidade());
 
-        if (!isAdmin && !pedido.getCliente().getEmail().equals(userEmail)) {
-            throw new ServiceException("Usuário não autorizado a deletar este pedido.", Response.Status.FORBIDDEN);
+            total += itemPedido.getPreco() / (itemDTO.desconto() / 100 + 1) * itemDTO.quantidade();
+            betoneiraBanco.setQuantidadeEstoque(betoneiraBanco.getQuantidadeEstoque() - itemDTO.quantidade());
+            itemPedidoRepository.persist(itemPedido);
+            itens.add(itemPedido);
         }
-
-        pedidoRepository.delete(pedido);
+        pedidoBanco.setPreco(total);
+        pedidoBanco.setItens(itens);
+        pedidoBanco.setStatusPedido(EnumStatusPedido.PENDENTE);
+        pedidoBanco.setItens(itens);
     }
 
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
+        pedidoRepository.deleteById(id);
+    }
+
+    @Override
     public List<PedidoResponseDTO> findAll() {
-        return pedidoRepository.listAll().stream()
-                .map(PedidoResponseDTO::valueOf)
-                .collect(Collectors.toList());
+        return pedidoRepository.listAll().stream().map(e -> PedidoResponseDTO.valueOf(e)).toList();
     }
 
-    public PedidoResponseDTO findById(Long id) {
+    public void validarQuantidade(Integer quantidadeReal, Integer quantidadePedido) {
+        if (quantidadeReal < quantidadePedido) {
+            throw new ValidationException("Quantidade", "Quantidade maior que o estoque");
+        }
+    }
+
+    @Override
+    public PedidoResponseDTO findById(@PathParam("id") Long id) {
         Pedido pedido = pedidoRepository.findById(id);
-        if (pedido == null) {
-            throw new ServiceException("Pedido não encontrado.", Response.Status.NOT_FOUND);
-        }
-
-        String userEmail = securityContext.getUserPrincipal().getName();
-        boolean isAdmin = securityContext.isUserInRole("ADMIN");
-
-        if (!isAdmin && !pedido.getCliente().getEmail().equals(userEmail)) {
-            throw new ServiceException("Usuário não autorizado a visualizar este pedido.", Response.Status.FORBIDDEN);
-        }
-
+        if (pedido == null)
+            return null;
         return PedidoResponseDTO.valueOf(pedido);
     }
 
-    public List<PedidoResponseDTO> getPurchaseHistoryForAuthenticatedUser() {
-        String userEmail = securityContext.getUserPrincipal().getName();
-        Cliente cliente = clienteRepository.findByEmail(userEmail);
-
-        if (cliente == null) {
-            throw new ServiceException("Cliente autenticado não encontrado.", Response.Status.UNAUTHORIZED);
-        }
-        return pedidoRepository.findByCliente(cliente).stream()
-                .map(PedidoResponseDTO::valueOf)
-                .collect(Collectors.toList());
+    @Override
+    public List<PedidoResponseDTO> findByEndereco(@PathParam("nome") String nome) {
+        return pedidoRepository.findByEndereco(nome).stream().map(e -> PedidoResponseDTO.valueOf(e)).toList();
     }
+
+    public void processarPedido(Long pedidoId, double valor) {
+        Pedido pedido = pedidoRepository.findById(pedidoId);
+        if (pedido == null) {
+            throw new ValidationException("Pedido", "Pedido não encontrado.");
+        }
+        if (valor < pedido.getPreco()) {
+            throw new ValidationException("Valor", "Valor insuficiente.");
+        }
+
+    }
+
+    @Override
+    public List<PedidoResponseDTO> findComprasByUser(@PathParam("id") Long id) {
+        return pedidoRepository.findByCliente(id).stream().map(e -> PedidoResponseDTO.valueOf(e)).toList();
+    }
+
+    @Override
+    public List<PedidoResponseDTO> findMyCompras() {
+        return findComprasByUser(clienteRepository.findNomeEqual(jsonWebToken.getName()).getId());
+    }
+
+    // @Override
+    // @Transactional
+    // public Response PagarPeloPix(@Valid PixDTO pix) {
+    //     Pedido pedidoPagar = pedidoRepository.findById(pix.idPedido());
+    //     processarPedido(pix.idPedido(), pix.valor());
+    //     pedidoPagar.setEstadoPamento(EnumStatusPagamento.APROVADO);
+    //     pedidoPagar.setTipoPagamento(PagamentoTipo.PIX);
+    //     return Response.ok().build();
+    // }
+
+    // @Override
+    // @Transactional
+    // public Response PagarPeloCredito(@Valid CartaoDTO cartao, int parcelas) {
+    //     if (parcelas < 1 || parcelas > 12) {
+    //         throw new ValidationException("Parcelas", "Parcelas inválidas, deve estar entre 1 e 12");
+    //     }
+    //     Pedido pedidoPagar = pedidoRepository.findById(cartao.idPedido());
+    //     processarPedido(cartao.idPedido(), cartao.limite());
+    //     pedidoPagar.setEstadoPamento(EnumStatusPagamento.PARCELAS);
+    //     pedidoPagar.setTipoPagamento(PagamentoTipo.CREDITO);
+    //     return Response.ok().build();
+    // }
+
+    // @Override
+    // @Transactional
+    // public Response PagarPeloDebito(@Valid CartaoDTO cartao) {
+    //     Pedido pedidoPagar = pedidoRepository.findById(cartao.idPedido());
+    //     processarPedido(cartao.idPedido(), cartao.limite());
+    //     pedidoPagar.setEstadoPamento(EnumStatusPagamento.APROVADO);
+    //     pedidoPagar.setTipoPagamento(PagamentoTipo.DEBITO);
+    //     return Response.ok().build();
+    // }
 }

@@ -1,7 +1,6 @@
 package br.unitins.tp1.repository;
 
 import br.unitins.tp1.model.Pedido;
-import br.unitins.tp1.model.Cliente;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -17,7 +16,11 @@ public class PedidoRepository implements PanacheRepository<Pedido> {
         return find("cliente.id", clienteId).list();
     }
 
-    public List<Pedido> findByCliente(Cliente cliente) {
-        return find("cliente", cliente).list();
+    public List<Pedido> findByCliente(Long id) {
+        return find("cliente", id).list();
+    }
+
+    public List<Pedido> findByEndereco(String endereco) {
+        return find("endereco", endereco).list();
     }
 }

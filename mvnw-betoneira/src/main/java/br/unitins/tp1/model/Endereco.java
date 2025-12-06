@@ -1,29 +1,29 @@
 package br.unitins.tp1.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
 
 @Entity
 public class Endereco extends DefaultEntity {
-    private String logradouro;
     private String numero;
     private String complemento;
     private String bairro;
+    private String rua;
     private String cidade;
     private String estado;
     private String cep;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
-
-    public String getLogradouro() {
-        return logradouro;
+    public Endereco() {
     }
 
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
+    public Endereco(String numero, String complemento, String bairro, String rua, String cidade, String estado,
+            String cep) {
+        this.numero = numero;
+        this.complemento = complemento;
+        this.bairro = bairro;
+        this.rua = rua;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.cep = cep;
     }
 
     public String getNumero() {
@@ -50,6 +50,14 @@ public class Endereco extends DefaultEntity {
         this.bairro = bairro;
     }
 
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
     public String getCidade() {
         return cidade;
     }
@@ -72,13 +80,5 @@ public class Endereco extends DefaultEntity {
 
     public void setCep(String cep) {
         this.cep = cep;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 }

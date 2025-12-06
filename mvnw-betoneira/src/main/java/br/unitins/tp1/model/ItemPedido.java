@@ -1,78 +1,60 @@
 package br.unitins.tp1.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
-public class ItemPedido {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Integer quantidade;
-    private Double precoUnitario;
-    private Double totalItem;    
-
+@Inheritance(strategy = InheritanceType.JOINED)
+public class ItemPedido extends DefaultEntity {
     @ManyToOne
-    @JoinColumn(name = "pedido_id")
-    private Pedido pedido;
-
-    @ManyToOne
-    @JoinColumn(name = "betoneira_id")
+    @JoinColumn(name = "id_betoneira")
     private Betoneira betoneira;
+    private Double preco;
+    private Double desconto;
+    private Integer quantidade;
 
     public ItemPedido() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public Integer getQuantidade() {
-        return quantidade;
-    }
-
-    public Double getPrecoUnitario() {
-        return precoUnitario;
-    }
-
-    public Double getTotalItem() {
-        return totalItem;
-    }
-
-    public Pedido getPedido() {
-        return pedido;
+    public ItemPedido(Betoneira betoneira, Double preco, Double desconto, Integer quantidade) {
+        this.betoneira = betoneira;
+        this.preco = preco;
+        this.desconto = desconto;
+        this.quantidade = quantidade;
     }
 
     public Betoneira getBetoneira() {
         return betoneira;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setBetoneira(Betoneira betoneira) {
+        this.betoneira = betoneira;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public Double getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(Double desconto) {
+        this.desconto = desconto;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
     }
 
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
-    }
-
-    public void setPrecoUnitario(Double precoUnitario) {
-        this.precoUnitario = precoUnitario;
-    }
-
-    public void setTotalItem(Double totalItem) {
-        this.totalItem = totalItem;
-    }
-
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
-    }
-
-    public void setBetoneira(Betoneira betoneira) {
-        this.betoneira = betoneira;
     }
 }

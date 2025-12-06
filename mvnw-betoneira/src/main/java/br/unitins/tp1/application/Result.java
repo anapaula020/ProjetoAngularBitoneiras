@@ -1,6 +1,5 @@
 package br.unitins.tp1.application;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Result {

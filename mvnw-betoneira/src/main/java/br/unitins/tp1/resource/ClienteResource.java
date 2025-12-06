@@ -1,6 +1,6 @@
 package br.unitins.tp1.resource;
 
-import br.unitins.tp1.dto.ClienteRequestDTO;
+import br.unitins.tp1.dto.ClienteDTO;
 import br.unitins.tp1.dto.ClienteResponseDTO;
 import br.unitins.tp1.service.ClienteService;
 import jakarta.annotation.security.PermitAll;
@@ -22,7 +22,7 @@ public class ClienteResource {
     @POST
     @Transactional
     @PermitAll
-    public Response create(ClienteRequestDTO dto) {
+    public Response create(ClienteDTO dto) {
         ClienteResponseDTO newCliente = clienteService.create(dto);
         return Response.status(Response.Status.CREATED).entity(newCliente).build();
     }
@@ -31,7 +31,7 @@ public class ClienteResource {
     @Path("/{id}")
     @Transactional
     @RolesAllowed({"ADMIN", "USER"})
-    public Response update(@PathParam("id") Long id, ClienteRequestDTO dto) {
+    public Response update(@PathParam("id") Long id, ClienteDTO dto) {
         ClienteResponseDTO updatedCliente = clienteService.update(id, dto);
         return Response.status(Response.Status.OK).entity(updatedCliente).build();
     }

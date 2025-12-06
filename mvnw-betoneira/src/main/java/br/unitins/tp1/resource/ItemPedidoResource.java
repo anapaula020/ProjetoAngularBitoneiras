@@ -1,6 +1,6 @@
 package br.unitins.tp1.resource;
 
-import br.unitins.tp1.dto.ItemPedidoRequestDTO;
+import br.unitins.tp1.dto.PedidoDTO;
 import br.unitins.tp1.dto.ItemPedidoResponseDTO;
 import br.unitins.tp1.service.ItemPedidoService;
 import jakarta.annotation.security.RolesAllowed;
@@ -21,7 +21,7 @@ public class ItemPedidoResource {
     @POST
     @Transactional
     @RolesAllowed("ADMIN")
-    public Response create(ItemPedidoRequestDTO dto) {
+    public Response create(PedidoDTO dto) {
         ItemPedidoResponseDTO newItemPedido = itemPedidoService.create(dto);
         return Response.status(Response.Status.CREATED).entity(newItemPedido).build();
     }
@@ -30,7 +30,7 @@ public class ItemPedidoResource {
     @Path("/{id}")
     @Transactional
     @RolesAllowed("ADMIN")
-    public Response update(@PathParam("id") Long id, ItemPedidoRequestDTO dto) {
+    public Response update(@PathParam("id") Long id, PedidoDTO dto) {
         ItemPedidoResponseDTO updatedItemPedido = itemPedidoService.update(id, dto);
         return Response.status(Response.Status.OK).entity(updatedItemPedido).build();
     }

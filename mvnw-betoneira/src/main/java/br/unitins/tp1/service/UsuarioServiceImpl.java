@@ -40,7 +40,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         if (userDto.endereco() != null) {
             Endereco endereco = new Endereco();
-            endereco.setLogradouro(endereco.getLogradouro());
             endereco.setNumero(endereco.getNumero());
             endereco.setComplemento(endereco.getComplemento());
             endereco.setBairro(endereco.getBairro());
@@ -92,7 +91,6 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new ValidationException("id", "Usuário não existe.");
         }
         Endereco endereco = new Endereco();
-        endereco.setLogradouro(endereco.getLogradouro());
         endereco.setNumero(endereco.getNumero());
         endereco.setComplemento(endereco.getComplemento());
         endereco.setBairro(endereco.getBairro());
@@ -117,7 +115,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         userBanco.setCpf(userDto.cpf());
 
         Endereco endereco = new Endereco();
-        endereco.setLogradouro(endereco.getLogradouro());
         endereco.setNumero(endereco.getNumero());
         endereco.setComplemento(endereco.getComplemento());
         endereco.setBairro(endereco.getBairro());

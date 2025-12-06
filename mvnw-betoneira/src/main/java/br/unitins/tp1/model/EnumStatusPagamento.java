@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum EnumStatusPagamento {
-    APROVADO(1, "Aprovado"),
     PROCESSANDO(1, "Processando"),
-    REJEITADO(1, "Rejeitado"),
-    CANCELADO(1, "Cancelado");
+    APROVADO(2, "Aprovado"),
+    REJEITADO(3, "Rejeitado"),
+    CANCELADO(4, "Cancelado");
 
     private final Integer id;
     private final String label;

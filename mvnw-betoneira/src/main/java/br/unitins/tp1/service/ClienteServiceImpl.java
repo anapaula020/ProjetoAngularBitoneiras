@@ -1,6 +1,6 @@
 package br.unitins.tp1.service;
 
-import br.unitins.tp1.dto.ClienteRequestDTO;
+import br.unitins.tp1.dto.ClienteDTO;
 import br.unitins.tp1.dto.ClienteResponseDTO;
 import br.unitins.tp1.exception.ServiceException;
 import br.unitins.tp1.model.Cliente;
@@ -19,7 +19,7 @@ public class ClienteServiceImpl implements ClienteService {
     ClienteRepository clienteRepository;
 
     @Transactional
-    public ClienteResponseDTO create(ClienteRequestDTO dto) {
+    public ClienteResponseDTO create(ClienteDTO dto) {
         if (clienteRepository.findByEmail(dto.getEmail()) != null) {
             throw new ServiceException("Email já cadastrado.", Response.Status.CONFLICT);
         }
@@ -29,7 +29,6 @@ public class ClienteServiceImpl implements ClienteService {
         cliente.setEmail(dto.getEmail());
         // cliente.setSenha(HashUtil.hash(dto.getSenha()));
         cliente.setCpf(dto.getCpf());
-        cliente.setTelefone(dto.getTelefone());
         cliente.setRole("USER");
 
         clienteRepository.persist(cliente);
@@ -37,7 +36,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Transactional
-    public ClienteResponseDTO update(Long id, ClienteRequestDTO dto) {
+    public ClienteResponseDTO update(Long id, ClienteDTO dto) {
         Cliente cliente = clienteRepository.findById(id);
         if (cliente == null) {
             throw new ServiceException("Cliente não encontrado.", Response.Status.NOT_FOUND);
@@ -51,7 +50,6 @@ public class ClienteServiceImpl implements ClienteService {
         cliente.setEmail(dto.getEmail());
         // cliente.setSenha(HashUtil.hash(dto.getSenha()));
         cliente.setCpf(dto.getCpf());
-        cliente.setTelefone(dto.getTelefone());
 
         clienteRepository.persist(cliente);
         return ClienteResponseDTO.valueOf(cliente);

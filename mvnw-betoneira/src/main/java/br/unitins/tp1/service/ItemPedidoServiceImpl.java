@@ -1,6 +1,6 @@
 package br.unitins.tp1.service;
 
-import br.unitins.tp1.dto.ItemPedidoRequestDTO;
+import br.unitins.tp1.dto.PedidoDTO;
 import br.unitins.tp1.dto.ItemPedidoResponseDTO;
 import br.unitins.tp1.exception.ServiceException;
 import br.unitins.tp1.model.ItemPedido;
@@ -23,7 +23,7 @@ public class ItemPedidoServiceImpl implements ItemPedidoService {
     SecurityContext securityContext;
 
     @Transactional
-    public ItemPedidoResponseDTO create(ItemPedidoRequestDTO dto) {
+    public ItemPedidoResponseDTO create(PedidoDTO dto) {
         if (!securityContext.isUserInRole("ADMIN")) {
             throw new ServiceException("Usuário não autorizado a criar itens de pedido diretamente.", Response.Status.FORBIDDEN);
         }
@@ -36,7 +36,7 @@ public class ItemPedidoServiceImpl implements ItemPedidoService {
     }
 
     @Transactional
-    public ItemPedidoResponseDTO update(Long id, ItemPedidoRequestDTO dto) {
+    public ItemPedidoResponseDTO update(Long id, PedidoDTO dto) {
         if (!securityContext.isUserInRole("ADMIN")) {
             throw new ServiceException("Usuário não autorizado a atualizar itens de pedido.", Response.Status.FORBIDDEN);
         }
