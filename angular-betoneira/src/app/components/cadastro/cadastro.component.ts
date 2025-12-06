@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { FooterLoginComponent } from '../template/footer-login/footer-login.component';
 import { HeaderLoginComponent } from '../template/header-login/header-login.component';
-import { UsuarioService } from '../../services/usuario.service';
+import { ClienteService } from '../../services/cliente.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -23,7 +23,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class CadastroComponent implements OnInit {
     formGroup: FormGroup;
     constructor(
-        private usuarioService: UsuarioService,private router: Router,private formBuilder: FormBuilder,private snackBar: MatSnackBar) {
+        private usuarioService: ClienteService,private router: Router,private formBuilder: FormBuilder,private snackBar: MatSnackBar) {
         this.formGroup = this.formBuilder.group({
             username: [null,[Validators.required,Validators.minLength(4),Validators.maxLength(80)]],
             email: [null,[Validators.required,Validators.email,Validators.minLength(6),Validators.maxLength(60)]],
@@ -42,7 +42,7 @@ export class CadastroComponent implements OnInit {
                 next: () => {
                     this.router.navigateByUrl('/login');
                 },
-                error: (err) => {
+                error: (err: any) => {
                     this.showSnackbarTopPosition("Erro ao cadastrar usuário.");
                 },
             });

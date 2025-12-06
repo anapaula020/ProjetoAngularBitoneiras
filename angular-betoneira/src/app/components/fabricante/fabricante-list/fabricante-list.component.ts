@@ -15,15 +15,15 @@ import { ExclusaoComponent } from '../../confirmacao/exclusao/exclusao.component
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-    selector: 'app-autor-betoneira-list',
+    selector: 'app-fabricante-betoneira-list',
     standalone: true,
-    templateUrl: './autor-list.component.html',
-    styleUrls: ['./autor-list.component.css'],
+    templateUrl: './fabricante-list.component.html',
+    styleUrls: ['./fabricante-list.component.css'],
     imports: [MatPaginatorModule,CommonModule,RouterModule,MatTableModule,MatButtonModule,MatCardModule,MatToolbarModule,HeaderAdminComponent,FooterAdminComponent,MatIconModule]
 })
 export class FabricanteListComponent implements OnInit {
     displayedColumns: string[] = ['id','nome','anoNascimento','nacionalidade','sexo','actions'];
-    autores: Fabricante[] = [];
+    fabricante: Fabricante[] = [];
     totalRecords = 0;
     pageSize = 10;
     page = 0;
@@ -32,7 +32,7 @@ export class FabricanteListComponent implements OnInit {
     constructor(private autorService: FabricanteService,private router: Router) { }
 
     ngOnInit(): void {
-        this.loadAutores();
+        this.loadFabricante();
     }
 
     paginar(event: PageEvent): void {
@@ -41,9 +41,9 @@ export class FabricanteListComponent implements OnInit {
         this.ngOnInit();
     }
 
-    loadAutores(): void {
+    loadFabricante(): void {
         this.autorService.findAll(this.page,this.pageSize).subscribe((data: Fabricante[]) => {
-            this.autores = data;
+            this.fabricante = data;
         });
         this.autorService.count().subscribe(data => { this.totalRecords = data });
     }
@@ -57,7 +57,7 @@ export class FabricanteListComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             if(result === true) {
                 this.autorService.delete(id).subscribe(() => {
-                    this.loadAutores();
+                    this.loadFabricante();
                 });
             }
         });

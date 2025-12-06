@@ -1,17 +1,17 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Usuario } from '../models/usuario.model';
+import { Cliente } from '../models/cliente.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
-export class UsuarioService {
+export class ClienteService {
     private baseUrl = 'http://localhost:8000/usuarios';
 
     constructor(private httpClient: HttpClient) { }
 
-    findAll(page?: number,pageSize?: number): Observable<Usuario[]> {
+    findAll(page?: number,pageSize?: number): Observable<Cliente[]> {
         let params = {};
         if(page !== undefined && pageSize !== undefined) {
             params = {
@@ -19,26 +19,25 @@ export class UsuarioService {
                 pageSize: pageSize.toString()
             }
         }
-        return this.httpClient.get<Usuario[]>(this.baseUrl, {params});
+        return this.httpClient.get<Cliente[]>(this.baseUrl, {params});
     }
 
     count(): Observable<number> {
         return this.httpClient.get<number>(`${this.baseUrl}/count`);
     }
 
-    findById(id: number): Observable<Usuario> {
-        return this.httpClient.get<Usuario>(`${this.baseUrl}/${id}`);
+    findById(id: number): Observable<Cliente> {
+        return this.httpClient.get<Cliente>(`${this.baseUrl}/${id}`);
     }
 
-    insert(usuario: Usuario): Observable<Usuario> {
+    insert(usuario: Cliente): Observable<Cliente> {
         const data = {
             username: usuario.username, 
             email: usuario.email, 
             senha: usuario.senha, 
-            cpf: usuario.cpf, 
-            sexo: usuario.sexo
+            cpf: usuario.cpf
         };
-        return this.httpClient.post<Usuario>(this.baseUrl,data);
+        return this.httpClient.post<Cliente>(this.baseUrl,data);
     }
 
     updateSenha(senhaAntiga: string, repeticao: string, senhaNova: string): Observable<any> {
@@ -66,16 +65,15 @@ export class UsuarioService {
     }
     
 
-    update(usuario: Usuario): Observable<Usuario> {
+    update(usuario: Cliente): Observable<Cliente> {
         const data = {
             username: usuario.username, 
             email: usuario.email, 
             senha: usuario.senha, 
             cpf: usuario.cpf, 
-            endereco: usuario.endereco, 
-            sexo: usuario.sexo
+            endereco: usuario.endereco
         };
-        return this.httpClient.put<Usuario>(`${this.baseUrl}/${usuario.id}`,data);
+        return this.httpClient.put<Cliente>(`${this.baseUrl}/${usuario.id}`,data);
     }
 
     delete(id: number): Observable<void> {

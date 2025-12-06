@@ -1,15 +1,17 @@
 export class Cliente {
     id!: number;
-    nome!: string;
+    username!: string;
     email!: string;
     cpf!: string;
     senha!: string;
+    endereco!: string;
 
-    constructor(id: number,nome: string,email: string,cpf: string,senha: string) {
+    constructor(id: number,username: string,email: string,cpf: string,senha: string,endereco: string) {
         this.id = id;
-        this.nome = nome;
+        this.username = username;
         this.email = email;
         this.cpf = cpf;
         this.senha = senha;
+        this.endereco = endereco;
     }
 }

@@ -13,8 +13,15 @@ export class PedidoService {
 
     constructor(private httpClient: HttpClient) { }
 
-    findAll(): Observable<Pedido[]> {
-        return this.httpClient.get<Pedido[]>(this.baseUrl);
+    findAll(page?: number,pageSize?: number): Observable<Pedido[]> {
+        let params = {};
+        if(page !== undefined && pageSize !== undefined) {
+            params = {
+                page: page.toString(),
+                pageSize: pageSize.toString()
+            }
+        }
+        return this.httpClient.get<Pedido[]>(this.baseUrl, {params});
     }
 
     findMyPedidos(): Observable<Pedido[]> {
