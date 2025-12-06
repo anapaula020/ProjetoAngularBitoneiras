@@ -18,7 +18,6 @@ import { Betoneira } from '../../../models/betoneira.model';
 import { MatIcon } from '@angular/material/icon';
 import { ExclusaoComponent } from '../../confirmacao/exclusao/exclusao.component';
 import { MatDialog } from '@angular/material/dialog';
-import { TipoBetoneira } from '../../../models/tipoBetoneira.model';
 
 @Component({
     selector: 'app-betoneira-form',
@@ -32,7 +31,7 @@ export class BetoneiraFormComponent implements OnInit {
     fabricantes: Fabricante[] = [];
     betoneiraId: number | null = null;
     dialog = inject(MatDialog);
-    tipos: TipoBetoneira[] = [];
+    tipos: string[] = [];
 
     fileName: string = '';
     selectedFile: File | null = null;
@@ -47,7 +46,7 @@ export class BetoneiraFormComponent implements OnInit {
             quantidadeEstoque: [null,[Validators.required]],
             modelo: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(80)]],
             marca: ['',[Validators.required,Validators.minLength(10),Validators.maxLength(1000)]],
-            tipoBetoneira: [null],
+            tipo: [null],
             fabricante: [null],
             imageUrl: [null]
         });
@@ -79,7 +78,7 @@ export class BetoneiraFormComponent implements OnInit {
             nome: [(betoneira && betoneira.nome) ? betoneira.nome : null],
             descricao: [(betoneira && betoneira.descricao) ? betoneira.descricao : null],
             preco: [(betoneira && betoneira.preco) ? betoneira.preco : null],
-            tipoBetoneira: [(betoneira && betoneira.tipoBetoneira) ? betoneira.tipoBetoneira : null],
+            tipo: [(betoneira && betoneira.tipo) ? betoneira.tipo : null],
             fabricante: [(betoneira && betoneira.fabricante) ? betoneira.fabricante : null],
             imageUrl: [(betoneira && betoneira.imageUrl) ? betoneira.imageUrl : null]
         });
@@ -208,8 +207,8 @@ export class BetoneiraFormComponent implements OnInit {
 
 
     get tipoSelecionado() {
-        const id = this.formGroup.get("tipoBetoneira")?.value;
-        return this.tipos.find(t => t.id === id);
+        const id = this.formGroup.get("tipo")?.value;
+        return this.tipos.find(t => t === id);
     }
 
     errorMessages: { [controlName: string]: { [errorName: string]: string } } = {
@@ -252,7 +251,7 @@ export class BetoneiraFormComponent implements OnInit {
             min: 'Capacidade deve ser maior do que 0.',
             apiError: 'API_ERROR'
         },
-        tipoBetoneira: {
+        tipo: {
             required: 'Id da betoneira é obrigatório.',
             min: 'Id da betoneira deve ser maior do que 0.',
             apiError: 'API_ERROR'

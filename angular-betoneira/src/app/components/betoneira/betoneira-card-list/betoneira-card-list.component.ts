@@ -14,7 +14,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { Fabricante } from '../../../models/fabricante.model';
 import { FabricanteService } from '../../../services/fabricante.service';
-import { TipoBetoneira } from '../../../models/tipoBetoneira.model';
 
 type Card = {
     id: number,
@@ -25,7 +24,7 @@ type Card = {
     modelo: string,
     marca: string,
     capacidade: number,
-    tipoBetoneira: TipoBetoneira, 
+    tipo: string, 
     idFabricante: Fabricante, 
     imageUrl: string
 }
@@ -43,7 +42,7 @@ export class BetoneiraCardListComponent implements OnInit {
     selectedTipo: string | null = null;
     selectedFabricante: number | null = null;
     precos: any[] = [];
-    tipos: TipoBetoneira[] = [];
+    tipos: string[] = [];
     fabricantes: Fabricante[] = [];
     selectedFornecedor: number | null = null;
     selectedPreco: number | null = null;
@@ -144,7 +143,7 @@ export class BetoneiraCardListComponent implements OnInit {
                 modelo: betoneira.modelo,
                 marca: betoneira.marca,
                 capacidade: betoneira.capacidade,
-                tipoBetoneira: betoneira.tipoBetoneira, 
+                tipo: betoneira.tipo, 
                 idFabricante: betoneira.idFabricante, 
                 imageUrl: this.betoneiraService.toImageUrl(betoneira.imageUrl)
             });

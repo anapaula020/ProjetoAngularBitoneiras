@@ -65,14 +65,10 @@
                     </mat-form-field>
                     
                     <mat-form-field appearance="fill" class="full-width-input">
-                        <mat-label>Tipo de betoneira:</mat-label>
-                        <mat-select id="tipoBetoneira" formControlName="tipoBetoneira" required>
-                            <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
-                                {{ tipo.nome }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="formGroup.get('tipoBetoneira')?.invalid && formGroup.get('tipoBetoneira')?.touched">
-                            {{ getErrorMessage("tipoBetoneira", formGroup.get("tipoBetoneira")?.errors) }}
+                        <mat-label>Tipo da betoneira:</mat-label>
+                        <input matInput type="text" id="tipo" formControlName="tipo" required>
+                        <mat-error *ngIf="formGroup.get('tipo')?.invalid && formGroup.get('tipo')?.touched">
+                            {{ getErrorMessage("tipo", formGroup.get("tipo")?.errors) }}
                         </mat-error>
                     </mat-form-field>
 

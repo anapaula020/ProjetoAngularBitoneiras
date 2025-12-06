@@ -9,11 +9,11 @@ export class Betoneira {
     modelo!: string;
     marca!: string;
     capacidade!: number;
-    tipoBetoneira!: string;
+    tipo!: string;
     idFabricante!: Fabricante;
     imageUrl!: string;
 
-    constructor(id: number,nome: string,descricao: string,preco: number,quantidadeEstoque: number,modelo: string,marca: string,capacidade: number,tipoBetoneira: string,idFabricante: Fabricante,imageUrl: string) {
+    constructor(id: number,nome: string,descricao: string,preco: number,quantidadeEstoque: number,modelo: string,marca: string,capacidade: number,tipo: string,idFabricante: Fabricante,imageUrl: string) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -22,7 +22,7 @@ export class Betoneira {
         this.modelo = modelo;
         this.marca = marca;
         this.capacidade = capacidade;
-        this.tipoBetoneira = tipoBetoneira;
+        this.tipo = tipo;
         this.idFabricante = idFabricante;
         this.imageUrl = imageUrl;
     }

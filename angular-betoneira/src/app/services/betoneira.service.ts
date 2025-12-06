@@ -61,7 +61,7 @@ export class BetoneiraService {
             modelo: betoneira.modelo,
             marca: betoneira.marca,
             capacidade: betoneira.capacidade,
-            tipoBetoneira: betoneira.tipoBetoneira,
+            tipo: betoneira.tipo,
             idFabricante: betoneira.idFabricante,
             imageUrl: betoneira.imageUrl
         };
@@ -77,7 +77,7 @@ export class BetoneiraService {
             modelo: betoneira.modelo,
             marca: betoneira.marca,
             capacidade: betoneira.capacidade,
-            tipoBetoneira: betoneira.tipoBetoneira,
+            tipo: betoneira.tipo,
             idFabricante: betoneira.idFabricante,
             imageUrl: betoneira.imageUrl
         };
