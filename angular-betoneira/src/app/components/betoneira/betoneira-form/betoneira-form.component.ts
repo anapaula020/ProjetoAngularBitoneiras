@@ -201,6 +201,17 @@ export class BetoneiraFormComponent implements OnInit {
         }
     }
 
+    get fabricanteSelecionado() {
+        const id = this.formGroup.get("idFabricante")?.value;
+        return this.fabricantes.find(f => f.id === id);
+    }
+
+
+    get tipoSelecionado() {
+        const id = this.formGroup.get("tipoBetoneira")?.value;
+        return this.tipos.find(t => t.id === id);
+    }
+
     errorMessages: { [controlName: string]: { [errorName: string]: string } } = {
         nome: {
             required: 'Nome é obrigatório.',
