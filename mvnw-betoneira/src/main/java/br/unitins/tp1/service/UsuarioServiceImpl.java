@@ -182,4 +182,10 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario usuario = usuarioRepository.findByUsernameAndSenha(username, senha);
         return UsuarioResponseDTO.valueOf(usuario);
     }
+
+    @Override
+    public UsuarioResponseDTO findByLoginAndSenha(String username, String senha) {
+        Usuario usuario = usuarioRepository.findByUsernameAndSenha(username, senha);
+        return UsuarioResponseDTO.valueOf(usuario);
+    }
 }
