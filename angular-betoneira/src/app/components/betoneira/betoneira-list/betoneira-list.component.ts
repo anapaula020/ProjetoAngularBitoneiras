@@ -17,10 +17,9 @@ import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-betoneira-list',
-    standalone: true,
     templateUrl: './betoneira-list.component.html',
     styleUrls: ['./betoneira-list.component.css'],
-    imports: [MatPaginatorModule,CommonModule,RouterModule,MatTableModule,MatButtonModule,MatCardModule,MatToolbarModule,HeaderAdminComponent,FooterAdminComponent]
+    imports: [MatPaginatorModule, CommonModule, RouterModule, MatTableModule, MatButtonModule, MatCardModule, MatToolbarModule, HeaderAdminComponent, FooterAdminComponent]
 })
 export class BetoneiraListComponent implements OnInit {
     displayedColumns: string[] = ['id', 'nome', 'descricao', 'preco', 'quantidadeEstoque', 'modelo', 'marca', 'tipo', 'idFabricante'];

@@ -21,10 +21,9 @@ import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-betoneira-form',
-    standalone: true,
     templateUrl: './betoneira-form.component.html',
     styleUrls: ['./betoneira-form.component.css'],
-    imports: [CommonModule,FooterAdminComponent,HeaderAdminComponent,MatIcon,MatButtonModule,MatCardModule,MatFormFieldModule,MatInputModule,MatSelectModule,MatToolbarModule,NgIf,ReactiveFormsModule,RouterModule]
+    imports: [CommonModule, FooterAdminComponent, HeaderAdminComponent, MatIcon, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatToolbarModule, NgIf, ReactiveFormsModule, RouterModule]
 })
 export class BetoneiraFormComponent implements OnInit {
     formGroup: FormGroup;

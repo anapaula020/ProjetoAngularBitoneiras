@@ -10,10 +10,9 @@ import { MatCardModule,MatCardActions,MatCardContent,MatCardTitle,MatCardFooter 
 
 @Component({
     selector: 'app-carrinho',
-    standalone: true,
     templateUrl: './carrinho.component.html',
     styleUrls: ['./carrinho.component.css'],
-    imports: [NgIf,ReactiveFormsModule,CommonModule,MatCardModule,MatButtonModule,NgFor,MatCardActions,MatCardContent,MatCardTitle,MatCardFooter]
+    imports: [NgIf, ReactiveFormsModule, CommonModule, MatCardModule, MatButtonModule, NgFor, MatCardActions, MatCardContent, MatCardTitle, MatCardFooter]
 })
 export class CarrinhoComponent implements OnInit {
     carrinhoItens: ItemCarrinho[] = [];

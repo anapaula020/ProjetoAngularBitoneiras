@@ -19,10 +19,9 @@ import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-fabricante-form',
-    standalone: true,
     templateUrl: './fabricante-form.component.html',
     styleUrls: ['./fabricante-form.component.css'],
-    imports: [MatDatepickerModule,MatNativeDateModule,CommonModule,FormsModule,ReactiveFormsModule,MatFormFieldModule,MatInputModule,MatButtonModule,MatCardModule,MatToolbarModule,MatSelectModule,RouterModule,HeaderAdminComponent,FooterAdminComponent],
+    imports: [MatDatepickerModule, MatNativeDateModule, CommonModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule, MatToolbarModule, MatSelectModule, RouterModule, HeaderAdminComponent, FooterAdminComponent],
     providers: [MatDatepickerModule]
 })
 export class FabricanteFormComponent implements OnInit {

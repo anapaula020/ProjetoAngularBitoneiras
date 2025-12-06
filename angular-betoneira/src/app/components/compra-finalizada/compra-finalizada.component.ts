@@ -11,10 +11,9 @@ import { HeaderComponent } from '../template/header/header.component';
 
 @Component({
     selector: 'app-compra-finalizada',
-    standalone: true,
     templateUrl: './compra-finalizada.component.html',
     styleUrls: ['./compra-finalizada.component.css'],
-    imports: [NgIf,ReactiveFormsModule,CommonModule,MatCardModule,MatButtonModule,NgFor,MatCardActions,MatCardContent,MatCardTitle,MatCardFooter,HeaderComponent,FooterComponent]
+    imports: [NgIf, ReactiveFormsModule, CommonModule, MatCardModule, MatButtonModule, NgFor, MatCardActions, MatCardContent, MatCardTitle, MatCardFooter, HeaderComponent, FooterComponent]
 })
 export class CompraFinalizadaComponent implements OnInit {
     constructor(private carrinhoService: CarrinhoService,private localStorageService: LocalStorageService,private router: Router) {

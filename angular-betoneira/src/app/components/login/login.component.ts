@@ -16,7 +16,6 @@ import { HeaderLoginComponent } from '../template/header-login/header-login.comp
 
 @Component({
     selector: 'app-login-component',
-    standalone: true,
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
     imports: [NgIf, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule, MatToolbarModule, RouterModule, MatSelectModule, CommonModule, HeaderLoginComponent, FooterLoginComponent]

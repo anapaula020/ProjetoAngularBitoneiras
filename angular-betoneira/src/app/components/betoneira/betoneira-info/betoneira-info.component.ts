@@ -23,7 +23,6 @@ type Card = {
 
 @Component({
     selector: 'app-betoneira-info',
-    standalone: true,
     templateUrl: './betoneira-info.component.html',
     styleUrls: ['./betoneira-info.component.css'],
     imports: [

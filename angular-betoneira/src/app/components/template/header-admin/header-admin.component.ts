@@ -17,8 +17,7 @@ import { Cliente } from '../../../models/cliente.model';
     selector: 'app-header-admin',
     templateUrl: './header-admin.component.html',
     styleUrls: ['./header-admin.component.css'],
-    imports: [CommonModule,RouterModule,ReactiveFormsModule,MatFormFieldModule,MatInputModule,MatButtonModule,MatToolbarModule,MatToolbar,MatIcon,MatBadge,MatButton,MatIconButton,RouterModule],
-    standalone: true
+    imports: [CommonModule, RouterModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatToolbarModule, MatToolbar, MatIcon, MatBadge, MatButton, MatIconButton, RouterModule]
 })
 export class HeaderAdminComponent {
     searchForm: FormGroup;

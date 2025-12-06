@@ -7,8 +7,7 @@ import { PedidoService } from '../../../services/pedido.service';
 import { DecimalPipe,NgFor,NgIf } from '@angular/common';
 
 @Component({
-    imports: [NgFor,DecimalPipe,NgIf],
-    standalone: true,
+    imports: [NgFor, DecimalPipe, NgIf],
     selector: 'app-pedido-list',
     templateUrl: './pedido-list.component.html',
     styleUrls: ['./pedido-list.component.css']

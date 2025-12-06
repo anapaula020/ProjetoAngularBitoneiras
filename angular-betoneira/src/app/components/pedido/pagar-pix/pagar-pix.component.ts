@@ -11,8 +11,7 @@ import { Cliente } from '../../../models/cliente.model';
     selector: 'app-pagar-pix',
     templateUrl: './pagar-pix.component.html',
     styleUrls: ['./pagar-pix.component.css'],
-    imports: [ReactiveFormsModule,NgIf],
-    standalone: true
+    imports: [ReactiveFormsModule, NgIf]
 })
 export class PagarPixComponent implements OnInit {
     pagarPixForm: FormGroup;

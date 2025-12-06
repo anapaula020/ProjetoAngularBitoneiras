@@ -15,10 +15,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-register',
-    standalone: true,
     templateUrl: './cadastro.component.html',
     styleUrls: ['./cadastro.component.css'],
-    imports: [CommonModule,MatFormFieldModule,ReactiveFormsModule,MatInputModule,MatButtonModule,MatCardModule,MatSelectModule,HeaderLoginComponent,FooterLoginComponent],
+    imports: [CommonModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatButtonModule, MatCardModule, MatSelectModule, HeaderLoginComponent, FooterLoginComponent]
 })
 export class CadastroComponent implements OnInit {
     formGroup: FormGroup;
