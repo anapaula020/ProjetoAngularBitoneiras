@@ -3,7 +3,7 @@ import { NgIf } from '@angular/common';
 import { Component,OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { FormBuilder,FormGroup,ReactiveFormsModule,Validators } from '@angular/forms';
-import { Usuario } from '../../../models/usuario.model';
+import { Cliente } from '../../../models/cliente.model';
 import { AuthService } from '../../../services/auth.service';
 import { PedidoService } from '../../../services/pedido.service';
 
@@ -17,7 +17,7 @@ import { PedidoService } from '../../../services/pedido.service';
 export class PagarCartaoComponent implements OnInit {
     pagarCartaoForm: FormGroup;
     pedidoId!: number;
-    usuarioLogado: Usuario | null = null;
+    clienteLogado: Cliente | null = null;
     private subscription = new Subscription();
     titulo: string = '';
 
@@ -43,8 +43,8 @@ export class PagarCartaoComponent implements OnInit {
         const tipoPagamento = this.route.snapshot.url[1].path === 'pagarcredito' ? 'credito' : 'debito';
         this.pagarCartaoForm.patchValue({ tipoPagamento });
         this.titulo = tipoPagamento === 'credito' ? 'Pagar com Cartão de Crédito' : 'Pagar com Cartão de Débito';
-        this.subscription.add(this.authService.getUsuarioLogado().subscribe(usuario => {
-            this.usuarioLogado = usuario;
+        this.subscription.add(this.authService.getClienteLogado().subscribe(cliente => {
+            this.clienteLogado = cliente;
         }));
     }
 

@@ -23,7 +23,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class CadastroComponent implements OnInit {
     formGroup: FormGroup;
     constructor(
-        private usuarioService: ClienteService,private router: Router,private formBuilder: FormBuilder,private snackBar: MatSnackBar) {
+        private clienteService: ClienteService,private router: Router,private formBuilder: FormBuilder,private snackBar: MatSnackBar) {
         this.formGroup = this.formBuilder.group({
             username: [null,[Validators.required,Validators.minLength(4),Validators.maxLength(80)]],
             email: [null,[Validators.required,Validators.email,Validators.minLength(6),Validators.maxLength(60)]],
@@ -37,8 +37,8 @@ export class CadastroComponent implements OnInit {
 
     register() {
         if(this.formGroup.valid) {
-            const usuario = this.formGroup.value;
-            this.usuarioService.insert(usuario).subscribe({
+            const cliente = this.formGroup.value;
+            this.clienteService.insert(cliente).subscribe({
                 next: () => {
                     this.router.navigateByUrl('/login');
                 },

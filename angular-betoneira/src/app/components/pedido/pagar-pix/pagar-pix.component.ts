@@ -5,7 +5,7 @@ import { PedidoService } from '../../../services/pedido.service';
 import { AuthService } from '../../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { NgIf } from '@angular/common';
-import { Usuario } from '../../../models/usuario.model';
+import { Cliente } from '../../../models/cliente.model';
 
 @Component({
     selector: 'app-pagar-pix',
@@ -17,7 +17,7 @@ import { Usuario } from '../../../models/usuario.model';
 export class PagarPixComponent implements OnInit {
     pagarPixForm: FormGroup;
     pedidoId!: number;
-    usuarioLogado: Usuario | null = null;
+    clienteLogado: Cliente | null = null;
     private subscription = new Subscription();
 
     constructor(
@@ -35,10 +35,10 @@ export class PagarPixComponent implements OnInit {
 
     ngOnInit(): void {
         this.pedidoId = +this.route.snapshot.paramMap.get('id')!;
-        this.subscription.add(this.authService.getUsuarioLogado().subscribe(usuario => {
-            this.usuarioLogado = usuario;
-            if(this.usuarioLogado && this.usuarioLogado.cpf) {
-                this.pagarPixForm.patchValue({ cpf: this.usuarioLogado.cpf });
+        this.subscription.add(this.authService.getClienteLogado().subscribe(data => {
+            this.clienteLogado = data;
+            if(this.clienteLogado && this.clienteLogado.cpf) {
+                this.pagarPixForm.patchValue({ cpf: this.clienteLogado.cpf });
             }
         }));
     }

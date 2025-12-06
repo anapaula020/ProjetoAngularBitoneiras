@@ -1,5 +1,4 @@
 import { Fabricante } from "./fabricante.model";
-import { TipoBetoneira } from "./tipoBetoneira.model";
 
 export class Betoneira {
     id!: number;
@@ -10,11 +9,11 @@ export class Betoneira {
     modelo!: string;
     marca!: string;
     capacidade!: number;
-    tipoBetoneira!: TipoBetoneira;
+    tipoBetoneira!: string;
     idFabricante!: Fabricante;
     imageUrl!: string;
 
-    constructor(id: number,nome: string,descricao: string,preco: number,quantidadeEstoque: number,modelo: string,marca: string,capacidade: number,tipoBetoneira: TipoBetoneira,idFabricante: Fabricante,imageUrl: string) {
+    constructor(id: number,nome: string,descricao: string,preco: number,quantidadeEstoque: number,modelo: string,marca: string,capacidade: number,tipoBetoneira: string,idFabricante: Fabricante,imageUrl: string) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;

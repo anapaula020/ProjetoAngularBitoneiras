@@ -6,7 +6,7 @@ import { MatCardActions,MatCardContent,MatCardFooter,MatCardModule,MatCardTitle 
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ItemCarrinho } from '../../models/itemCarrinho.model';
-import { Usuario } from '../../models/usuario.model';
+import { Cliente } from '../../models/cliente.model';
 import { AuthService } from '../../services/auth.service';
 import { CarrinhoService } from '../../services/carrinho.service';
 import { LocalStorageService } from '../../services/local-storage.service';
@@ -32,7 +32,7 @@ export class CompraComponent implements OnInit,OnDestroy {
     private subscription = new Subscription();
     carrinhoItens: ItemCarrinho[] = [];
     userRole: string | null = null;
-    usuarioLogado: Usuario | null = null;
+    clienteLogado: Cliente | null = null;
     enderecoForm: FormGroup;
     betoneiras: Betoneira[] = [];
 
@@ -60,7 +60,7 @@ export class CompraComponent implements OnInit,OnDestroy {
         this.carrinhoService.carrinhos.subscribe((items: ItemCarrinho[]) => {
             this.carrinhoItens = items;
         });
-        this.subscription.add(this.authService.getUsuarioLogado().subscribe(usuario => {
+        this.subscription.add(this.authService.getClienteLogado().subscribe(cliente => {
             if(this.enderecoForm.dirty) {
                 this.enderecoForm.patchValue({
                     numero: this.enderecoForm.get("numero"), 
@@ -99,7 +99,7 @@ export class CompraComponent implements OnInit,OnDestroy {
         });
         /*
                 this.pedidoService.insert({
-                    usuario: this.usuarioLogado,
+                    cliente: this.clienteLogado,
                     itens: this.carrinhoService.obter(), 
                     preco: this.carrinhoItens.reduce((total,item) => total + item.quantidade * item.preco,0),
                     endereco: this.enderecoForm.value,

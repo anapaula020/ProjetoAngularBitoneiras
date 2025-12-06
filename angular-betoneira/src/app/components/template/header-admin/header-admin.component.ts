@@ -11,7 +11,7 @@ import { MatBadge } from '@angular/material/badge';
 import { SidebarService } from '../../../services/sidebar.service';
 import { AuthService } from '../../../services/auth.service';
 import { Subscription } from 'rxjs';
-import { Usuario } from '../../../models/usuario.model';
+import { Cliente } from '../../../models/cliente.model';
 
 @Component({
     selector: 'app-header-admin',
@@ -22,7 +22,7 @@ import { Usuario } from '../../../models/usuario.model';
 })
 export class HeaderAdminComponent {
     searchForm: FormGroup;
-    usuarioLogado: Usuario | null = null;
+    clienteLogado: Cliente | null = null;
     userRole: string | null = null;
     private subscription = new Subscription();
 
@@ -34,9 +34,8 @@ export class HeaderAdminComponent {
     }
 
     ngOnInit(): void {
-        this.subscription.add(this.authService.getUsuarioLogado().subscribe(
-            usuario => {
-                this.usuarioLogado = usuario;
+        this.subscription.add(this.authService.getClienteLogado().subscribe(data => {
+                this.clienteLogado = data;
                 this.userRole = this.authService.getUserRole();
             }
         ));

@@ -2,8 +2,8 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { BehaviorSubject,Observable,tap } from "rxjs";
-import { Usuario } from "../models/usuario.model";
 import { LocalStorageService } from "./local-storage.service";
+import { Cliente } from "../models/cliente.model";
 
 @Injectable({
     providedIn: 'root'
@@ -11,17 +11,17 @@ import { LocalStorageService } from "./local-storage.service";
 export class AuthService {
     private baseUrl = 'http://localhost:8000/auth';
     private tokenKey = 'jwt_token';
-    private usuarioLogadoKey = 'usuario_logado';
-    private usuarioLogadoSubject = new BehaviorSubject<Usuario | null>(null);
+    private clienteLogadoKey = 'cliente_logado';
+    private clienteLogadoSubject = new BehaviorSubject<Cliente | null>(null);
 
     constructor(private httpClient: HttpClient,private localStorageService: LocalStorageService,private jwtHelper: JwtHelperService) {
         this.init();
     }
 
     private init(): void {
-        const usuario = this.localStorageService.getItem(this.usuarioLogadoKey);
-        if(usuario) {
-            this.usuarioLogadoSubject.next(usuario);
+        const cliente = this.localStorageService.getItem(this.clienteLogadoKey);
+        if(cliente) {
+            this.clienteLogadoSubject.next(cliente);
         }
     }
 
@@ -39,26 +39,26 @@ export class AuthService {
             tap((res: any) => {
                 if(res.headers.get('Authorization')) {
                     this.setToken(res.headers.get('Authorization'));
-                    const usuarioLogado = res.body;
-                    if(usuarioLogado) {
-                        this.setUsuarioLogado(usuarioLogado);
-                        this.usuarioLogadoSubject.next(usuarioLogado);
+                    const clienteLogado = res.body;
+                    if(clienteLogado) {
+                        this.setClienteLogado(clienteLogado);
+                        this.clienteLogadoSubject.next(clienteLogado);
                     }
                 }
             })
         )
     }
 
-    setUsuarioLogado(usuario: Usuario): void {
-        this.localStorageService.setItem(this.usuarioLogadoKey,usuario);
+    setClienteLogado(cliente: Cliente): void {
+        this.localStorageService.setItem(this.clienteLogadoKey,cliente);
     }
 
     setToken(token: string): void {
         this.localStorageService.setItem(this.tokenKey,token);
     }
 
-    getUsuarioLogado() {
-        return this.usuarioLogadoSubject.asObservable();
+    getClienteLogado() {
+        return this.clienteLogadoSubject.asObservable();
     }
 
     getToken(): string | null {
@@ -70,8 +70,8 @@ export class AuthService {
     }
 
     removeUser(): void {
-        this.localStorageService.removeItem(this.usuarioLogadoKey);
-        this.usuarioLogadoSubject.next(null);
+        this.localStorageService.removeItem(this.clienteLogadoKey);
+        this.clienteLogadoSubject.next(null);
     }
 
     isTokenExpired(): boolean {

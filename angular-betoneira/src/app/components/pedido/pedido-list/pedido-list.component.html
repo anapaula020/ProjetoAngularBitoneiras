@@ -1,7 +1,7 @@
 <div class="pedido-list-container" *ngIf="pedidos.length > 0; else pedidosVazios">
     <h1>Lista de Pedidos</h1>
     <div *ngFor="let pedido of pedidos" class="pedido-card">
-        <h2>Pedido #{{ pedido.id }} - Usuário: {{ pedido.usuario.username }}</h2>
+        <h2>Pedido #{{ pedido.id }} - Usuário: {{ pedido.cliente.username }}</h2>
         <div class="pedido-preco">
             <strong>Preço Total:</strong> R$ {{ pedido.preco | number:'1.2-2' }}
         </div>

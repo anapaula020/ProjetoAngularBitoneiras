@@ -48,8 +48,8 @@ export class CarrinhoComponent implements OnInit {
     }
 
     finalizarCompra(): void {
-        const usuario = this.localStorageService.getItem('usuario_logado');
-        if(!usuario) {
+        const cliente = this.localStorageService.getItem('cliente_logado');
+        if(!cliente) {
             this.router.navigateByUrl("/login");
             return;
         };
