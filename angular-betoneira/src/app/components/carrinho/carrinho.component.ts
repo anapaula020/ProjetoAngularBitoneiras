@@ -52,6 +52,6 @@ export class CarrinhoComponent implements OnInit {
             this.router.navigateByUrl("/login");
             return;
         };
-        this.router.navigateByUrl("/compras");
+        this.router.navigateByUrl("/carrinho");
     }
 }
